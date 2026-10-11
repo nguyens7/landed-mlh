@@ -19,7 +19,6 @@ export function HeroCard() {
   const dismissedId = useDeskStore((s) => s.dismissedAlertId);
   const acknowledge = useDeskStore((s) => s.acknowledge);
   const takeOver = useDeskStore((s) => s.takeOver);
-  const dismissAlert = useDeskStore((s) => s.dismissAlert);
   const voice = useVoiceStore();
   const [handled, setHandled] = useState<Set<string>>(new Set());
 
@@ -82,33 +81,29 @@ export function HeroCard() {
       )}
       {decided ? (
         <div className="hero-decided">
-          {decided.decision === "acknowledge" ? "Acknowledged" : "Took over"} in {decided.latency_ms} ms
+          {decided.decision === "acknowledge"
+            ? `Seen by the controller in ${(decided.latency_ms / 1000).toFixed(1)} s`
+            : `Controller is talking to the pilot. Response time ${(decided.latency_ms / 1000).toFixed(1)} s`}
         </div>
       ) : (
         <div className="hero-actions">
-          <button className="btn btn-ack" onClick={() => acknowledge(alert.id)}>
-            Acknowledge
+          <button className="btn btn-ack" title="I'm aware and watching" onClick={() => acknowledge(alert.id)}>
+            Seen
           </button>
           <button
             className="btn btn-takeover"
+            title="The controller talks to this pilot directly; Landed stops handling the flight"
             onClick={() => {
               takeOver(alert.id);
-              dismissAlert(alert.id);
-            }}
-          >
-            Take over
-          </button>
-          {spoken && !handled.has(spoken.id) && (
-            <button
-              className="btn"
-              onClick={() => {
+              // Tell the voice agent the human has the frequency for this flight.
+              if (spoken && !handled.has(spoken.id)) {
                 decide(spoken.id, "human_transmit").catch(() => undefined);
                 setHandled(new Set(handled).add(spoken.id));
-              }}
-            >
-              Controller has it
-            </button>
-          )}
+              }
+            }}
+          >
+            I'll take this pilot
+          </button>
         </div>
       )}
     </section>
