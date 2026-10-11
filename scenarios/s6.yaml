@@ -1,0 +1,143 @@
+# S6 (optional in SPEC). Volume cap: a fourth helicopter checks in and the newest is handed off. SIMULATION ONLY.
+# The desk keeps three helicopters; the newest arrival is handed to the human (trigger: more than 3 helicopters).
+id: S6
+title: Volume cap, the fourth helicopter is handed off
+spec: "SPEC.md section 4, S6; section 2 (more than 3 helicopters on the desk)"
+summary: >-
+  Three helicopters check in and are acknowledged. A fourth (N761NY) checks in 15 s later and is handed off with
+  STANDBY_HANDOFF; the desk keeps the original three. No track enters an LGA volume.
+window_s: 220
+aircraft:
+  - reg: N2646X
+    spoken: MEDEVAC Two Six Four Six X-Ray
+    type: EC35
+    voice: Kore
+    liftoff_t: 10
+    airborne: true
+    cruise_alt_ft: 400
+    cruise_kt: 90
+    route:   # JRB to 6N5, East River northbound
+      - {name: JRB, lat: 40.7012136, lon: -74.0090283}
+      - {lat: 40.7035, lon: -74.0000}
+      - {name: Brooklyn Bridge, ref: brooklyn_bridge}
+      - {lat: 40.7080, lon: -73.9903}
+      - {lat: 40.7100, lon: -73.9830}
+      - {name: Williamsburg Bridge, ref: williamsburg_bridge}
+      - {lat: 40.7210, lon: -73.9705}
+      - {lat: 40.7330, lon: -73.9655}
+      - {lat: 40.7400, lon: -73.9680}
+      - {name: 6N5, lat: 40.7424472, lon: -73.9721222}
+  - reg: N38BL
+    spoken: MEDEVAC Three Eight Bravo Lima
+    type: EC35
+    voice: Charon
+    liftoff_t: 25
+    airborne: true
+    cruise_alt_ft: 1000
+    cruise_kt: 100
+    route:   # climbed out of JRB, now west of the Battery heading for the Hudson east shoreline (northbound)
+      - {lat: 40.6985, lon: -74.0225}
+      - {lat: 40.700, lon: -74.0209}
+      - {lat: 40.720, lon: -74.0169}
+      - {lat: 40.740, lon: -74.0130}
+      - {lat: 40.760, lon: -74.0028}
+      - {lat: 40.775, lon: -73.9913}
+  - reg: N312LM
+    hex: SIM312LM
+    spoken: MEDEVAC Three One Two Lima
+    type: EC35
+    voice: Fenrir
+    liftoff_t: 40
+    airborne: true
+    cruise_alt_ft: 1000
+    cruise_kt: 100
+    route:   # Hudson southbound, west shoreline
+      - {lat: 40.775, lon: -74.0001}
+      - {lat: 40.760, lon: -74.0116}
+      - {lat: 40.740, lon: -74.0218}
+      - {lat: 40.720, lon: -74.0257}
+      - {lat: 40.700, lon: -74.0297}
+  - reg: N761NY
+    spoken: MEDEVAC Seven Six One November Yankee
+    type: EC35
+    voice: Kore
+    liftoff_t: 55
+    airborne: true
+    cruise_alt_ft: 500
+    cruise_kt: 90
+    route:   # 6N5 to JRB, East River southbound
+      - {name: 6N5, lat: 40.7424472, lon: -73.9721222}
+      - {lat: 40.7400, lon: -73.9680}
+      - {lat: 40.7330, lon: -73.9655}
+      - {lat: 40.7210, lon: -73.9705}
+      - {name: Williamsburg Bridge, ref: williamsburg_bridge}
+      - {lat: 40.7100, lon: -73.9830}
+      - {lat: 40.7080, lon: -73.9903}
+      - {name: Brooklyn Bridge, ref: brooklyn_bridge}
+      - {lat: 40.7035, lon: -74.0000}
+      - {name: JRB, lat: 40.7012136, lon: -74.0090283}
+lines:
+  - id: L1
+    t: 12
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.
+    snr: clean
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        intent: checkin
+        slots: {origin: Downtown Skyport, corridor: East River, direction: northbound, altitude_ft: 400}
+      response: {mode: speak, template_id: ACK_CHECKIN, tier: auto, spoken_contains: [Downtown Skyport]}
+  - id: L2
+    t: 27
+    aircraft: N38BL
+    text: Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.
+    snr: clean
+    expect:
+      parse:
+        callsign: {snapped_to: N38BL}
+        intent: checkin
+        slots: {origin: Downtown Skyport, corridor: Hudson, direction: northbound, altitude_ft: 1000}
+      response: {mode: speak, template_id: ACK_CHECKIN, tier: auto, spoken_contains: [Downtown Skyport]}
+  - id: L3
+    t: 42
+    aircraft: N312LM
+    text: Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.
+    snr: clean
+    expect:
+      parse:
+        callsign: {snapped_to: N312LM}
+        slots: {corridor: Hudson, direction: southbound, altitude_ft: 1000}
+      response: {mode: speak, template_id: ACK_CHECKIN, tier: auto}
+  - id: L4
+    t: 57
+    aircraft: N761NY
+    text: Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.
+    snr: clean
+    expect:
+      parse:
+        callsign: {snapped_to: N761NY}
+        intent: checkin
+        slots: {origin: East 34th, corridor: East River, direction: southbound, altitude_ft: 500}
+      response:
+        mode: handoff
+        template_id: STANDBY_HANDOFF
+        tier: handoff
+        triggers: [desk_over_capacity]
+        spoken_contains: [standby, controller will be with you]
+events:
+  - id: E1
+    kind: desk_count
+    at_t: 57
+    count: 4
+    note: Four helicopters are airborne on the desk when the fourth checks in.
+  - id: E2
+    kind: no_alerts
+    min_severity: advisory
+geo:
+  corridors:
+    N2646X: [sfra_east_river_south, sfra_east_river_north]
+    N38BL: [sfra_hudson, sfra_east_river_south]
+    N312LM: [sfra_hudson]
+    N761NY: [sfra_east_river_south, sfra_east_river_north]
+expected_summary: {auto_transmissions: 3, handoffs: 1}

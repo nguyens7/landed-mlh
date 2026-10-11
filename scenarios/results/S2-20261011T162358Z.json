@@ -1,0 +1,1078 @@
+{
+ "scenario": "S2",
+ "title": "Medevac crosses the LGA Rwy 22 final, handoff",
+ "timestamp": "20261011T162358Z",
+ "mode": "pinned",
+ "dry_run": true,
+ "server": {
+  "url": "http://127.0.0.1:8787",
+  "reachable": false,
+  "context_pushed": false
+ },
+ "repeat": 3,
+ "curation": null,
+ "runs": [
+  {
+   "run": 1,
+   "status": "pending",
+   "tally": {
+    "pass": 11,
+    "fail": 0,
+    "partial": 0,
+    "pending": 10,
+    "gap": 0,
+    "total": 21
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 222.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+      "asr_confidence": 0.8769230769230769,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8769230769230769,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "request_route",
+       "parse_confidence": 0.9,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": null,
+        "destination": "College Point",
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.864720821380615,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": null,
+     "server_error": null,
+     "speech_latency_ms": 4865,
+     "total_latency_ms": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S2.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.intent",
+       "field": "intent",
+       "expected": "request_route",
+       "actual": "request_route",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "College Point",
+       "actual": "College Point",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S2.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "out_of_whitelist"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "engine_alert",
+     "t": 392.0,
+     "facts": {
+      "t_first": 392.0,
+      "lead_s": 83.109375,
+      "confidence": 1.0,
+      "volume_id": "lga22_final_seg2"
+     },
+     "alert": {
+      "id": "SIM312LM",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "volume_id": "lga22_final_seg2",
+      "severity": "handoff",
+      "confidence": 0.5631,
+      "reason": "N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor.",
+      "time_to_entry_s": 83.109375,
+      "entry_point": {
+       "lat": 40.81907514551145,
+       "lon": -73.85585199554221
+      },
+      "entry_alt_ft": 600.0,
+      "first_seen_t": 328.0,
+      "last_seen_t": 392.0
+     },
+     "outcome": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S2.E1.geometry.exists",
+       "field": "exists",
+       "expected": "handoff lga22_final_seg*",
+       "actual": "lga22_final_seg2",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.lead_s",
+       "field": "lead_s",
+       "expected": [
+        80.0,
+        90.0
+       ],
+       "actual": 83.109375,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.t_first",
+       "field": "t_first",
+       "expected": [
+        380.0,
+        400.0
+       ],
+       "actual": 392.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "path_protected_volume"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "Rwy 22"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    },
+    {
+     "id": "ENGINE",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.ENGINE.geometry.no_unexpected_alert",
+       "field": "no_unexpected_alert",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S2.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": null,
+     "status": "pending",
+     "detail": "pending server"
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=222.0  L1  N312LM  [PENDING]\n      said  : Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.\n      heard : Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.   (asr 0.88, grammar parser, pinned)\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected request_route  actual request_route\n      PASS  L1.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L1.parse.slots.destination         expected College Point  actual College Point\n      PASS  L1.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PEND  L1.response.mode                   expected handoff  actual null  (pending server)\n      PEND  L1.response.template_id            expected STANDBY_HANDOFF  actual null  (pending server)\n      PEND  L1.response.tier                   expected handoff  actual null  (pending server)\n      PEND  L1.response.triggers               expected [\"out_of_whitelist\"]  actual null  (pending server)\n      PEND  L1.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual null  (pending server)\nt=392.0  E1  event:engine_alert  [PENDING]\n      PASS  E1.geometry.exists                 expected handoff lga22_final_seg*  actual lga22_final_seg2\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.lead_s                 expected [80.0, 90.0]  actual 83.109375\n      PASS  E1.geometry.t_first                expected [380.0, 400.0]  actual 392.0\n      PEND  E1.response.mode                   expected handoff  actual null  (pending server)\n      PEND  E1.response.tier                   expected handoff  actual null  (pending server)\n      PEND  E1.response.triggers               expected [\"path_protected_volume\"]  actual null  (pending server)\n      PEND  E1.response.card_contains          expected [\"Rwy 22\"]  actual null  (pending server)\nt=0.0    ENGINE  event:no_alerts  [PASS]\n      PASS  ENGINE.geometry.no_unexpected_alert expected none  actual none\nsummary\n      PEND  summary.handoffs                   expected 1  actual null  (pending server)"
+  },
+  {
+   "run": 2,
+   "status": "pending",
+   "tally": {
+    "pass": 11,
+    "fail": 0,
+    "partial": 0,
+    "pending": 10,
+    "gap": 0,
+    "total": 21
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 222.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+      "asr_confidence": 0.8769230769230769,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8769230769230769,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "request_route",
+       "parse_confidence": 0.9,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": null,
+        "destination": "College Point",
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.864720821380615,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": null,
+     "server_error": null,
+     "speech_latency_ms": 4865,
+     "total_latency_ms": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S2.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.intent",
+       "field": "intent",
+       "expected": "request_route",
+       "actual": "request_route",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "College Point",
+       "actual": "College Point",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S2.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "out_of_whitelist"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "engine_alert",
+     "t": 392.0,
+     "facts": {
+      "t_first": 392.0,
+      "lead_s": 83.109375,
+      "confidence": 1.0,
+      "volume_id": "lga22_final_seg2"
+     },
+     "alert": {
+      "id": "SIM312LM",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "volume_id": "lga22_final_seg2",
+      "severity": "handoff",
+      "confidence": 0.5631,
+      "reason": "N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor.",
+      "time_to_entry_s": 83.109375,
+      "entry_point": {
+       "lat": 40.81907514551145,
+       "lon": -73.85585199554221
+      },
+      "entry_alt_ft": 600.0,
+      "first_seen_t": 328.0,
+      "last_seen_t": 392.0
+     },
+     "outcome": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S2.E1.geometry.exists",
+       "field": "exists",
+       "expected": "handoff lga22_final_seg*",
+       "actual": "lga22_final_seg2",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.lead_s",
+       "field": "lead_s",
+       "expected": [
+        80.0,
+        90.0
+       ],
+       "actual": 83.109375,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.t_first",
+       "field": "t_first",
+       "expected": [
+        380.0,
+        400.0
+       ],
+       "actual": 392.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "path_protected_volume"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "Rwy 22"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    },
+    {
+     "id": "ENGINE",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.ENGINE.geometry.no_unexpected_alert",
+       "field": "no_unexpected_alert",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S2.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": null,
+     "status": "pending",
+     "detail": "pending server"
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=222.0  L1  N312LM  [PENDING]\n      said  : Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.\n      heard : Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.   (asr 0.88, grammar parser, pinned)\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected request_route  actual request_route\n      PASS  L1.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L1.parse.slots.destination         expected College Point  actual College Point\n      PASS  L1.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PEND  L1.response.mode                   expected handoff  actual null  (pending server)\n      PEND  L1.response.template_id            expected STANDBY_HANDOFF  actual null  (pending server)\n      PEND  L1.response.tier                   expected handoff  actual null  (pending server)\n      PEND  L1.response.triggers               expected [\"out_of_whitelist\"]  actual null  (pending server)\n      PEND  L1.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual null  (pending server)\nt=392.0  E1  event:engine_alert  [PENDING]\n      PASS  E1.geometry.exists                 expected handoff lga22_final_seg*  actual lga22_final_seg2\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.lead_s                 expected [80.0, 90.0]  actual 83.109375\n      PASS  E1.geometry.t_first                expected [380.0, 400.0]  actual 392.0\n      PEND  E1.response.mode                   expected handoff  actual null  (pending server)\n      PEND  E1.response.tier                   expected handoff  actual null  (pending server)\n      PEND  E1.response.triggers               expected [\"path_protected_volume\"]  actual null  (pending server)\n      PEND  E1.response.card_contains          expected [\"Rwy 22\"]  actual null  (pending server)\nt=0.0    ENGINE  event:no_alerts  [PASS]\n      PASS  ENGINE.geometry.no_unexpected_alert expected none  actual none\nsummary\n      PEND  summary.handoffs                   expected 1  actual null  (pending server)"
+  },
+  {
+   "run": 3,
+   "status": "pending",
+   "tally": {
+    "pass": 11,
+    "fail": 0,
+    "partial": 0,
+    "pending": 10,
+    "gap": 0,
+    "total": 21
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 222.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+      "asr_confidence": 0.8769230769230769,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8769230769230769,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "request_route",
+       "parse_confidence": 0.9,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": null,
+        "destination": "College Point",
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.864720821380615,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": null,
+     "server_error": null,
+     "speech_latency_ms": 4865,
+     "total_latency_ms": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S2.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.intent",
+       "field": "intent",
+       "expected": "request_route",
+       "actual": "request_route",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "College Point",
+       "actual": "College Point",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S2.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "out_of_whitelist"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "engine_alert",
+     "t": 392.0,
+     "facts": {
+      "t_first": 392.0,
+      "lead_s": 83.109375,
+      "confidence": 1.0,
+      "volume_id": "lga22_final_seg2"
+     },
+     "alert": {
+      "id": "SIM312LM",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "volume_id": "lga22_final_seg2",
+      "severity": "handoff",
+      "confidence": 0.5631,
+      "reason": "N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor.",
+      "time_to_entry_s": 83.109375,
+      "entry_point": {
+       "lat": 40.81907514551145,
+       "lon": -73.85585199554221
+      },
+      "entry_alt_ft": 600.0,
+      "first_seen_t": 328.0,
+      "last_seen_t": 392.0
+     },
+     "outcome": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S2.E1.geometry.exists",
+       "field": "exists",
+       "expected": "handoff lga22_final_seg*",
+       "actual": "lga22_final_seg2",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.lead_s",
+       "field": "lead_s",
+       "expected": [
+        80.0,
+        90.0
+       ],
+       "actual": 83.109375,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.t_first",
+       "field": "t_first",
+       "expected": [
+        380.0,
+        400.0
+       ],
+       "actual": 392.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "path_protected_volume"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S2.E1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "Rwy 22"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    },
+    {
+     "id": "ENGINE",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.ENGINE.geometry.no_unexpected_alert",
+       "field": "no_unexpected_alert",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S2.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": null,
+     "status": "pending",
+     "detail": "pending server"
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=222.0  L1  N312LM  [PENDING]\n      said  : Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.\n      heard : Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.   (asr 0.88, grammar parser, pinned)\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected request_route  actual request_route\n      PASS  L1.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L1.parse.slots.destination         expected College Point  actual College Point\n      PASS  L1.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PEND  L1.response.mode                   expected handoff  actual null  (pending server)\n      PEND  L1.response.template_id            expected STANDBY_HANDOFF  actual null  (pending server)\n      PEND  L1.response.tier                   expected handoff  actual null  (pending server)\n      PEND  L1.response.triggers               expected [\"out_of_whitelist\"]  actual null  (pending server)\n      PEND  L1.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual null  (pending server)\nt=392.0  E1  event:engine_alert  [PENDING]\n      PASS  E1.geometry.exists                 expected handoff lga22_final_seg*  actual lga22_final_seg2\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.lead_s                 expected [80.0, 90.0]  actual 83.109375\n      PASS  E1.geometry.t_first                expected [380.0, 400.0]  actual 392.0\n      PEND  E1.response.mode                   expected handoff  actual null  (pending server)\n      PEND  E1.response.tier                   expected handoff  actual null  (pending server)\n      PEND  E1.response.triggers               expected [\"path_protected_volume\"]  actual null  (pending server)\n      PEND  E1.response.card_contains          expected [\"Rwy 22\"]  actual null  (pending server)\nt=0.0    ENGINE  event:no_alerts  [PASS]\n      PASS  ENGINE.geometry.no_unexpected_alert expected none  actual none\nsummary\n      PEND  summary.handoffs                   expected 1  actual null  (pending server)"
+  }
+ ],
+ "aggregate": {
+  "runs": 3,
+  "all_judged_passed_every_run": true,
+  "judged": 11,
+  "pending": 10
+ },
+ "per_check": {
+  "S2.L1.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.slots.position": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.slots.destination": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.emergency": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.response.mode": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.L1.response.template_id": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.L1.response.tier": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.L1.response.triggers": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.L1.response.spoken_contains": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.E1.geometry.exists": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.geometry.confidence>=": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.geometry.lead_s": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.geometry.t_first": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.response.mode": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.E1.response.tier": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.E1.response.triggers": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.E1.response.card_contains": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S2.ENGINE.geometry.no_unexpected_alert": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.summary.handoffs": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  }
+ },
+ "wall_s": 0.54
+}

@@ -1,0 +1,9 @@
+{
+  "selected": "domain",
+  "comparator": "fresh control",
+  "confirmation_n": 75,
+  "rationale": "Development WER 76.97% vs fresh control 86.18%; numeric sequence proxy 7/18 vs 6/18. Literal and segmented did not beat control. Candidate selection declared before confirmation start; artifact saved after fixing its import environment, before confirmation scoring.",
+  "domain_sha256": "2ff61ab1f18b5f7bbd52ee873e8c58480badcfa3d3b53cb224705957a6a6ec7b",
+  "instructions_sha256": "a84dfca17fed9f69108455e28cabe1b81673dc903195f42fc1627457cb720298",
+  "plan_sha256": "c9af7ecd5b23386b665cc8225d614b0d7d1b5125322367aefa6e2dc2f6a366e7"
+}

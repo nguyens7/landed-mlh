@@ -1,0 +1,80 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "source": "COPTER ILS/LOC RWY 22 and RNAV (GPS) X RWY 31 plates; AirNav KLGA thresholds",
+  "generated_by": "geo/build.py",
+  "generated_at": "2026-10-11T16:28:25+00:00",
+  "approximate_note": "Rwy 22 centerline is a straight line on the sourced true heading. Rwy 31 centerline passes through the FAA CIFP (cycle 2610) positions of DCTRK, KEYTH, DRRYL and GACAR as straight TF legs. See geo/check.py and geo/tests/test_rwy31.py for the deviation check."
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -73.870673,
+      40.785437
+     ],
+     [
+      -73.753857,
+      40.926624
+     ]
+    ]
+   },
+   "properties": {
+    "runway": "22",
+    "bearing_true": 212.0,
+    "glidepath_deg": 3.0,
+    "threshold_lat": 40.785437,
+    "threshold_lon": -73.870673,
+    "tdze_ft": 11.5,
+    "fixes": [],
+    "source": "COPTER ILS/LOC RWY 22 (https://aeronav.faa.gov/d-tpp/2609/00289copteril22.pdf); threshold AirNav KLGA"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -73.857112,
+      40.772071
+     ],
+     [
+      -73.837139,
+      40.762531
+     ],
+     [
+      -73.831964,
+      40.745289
+     ],
+     [
+      -73.844333,
+      40.730314
+     ],
+     [
+      -73.91085,
+      40.718739
+     ]
+    ]
+   },
+   "properties": {
+    "runway": "31",
+    "bearing_true": 302.0,
+    "glidepath_deg": 3.0,
+    "threshold_lat": 40.772071,
+    "threshold_lon": -73.857112,
+    "tdze_ft": 6.5,
+    "fixes": [
+     "DCTRK",
+     "KEYTH",
+     "DRRYL",
+     "GACAR"
+    ],
+    "source": "RNAV (GPS) X RWY 31 (https://aeronav.faa.gov/d-tpp/2610/00289rx31.pdf); fix positions FAA CIFP cycle 2610 (effective 2026-10-01) (https://aeronav.faa.gov/Upload_313-d/cifp/CIFP_261001.zip); threshold AirNav KLGA"
+   }
+  }
+ ]
+}

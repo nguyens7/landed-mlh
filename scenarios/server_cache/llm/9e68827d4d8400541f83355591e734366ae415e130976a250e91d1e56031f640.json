@@ -1,0 +1,1 @@
+{"name": "choose_template", "args": {"slots": {"position": "6N5", "reg": "N2646X", "altimeter_inhg": 29.92}, "reason": "Pilot is checking in.", "template_id": "ACK_CHECKIN"}}

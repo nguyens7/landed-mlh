@@ -1,0 +1,20 @@
+# Raw ADS-B capture. 177MB, above GitHub's 100MB file limit.
+eda/data/history_nyc_traces.jsonl
+eda/data/*.log
+
+# Local environments and build output
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+.next/
+.DS_Store
+
+# Unlicensed prior-art reference code (issue #7). Kept locally, never published.
+ref/
+
+# Local Secret Manager mapping (never commit)
+server/scripts/secrets.local.sh

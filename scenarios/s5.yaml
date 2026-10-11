@@ -1,0 +1,115 @@
+# S5. Emergency: MAYDAY plus squawk 7700. SIMULATION ONLY (fictional N312LM, frequency "SIM DESK").
+# Exactly one transmission ("controller taking over"), then the agent locks silent. Nothing further is spoken for
+# any aircraft; the "notify heliport ops" proposal goes to a TEST NUMBER ONLY and needs human approval.
+id: S5
+title: MAYDAY and 7700, agent goes silent
+spec: "SPEC.md section 4, S5; section 2.1 item 4; JO 7110.65 2-1-4a"
+summary: >-
+  N312LM, inbound to the E 34th St heliport on the East River, calls MAYDAY with an engine chip light and squawks
+  7700. Landed says "controller taking over" once and locks silent. A later routine call from the same aircraft and
+  a check-in from a second helicopter both get no reply.
+window_s: 200
+aircraft:
+  - reg: N312LM
+    hex: SIM312LM
+    spoken: MEDEVAC Three One Two Lima
+    type: EC35
+    voice: Fenrir
+    liftoff_t: 5
+    airborne: true
+    cruise_alt_ft: 500
+    cruise_kt: 100
+    squawk:
+      - {t: 0, code: "1200"}
+      - {t: 75, code: "7700"}
+    route:   # JRB to 6N5, East River northbound
+      - {name: JRB, lat: 40.7012136, lon: -74.0090283}
+      - {lat: 40.7035, lon: -74.0000}
+      - {name: Brooklyn Bridge, ref: brooklyn_bridge}
+      - {lat: 40.7080, lon: -73.9903}
+      - {lat: 40.7100, lon: -73.9830}
+      - {name: Williamsburg Bridge, ref: williamsburg_bridge}
+      - {lat: 40.7210, lon: -73.9705}
+      - {lat: 40.7330, lon: -73.9655}
+      - {lat: 40.7400, lon: -73.9680}
+      - {name: 6N5, lat: 40.7424472, lon: -73.9721222}
+  - reg: N2646X
+    spoken: MEDEVAC Two Six Four Six X-Ray
+    type: EC35
+    voice: Kore
+    liftoff_t: 60
+    airborne: true
+    cruise_alt_ft: 800
+    cruise_kt: 90
+    route:   # already airborne, East River southbound (800 ft, above N312LM)
+      - {lat: 40.7330, lon: -73.9655}
+      - {lat: 40.7210, lon: -73.9705}
+      - {name: Williamsburg Bridge, ref: williamsburg_bridge}
+      - {lat: 40.7100, lon: -73.9830}
+      - {lat: 40.7080, lon: -73.9903}
+      - {name: Brooklyn Bridge, ref: brooklyn_bridge}
+      - {lat: 40.7035, lon: -74.0000}
+      - {name: JRB, lat: 40.7012136, lon: -74.0090283}
+lines:
+  - id: L1
+    t: 73
+    aircraft: N312LM
+    text: MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.
+    voice: Fenrir
+    style: urgent
+    snr: "10"
+    rotor: true
+    near: {ref: williamsburg_bridge, max_nm: 0.5}
+    expect:
+      parse:
+        callsign: {snapped_to: N312LM}
+        intent: emergency
+        slots: {destination: East 34th}
+        emergency: true
+      response:
+        mode: handoff
+        template_id: CONTROLLER_TAKING_OVER
+        tier: handoff
+        triggers: [emergency]
+        spoken_contains: [controller taking over]
+        card_contains: [heliport ops]
+  - id: L2
+    t: 125
+    aircraft: N312LM
+    text: MEDEVAC Three One Two Lima, approaching East 34th.
+    voice: Fenrir
+    snr: "10"
+    note: A later routine call from the emergency aircraft. The agent is locked silent.
+    expect:
+      parse:
+        callsign: {snapped_to: N312LM}
+        intent: position_report
+        slots: {position: East 34th}
+      response: {mode: locked_silent}
+  - id: L3
+    t: 110
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.
+    voice: Kore
+    snr: clean
+    note: Another helicopter reports while the emergency is open. Still no agent transmission.
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        intent: position_report
+        slots: {position: Williamsburg Bridge, corridor: East River, direction: southbound, altitude_ft: 800}
+      response: {mode: locked_silent}
+events:
+  - id: E1
+    kind: squawk
+    aircraft: N312LM
+    code: "7700"
+    t_window: [72, 80]
+    note: Simulated ADS-B shows 7700 within seconds of the call.
+    response: {mode: locked_silent}
+  - id: E2
+    kind: no_alerts
+    min_severity: advisory
+geo:
+  corridors: {N312LM: [sfra_east_river_south, sfra_east_river_north], N2646X: [sfra_east_river_south, sfra_east_river_north]}
+expected_summary: {transmissions: 1, transmissions_after_lock: 0}

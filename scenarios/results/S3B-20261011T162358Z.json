@@ -1,0 +1,1049 @@
+{
+ "scenario": "S3B",
+ "title": "Silent drift to the wrong Hudson shoreline",
+ "timestamp": "20261011T162358Z",
+ "mode": "pinned",
+ "dry_run": true,
+ "server": {
+  "url": "http://127.0.0.1:8787",
+  "reachable": false,
+  "context_pushed": false
+ },
+ "repeat": 3,
+ "curation": null,
+ "runs": [
+  {
+   "run": 1,
+   "status": "pending",
+   "tally": {
+    "pass": 10,
+    "fail": 0,
+    "partial": 0,
+    "pending": 10,
+    "gap": 0,
+    "total": 20
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.0942680835723877,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": null,
+     "server_error": null,
+     "speech_latency_ms": 3095,
+     "total_latency_ms": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S3B.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3B.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "shoreline",
+     "t": 83.0,
+     "facts": {
+      "kind": "shoreline",
+      "reg": "N2646X",
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "first_seen_t": 83.0,
+      "direction": "southbound",
+      "offset_east_nm": 0.301,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      },
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm."
+     },
+     "alert": {
+      "id": "N2646X:shoreline",
+      "kind": "shoreline",
+      "aircraft": {
+       "hex": "SIM2646X",
+       "reg": "N2646X"
+      },
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+      "first_seen_t": 83.0,
+      "last_seen_t": 83.0,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      }
+     },
+     "outcome": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S3B.E1.geometry.exists",
+       "field": "exists",
+       "expected": "shoreline alert",
+       "actual": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.first_seen_t",
+       "field": "first_seen_t",
+       "expected": [
+        40.0,
+        100.0
+       ],
+       "actual": 83.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.opposing_traffic_nm",
+       "field": "opposing_traffic_nm",
+       "expected": [
+        0.5,
+        3.5
+       ],
+       "actual": 1.91,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3B.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": null,
+     "status": "pending",
+     "detail": "pending server"
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=12.0   L1  N2646X  [PENDING]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PEND  L1.response.mode                   expected speak  actual null  (pending server)\n      PEND  L1.response.template_id            expected ACK_CHECKIN  actual null  (pending server)\n      PEND  L1.response.tier                   expected auto  actual null  (pending server)\n      PEND  L1.response.latency_ms             expected <=3000  actual null  (pending server)\nt=83.0   E1  event:shoreline  [PENDING]\n      PASS  E1.geometry.exists                 expected shoreline alert  actual N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre li...\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.first_seen_t           expected [40.0, 100.0]  actual 83.0\n      PASS  E1.geometry.opposing_traffic_nm    expected [0.5, 3.5]  actual 1.91\n      PEND  E1.response.mode                   expected speak  actual null  (pending server)\n      PEND  E1.response.template_id            expected TRAFFIC  actual null  (pending server)\n      PEND  E1.response.tier                   expected auto  actual null  (pending server)\n      PEND  E1.response.spoken_contains        expected [\"traffic\"]  actual null  (pending server)\n      PEND  E1.response.latency_ms             expected <=3000  actual null  (pending server)\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PEND  summary.handoffs                   expected 0  actual null  (pending server)"
+  },
+  {
+   "run": 2,
+   "status": "pending",
+   "tally": {
+    "pass": 10,
+    "fail": 0,
+    "partial": 0,
+    "pending": 10,
+    "gap": 0,
+    "total": 20
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.0942680835723877,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": null,
+     "server_error": null,
+     "speech_latency_ms": 3095,
+     "total_latency_ms": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S3B.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3B.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "shoreline",
+     "t": 83.0,
+     "facts": {
+      "kind": "shoreline",
+      "reg": "N2646X",
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "first_seen_t": 83.0,
+      "direction": "southbound",
+      "offset_east_nm": 0.301,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      },
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm."
+     },
+     "alert": {
+      "id": "N2646X:shoreline",
+      "kind": "shoreline",
+      "aircraft": {
+       "hex": "SIM2646X",
+       "reg": "N2646X"
+      },
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+      "first_seen_t": 83.0,
+      "last_seen_t": 83.0,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      }
+     },
+     "outcome": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S3B.E1.geometry.exists",
+       "field": "exists",
+       "expected": "shoreline alert",
+       "actual": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.first_seen_t",
+       "field": "first_seen_t",
+       "expected": [
+        40.0,
+        100.0
+       ],
+       "actual": 83.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.opposing_traffic_nm",
+       "field": "opposing_traffic_nm",
+       "expected": [
+        0.5,
+        3.5
+       ],
+       "actual": 1.91,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3B.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": null,
+     "status": "pending",
+     "detail": "pending server"
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=12.0   L1  N2646X  [PENDING]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PEND  L1.response.mode                   expected speak  actual null  (pending server)\n      PEND  L1.response.template_id            expected ACK_CHECKIN  actual null  (pending server)\n      PEND  L1.response.tier                   expected auto  actual null  (pending server)\n      PEND  L1.response.latency_ms             expected <=3000  actual null  (pending server)\nt=83.0   E1  event:shoreline  [PENDING]\n      PASS  E1.geometry.exists                 expected shoreline alert  actual N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre li...\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.first_seen_t           expected [40.0, 100.0]  actual 83.0\n      PASS  E1.geometry.opposing_traffic_nm    expected [0.5, 3.5]  actual 1.91\n      PEND  E1.response.mode                   expected speak  actual null  (pending server)\n      PEND  E1.response.template_id            expected TRAFFIC  actual null  (pending server)\n      PEND  E1.response.tier                   expected auto  actual null  (pending server)\n      PEND  E1.response.spoken_contains        expected [\"traffic\"]  actual null  (pending server)\n      PEND  E1.response.latency_ms             expected <=3000  actual null  (pending server)\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PEND  summary.handoffs                   expected 0  actual null  (pending server)"
+  },
+  {
+   "run": 3,
+   "status": "pending",
+   "tally": {
+    "pass": 10,
+    "fail": 0,
+    "partial": 0,
+    "pending": 10,
+    "gap": 0,
+    "total": 20
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.0942680835723877,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": null,
+     "server_error": null,
+     "speech_latency_ms": 3095,
+     "total_latency_ms": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S3B.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3B.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "shoreline",
+     "t": 83.0,
+     "facts": {
+      "kind": "shoreline",
+      "reg": "N2646X",
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "first_seen_t": 83.0,
+      "direction": "southbound",
+      "offset_east_nm": 0.301,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      },
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm."
+     },
+     "alert": {
+      "id": "N2646X:shoreline",
+      "kind": "shoreline",
+      "aircraft": {
+       "hex": "SIM2646X",
+       "reg": "N2646X"
+      },
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+      "first_seen_t": 83.0,
+      "last_seen_t": 83.0,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      }
+     },
+     "outcome": null,
+     "status": "pending",
+     "checks": [
+      {
+       "id": "S3B.E1.geometry.exists",
+       "field": "exists",
+       "expected": "shoreline alert",
+       "actual": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.first_seen_t",
+       "field": "first_seen_t",
+       "expected": [
+        40.0,
+        100.0
+       ],
+       "actual": 83.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.opposing_traffic_nm",
+       "field": "opposing_traffic_nm",
+       "expected": [
+        0.5,
+        3.5
+       ],
+       "actual": 1.91,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      },
+      {
+       "id": "S3B.E1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": null,
+       "status": "pending",
+       "detail": "pending server"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3B.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": null,
+     "status": "pending",
+     "detail": "pending server"
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=12.0   L1  N2646X  [PENDING]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PEND  L1.response.mode                   expected speak  actual null  (pending server)\n      PEND  L1.response.template_id            expected ACK_CHECKIN  actual null  (pending server)\n      PEND  L1.response.tier                   expected auto  actual null  (pending server)\n      PEND  L1.response.latency_ms             expected <=3000  actual null  (pending server)\nt=83.0   E1  event:shoreline  [PENDING]\n      PASS  E1.geometry.exists                 expected shoreline alert  actual N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre li...\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.first_seen_t           expected [40.0, 100.0]  actual 83.0\n      PASS  E1.geometry.opposing_traffic_nm    expected [0.5, 3.5]  actual 1.91\n      PEND  E1.response.mode                   expected speak  actual null  (pending server)\n      PEND  E1.response.template_id            expected TRAFFIC  actual null  (pending server)\n      PEND  E1.response.tier                   expected auto  actual null  (pending server)\n      PEND  E1.response.spoken_contains        expected [\"traffic\"]  actual null  (pending server)\n      PEND  E1.response.latency_ms             expected <=3000  actual null  (pending server)\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PEND  summary.handoffs                   expected 0  actual null  (pending server)"
+  }
+ ],
+ "aggregate": {
+  "runs": 3,
+  "all_judged_passed_every_run": true,
+  "judged": 10,
+  "pending": 10
+ },
+ "per_check": {
+  "S3B.L1.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.parse.emergency": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.response.mode": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.L1.response.template_id": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.L1.response.tier": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.L1.response.latency_ms": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.E1.geometry.exists": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.geometry.confidence>=": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.geometry.first_seen_t": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.geometry.opposing_traffic_nm": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.response.mode": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.E1.response.template_id": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.E1.response.tier": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.E1.response.spoken_contains": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.E1.response.latency_ms": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  },
+  "S3B.E2.geometry.no_alert>=advisory": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.summary.handoffs": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 0,
+   "stable": false
+  }
+ },
+ "wall_s": 0.61
+}

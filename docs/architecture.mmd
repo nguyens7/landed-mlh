@@ -1,0 +1,48 @@
+%% Landed architecture. Closes #21. Status as of Oct 11 2026 (integration branch).
+%% Solid blue border = built. Solid orange border = in progress. Dashed grey border, grey text = planned.
+%% Lanes, left to right: Inputs, Landed core, Controller.
+flowchart LR
+  IN_T["INPUTS"]:::title
+  CORE_T["LANDED CORE"]:::title
+  CTRL_T["CONTROLLER"]:::title
+
+  A1["ADS-B replay<br/>17 helicopters<br/>REPLAY tag"]:::built
+  R1["Radio audio<br/>simulated pilot audio<br/>SIM tag"]:::built
+  SP2["Scenario picker #17<br/>play S1 to S6 in the app"]:::built
+  SC["Scenarios S1 to S6<br/>7 of 7 pass 3 out of 3"]:::built
+
+  G1["Geo layers<br/>corridors, LGA volumes<br/>METAR altitude fix"]:::built
+  SP["Gemini speech<br/>ASR gemini-3.8-flash<br/>parser gemini-3.5-flash-lite"]:::built
+  HC["Parsed calls to<br/>handoff card #10"]:::progress
+  SI["Stated-intent projection"]:::planned
+  E1["Conflict engine<br/>90 s projection<br/>alert with confidence"]:::built
+  CR["Corridor rules #15<br/>router enforce mode"]:::planned
+  VA["Voice agent<br/>function calling, phrase whitelist<br/>TTS verbatim, Decisions router (shadow)"]:::built
+  SV["FastAPI server<br/>keys stay server side"]:::built
+
+  AP["Approval cards A/E/R<br/>emergency lock and keyword gate #16, audit log"]:::built
+  AL["Alert card<br/>map and alert log"]:::built
+
+  L1["Built"]:::built
+  L2["In progress"]:::progress
+  L3["Planned"]:::planned
+
+  A1 --> E1
+  R1 --> SP
+  G1 --> E1
+  SP --> HC
+  HC -.-> SI -.-> E1
+  SP -.-> VA
+  E1 -.-> VA
+  SV -.-> VA
+  E1 --> AL
+  VA -.-> AP
+  AP -.-> AL
+  SC -.-> A1
+  SP2 -.-> SC
+  CR -.-> E1
+
+  classDef title fill:none,stroke:none,color:#9AA4B1,font-size:30px,font-weight:bold
+  classDef built fill:#14202C,stroke:#6CB0EE,stroke-width:3px,color:#EEF0EA,font-size:28px
+  classDef progress fill:#14202C,stroke:#F29E4C,stroke-width:3px,color:#EEF0EA,font-size:28px
+  classDef planned fill:#0F141B,stroke:#7D8894,stroke-width:2px,stroke-dasharray:6 4,color:#7D8894,font-size:28px

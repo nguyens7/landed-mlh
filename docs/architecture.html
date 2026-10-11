@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Landed architecture</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@700&display=swap">
+<style>
+  :root { --bg:#0F141B; --lane:#141B24; --box:#18212C; --text:#EEF0EA; --soft:#B8C2CE; --muted:#7D8894;
+          --built:#6CB0EE; --prog:#F29E4C; --plan:#7D8894; }
+  * { box-sizing:border-box; margin:0; }
+  body { width:1920px; height:1080px; background:var(--bg); color:var(--text); font-family:'IBM Plex Sans', Arial, sans-serif; position:relative; overflow:hidden; }
+  .title { position:absolute; left:96px; top:56px; font:700 56px 'Space Grotesk', Arial, sans-serif; }
+  .legend { position:absolute; right:96px; top:70px; display:flex; gap:20px; font-size:24px; }
+  .legend span { padding:6px 16px; border-radius:8px; border:3px solid; }
+  .lane { position:absolute; top:160px; height:880px; background:var(--lane); border-radius:20px; }
+  .lane h2 { position:absolute; top:22px; left:28px; font:700 24px 'JetBrains Mono', monospace; letter-spacing:3px; color:var(--muted); }
+  .box { position:absolute; background:var(--box); border:3px solid var(--built); border-radius:14px; padding:16px 22px; }
+  .box b { display:block; font:600 30px 'Space Grotesk', Arial, sans-serif; line-height:1.2; }
+  .box p { font-size:23px; color:var(--soft); line-height:1.3; margin-top:6px; }
+  .prog { border-color:var(--prog); }
+  .plan { border:3px dashed var(--plan); background:transparent; }
+  .plan b, .plan p { color:var(--muted); }
+  .tag { display:inline-block; font:700 20px 'JetBrains Mono', monospace; color:#0F141B; background:var(--prog); border-radius:6px; padding:2px 10px; margin-left:10px; vertical-align:4px; }
+  .tag.replay { background:var(--built); }
+  .status { position:absolute; right:14px; top:12px; font:700 18px 'JetBrains Mono', monospace; letter-spacing:1px; }
+  svg { position:absolute; left:0; top:0; }
+</style>
+</head>
+<body>
+<div class="title">How Landed works</div>
+<div class="legend">
+  <span style="border-color:var(--built)">Built</span>
+  <span style="border-color:var(--prog)">In progress</span>
+  <span style="border-color:var(--plan);border-style:dashed;color:var(--muted)">Planned</span>
+</div>
+
+<div class="lane" style="left:72px;width:520px"><h2>INPUTS</h2></div>
+<div class="lane" style="left:648px;width:640px"><h2>LANDED CORE</h2></div>
+<div class="lane" style="left:1344px;width:504px"><h2>CONTROLLER</h2></div>
+
+<!-- Inputs -->
+<div class="box" style="left:100px;top:230px;width:464px"><span class="status" style="color:var(--built)">BUILT</span><b>ADS-B replay<span class="tag replay">REPLAY</span></b><p>17 real helicopters, adsb.lol</p></div>
+<div class="box" style="left:100px;top:410px;width:464px"><span class="status" style="color:var(--built)">BUILT</span><b>Pilot radio calls<span class="tag">SIM</span></b><p>Gemini TTS voices, radio filter</p></div>
+<div class="box" style="left:100px;top:590px;width:464px"><span class="status" style="color:var(--built)">BUILT</span><b>Scenarios S1 to S6</b><p>7 of 7 pass 3 out of 3, 236 checks</p></div>
+<div class="box" style="left:100px;top:790px;width:464px"><span class="status" style="color:var(--built)">BUILT</span><b>Scenario picker</b><p>play S1 to S6 in the app, scoreboard</p></div>
+
+<!-- Core -->
+<div class="box" style="left:676px;top:230px;width:584px"><span class="status" style="color:var(--built)">BUILT</span><b>Geo layers</b><p>SFRA corridors, LGA volumes, METAR altitude</p></div>
+<div class="box" style="left:676px;top:395px;width:584px"><span class="status" style="color:var(--built)">BUILT</span><b>Conflict engine</b><p>90 s projection; reason, confidence, countdown</p></div>
+<div class="box" style="left:676px;top:560px;width:584px"><span class="status" style="color:var(--built)">BUILT</span><b>Gemini speech</b><p>ASR 3.8 Flash, parser 3.5 Flash-Lite</p></div>
+<div class="box" style="left:676px;top:725px;width:584px"><span class="status" style="color:var(--built)">BUILT</span><b>Voice agent and server</b><p>Gemini picks a template; TTS speaks it verbatim; Decisions router in shadow mode</p></div>
+<div class="box prog" style="left:676px;top:884px;width:282px;padding:10px 16px"><p style="margin:0;color:var(--text)">Parsed call, #10</p></div>
+<div class="box plan" style="left:978px;top:884px;width:282px;padding:10px 16px"><p style="margin:0">Stated-intent path</p></div>
+<div class="box plan" style="left:676px;top:956px;width:282px;padding:10px 16px"><p style="margin:0">Corridor rules, #15</p></div>
+<div class="box plan" style="left:978px;top:956px;width:282px;padding:10px 16px"><p style="margin:0">Router enforce mode</p></div>
+
+<!-- Controller -->
+<div class="box" style="left:1372px;top:395px;width:448px"><span class="status" style="color:var(--built)">BUILT</span><b>Alert card and map</b><p>reason and live countdown</p></div>
+<div class="box" style="left:1372px;top:600px;width:448px"><span class="status" style="color:var(--built)">BUILT</span><b>Approval cards</b><p>A, E or R; expired cards never sent</p></div>
+<div class="box" style="left:1372px;top:790px;width:448px"><span class="status" style="color:var(--built)">BUILT</span><b>Emergency lock</b><p>keyword gate and squawk; agent goes silent; audit log</p></div>
+
+<svg width="1920" height="1080" aria-label="Arrows: replay feeds the conflict engine; geo layers feed the engine; pilot calls feed Gemini speech; the scenario picker drives scenarios, which drive pilot calls; the engine feeds the alert card and the voice agent; speech feeds the voice agent; the voice agent feeds approval cards and the emergency lock.">
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#B8C2CE"/></marker></defs>
+  <g stroke="#B8C2CE" stroke-width="3" fill="none" marker-end="url(#a)">
+    <path d="M564 290 C 620 290, 620 460, 672 460"/>
+    <path d="M968 340 L968 391"/>
+    <path d="M564 470 C 620 470, 620 625, 672 625"/>
+    <path d="M332 590 L332 540"/>
+    <path d="M332 790 L332 700"/>
+    <path d="M1260 460 L1368 460"/>
+    <path d="M1260 480 C 1318 480, 1318 760, 1264 760"/>
+    <path d="M968 670 L968 721"/>
+    <path d="M1260 790 C 1310 790, 1310 665, 1368 665"/>
+    <path d="M1260 820 C 1310 820, 1310 850, 1368 850"/>
+  </g>
+</svg>
+</body>
+</html>

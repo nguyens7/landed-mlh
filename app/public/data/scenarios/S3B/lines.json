@@ -1,0 +1,71 @@
+{
+ "scenario": "S3B",
+ "title": "Silent drift to the wrong Hudson shoreline",
+ "note": "SIMULATION ONLY. Fictional registrations. Frequency shown as SIM DESK.",
+ "lines": [
+  {
+   "id": "L1",
+   "t": 12.0,
+   "aircraft": "N2646X",
+   "spoken_callsign": "MEDEVAC Two Six Four Six X-Ray",
+   "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+   "voice": "Kore",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s3b_l1__Kore__clean.wav",
+   "hash": "2db9e1e874da5ce5",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N2646X"
+     },
+     "slots": {
+      "corridor": "Hudson",
+      "direction": "southbound",
+      "altitude_ft": 1000
+     },
+     "emergency": false
+    },
+    "response": {
+     "mode": "speak",
+     "template_id": "ACK_CHECKIN",
+     "tier": "auto"
+    }
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "E1",
+   "kind": "shoreline",
+   "aircraft": "N2646X",
+   "note": "Southbound aircraft on the east shoreline with opposing traffic nearby.",
+   "severity": "caution",
+   "min_confidence": 0.8,
+   "t_window": [
+    40.0,
+    100.0
+   ],
+   "traffic_nm": [
+    0.5,
+    3.5
+   ],
+   "response": {
+    "mode": "speak",
+    "template_id": "TRAFFIC",
+    "tier": "auto",
+    "spoken_contains": [
+     "traffic"
+    ],
+    "known_gap": "server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+   }
+  },
+  {
+   "id": "E2",
+   "kind": "no_alerts",
+   "aircraft": "N2646X",
+   "note": "No LGA volume alert; the deviation is a corridor-rule alert only."
+  }
+ ]
+}

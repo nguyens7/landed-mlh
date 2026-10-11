@@ -1,0 +1,63 @@
+# S3 variant A. Weather request below the Hudson transit minimum: handoff. SIMULATION ONLY.
+id: S3A
+title: Weather, descend below the Hudson minimum
+spec: "SPEC.md section 4, S3 variant A"
+summary: >-
+  N2646X is southbound on the Hudson west shoreline at 1,000 ft. It reports ceilings coming down and asks to descend
+  to 600 ft. That is below the 1,000 ft Hudson transit minimum and carries a weather phrase, so the agent stands by
+  and hands the flight to the human. The track itself never conflicts with an LGA volume.
+window_s: 200
+aircraft:
+  - reg: N2646X
+    spoken: MEDEVAC Two Six Four Six X-Ray
+    type: EC35
+    voice: Kore
+    liftoff_t: 5
+    airborne: true
+    cruise_alt_ft: 1000
+    cruise_kt: 100
+    route:   # Hudson southbound, west shoreline (0.15 nm west of the calibrated centre line)
+      - {lat: 40.775, lon: -74.0001}
+      - {lat: 40.760, lon: -74.0116}
+      - {lat: 40.740, lon: -74.0218}
+      - {lat: 40.720, lon: -74.0257}
+      - {lat: 40.700, lon: -74.0297}
+lines:
+  - id: L1
+    t: 30
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.
+    snr: clean
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        slots: {corridor: Hudson, direction: southbound, altitude_ft: 1000}
+        emergency: false
+      response: {mode: speak, template_id: ACK_CHECKIN, tier: auto}
+  - id: L2
+    t: 70
+    aircraft: N2646X
+    text: MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descend to six hundred.
+    snr: "10"
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        intent: request_altitude
+        slots: {corridor: Hudson, direction: southbound, weather_phrase: ceilings coming down, altitude_ft: 600}
+        emergency: false
+      response:
+        mode: handoff
+        template_id: STANDBY_HANDOFF
+        tier: handoff
+        triggers: [weather, below_transit_min, out_of_whitelist]
+        spoken_contains: [standby, controller will be with you]
+        card_contains: [ceilings, Hudson]
+events:
+  - id: E1
+    kind: no_alerts
+    aircraft: N2646X
+    min_severity: advisory
+    note: Weather is a language trigger, not a geometry one; the engine stays quiet.
+geo:
+  corridors: {N2646X: [sfra_hudson]}
+expected_summary: {auto_transmissions: 1, handoffs: 1}

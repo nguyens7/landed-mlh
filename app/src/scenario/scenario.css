@@ -1,0 +1,73 @@
+/* Scenario picker and scoreboard: same dark console palette. */
+.scenario-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 14px;
+  border-left: 1px solid var(--panel-border);
+}
+.sim-tag {
+  color: var(--sim);
+  border: 1px solid var(--sim);
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 1px 5px;
+}
+.scenario-select {
+  background: #1a2634;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 13px;
+  max-width: 330px;
+}
+.scenario-status {
+  color: var(--text-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.scoreboard-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 16px);
+  width: 640px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+.scoreboard-row {
+  display: grid;
+  grid-template-columns: 40px 60px 170px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  padding: 4px 0;
+  border-top: 1px solid var(--panel-border);
+  font-size: 13px;
+}
+.scoreboard-id {
+  font-weight: 700;
+}
+.scoreboard-status.ok {
+  color: #3ddc84;
+  font-weight: 700;
+}
+.scoreboard-status.bad {
+  color: var(--handoff);
+  font-weight: 700;
+}
+.scoreboard-count {
+  color: var(--text-dim);
+}
+.scoreboard-title {
+  color: var(--text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

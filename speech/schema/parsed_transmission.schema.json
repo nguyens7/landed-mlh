@@ -1,0 +1,261 @@
+{
+  "$defs": {
+    "Callsign": {
+      "properties": {
+        "spoken": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Callsign as spoken, e.g. 'Two Six Four Six X-Ray'",
+          "title": "Spoken"
+        },
+        "normalized": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Alphanumeric form, e.g. '2646X' or 'N312LM'",
+          "title": "Normalized"
+        },
+        "snapped_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Roster registration the callsign snapped to, e.g. 'N2646X'",
+          "title": "Snapped To"
+        },
+        "snap_score": {
+          "default": 0.0,
+          "description": "Phonetic+digit similarity to snapped_to",
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Snap Score",
+          "type": "number"
+        },
+        "ambiguous_with": {
+          "description": "Other roster callsigns within the ambiguity margin (S4)",
+          "items": {
+            "type": "string"
+          },
+          "title": "Ambiguous With",
+          "type": "array"
+        }
+      },
+      "title": "Callsign",
+      "type": "object"
+    },
+    "Slots": {
+      "properties": {
+        "position": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Canonical place name of the reported position / reporting point",
+          "title": "Position"
+        },
+        "position_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Canonical agent position ID for the position, e.g. '6N5' or 'JRB'",
+          "title": "Position Id"
+        },
+        "altitude_ft": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Altitude Ft"
+        },
+        "direction": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "e.g. 'northbound'",
+          "title": "Direction"
+        },
+        "corridor": {
+          "anyOf": [
+            {
+              "enum": [
+                "Hudson",
+                "East River"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Corridor"
+        },
+        "origin": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin"
+        },
+        "destination": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Destination"
+        },
+        "weather_phrase": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Canonical weather phrase, e.g. 'ceilings coming down'",
+          "title": "Weather Phrase"
+        },
+        "squawk": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "4-digit transponder code",
+          "title": "Squawk"
+        }
+      },
+      "title": "Slots",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "raw_text": {
+      "title": "Raw Text",
+      "type": "string"
+    },
+    "asr_confidence": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "exp(mean token logprob); None if unavailable",
+      "title": "Asr Confidence"
+    },
+    "callsign": {
+      "$ref": "#/$defs/Callsign"
+    },
+    "intent": {
+      "default": "unknown",
+      "enum": [
+        "checkin",
+        "position_report",
+        "request_route",
+        "request_altitude",
+        "readback",
+        "emergency",
+        "unknown"
+      ],
+      "title": "Intent",
+      "type": "string"
+    },
+    "slots": {
+      "$ref": "#/$defs/Slots"
+    },
+    "emergency": {
+      "default": false,
+      "title": "Emergency",
+      "type": "boolean"
+    },
+    "parse_confidence": {
+      "default": 0.0,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Parse Confidence",
+      "type": "number"
+    },
+    "parser": {
+      "default": "grammar",
+      "enum": [
+        "grammar",
+        "llm"
+      ],
+      "title": "Parser",
+      "type": "string"
+    },
+    "reason": {
+      "default": "",
+      "description": "Human-readable explanation of how this parse was reached and how confident it is, suitable for an approval card",
+      "title": "Reason",
+      "type": "string"
+    }
+  },
+  "required": [
+    "raw_text"
+  ],
+  "title": "ParsedTransmission",
+  "type": "object"
+}

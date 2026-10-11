@@ -1,0 +1,385 @@
+{
+  "n": 25,
+  "tag_counts": {
+    "callsign": 9,
+    "orthography": 3,
+    "numeric": 6,
+    "insertion": 5,
+    "exact": 6,
+    "omission": 3,
+    "language_review": 9,
+    "meaning_review": 2,
+    "normalization_review": 1
+  },
+  "cases": [
+    {
+      "id": "uwb-atcc_TWR-A91jjm_001375_002009_AT",
+      "role": "AT",
+      "wer": 0.36363636363636365,
+      "duration_s": 6.34,
+      "peak": 0.205322265625,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.06,
+      "tags": [
+        "callsign",
+        "orthography"
+      ],
+      "note": "Airline/callsign and startup spacing differ; preserve the reference pending listening.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-VkJgsW_002379_002618_PI",
+      "role": "PI",
+      "wer": 1.0,
+      "duration_s": 2.39,
+      "peak": 0.1556396484375,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.08,
+      "tags": [
+        "callsign",
+        "numeric"
+      ],
+      "note": "Airline designator collapses into a numeric sequence.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-XwCoKq_002268_002474_AT",
+      "role": "AT",
+      "wer": 2.0,
+      "duration_s": 2.06,
+      "peak": 0.1998291015625,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.08,
+      "tags": [
+        "callsign"
+      ],
+      "note": "Callsign letters and airline name differ.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-iDQ8Oj_000605_000865_PI",
+      "role": "PI",
+      "wer": 3.3333333333333335,
+      "duration_s": 2.6,
+      "peak": 0.1328125,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.0,
+      "tags": [
+        "numeric",
+        "insertion"
+      ],
+      "note": "Callsign digit substitution plus extra conversational words.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-Kc4ziu_000952_001548_AT",
+      "role": "AT",
+      "wer": 0.0,
+      "duration_s": 5.96,
+      "peak": 0.1138916015625,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.0,
+      "tags": [
+        "exact"
+      ],
+      "note": "Baseline normalized hypothesis matches reference.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-y6U2vL_002224_002734_PIAT",
+      "role": "PIAT",
+      "wer": 1.0,
+      "duration_s": 5.1,
+      "peak": 0.4986572265625,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.04,
+      "tags": [
+        "omission",
+        "language_review"
+      ],
+      "note": "Hypothesis is much shorter and the reference includes apparent non-English words.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-DeVSyo_001521_001776_AT",
+      "role": "AT",
+      "wer": 0.0,
+      "duration_s": 2.55,
+      "peak": 0.5384521484375,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.2,
+      "tags": [
+        "exact"
+      ],
+      "note": "Baseline normalized hypothesis matches reference.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-Q9VzyB_000000_000462_AT",
+      "role": "AT",
+      "wer": 2.75,
+      "duration_s": 4.62,
+      "peak": 0.3917236328125,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.0,
+      "tags": [
+        "insertion",
+        "language_review"
+      ],
+      "note": "Extra Czech-looking text; check audio and reference language coverage.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-GsdsEp_001655_001880_PI",
+      "role": "PI",
+      "wer": 0.0,
+      "duration_s": 2.24,
+      "peak": 0.155029296875,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.0,
+      "tags": [
+        "exact"
+      ],
+      "note": "Baseline normalized hypothesis matches reference.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-ybuLTX_001539_002052_AT",
+      "role": "AT",
+      "wer": 11.0,
+      "duration_s": 5.135,
+      "peak": 0.3282470703125,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.215,
+      "tags": [
+        "insertion",
+        "language_review"
+      ],
+      "note": "One-token reference versus long Czech-looking output; verify reference coverage.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-t05WHO_001481_001798_PI",
+      "role": "PI",
+      "wer": 2.0,
+      "duration_s": 3.18,
+      "peak": 0.1368408203125,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.09,
+      "tags": [
+        "callsign",
+        "language_review"
+      ],
+      "note": "Czech-looking output and a callsign spelling mismatch require adjudication.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-hlhXbw_000601_000953_AT",
+      "role": "AT",
+      "wer": 1.3333333333333333,
+      "duration_s": 3.53,
+      "peak": 0.1737060546875,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.09,
+      "tags": [
+        "numeric",
+        "meaning_review"
+      ],
+      "note": "Runway/number and phrase mismatch could change operational meaning.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-OPcLbI_000760_001321_AT",
+      "role": "AT",
+      "wer": 3.0,
+      "duration_s": 5.61,
+      "peak": 0.337890625,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.1,
+      "tags": [
+        "insertion",
+        "language_review"
+      ],
+      "note": "Short reference beside Czech-looking output; do not assume every insertion is invented.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-PwCXyy_000000_000297_AT",
+      "role": "AT",
+      "wer": 0.0,
+      "duration_s": 2.97,
+      "peak": 0.3226318359375,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.12,
+      "tags": [
+        "exact"
+      ],
+      "note": "Baseline normalized hypothesis matches reference.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-FxfhED_006180_006806_AT",
+      "role": "AT",
+      "wer": 0.0,
+      "duration_s": 6.27,
+      "peak": 0.4849853515625,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.1,
+      "tags": [
+        "exact"
+      ],
+      "note": "Baseline normalized hypothesis matches reference.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-thLWob_002243_002533_PI",
+      "role": "PI",
+      "wer": 0.0,
+      "duration_s": 2.9,
+      "peak": 0.141357421875,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.0,
+      "tags": [
+        "exact"
+      ],
+      "note": "Baseline normalized hypothesis matches reference.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-Pd3zip_000676_000936_PI",
+      "role": "PI",
+      "wer": 1.4285714285714286,
+      "duration_s": 2.61,
+      "peak": 0.1287841796875,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.01,
+      "tags": [
+        "numeric",
+        "meaning_review"
+      ],
+      "note": "Readback versus a different clearance-like phrase and runway/number sequence.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-HhPTbJ_000000_000391_AT",
+      "role": "AT",
+      "wer": 0.4,
+      "duration_s": 3.91,
+      "peak": 0.2919921875,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.0,
+      "tags": [
+        "callsign",
+        "orthography"
+      ],
+      "note": "Airline interpreted as a November callsign; clear/cleared variant also differs.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-iWc9VQ_000087_000759_PIAT",
+      "role": "PIAT",
+      "wer": 1.3636363636363635,
+      "duration_s": 6.72,
+      "peak": 0.482421875,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.07,
+      "tags": [
+        "callsign",
+        "numeric",
+        "language_review"
+      ],
+      "note": "Callsign and numerical sequences differ alongside Czech-looking output.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-RRaAMu_000245_000632_PIAT",
+      "role": "PIAT",
+      "wer": 0.5714285714285714,
+      "duration_s": 3.87,
+      "peak": 0.187255859375,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.0,
+      "tags": [
+        "omission",
+        "language_review"
+      ],
+      "note": "Approach acronym omitted and extra Czech-looking words appear.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-xWBicz_000193_000851_PIAT",
+      "role": "PIAT",
+      "wer": 1.8571428571428572,
+      "duration_s": 6.58,
+      "peak": 0.2691650390625,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.1,
+      "tags": [
+        "callsign",
+        "numeric",
+        "normalization_review"
+      ],
+      "note": "Frequency repetition collapses in reference normalization; audit separately from callsign errors.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-FVLEMW_000401_000627_PI",
+      "role": "PI",
+      "wer": 0.2857142857142857,
+      "duration_s": 2.250125,
+      "peak": 0.1148681640625,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.04,
+      "tags": [
+        "callsign",
+        "orthography"
+      ],
+      "note": "Airline becomes digits and lining/line wording differs.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-nTIjqH_000767_001272_PIAT",
+      "role": "PIAT",
+      "wer": 1.0,
+      "duration_s": 5.05,
+      "peak": 0.11279296875,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.0,
+      "tags": [
+        "omission",
+        "language_review"
+      ],
+      "note": "Very short reference and Czech-looking hypothesis need language-coverage review.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-zq9TaC_000057_000528_PI",
+      "role": "PI",
+      "wer": 12.0,
+      "duration_s": 4.7,
+      "peak": 0.1378173828125,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.04,
+      "tags": [
+        "insertion",
+        "language_review"
+      ],
+      "note": "One-token reference beside long Czech-looking output; verify annotated coverage.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    },
+    {
+      "id": "uwb-atcc_TWR-sk4Eh7_000172_000588_AT",
+      "role": "AT",
+      "wer": 0.2857142857142857,
+      "duration_s": 4.16,
+      "peak": 0.610595703125,
+      "clipped_fraction": 0.0,
+      "outer_trim_s": 0.07,
+      "tags": [
+        "callsign"
+      ],
+      "note": "Airline/operator word substitution.",
+      "adjudication": "Signal/text review only; no auditory gold correction."
+    }
+  ]
+}

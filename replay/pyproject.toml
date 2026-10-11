@@ -1,0 +1,20 @@
+[project]
+name = "replay"
+version = "0.1.0"
+description = "Builds replay JSON (real Saturday helicopter traffic + simulated medevac track) for the Landed app."
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.5.4",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"

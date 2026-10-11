@@ -1,0 +1,1165 @@
+{
+ "scenario": "S2",
+ "title": "Medevac crosses the LGA Rwy 22 final, handoff",
+ "timestamp": "20261011T162123Z",
+ "mode": "pinned",
+ "dry_run": false,
+ "server": {
+  "url": "http://127.0.0.1:8787",
+  "reachable": true,
+  "context_pushed": true
+ },
+ "repeat": 3,
+ "curation": {
+  "attempts": 1,
+  "misses_before": []
+ },
+ "runs": [
+  {
+   "run": 1,
+   "status": "pass",
+   "tally": {
+    "pass": 21,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 21
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 222.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+      "asr_confidence": 0.8769230769230769,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8769230769230769,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "request_route",
+       "parse_confidence": 0.9,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": null,
+        "destination": "College Point",
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.864720821380615,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "out_of_whitelist"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "card_text": "Mandatory handoff: out_of_whitelist. intent 'request_route' / request outside the phrase whitelist parse: Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser). intent 'request_route' / request outside the phrase whitelist MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "proposal_id": "68205969e2",
+      "source": "policy",
+      "confidence": 0.7892
+     },
+     "server_error": null,
+     "speech_latency_ms": 4865,
+     "total_latency_ms": 4866,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.intent",
+       "field": "intent",
+       "expected": "request_route",
+       "actual": "request_route",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "College Point",
+       "actual": "College Point",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S2.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "out_of_whitelist"
+       ],
+       "actual": [
+        "out_of_whitelist"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "engine_alert",
+     "t": 392.0,
+     "facts": {
+      "t_first": 392.0,
+      "lead_s": 83.109375,
+      "confidence": 1.0,
+      "volume_id": "lga22_final_seg2"
+     },
+     "alert": {
+      "id": "SIM312LM",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "volume_id": "lga22_final_seg2",
+      "severity": "handoff",
+      "confidence": 0.5631,
+      "reason": "N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor.",
+      "time_to_entry_s": 83.109375,
+      "entry_point": {
+       "lat": 40.81907514551145,
+       "lon": -73.85585199554221
+      },
+      "entry_alt_ft": 600.0,
+      "first_seen_t": 328.0,
+      "last_seen_t": 392.0
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "path_protected_volume"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "card_text": "Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. engine alert SIM312LM: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. time to entry 83s into lga22_final_seg2 MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "proposal_id": "7247311fa5",
+      "source": "policy",
+      "confidence": 0.5631
+     },
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.E1.geometry.exists",
+       "field": "exists",
+       "expected": "handoff lga22_final_seg*",
+       "actual": "lga22_final_seg2",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.lead_s",
+       "field": "lead_s",
+       "expected": [
+        80.0,
+        90.0
+       ],
+       "actual": 83.109375,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.t_first",
+       "field": "t_first",
+       "expected": [
+        380.0,
+        400.0
+       ],
+       "actual": 392.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "path_protected_volume"
+       ],
+       "actual": [
+        "path_protected_volume"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "Rwy 22"
+       ],
+       "actual": "Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. engine alert SIM312LM: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. time to entry 83s into lga22_final_seg2 MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "ENGINE",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.ENGINE.geometry.no_unexpected_alert",
+       "field": "no_unexpected_alert",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S2.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=222.0  L1  N312LM  [PASS]\n      said  : Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.\n      heard : Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.   (asr 0.88, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['out_of_whitelist'] src=policy  \"MEDEVAC Three One Two Lima Mike, standby, controller will be with you\"\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected request_route  actual request_route\n      PASS  L1.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L1.parse.slots.destination         expected College Point  actual College Point\n      PASS  L1.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected handoff  actual handoff\n      PASS  L1.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L1.response.tier                   expected handoff  actual handoff\n      PASS  L1.response.triggers               expected [\"out_of_whitelist\"]  actual [\"out_of_whitelist\"]\n      PASS  L1.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Three One Two Lima Mike, standby, controller will be with you\nt=392.0  E1  event:engine_alert  [PASS]\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['path_protected_volume']  \"MEDEVAC Three One Two Lima Mike, standby, controller will be with you\"\n      PASS  E1.geometry.exists                 expected handoff lga22_final_seg*  actual lga22_final_seg2\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.lead_s                 expected [80.0, 90.0]  actual 83.109375\n      PASS  E1.geometry.t_first                expected [380.0, 400.0]  actual 392.0\n      PASS  E1.response.mode                   expected handoff  actual handoff\n      PASS  E1.response.tier                   expected handoff  actual handoff\n      PASS  E1.response.triggers               expected [\"path_protected_volume\"]  actual [\"path_protected_volume\"]\n      PASS  E1.response.card_contains          expected [\"Rwy 22\"]  actual Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 2...\nt=0.0    ENGINE  event:no_alerts  [PASS]\n      PASS  ENGINE.geometry.no_unexpected_alert expected none  actual none\nsummary\n      PASS  summary.handoffs                   expected 1  actual 1"
+  },
+  {
+   "run": 2,
+   "status": "pass",
+   "tally": {
+    "pass": 21,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 21
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 222.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+      "asr_confidence": 0.8769230769230769,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8769230769230769,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "request_route",
+       "parse_confidence": 0.9,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": null,
+        "destination": "College Point",
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.864720821380615,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "out_of_whitelist"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "card_text": "Mandatory handoff: out_of_whitelist. intent 'request_route' / request outside the phrase whitelist parse: Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser). intent 'request_route' / request outside the phrase whitelist MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "proposal_id": "c3544081b0",
+      "source": "policy",
+      "confidence": 0.7892
+     },
+     "server_error": null,
+     "speech_latency_ms": 4865,
+     "total_latency_ms": 4866,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.intent",
+       "field": "intent",
+       "expected": "request_route",
+       "actual": "request_route",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "College Point",
+       "actual": "College Point",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S2.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "out_of_whitelist"
+       ],
+       "actual": [
+        "out_of_whitelist"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "engine_alert",
+     "t": 392.0,
+     "facts": {
+      "t_first": 392.0,
+      "lead_s": 83.109375,
+      "confidence": 1.0,
+      "volume_id": "lga22_final_seg2"
+     },
+     "alert": {
+      "id": "SIM312LM",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "volume_id": "lga22_final_seg2",
+      "severity": "handoff",
+      "confidence": 0.5631,
+      "reason": "N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor.",
+      "time_to_entry_s": 83.109375,
+      "entry_point": {
+       "lat": 40.81907514551145,
+       "lon": -73.85585199554221
+      },
+      "entry_alt_ft": 600.0,
+      "first_seen_t": 328.0,
+      "last_seen_t": 392.0
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "path_protected_volume"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "card_text": "Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. engine alert SIM312LM: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. time to entry 83s into lga22_final_seg2 MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "proposal_id": "e03b4d77c8",
+      "source": "policy",
+      "confidence": 0.5631
+     },
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.E1.geometry.exists",
+       "field": "exists",
+       "expected": "handoff lga22_final_seg*",
+       "actual": "lga22_final_seg2",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.lead_s",
+       "field": "lead_s",
+       "expected": [
+        80.0,
+        90.0
+       ],
+       "actual": 83.109375,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.t_first",
+       "field": "t_first",
+       "expected": [
+        380.0,
+        400.0
+       ],
+       "actual": 392.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "path_protected_volume"
+       ],
+       "actual": [
+        "path_protected_volume"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "Rwy 22"
+       ],
+       "actual": "Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. engine alert SIM312LM: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. time to entry 83s into lga22_final_seg2 MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "ENGINE",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.ENGINE.geometry.no_unexpected_alert",
+       "field": "no_unexpected_alert",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S2.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=222.0  L1  N312LM  [PASS]\n      said  : Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.\n      heard : Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.   (asr 0.88, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['out_of_whitelist'] src=policy  \"MEDEVAC Three One Two Lima Mike, standby, controller will be with you\"\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected request_route  actual request_route\n      PASS  L1.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L1.parse.slots.destination         expected College Point  actual College Point\n      PASS  L1.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected handoff  actual handoff\n      PASS  L1.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L1.response.tier                   expected handoff  actual handoff\n      PASS  L1.response.triggers               expected [\"out_of_whitelist\"]  actual [\"out_of_whitelist\"]\n      PASS  L1.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Three One Two Lima Mike, standby, controller will be with you\nt=392.0  E1  event:engine_alert  [PASS]\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['path_protected_volume']  \"MEDEVAC Three One Two Lima Mike, standby, controller will be with you\"\n      PASS  E1.geometry.exists                 expected handoff lga22_final_seg*  actual lga22_final_seg2\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.lead_s                 expected [80.0, 90.0]  actual 83.109375\n      PASS  E1.geometry.t_first                expected [380.0, 400.0]  actual 392.0\n      PASS  E1.response.mode                   expected handoff  actual handoff\n      PASS  E1.response.tier                   expected handoff  actual handoff\n      PASS  E1.response.triggers               expected [\"path_protected_volume\"]  actual [\"path_protected_volume\"]\n      PASS  E1.response.card_contains          expected [\"Rwy 22\"]  actual Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 2...\nt=0.0    ENGINE  event:no_alerts  [PASS]\n      PASS  ENGINE.geometry.no_unexpected_alert expected none  actual none\nsummary\n      PASS  summary.handoffs                   expected 1  actual 1"
+  },
+  {
+   "run": 3,
+   "status": "pass",
+   "tally": {
+    "pass": 21,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 21
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 222.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+      "asr_confidence": 0.8769230769230769,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8769230769230769,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "request_route",
+       "parse_confidence": 0.9,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": null,
+        "destination": "College Point",
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.864720821380615,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "out_of_whitelist"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "card_text": "Mandatory handoff: out_of_whitelist. intent 'request_route' / request outside the phrase whitelist parse: Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent request_route (cues: request); slots position=East 34th, altitude_ft=600, destination=College Point; ASR confidence 0.88, parse confidence 0.90 (grammar parser). intent 'request_route' / request outside the phrase whitelist MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "proposal_id": "9322b87d09",
+      "source": "policy",
+      "confidence": 0.7892
+     },
+     "server_error": null,
+     "speech_latency_ms": 4865,
+     "total_latency_ms": 4866,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.intent",
+       "field": "intent",
+       "expected": "request_route",
+       "actual": "request_route",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "College Point",
+       "actual": "College Point",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S2.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "out_of_whitelist"
+       ],
+       "actual": [
+        "out_of_whitelist"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "engine_alert",
+     "t": 392.0,
+     "facts": {
+      "t_first": 392.0,
+      "lead_s": 83.109375,
+      "confidence": 1.0,
+      "volume_id": "lga22_final_seg2"
+     },
+     "alert": {
+      "id": "SIM312LM",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "volume_id": "lga22_final_seg2",
+      "severity": "handoff",
+      "confidence": 0.5631,
+      "reason": "N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor.",
+      "time_to_entry_s": 83.109375,
+      "entry_point": {
+       "lat": 40.81907514551145,
+       "lon": -73.85585199554221
+      },
+      "entry_alt_ft": 600.0,
+      "first_seen_t": 328.0,
+      "last_seen_t": 392.0
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "path_protected_volume"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "card_text": "Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. engine alert SIM312LM: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. time to entry 83s into lga22_final_seg2 MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+      "proposal_id": "be73fa0ba2",
+      "source": "policy",
+      "confidence": 0.5631
+     },
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.E1.geometry.exists",
+       "field": "exists",
+       "expected": "handoff lga22_final_seg*",
+       "actual": "lga22_final_seg2",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.lead_s",
+       "field": "lead_s",
+       "expected": [
+        80.0,
+        90.0
+       ],
+       "actual": 83.109375,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.geometry.t_first",
+       "field": "t_first",
+       "expected": [
+        380.0,
+        400.0
+       ],
+       "actual": 392.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "path_protected_volume"
+       ],
+       "actual": [
+        "path_protected_volume"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S2.E1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "Rwy 22"
+       ],
+       "actual": "Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. engine alert SIM312LM: N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. time to entry 83s into lga22_final_seg2 MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "ENGINE",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S2.ENGINE.geometry.no_unexpected_alert",
+       "field": "no_unexpected_alert",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S2.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=222.0  L1  N312LM  [PASS]\n      said  : Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.\n      heard : Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.   (asr 0.88, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['out_of_whitelist'] src=policy  \"MEDEVAC Three One Two Lima Mike, standby, controller will be with you\"\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected request_route  actual request_route\n      PASS  L1.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L1.parse.slots.destination         expected College Point  actual College Point\n      PASS  L1.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected handoff  actual handoff\n      PASS  L1.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L1.response.tier                   expected handoff  actual handoff\n      PASS  L1.response.triggers               expected [\"out_of_whitelist\"]  actual [\"out_of_whitelist\"]\n      PASS  L1.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Three One Two Lima Mike, standby, controller will be with you\nt=392.0  E1  event:engine_alert  [PASS]\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['path_protected_volume']  \"MEDEVAC Three One Two Lima Mike, standby, controller will be with you\"\n      PASS  E1.geometry.exists                 expected handoff lga22_final_seg*  actual lga22_final_seg2\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.lead_s                 expected [80.0, 90.0]  actual 83.109375\n      PASS  E1.geometry.t_first                expected [380.0, 400.0]  actual 392.0\n      PASS  E1.response.mode                   expected handoff  actual handoff\n      PASS  E1.response.tier                   expected handoff  actual handoff\n      PASS  E1.response.triggers               expected [\"path_protected_volume\"]  actual [\"path_protected_volume\"]\n      PASS  E1.response.card_contains          expected [\"Rwy 22\"]  actual Projected path enters lga22_final_seg2 in 83s: N312LM: Projected path crosses LGA Rwy 2...\nt=0.0    ENGINE  event:no_alerts  [PASS]\n      PASS  ENGINE.geometry.no_unexpected_alert expected none  actual none\nsummary\n      PASS  summary.handoffs                   expected 1  actual 1"
+  }
+ ],
+ "aggregate": {
+  "runs": 3,
+  "all_judged_passed_every_run": true,
+  "judged": 21,
+  "pending": 0
+ },
+ "per_check": {
+  "S2.L1.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.slots.position": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.slots.destination": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.parse.emergency": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.response.triggers": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.L1.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.geometry.exists": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.geometry.confidence>=": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.geometry.lead_s": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.geometry.t_first": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.response.triggers": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.E1.response.card_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.ENGINE.geometry.no_unexpected_alert": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S2.summary.handoffs": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  }
+ },
+ "wall_s": 0.76
+}

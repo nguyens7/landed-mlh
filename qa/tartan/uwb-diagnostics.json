@@ -1,0 +1,104 @@
+{
+  "results_sha256": "3a39898c2242d2ef145477359022d2e536fff1f7f7eafca19ef67599f3fe24a1",
+  "manifest_sha256": "b50862399d392dfb73b103079b9b0b177b018cd6881e9c3741e06fae5e61d7f3",
+  "baseline": {
+    "clips": 150,
+    "reference_tokens": 1307,
+    "substitutions": 338,
+    "deletions": 89,
+    "insertions": 188,
+    "wer": 0.4705432287681714
+  },
+  "at_least_four_normalized_reference_tokens": {
+    "clips": 139,
+    "reference_tokens": 1284,
+    "substitutions": 325,
+    "deletions": 87,
+    "insertions": 142,
+    "wer": 0.43146417445482865
+  },
+  "one_to_three_normalized_reference_tokens": {
+    "clips": 11,
+    "reference_tokens": 23,
+    "substitutions": 13,
+    "deletions": 2,
+    "insertions": 46,
+    "wer": 2.652173913043478
+  },
+  "posthoc_orthography_only": {
+    "clips": 150,
+    "reference_tokens": 1327,
+    "substitutions": 317,
+    "deletions": 84,
+    "insertions": 182,
+    "wer": 0.43933685003767897
+  },
+  "orthography_caveat": "Post-hoc diagnostic, not ASR improvement or replacement for headline WER.",
+  "self_score_at_least_0_8": {
+    "clips": 87,
+    "clips_with_wer_above_0_25": 57
+  },
+  "confidence_caveat": "Single-call self-score; this is not the deployed resampling confidence or field-error calibration.",
+  "top_single_token_substitutions": [
+    {
+      "reference": "clear",
+      "hypothesis": "cleared",
+      "count": 11
+    },
+    {
+      "reference": "cleared",
+      "hypothesis": "clear",
+      "count": 6
+    },
+    {
+      "reference": "takeoff",
+      "hypothesis": "off",
+      "count": 4
+    },
+    {
+      "reference": "ruzyne",
+      "hypothesis": "ruzyn",
+      "count": 4
+    },
+    {
+      "reference": "lining",
+      "hypothesis": "line",
+      "count": 3
+    },
+    {
+      "reference": "csa",
+      "hypothesis": "tc",
+      "count": 3
+    },
+    {
+      "reference": "good",
+      "hypothesis": "goodbye",
+      "count": 2
+    },
+    {
+      "reference": "060",
+      "hypothesis": "020",
+      "count": 2
+    },
+    {
+      "reference": "csa",
+      "hypothesis": "cessna",
+      "count": 2
+    },
+    {
+      "reference": "121",
+      "hypothesis": "1",
+      "count": 2
+    },
+    {
+      "reference": "nor",
+      "hypothesis": "north",
+      "count": 2
+    },
+    {
+      "reference": "praha",
+      "hypothesis": "tower",
+      "count": 2
+    }
+  ]
+}

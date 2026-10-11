@@ -1,0 +1,123 @@
+{
+ "scenario": "S5",
+ "title": "MAYDAY and 7700, agent goes silent",
+ "note": "SIMULATION ONLY. Fictional registrations. Frequency shown as SIM DESK.",
+ "lines": [
+  {
+   "id": "L1",
+   "t": 73.0,
+   "aircraft": "N312LM",
+   "spoken_callsign": "MEDEVAC Three One Two Lima",
+   "text": "MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.",
+   "voice": "Fenrir",
+   "snr": "10",
+   "rotor": true,
+   "style": "urgent",
+   "audio": "audio/s5_l1__Fenrir__10.wav",
+   "hash": "f20a457b323c3c49",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N312LM"
+     },
+     "intent": "emergency",
+     "slots": {
+      "destination": "East 34th"
+     },
+     "emergency": true
+    },
+    "response": {
+     "mode": "handoff",
+     "template_id": "CONTROLLER_TAKING_OVER",
+     "tier": "handoff",
+     "triggers": [
+      "emergency"
+     ],
+     "spoken_contains": [
+      "controller taking over"
+     ],
+     "card_contains": [
+      "heliport ops"
+     ]
+    }
+   }
+  },
+  {
+   "id": "L3",
+   "t": 110.0,
+   "aircraft": "N2646X",
+   "spoken_callsign": "MEDEVAC Two Six Four Six X-Ray",
+   "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.",
+   "voice": "Kore",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s5_l3__Kore__clean.wav",
+   "hash": "a4bd4da1dc93c389",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N2646X"
+     },
+     "intent": "position_report",
+     "slots": {
+      "position": "Williamsburg Bridge",
+      "corridor": "East River",
+      "direction": "southbound",
+      "altitude_ft": 800
+     }
+    },
+    "response": {
+     "mode": "locked_silent"
+    }
+   }
+  },
+  {
+   "id": "L2",
+   "t": 125.0,
+   "aircraft": "N312LM",
+   "spoken_callsign": "MEDEVAC Three One Two Lima",
+   "text": "MEDEVAC Three One Two Lima, approaching East 34th.",
+   "voice": "Fenrir",
+   "snr": "10",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s5_l2__Fenrir__10.wav",
+   "hash": "d4997a5952598b15",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N312LM"
+     },
+     "intent": "position_report",
+     "slots": {
+      "position": "East 34th"
+     }
+    },
+    "response": {
+     "mode": "locked_silent"
+    }
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "E1",
+   "kind": "squawk",
+   "aircraft": "N312LM",
+   "note": "Simulated ADS-B shows 7700 within seconds of the call.",
+   "t_window": [
+    72.0,
+    80.0
+   ],
+   "code": "7700",
+   "response": {
+    "mode": "locked_silent"
+   }
+  },
+  {
+   "id": "E2",
+   "kind": "no_alerts"
+  }
+ ]
+}

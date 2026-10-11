@@ -1,0 +1,279 @@
+{
+  "plan_sha256": "c9af7ecd5b23386b665cc8225d614b0d7d1b5125322367aefa6e2dc2f6a366e7",
+  "subsets": {
+    "audit_development": {
+      "cached_baseline": {
+        "n": 25,
+        "wer": 0.9013157894736842,
+        "reference_tokens": 152,
+        "substitutions": 47,
+        "deletions": 14,
+        "insertions": 76,
+        "errors": 0,
+        "empty_hypotheses": 0,
+        "numeric_sequence_proxy": {
+          "eligible": 18,
+          "exact": 6
+        },
+        "stored_success_latency_n": 25,
+        "stored_success_median_latency_s": 3.4669618606567383,
+        "stored_success_p95_latency_s": 11.41214394569397,
+        "uncached_success_latency_n": 0,
+        "uncached_success_median_latency_s": null,
+        "uncached_success_p95_latency_s": null,
+        "cached_results": 25
+      },
+      "local_medium": {
+        "n": 25,
+        "wer": 1.3421052631578947,
+        "reference_tokens": 152,
+        "substitutions": 77,
+        "deletions": 10,
+        "insertions": 117,
+        "errors": 0,
+        "empty_hypotheses": 1,
+        "numeric_sequence_proxy": {
+          "eligible": 18,
+          "exact": 7
+        },
+        "stored_success_latency_n": 25,
+        "stored_success_median_latency_s": 3.0454362919845153,
+        "stored_success_p95_latency_s": 5.479517041996587,
+        "uncached_success_latency_n": 25,
+        "uncached_success_median_latency_s": 3.0454362919845153,
+        "uncached_success_p95_latency_s": 5.479517041996587,
+        "cached_results": 0
+      },
+      "control": {
+        "n": 25,
+        "wer": 0.8618421052631579,
+        "reference_tokens": 152,
+        "substitutions": 44,
+        "deletions": 11,
+        "insertions": 76,
+        "errors": 0,
+        "empty_hypotheses": 0,
+        "numeric_sequence_proxy": {
+          "eligible": 18,
+          "exact": 6
+        },
+        "stored_success_latency_n": 25,
+        "stored_success_median_latency_s": 2.4660520830075257,
+        "stored_success_p95_latency_s": 7.910482459003106,
+        "uncached_success_latency_n": 25,
+        "uncached_success_median_latency_s": 2.4660520830075257,
+        "uncached_success_p95_latency_s": 7.910482459003106,
+        "cached_results": 0
+      },
+      "literal": {
+        "n": 25,
+        "wer": 0.993421052631579,
+        "reference_tokens": 152,
+        "substitutions": 54,
+        "deletions": 19,
+        "insertions": 78,
+        "errors": 1,
+        "empty_hypotheses": 1,
+        "numeric_sequence_proxy": {
+          "eligible": 18,
+          "exact": 4
+        },
+        "stored_success_latency_n": 24,
+        "stored_success_median_latency_s": 4.689134646003367,
+        "stored_success_p95_latency_s": 13.810455042024842,
+        "uncached_success_latency_n": 24,
+        "uncached_success_median_latency_s": 4.689134646003367,
+        "uncached_success_p95_latency_s": 13.810455042024842,
+        "cached_results": 0
+      },
+      "segmented": {
+        "n": 25,
+        "wer": 0.868421052631579,
+        "reference_tokens": 152,
+        "substitutions": 51,
+        "deletions": 12,
+        "insertions": 69,
+        "errors": 1,
+        "empty_hypotheses": 1,
+        "numeric_sequence_proxy": {
+          "eligible": 18,
+          "exact": 5
+        },
+        "stored_success_latency_n": 24,
+        "stored_success_median_latency_s": 2.6008665834815474,
+        "stored_success_p95_latency_s": 9.960397957998794,
+        "uncached_success_latency_n": 16,
+        "uncached_success_median_latency_s": 2.2616646460082848,
+        "uncached_success_p95_latency_s": 6.802696042024763,
+        "cached_results": 8
+      },
+      "domain": {
+        "n": 25,
+        "wer": 0.7697368421052632,
+        "reference_tokens": 152,
+        "substitutions": 44,
+        "deletions": 5,
+        "insertions": 68,
+        "errors": 0,
+        "empty_hypotheses": 0,
+        "numeric_sequence_proxy": {
+          "eligible": 18,
+          "exact": 7
+        },
+        "stored_success_latency_n": 25,
+        "stored_success_median_latency_s": 2.3068101669778116,
+        "stored_success_p95_latency_s": 17.594263540988322,
+        "uncached_success_latency_n": 25,
+        "uncached_success_median_latency_s": 2.3068101669778116,
+        "uncached_success_p95_latency_s": 17.594263540988322,
+        "cached_results": 0
+      }
+    },
+    "confirmation": {
+      "cached_baseline": {
+        "n": 75,
+        "wer": 0.4144542772861357,
+        "reference_tokens": 678,
+        "substitutions": 187,
+        "deletions": 39,
+        "insertions": 55,
+        "errors": 0,
+        "empty_hypotheses": 0,
+        "numeric_sequence_proxy": {
+          "eligible": 68,
+          "exact": 31
+        },
+        "stored_success_latency_n": 75,
+        "stored_success_median_latency_s": 3.5714619159698486,
+        "stored_success_p95_latency_s": 25.125699043273926,
+        "uncached_success_latency_n": 0,
+        "uncached_success_median_latency_s": null,
+        "uncached_success_p95_latency_s": null,
+        "cached_results": 75
+      },
+      "local_medium": {
+        "n": 75,
+        "wer": 0.7551622418879056,
+        "reference_tokens": 678,
+        "substitutions": 285,
+        "deletions": 51,
+        "insertions": 176,
+        "errors": 0,
+        "empty_hypotheses": 0,
+        "numeric_sequence_proxy": {
+          "eligible": 68,
+          "exact": 18
+        },
+        "stored_success_latency_n": 75,
+        "stored_success_median_latency_s": 3.161454874993069,
+        "stored_success_p95_latency_s": 3.811694542004261,
+        "uncached_success_latency_n": 75,
+        "uncached_success_median_latency_s": 3.161454874993069,
+        "uncached_success_p95_latency_s": 3.811694542004261,
+        "cached_results": 0
+      },
+      "control": {
+        "n": 75,
+        "wer": 0.45870206489675514,
+        "reference_tokens": 678,
+        "substitutions": 173,
+        "deletions": 60,
+        "insertions": 78,
+        "errors": 1,
+        "empty_hypotheses": 1,
+        "numeric_sequence_proxy": {
+          "eligible": 68,
+          "exact": 33
+        },
+        "stored_success_latency_n": 74,
+        "stored_success_median_latency_s": 2.575412687510834,
+        "stored_success_p95_latency_s": 5.9387846250028815,
+        "uncached_success_latency_n": 74,
+        "uncached_success_median_latency_s": 2.575412687510834,
+        "uncached_success_p95_latency_s": 5.9387846250028815,
+        "cached_results": 0
+      },
+      "domain": {
+        "n": 75,
+        "wer": 0.415929203539823,
+        "reference_tokens": 678,
+        "substitutions": 160,
+        "deletions": 44,
+        "insertions": 78,
+        "errors": 0,
+        "empty_hypotheses": 0,
+        "numeric_sequence_proxy": {
+          "eligible": 68,
+          "exact": 29
+        },
+        "stored_success_latency_n": 75,
+        "stored_success_median_latency_s": 2.441275749995839,
+        "stored_success_p95_latency_s": 6.950834957999177,
+        "uncached_success_latency_n": 75,
+        "uncached_success_median_latency_s": 2.441275749995839,
+        "uncached_success_p95_latency_s": 6.950834957999177,
+        "cached_results": 0
+      }
+    },
+    "reserve": {
+      "cached_baseline": {
+        "n": 50,
+        "wer": 0.4129979035639413,
+        "reference_tokens": 477,
+        "substitutions": 104,
+        "deletions": 36,
+        "insertions": 57,
+        "errors": 0,
+        "empty_hypotheses": 0,
+        "numeric_sequence_proxy": {
+          "eligible": 37,
+          "exact": 25
+        },
+        "stored_success_latency_n": 50,
+        "stored_success_median_latency_s": 3.6822164058685303,
+        "stored_success_p95_latency_s": 20.525402069091797,
+        "uncached_success_latency_n": 0,
+        "uncached_success_median_latency_s": null,
+        "uncached_success_p95_latency_s": null,
+        "cached_results": 50
+      }
+    }
+  },
+  "cost_note": "API estimates from token metadata and 2026-10-11 standard rates, not billing receipts; unknown/failure usage remains conservatively reserved.",
+  "local_provenance": {
+    "model_files_sha256": {
+      "model.bin": "11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b",
+      "config.json": "4a1848ebabe7938d9797c15a2e8e4ce1d36e6fd4a43d096ae5955257c67c7962",
+      "tokenizer.json": "929c5252409436dce1b38a75d1abbcb5e132d170d8e324e4e04ed915fa2d22df",
+      "vocabulary.txt": "ff77588746d3a2595d32ab5b69ffd7b95ce2441ac57533cb66fc3eb575a115cf",
+      "preprocessor_config.json": null
+    },
+    "settings": {
+      "device": "cpu",
+      "compute_type": "int8",
+      "cpu_threads": 4,
+      "language": "en",
+      "beam_size": 5,
+      "condition_on_previous_text": false,
+      "temperature": 0,
+      "vad_filter": false
+    },
+    "packages": {
+      "faster-whisper": "1.2.1",
+      "ctranslate2": "4.8.2",
+      "scipy": "1.18.1",
+      "soundfile": "0.14.0"
+    },
+    "input_decoder": "soundfile.float32.mono.scipy.resample_poly.to_16000.v1",
+    "machine": "arm64",
+    "python": "3.13.14"
+  },
+  "cost": {
+    "reserved_calls": 242,
+    "conservative_reserved_usd": 8.177664,
+    "estimated_successful_usd": 0.11352675,
+    "unknown_usage_calls": 3,
+    "input_usd_per_million": 0.75,
+    "output_usd_per_million": 3.75
+  }
+}

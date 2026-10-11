@@ -1,0 +1,109 @@
+# S1. Clean autonomous: Downtown Skyport (JRB) to E 34th St (6N5) via the East River, northbound at 500 ft.
+# SIMULATION ONLY. Fictional registrations; the frequency is shown only as "SIM DESK".
+# Expected: four autonomous transmissions, no handoff, the track stays well clear of every LGA volume.
+id: S1
+title: Clean autonomous run, JRB to 6N5
+spec: "SPEC.md section 4, S1"
+summary: >-
+  A medevac lifts from Downtown Skyport and flies the East River northbound at 500 ft. Landed answers four times on
+  its own (check-in, Brooklyn Bridge, Williamsburg Bridge, landing traffic call) and never hands off.
+window_s: 240
+aircraft:
+  - reg: N2646X
+    spoken: MEDEVAC Two Six Four Six X-Ray
+    type: EC35
+    voice: Kore
+    liftoff_t: 10
+    airborne: true
+    cruise_alt_ft: 500
+    cruise_kt: 90
+    route:   # real East River centre line, JRB -> 6N5 (hand-placed over water, validated against the corridor polygons)
+      - {name: JRB, lat: 40.7012136, lon: -74.0090283}
+      - {lat: 40.7035, lon: -74.0000}
+      - {name: Brooklyn Bridge, ref: brooklyn_bridge}
+      - {lat: 40.7080, lon: -73.9903}
+      - {lat: 40.7100, lon: -73.9830}
+      - {name: Williamsburg Bridge, ref: williamsburg_bridge}
+      - {lat: 40.7210, lon: -73.9705}
+      - {lat: 40.7330, lon: -73.9655}
+      - {lat: 40.7400, lon: -73.9680}
+      - {name: 6N5, lat: 40.7424472, lon: -73.9721222}
+  - reg: N77TH
+    role: traffic
+    role_guess: tour
+    spoken: Tour Seven Seven Tango Hotel
+    type: AS350
+    voice: Fenrir
+    liftoff_t: 70
+    airborne: true
+    cruise_alt_ft: 800
+    cruise_kt: 90
+    route:   # simulated tour helicopter, East River southbound from Roosevelt Island (the TRAFFIC call target)
+      - {name: Roosevelt Island north, ref: roosevelt_island_north}
+      - {lat: 40.7600, lon: -73.9505}
+      - {lat: 40.7470, lon: -73.9600}
+      - {lat: 40.7330, lon: -73.9655}
+      - {lat: 40.7210, lon: -73.9705}
+lines:
+  - id: L1
+    t: 12
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.
+    snr: clean
+    near: {ref: JRB, max_nm: 0.3}
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        intent: checkin
+        slots: {position: Downtown Skyport, origin: Downtown Skyport, corridor: East River, direction: northbound, altitude_ft: 500}
+        emergency: false
+      response:
+        mode: speak
+        template_id: ACK_CHECKIN
+        tier: auto
+        spoken_contains: [Landed advisory, radar contact, Downtown Skyport]
+  - id: L2
+    t: 36
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred.
+    snr: clean
+    near: {ref: brooklyn_bridge, max_nm: 0.3}
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        intent: position_report
+        slots: {position: Brooklyn Bridge, altitude_ft: 500}
+      response: {mode: speak, template_id: REPORT_ACK, tier: auto, spoken_contains: [roger]}
+  - id: L3
+    t: 84
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, five hundred, landing East 34th.
+    snr: clean
+    near: {ref: williamsburg_bridge, max_nm: 0.3}
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        intent: position_report
+        slots: {position: Williamsburg Bridge, altitude_ft: 500, destination: East 34th}
+      response: {mode: speak, template_id: TRAFFIC, tier: auto, spoken_contains: [traffic]}
+  - id: L4
+    t: 156
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, approaching East 34th, five hundred.
+    snr: clean
+    near: {ref: 6N5, max_nm: 0.8}
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        intent: position_report
+        slots: {position: East 34th, altitude_ft: 500}
+      response: {mode: speak, template_id: REPORT_ACK, tier: auto, spoken_contains: [roger]}
+events:
+  - id: E1
+    kind: no_alerts
+    aircraft: N2646X
+    min_severity: advisory
+    note: The projected path never comes within 1 nm of any LGA volume.
+geo:
+  corridors: {N2646X: [sfra_east_river_south, sfra_east_river_north], N77TH: [sfra_east_river_south, sfra_east_river_north]}
+expected_summary: {auto_transmissions: 4, handoffs: 0, cards: 0}

@@ -1,0 +1,1136 @@
+{
+ "scenario": "S3B",
+ "title": "Silent drift to the wrong Hudson shoreline",
+ "timestamp": "20261011T162123Z",
+ "mode": "pinned",
+ "dry_run": false,
+ "server": {
+  "url": "http://127.0.0.1:8787",
+  "reachable": true,
+  "context_pushed": true
+ },
+ "repeat": 3,
+ "curation": {
+  "attempts": 1,
+  "misses_before": []
+ },
+ "runs": [
+  {
+   "run": 1,
+   "status": "gap",
+   "tally": {
+    "pass": 16,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 4,
+    "total": 20
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.0942680835723877,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text. model (gemini): Pilot checking in on the Hudson corridor southbound at 1000 feet. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "198626dd70",
+      "source": "gemini",
+      "confidence": 0.95
+     },
+     "server_error": null,
+     "speech_latency_ms": 3095,
+     "total_latency_ms": 3096,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3B.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "shoreline",
+     "t": 83.0,
+     "facts": {
+      "kind": "shoreline",
+      "reg": "N2646X",
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "first_seen_t": 83.0,
+      "direction": "southbound",
+      "offset_east_nm": 0.301,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      },
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm."
+     },
+     "alert": {
+      "id": "N2646X:shoreline",
+      "kind": "shoreline",
+      "aircraft": {
+       "hex": "SIM2646X",
+       "reg": "N2646X"
+      },
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+      "first_seen_t": 83.0,
+      "last_seen_t": 83.0,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      }
+     },
+     "outcome": {
+      "mode": "silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [],
+      "spoken_text": null,
+      "card_text": null,
+      "proposal_id": null,
+      "source": null,
+      "confidence": null
+     },
+     "status": "gap",
+     "checks": [
+      {
+       "id": "S3B.E1.geometry.exists",
+       "field": "exists",
+       "expected": "shoreline alert",
+       "actual": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.first_seen_t",
+       "field": "first_seen_t",
+       "expected": [
+        40.0,
+        100.0
+       ],
+       "actual": 83.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.opposing_traffic_nm",
+       "field": "opposing_traffic_nm",
+       "expected": [
+        0.5,
+        3.5
+       ],
+       "actual": 1.91,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "silent",
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 0,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3B.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 3095,
+     "server_ms": 1,
+     "total_ms": 3096,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=83.0   E1  event:shoreline  [GAP]\n      agent : silent None tier=None triggers=[]  \"\"\n      PASS  E1.geometry.exists                 expected shoreline alert  actual N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre li...\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.first_seen_t           expected [40.0, 100.0]  actual 83.0\n      PASS  E1.geometry.opposing_traffic_nm    expected [0.5, 3.5]  actual 1.91\n      GAP   E1.response.mode                   expected speak  actual silent  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.template_id            expected TRAFFIC  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.tier                   expected auto  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.spoken_contains        expected [\"traffic\"]  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      PASS  E1.response.latency_ms             expected <=3000  actual 0  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.handoffs                   expected 0  actual 0"
+  },
+  {
+   "run": 2,
+   "status": "gap",
+   "tally": {
+    "pass": 16,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 4,
+    "total": 20
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.0942680835723877,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text. model (gemini): Pilot checking in on the Hudson corridor southbound at 1000 feet. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "7fb8af3a70",
+      "source": "gemini",
+      "confidence": 0.95
+     },
+     "server_error": null,
+     "speech_latency_ms": 3095,
+     "total_latency_ms": 3096,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3B.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "shoreline",
+     "t": 83.0,
+     "facts": {
+      "kind": "shoreline",
+      "reg": "N2646X",
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "first_seen_t": 83.0,
+      "direction": "southbound",
+      "offset_east_nm": 0.301,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      },
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm."
+     },
+     "alert": {
+      "id": "N2646X:shoreline",
+      "kind": "shoreline",
+      "aircraft": {
+       "hex": "SIM2646X",
+       "reg": "N2646X"
+      },
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+      "first_seen_t": 83.0,
+      "last_seen_t": 83.0,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      }
+     },
+     "outcome": {
+      "mode": "silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [],
+      "spoken_text": null,
+      "card_text": null,
+      "proposal_id": null,
+      "source": null,
+      "confidence": null
+     },
+     "status": "gap",
+     "checks": [
+      {
+       "id": "S3B.E1.geometry.exists",
+       "field": "exists",
+       "expected": "shoreline alert",
+       "actual": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.first_seen_t",
+       "field": "first_seen_t",
+       "expected": [
+        40.0,
+        100.0
+       ],
+       "actual": 83.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.opposing_traffic_nm",
+       "field": "opposing_traffic_nm",
+       "expected": [
+        0.5,
+        3.5
+       ],
+       "actual": 1.91,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "silent",
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 0,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3B.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 3095,
+     "server_ms": 1,
+     "total_ms": 3096,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=83.0   E1  event:shoreline  [GAP]\n      agent : silent None tier=None triggers=[]  \"\"\n      PASS  E1.geometry.exists                 expected shoreline alert  actual N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre li...\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.first_seen_t           expected [40.0, 100.0]  actual 83.0\n      PASS  E1.geometry.opposing_traffic_nm    expected [0.5, 3.5]  actual 1.91\n      GAP   E1.response.mode                   expected speak  actual silent  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.template_id            expected TRAFFIC  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.tier                   expected auto  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.spoken_contains        expected [\"traffic\"]  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      PASS  E1.response.latency_ms             expected <=3000  actual 0  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.handoffs                   expected 0  actual 0"
+  },
+  {
+   "run": 3,
+   "status": "gap",
+   "tally": {
+    "pass": 16,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 4,
+    "total": 20
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.0942680835723877,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text. model (gemini): Pilot checking in on the Hudson corridor southbound at 1000 feet. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "b4a1d8a956",
+      "source": "gemini",
+      "confidence": 0.95
+     },
+     "server_error": null,
+     "speech_latency_ms": 3095,
+     "total_latency_ms": 3096,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3B.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "shoreline",
+     "t": 83.0,
+     "facts": {
+      "kind": "shoreline",
+      "reg": "N2646X",
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "first_seen_t": 83.0,
+      "direction": "southbound",
+      "offset_east_nm": 0.301,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      },
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm."
+     },
+     "alert": {
+      "id": "N2646X:shoreline",
+      "kind": "shoreline",
+      "aircraft": {
+       "hex": "SIM2646X",
+       "reg": "N2646X"
+      },
+      "volume_id": "sfra_hudson",
+      "severity": "caution",
+      "confidence": 1.0,
+      "reason": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+      "first_seen_t": 83.0,
+      "last_seen_t": 83.0,
+      "opposing_traffic": {
+       "reg": "N77TH",
+       "nm": 1.91
+      }
+     },
+     "outcome": {
+      "mode": "silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [],
+      "spoken_text": null,
+      "card_text": null,
+      "proposal_id": null,
+      "source": null,
+      "confidence": null
+     },
+     "status": "gap",
+     "checks": [
+      {
+       "id": "S3B.E1.geometry.exists",
+       "field": "exists",
+       "expected": "shoreline alert",
+       "actual": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.confidence>=",
+       "field": "confidence>=",
+       "expected": 0.8,
+       "actual": 1.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.first_seen_t",
+       "field": "first_seen_t",
+       "expected": [
+        40.0,
+        100.0
+       ],
+       "actual": 83.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.geometry.opposing_traffic_nm",
+       "field": "opposing_traffic_nm",
+       "expected": [
+        0.5,
+        3.5
+       ],
+       "actual": 1.91,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3B.E1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "silent",
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": null,
+       "status": "gap",
+       "detail": "known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert"
+      },
+      {
+       "id": "S3B.E1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 0,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3B.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3B.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 3095,
+     "server_ms": 1,
+     "total_ms": 3096,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=83.0   E1  event:shoreline  [GAP]\n      agent : silent None tier=None triggers=[]  \"\"\n      PASS  E1.geometry.exists                 expected shoreline alert  actual N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre li...\n      PASS  E1.geometry.confidence>=           expected 0.8  actual 1.0\n      PASS  E1.geometry.first_seen_t           expected [40.0, 100.0]  actual 83.0\n      PASS  E1.geometry.opposing_traffic_nm    expected [0.5, 3.5]  actual 1.91\n      GAP   E1.response.mode                   expected speak  actual silent  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.template_id            expected TRAFFIC  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.tier                   expected auto  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      GAP   E1.response.spoken_contains        expected [\"traffic\"]  actual null  (known gap: server /alerts only answers severity=handoff alerts; it makes no TRAFFIC proposal for a caution-level shoreline alert)\n      PASS  E1.response.latency_ms             expected <=3000  actual 0  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.handoffs                   expected 0  actual 0"
+  }
+ ],
+ "aggregate": {
+  "runs": 3,
+  "all_judged_passed_every_run": true,
+  "judged": 16,
+  "pending": 4
+ },
+ "per_check": {
+  "S3B.L1.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.parse.emergency": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.L1.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.geometry.exists": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.geometry.confidence>=": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.geometry.first_seen_t": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.geometry.opposing_traffic_nm": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E1.response.mode": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 3,
+   "stable": false
+  },
+  "S3B.E1.response.template_id": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 3,
+   "stable": false
+  },
+  "S3B.E1.response.tier": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 3,
+   "stable": false
+  },
+  "S3B.E1.response.spoken_contains": {
+   "passes": 0,
+   "runs": 3,
+   "judged": 0,
+   "pending": 3,
+   "gap": 3,
+   "stable": false
+  },
+  "S3B.E1.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.E2.geometry.no_alert>=advisory": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3B.summary.handoffs": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  }
+ },
+ "wall_s": 1.57
+}

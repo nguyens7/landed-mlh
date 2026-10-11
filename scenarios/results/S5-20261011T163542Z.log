@@ -1,0 +1,137 @@
+S5  MAYDAY and 7700, agent goes silent
+mode=pinned server=yes repeat=3  20261011T163542Z
+
+--- run 1/3: PASS {'pass': 27, 'fail': 0, 'partial': 0, 'pending': 0, 'gap': 0, 'total': 27}
+t=73.0   L1  N312LM  [PASS]
+      said  : MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.
+      heard : Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.   (asr 0.95, grammar parser, pinned)
+      agent : handoff CONTROLLER_TAKING_OVER tier=handoff triggers=['emergency'] src=policy  "MEDEVAC Three One Two Lima Mike, controller taking over"
+      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L1.parse.intent                    expected emergency  actual emergency
+      PASS  L1.parse.slots.destination         expected East 34th  actual East 34th
+      PASS  L1.parse.emergency                 expected true  actual true
+      PASS  L1.response.mode                   expected handoff  actual handoff
+      PASS  L1.response.template_id            expected CONTROLLER_TAKING_OVER  actual CONTROLLER_TAKING_OVER
+      PASS  L1.response.tier                   expected handoff  actual handoff
+      PASS  L1.response.triggers               expected ["emergency"]  actual ["emergency"]
+      PASS  L1.response.spoken_contains        expected ["controller taking over"]  actual MEDEVAC Three One Two Lima Mike, controller taking over
+      PASS  L1.response.card_contains          expected ["heliport ops"]  actual Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; t...
+t=75.0   E1  event:squawk  [PASS]
+      agent : locked_silent None tier=None triggers=[]  ""
+      PASS  E1.geometry.exists                 expected 7700  actual 7700
+      PASS  E1.geometry.t                      expected [72.0, 80.0]  actual 75.0
+      PASS  E1.response.mode                   expected locked_silent  actual locked_silent
+t=110.0  L3  N2646X  [PASS]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.
+      heard : Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.   (asr 0.95, grammar parser, pinned)
+      agent : locked_silent None tier=None triggers=['emergency'] src=policy  ""
+      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L3.parse.intent                    expected position_report  actual position_report
+      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge
+      PASS  L3.parse.slots.corridor            expected East River  actual East River
+      PASS  L3.parse.slots.direction           expected southbound  actual southbound
+      PASS  L3.parse.slots.altitude_ft         expected 800  actual 800  (within 50 ft (diff 0))
+      PASS  L3.response.mode                   expected locked_silent  actual locked_silent
+t=125.0  L2  N312LM  [PASS]
+      said  : MEDEVAC Three One Two Lima, approaching East 34th.
+      heard : MEDEVAC 312 Lima approaching East 34th.   (asr 0.95, grammar parser, pinned)
+      agent : locked_silent None tier=None triggers=['emergency'] src=policy  ""
+      PASS  L2.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L2.parse.intent                    expected position_report  actual position_report
+      PASS  L2.parse.slots.position            expected East 34th  actual East 34th
+      PASS  L2.response.mode                   expected locked_silent  actual locked_silent
+t=0.0    E2  event:no_alerts  [PASS]
+      PASS  E2.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PASS  summary.transmissions              expected 1  actual 1
+      PASS  summary.transmissions_after_lock   expected 0  actual 0
+
+--- run 2/3: PASS {'pass': 27, 'fail': 0, 'partial': 0, 'pending': 0, 'gap': 0, 'total': 27}
+t=73.0   L1  N312LM  [PASS]
+      said  : MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.
+      heard : Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.   (asr 0.95, grammar parser, pinned)
+      agent : handoff CONTROLLER_TAKING_OVER tier=handoff triggers=['emergency'] src=policy  "MEDEVAC Three One Two Lima Mike, controller taking over"
+      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L1.parse.intent                    expected emergency  actual emergency
+      PASS  L1.parse.slots.destination         expected East 34th  actual East 34th
+      PASS  L1.parse.emergency                 expected true  actual true
+      PASS  L1.response.mode                   expected handoff  actual handoff
+      PASS  L1.response.template_id            expected CONTROLLER_TAKING_OVER  actual CONTROLLER_TAKING_OVER
+      PASS  L1.response.tier                   expected handoff  actual handoff
+      PASS  L1.response.triggers               expected ["emergency"]  actual ["emergency"]
+      PASS  L1.response.spoken_contains        expected ["controller taking over"]  actual MEDEVAC Three One Two Lima Mike, controller taking over
+      PASS  L1.response.card_contains          expected ["heliport ops"]  actual Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; t...
+t=75.0   E1  event:squawk  [PASS]
+      agent : locked_silent None tier=None triggers=[]  ""
+      PASS  E1.geometry.exists                 expected 7700  actual 7700
+      PASS  E1.geometry.t                      expected [72.0, 80.0]  actual 75.0
+      PASS  E1.response.mode                   expected locked_silent  actual locked_silent
+t=110.0  L3  N2646X  [PASS]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.
+      heard : Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.   (asr 0.95, grammar parser, pinned)
+      agent : locked_silent None tier=None triggers=['emergency'] src=policy  ""
+      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L3.parse.intent                    expected position_report  actual position_report
+      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge
+      PASS  L3.parse.slots.corridor            expected East River  actual East River
+      PASS  L3.parse.slots.direction           expected southbound  actual southbound
+      PASS  L3.parse.slots.altitude_ft         expected 800  actual 800  (within 50 ft (diff 0))
+      PASS  L3.response.mode                   expected locked_silent  actual locked_silent
+t=125.0  L2  N312LM  [PASS]
+      said  : MEDEVAC Three One Two Lima, approaching East 34th.
+      heard : MEDEVAC 312 Lima approaching East 34th.   (asr 0.95, grammar parser, pinned)
+      agent : locked_silent None tier=None triggers=['emergency'] src=policy  ""
+      PASS  L2.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L2.parse.intent                    expected position_report  actual position_report
+      PASS  L2.parse.slots.position            expected East 34th  actual East 34th
+      PASS  L2.response.mode                   expected locked_silent  actual locked_silent
+t=0.0    E2  event:no_alerts  [PASS]
+      PASS  E2.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PASS  summary.transmissions              expected 1  actual 1
+      PASS  summary.transmissions_after_lock   expected 0  actual 0
+
+--- run 3/3: PASS {'pass': 27, 'fail': 0, 'partial': 0, 'pending': 0, 'gap': 0, 'total': 27}
+t=73.0   L1  N312LM  [PASS]
+      said  : MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.
+      heard : Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.   (asr 0.95, grammar parser, pinned)
+      agent : handoff CONTROLLER_TAKING_OVER tier=handoff triggers=['emergency'] src=policy  "MEDEVAC Three One Two Lima Mike, controller taking over"
+      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L1.parse.intent                    expected emergency  actual emergency
+      PASS  L1.parse.slots.destination         expected East 34th  actual East 34th
+      PASS  L1.parse.emergency                 expected true  actual true
+      PASS  L1.response.mode                   expected handoff  actual handoff
+      PASS  L1.response.template_id            expected CONTROLLER_TAKING_OVER  actual CONTROLLER_TAKING_OVER
+      PASS  L1.response.tier                   expected handoff  actual handoff
+      PASS  L1.response.triggers               expected ["emergency"]  actual ["emergency"]
+      PASS  L1.response.spoken_contains        expected ["controller taking over"]  actual MEDEVAC Three One Two Lima Mike, controller taking over
+      PASS  L1.response.card_contains          expected ["heliport ops"]  actual Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; t...
+t=75.0   E1  event:squawk  [PASS]
+      agent : locked_silent None tier=None triggers=[]  ""
+      PASS  E1.geometry.exists                 expected 7700  actual 7700
+      PASS  E1.geometry.t                      expected [72.0, 80.0]  actual 75.0
+      PASS  E1.response.mode                   expected locked_silent  actual locked_silent
+t=110.0  L3  N2646X  [PASS]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.
+      heard : Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.   (asr 0.95, grammar parser, pinned)
+      agent : locked_silent None tier=None triggers=['emergency'] src=policy  ""
+      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L3.parse.intent                    expected position_report  actual position_report
+      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge
+      PASS  L3.parse.slots.corridor            expected East River  actual East River
+      PASS  L3.parse.slots.direction           expected southbound  actual southbound
+      PASS  L3.parse.slots.altitude_ft         expected 800  actual 800  (within 50 ft (diff 0))
+      PASS  L3.response.mode                   expected locked_silent  actual locked_silent
+t=125.0  L2  N312LM  [PASS]
+      said  : MEDEVAC Three One Two Lima, approaching East 34th.
+      heard : MEDEVAC 312 Lima approaching East 34th.   (asr 0.95, grammar parser, pinned)
+      agent : locked_silent None tier=None triggers=['emergency'] src=policy  ""
+      PASS  L2.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L2.parse.intent                    expected position_report  actual position_report
+      PASS  L2.parse.slots.position            expected East 34th  actual East 34th
+      PASS  L2.response.mode                   expected locked_silent  actual locked_silent
+t=0.0    E2  event:no_alerts  [PASS]
+      PASS  E2.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PASS  summary.transmissions              expected 1  actual 1
+      PASS  summary.transmissions_after_lock   expected 0  actual 0

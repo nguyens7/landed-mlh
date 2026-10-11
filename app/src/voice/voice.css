@@ -1,0 +1,248 @@
+/* Voice agent UI: approval card, handoff card, emergency banner, audit log. Same dark console palette. */
+
+.voice-stack {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  width: min(600px, 94%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 12;
+}
+
+.approval-card {
+  background: #1a1608;
+  border: 2px solid var(--caution);
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 30px rgba(255, 176, 32, 0.28);
+}
+.approval-card.handoff-spoken {
+  background: #1a0d0d;
+  border-color: var(--handoff);
+  box-shadow: 0 8px 30px rgba(255, 59, 59, 0.3);
+}
+.approval-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.approval-badge {
+  background: var(--caution);
+  color: #1a1100;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.approval-badge.handoff {
+  background: var(--handoff);
+  color: white;
+}
+.approval-conf {
+  color: var(--text-dim);
+  font-size: 12px;
+}
+.approval-count {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--caution);
+  min-width: 56px;
+  text-align: right;
+}
+.approval-expiry {
+  height: 5px;
+  background: #2b2412;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.approval-expiry-fill {
+  height: 100%;
+  background: var(--caution);
+  transition: width 0.1s linear;
+}
+.approval-heard {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.approval-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+.approval-words {
+  margin: 4px 0 8px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--accent);
+  font-size: 15px;
+  line-height: 1.4;
+}
+.approval-evidence {
+  margin: 0 0 8px;
+  padding-left: 18px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.approval-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.approval-actions .btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.approval-actions kbd {
+  display: inline-block;
+  min-width: 18px;
+  padding: 0 4px;
+  margin-right: 4px;
+  border: 1px solid var(--text-dim);
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 12px;
+  text-align: center;
+}
+.btn-approve {
+  background: #14452c;
+  border-color: #2fbf71;
+}
+.approval-arm {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.approval-queue {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.approval-error {
+  color: var(--handoff);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.approval-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 6px 0;
+}
+.approval-edit-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+}
+.approval-edit-row span {
+  width: 120px;
+  color: var(--text-dim);
+}
+.approval-edit-row input {
+  flex: 1;
+  background: #0a0e14;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 3px;
+  padding: 4px 6px;
+  font-family: var(--mono);
+}
+.approval-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.emergency-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px 18px;
+  background: #5a0b0b;
+  border-bottom: 2px solid var(--handoff);
+  animation: alert-pulse 1.2s ease-in-out infinite;
+}
+.emergency-title {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: white;
+}
+.emergency-sub {
+  flex: 1 1 auto;
+  font-size: 13px;
+  color: #ffd0d0;
+}
+.btn-transmit {
+  background: var(--handoff);
+  border-color: white;
+  color: white;
+  font-size: 15px;
+  padding: 8px 18px;
+}
+
+.voice-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.voice-status .btn {
+  margin-left: auto;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+.audit-panel {
+  margin-top: 18px;
+}
+.audit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 12px;
+  padding: 5px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.audit-ts {
+  color: var(--text-dim);
+}
+.audit-decision {
+  font-weight: 700;
+  color: var(--accent);
+}
+.audit-expire,
+.audit-dropped_by_lock,
+.audit-dropped_by_rewind,
+.audit-suppressed_by_lock {
+  color: var(--caution);
+}
+.audit-reject_take_over,
+.audit-handoff_speak {
+  color: var(--handoff);
+}
+.audit-who,
+.audit-lat {
+  color: var(--text-dim);
+}
+.audit-text {
+  flex-basis: 100%;
+  color: var(--text);
+  opacity: 0.85;
+}
+.approval-router {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin: 2px 0 6px;
+}

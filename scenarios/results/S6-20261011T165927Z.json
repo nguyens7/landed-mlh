@@ -1,0 +1,2404 @@
+{
+ "scenario": "S6",
+ "title": "Volume cap, the fourth helicopter is handed off",
+ "timestamp": "20261011T165927Z",
+ "mode": "pinned",
+ "dry_run": false,
+ "server": {
+  "url": "http://127.0.0.1:8787",
+  "reachable": true,
+  "context_pushed": true
+ },
+ "repeat": 3,
+ "curation": null,
+ "runs": [
+  {
+   "run": 1,
+   "status": "pass",
+   "tally": {
+    "pass": 45,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 45
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=400, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 400,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 10.701525926589966,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=400, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). router (shadow): shadow, would be approval: router: routine 0.43 model (gemini): Pilot is checking in at JRB with altimeter setting available. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "af3589cac5",
+      "source": "gemini",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 10702,
+     "total_latency_ms": 10703,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 400,
+       "actual": 400,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 2,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 27.0,
+     "aircraft": "N38BL",
+     "text": "Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "38BL",
+        "snap_score": 1.0,
+        "snapped_to": "N38BL",
+        "spoken": "Three Eight Bravo Lima"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.",
+       "reason": "Callsign heard as 'Three Eight Bravo Lima' (38BL) snapped to N38BL (score 1.00); intent checkin (cues: airborne, checking in); slots position=Downtown Skyport, altitude_ft=1000, direction=northbound, corridor=Hudson, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 5.843782186508179,
+      "parse_latency_s": 0.0004
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.81, no active alert parse: Callsign heard as 'Three Eight Bravo Lima' (38BL) snapped to N38BL (score 1.00); intent checkin (cues: airborne, checking in); slots position=Downtown Skyport, altitude_ft=1000, direction=northbound, corridor=Hudson, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). router (shadow): shadow, would be approval: router: routine 0.66 model (gemini): Acknowledge check-in for N38BL at JRB with altimeter. MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "36241d0b7e",
+      "source": "gemini",
+      "confidence": 0.8136
+     },
+     "server_error": null,
+     "speech_latency_ms": 5844,
+     "total_latency_ms": 5846,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N38BL",
+       "actual": "N38BL",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L2.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 2,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 42.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 312 Lima, Hudson southbound 1000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 0.9,
+       "parser": "llm",
+       "raw_text": "Landed desk, Medevac 312 Lima, Hudson southbound 1000.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 0.90 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.508677959442139,
+      "parse_latency_s": 1.2936
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.85, no active alert parse: Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 0.90 (llm parser). Grammar was unsure; LLM output kept only values found in the text. router (shadow): shadow, would be approval: router: routine 0.64 model (gemini): Pilot N312LM is checking in at 1000 feet on the Hudson southbound. MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "a33297a277",
+      "source": "gemini",
+      "confidence": 0.855
+     },
+     "server_error": null,
+     "speech_latency_ms": 5802,
+     "total_latency_ms": 5804,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L3.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 2,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L4",
+     "t": 57.0,
+     "aircraft": "N761NY",
+     "text": "Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "761NY",
+        "snap_score": 1.0,
+        "snapped_to": "N761NY",
+        "spoken": "Seven Six One November Yankee"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.",
+       "reason": "Callsign heard as 'Seven Six One November Yankee' (761NY) snapped to N761NY (score 1.00); intent checkin (cues: checking in, lifting); slots position=East 34th, altitude_ft=500, direction=southbound, corridor=East River, origin=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "southbound",
+        "origin": "East 34th",
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 5.317724704742432,
+      "parse_latency_s": 0.0003
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "desk_over_capacity"
+      ],
+      "spoken_text": "MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+      "card_text": "Mandatory handoff: desk_over_capacity. 4 helicopters on the desk (cap 3) parse: Callsign heard as 'Seven Six One November Yankee' (761NY) snapped to N761NY (score 1.00); intent checkin (cues: checking in, lifting); slots position=East 34th, altitude_ft=500, direction=southbound, corridor=East River, origin=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser). 4 helicopters on the desk (cap 3) router (shadow): router cannot relax a policy decision MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+      "proposal_id": "00677a1733",
+      "source": "policy",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 5318,
+     "total_latency_ms": 5320,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L4.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N761NY",
+       "actual": "N761NY",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L4.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "desk_over_capacity"
+       ],
+       "actual": [
+        "desk_over_capacity"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "desk_count",
+     "t": 57.0,
+     "facts": {
+      "count": 4,
+      "regs": [
+       "N2646X",
+       "N38BL",
+       "N312LM",
+       "N761NY"
+      ]
+     },
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.E1.geometry.count",
+       "field": "count",
+       "expected": 4,
+       "actual": 4,
+       "status": "pass",
+       "detail": "['N2646X', 'N38BL', 'N312LM', 'N761NY']"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S6.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 3,
+     "actual": 3,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S6.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 10702,
+     "server_ms": 2,
+     "total_ms": 10703,
+     "source": "gemini"
+    },
+    {
+     "line": "L2",
+     "speech_ms": 5844,
+     "server_ms": 2,
+     "total_ms": 5846,
+     "source": "gemini"
+    },
+    {
+     "line": "L3",
+     "speech_ms": 5802,
+     "server_ms": 2,
+     "total_ms": 5804,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.\n      heard : Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.intent                    expected checkin  actual checkin\n      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.corridor            expected East River  actual East River\n      PASS  L1.parse.slots.direction           expected northbound  actual northbound\n      PASS  L1.parse.slots.altitude_ft         expected 400  actual 400  (within 50 ft (diff 0))\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.spoken_contains        expected [\"Downtown Skyport\"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L1.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=27.0   L2  N38BL  [PASS]\n      said  : Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.\n      heard : Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L2.parse.callsign.snapped_to       expected N38BL  actual N38BL\n      PASS  L2.parse.intent                    expected checkin  actual checkin\n      PASS  L2.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L2.parse.slots.direction           expected northbound  actual northbound\n      PASS  L2.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L2.response.mode                   expected speak  actual speak\n      PASS  L2.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L2.response.tier                   expected auto  actual auto\n      PASS  L2.response.spoken_contains        expected [\"Downtown Skyport\"]  actual MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L2.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=42.0   L3  N312LM  [PASS]\n      said  : Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.\n      heard : Landed desk, Medevac 312 Lima, Hudson southbound 1000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L3.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L3.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L3.parse.slots.direction           expected southbound  actual southbound\n      PASS  L3.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L3.response.mode                   expected speak  actual speak\n      PASS  L3.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L3.response.tier                   expected auto  actual auto\n      PASS  L3.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=57.0   L4  N761NY  [PASS]\n      said  : Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.\n      heard : Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.   (asr 0.95, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['desk_over_capacity'] src=policy  \"MEDEVAC Seven Six One November Yankee, standby, controller will be with you\"\n      PASS  L4.parse.callsign.snapped_to       expected N761NY  actual N761NY\n      PASS  L4.parse.intent                    expected checkin  actual checkin\n      PASS  L4.parse.slots.origin              expected East 34th  actual East 34th\n      PASS  L4.parse.slots.corridor            expected East River  actual East River\n      PASS  L4.parse.slots.direction           expected southbound  actual southbound\n      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L4.response.mode                   expected handoff  actual handoff\n      PASS  L4.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L4.response.tier                   expected handoff  actual handoff\n      PASS  L4.response.triggers               expected [\"desk_over_capacity\"]  actual [\"desk_over_capacity\"]\n      PASS  L4.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Seven Six One November Yankee, standby, controller will be with you\nt=57.0   E1  event:desk_count  [PASS]\n      PASS  E1.geometry.count                  expected 4  actual 4  (['N2646X', 'N38BL', 'N312LM', 'N761NY'])\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 3  actual 3\n      PASS  summary.handoffs                   expected 1  actual 1"
+  },
+  {
+   "run": 2,
+   "status": "pass",
+   "tally": {
+    "pass": 45,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 45
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=400, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 400,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 10.701525926589966,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=400, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). router (shadow): shadow, would be approval: router: routine 0.43 model (gemini): Pilot is checking in at JRB with altimeter setting available. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "4f6892df34",
+      "source": "gemini",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 10702,
+     "total_latency_ms": 10704,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 400,
+       "actual": 400,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 2,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 27.0,
+     "aircraft": "N38BL",
+     "text": "Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "38BL",
+        "snap_score": 1.0,
+        "snapped_to": "N38BL",
+        "spoken": "Three Eight Bravo Lima"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.",
+       "reason": "Callsign heard as 'Three Eight Bravo Lima' (38BL) snapped to N38BL (score 1.00); intent checkin (cues: airborne, checking in); slots position=Downtown Skyport, altitude_ft=1000, direction=northbound, corridor=Hudson, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 5.843782186508179,
+      "parse_latency_s": 0.0004
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.81, no active alert parse: Callsign heard as 'Three Eight Bravo Lima' (38BL) snapped to N38BL (score 1.00); intent checkin (cues: airborne, checking in); slots position=Downtown Skyport, altitude_ft=1000, direction=northbound, corridor=Hudson, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). router (shadow): shadow, would be approval: router: routine 0.66 model (gemini): Acknowledge check-in for N38BL at JRB with altimeter. MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "a1d8f130de",
+      "source": "gemini",
+      "confidence": 0.8136
+     },
+     "server_error": null,
+     "speech_latency_ms": 5844,
+     "total_latency_ms": 5846,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N38BL",
+       "actual": "N38BL",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L2.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 42.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 312 Lima, Hudson southbound 1000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 0.9,
+       "parser": "llm",
+       "raw_text": "Landed desk, Medevac 312 Lima, Hudson southbound 1000.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 0.90 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.508677959442139,
+      "parse_latency_s": 1.2936
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.85, no active alert parse: Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 0.90 (llm parser). Grammar was unsure; LLM output kept only values found in the text. router (shadow): shadow, would be approval: router: routine 0.64 model (gemini): Pilot N312LM is checking in at 1000 feet on the Hudson southbound. MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "009f292030",
+      "source": "gemini",
+      "confidence": 0.855
+     },
+     "server_error": null,
+     "speech_latency_ms": 5802,
+     "total_latency_ms": 5804,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L3.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 2,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L4",
+     "t": 57.0,
+     "aircraft": "N761NY",
+     "text": "Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "761NY",
+        "snap_score": 1.0,
+        "snapped_to": "N761NY",
+        "spoken": "Seven Six One November Yankee"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.",
+       "reason": "Callsign heard as 'Seven Six One November Yankee' (761NY) snapped to N761NY (score 1.00); intent checkin (cues: checking in, lifting); slots position=East 34th, altitude_ft=500, direction=southbound, corridor=East River, origin=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "southbound",
+        "origin": "East 34th",
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 5.317724704742432,
+      "parse_latency_s": 0.0003
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "desk_over_capacity"
+      ],
+      "spoken_text": "MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+      "card_text": "Mandatory handoff: desk_over_capacity. 4 helicopters on the desk (cap 3) parse: Callsign heard as 'Seven Six One November Yankee' (761NY) snapped to N761NY (score 1.00); intent checkin (cues: checking in, lifting); slots position=East 34th, altitude_ft=500, direction=southbound, corridor=East River, origin=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser). 4 helicopters on the desk (cap 3) router (shadow): router cannot relax a policy decision MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+      "proposal_id": "47b66e1fe4",
+      "source": "policy",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 5318,
+     "total_latency_ms": 5319,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L4.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N761NY",
+       "actual": "N761NY",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L4.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "desk_over_capacity"
+       ],
+       "actual": [
+        "desk_over_capacity"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "desk_count",
+     "t": 57.0,
+     "facts": {
+      "count": 4,
+      "regs": [
+       "N2646X",
+       "N38BL",
+       "N312LM",
+       "N761NY"
+      ]
+     },
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.E1.geometry.count",
+       "field": "count",
+       "expected": 4,
+       "actual": 4,
+       "status": "pass",
+       "detail": "['N2646X', 'N38BL', 'N312LM', 'N761NY']"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S6.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 3,
+     "actual": 3,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S6.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 10702,
+     "server_ms": 2,
+     "total_ms": 10704,
+     "source": "gemini"
+    },
+    {
+     "line": "L2",
+     "speech_ms": 5844,
+     "server_ms": 1,
+     "total_ms": 5846,
+     "source": "gemini"
+    },
+    {
+     "line": "L3",
+     "speech_ms": 5802,
+     "server_ms": 2,
+     "total_ms": 5804,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.\n      heard : Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.intent                    expected checkin  actual checkin\n      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.corridor            expected East River  actual East River\n      PASS  L1.parse.slots.direction           expected northbound  actual northbound\n      PASS  L1.parse.slots.altitude_ft         expected 400  actual 400  (within 50 ft (diff 0))\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.spoken_contains        expected [\"Downtown Skyport\"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L1.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=27.0   L2  N38BL  [PASS]\n      said  : Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.\n      heard : Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L2.parse.callsign.snapped_to       expected N38BL  actual N38BL\n      PASS  L2.parse.intent                    expected checkin  actual checkin\n      PASS  L2.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L2.parse.slots.direction           expected northbound  actual northbound\n      PASS  L2.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L2.response.mode                   expected speak  actual speak\n      PASS  L2.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L2.response.tier                   expected auto  actual auto\n      PASS  L2.response.spoken_contains        expected [\"Downtown Skyport\"]  actual MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L2.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=42.0   L3  N312LM  [PASS]\n      said  : Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.\n      heard : Landed desk, Medevac 312 Lima, Hudson southbound 1000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L3.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L3.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L3.parse.slots.direction           expected southbound  actual southbound\n      PASS  L3.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L3.response.mode                   expected speak  actual speak\n      PASS  L3.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L3.response.tier                   expected auto  actual auto\n      PASS  L3.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=57.0   L4  N761NY  [PASS]\n      said  : Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.\n      heard : Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.   (asr 0.95, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['desk_over_capacity'] src=policy  \"MEDEVAC Seven Six One November Yankee, standby, controller will be with you\"\n      PASS  L4.parse.callsign.snapped_to       expected N761NY  actual N761NY\n      PASS  L4.parse.intent                    expected checkin  actual checkin\n      PASS  L4.parse.slots.origin              expected East 34th  actual East 34th\n      PASS  L4.parse.slots.corridor            expected East River  actual East River\n      PASS  L4.parse.slots.direction           expected southbound  actual southbound\n      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L4.response.mode                   expected handoff  actual handoff\n      PASS  L4.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L4.response.tier                   expected handoff  actual handoff\n      PASS  L4.response.triggers               expected [\"desk_over_capacity\"]  actual [\"desk_over_capacity\"]\n      PASS  L4.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Seven Six One November Yankee, standby, controller will be with you\nt=57.0   E1  event:desk_count  [PASS]\n      PASS  E1.geometry.count                  expected 4  actual 4  (['N2646X', 'N38BL', 'N312LM', 'N761NY'])\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 3  actual 3\n      PASS  summary.handoffs                   expected 1  actual 1"
+  },
+  {
+   "run": 3,
+   "status": "pass",
+   "tally": {
+    "pass": 45,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 45
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=400, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 400,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 10.701525926589966,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=400, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). router (shadow): shadow, would be approval: router: routine 0.43 model (gemini): Pilot is checking in at JRB with altimeter setting available. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "4ad9ebff58",
+      "source": "gemini",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 10702,
+     "total_latency_ms": 10703,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 400,
+       "actual": 400,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 27.0,
+     "aircraft": "N38BL",
+     "text": "Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "38BL",
+        "snap_score": 1.0,
+        "snapped_to": "N38BL",
+        "spoken": "Three Eight Bravo Lima"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.",
+       "reason": "Callsign heard as 'Three Eight Bravo Lima' (38BL) snapped to N38BL (score 1.00); intent checkin (cues: airborne, checking in); slots position=Downtown Skyport, altitude_ft=1000, direction=northbound, corridor=Hudson, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 5.843782186508179,
+      "parse_latency_s": 0.0004
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.81, no active alert parse: Callsign heard as 'Three Eight Bravo Lima' (38BL) snapped to N38BL (score 1.00); intent checkin (cues: airborne, checking in); slots position=Downtown Skyport, altitude_ft=1000, direction=northbound, corridor=Hudson, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). router (shadow): shadow, would be approval: router: routine 0.66 model (gemini): Acknowledge check-in for N38BL at JRB with altimeter. MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "eb8a8d9bc3",
+      "source": "gemini",
+      "confidence": 0.8136
+     },
+     "server_error": null,
+     "speech_latency_ms": 5844,
+     "total_latency_ms": 5846,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N38BL",
+       "actual": "N38BL",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L2.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L2.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 2,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 42.0,
+     "aircraft": "N312LM",
+     "text": "Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 312 Lima, Hudson southbound 1000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 0.9,
+       "parser": "llm",
+       "raw_text": "Landed desk, Medevac 312 Lima, Hudson southbound 1000.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 0.90 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.508677959442139,
+      "parse_latency_s": 1.2936
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.85, no active alert parse: Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 0.90 (llm parser). Grammar was unsure; LLM output kept only values found in the text. router (shadow): shadow, would be approval: router: routine 0.64 model (gemini): Pilot N312LM is checking in at 1000 feet on the Hudson southbound. MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "60cb172d5d",
+      "source": "gemini",
+      "confidence": 0.855
+     },
+     "server_error": null,
+     "speech_latency_ms": 5802,
+     "total_latency_ms": 5803,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L3.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L3.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L4",
+     "t": 57.0,
+     "aircraft": "N761NY",
+     "text": "Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "761NY",
+        "snap_score": 1.0,
+        "snapped_to": "N761NY",
+        "spoken": "Seven Six One November Yankee"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.",
+       "reason": "Callsign heard as 'Seven Six One November Yankee' (761NY) snapped to N761NY (score 1.00); intent checkin (cues: checking in, lifting); slots position=East 34th, altitude_ft=500, direction=southbound, corridor=East River, origin=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "southbound",
+        "origin": "East 34th",
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 5.317724704742432,
+      "parse_latency_s": 0.0003
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "desk_over_capacity"
+      ],
+      "spoken_text": "MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+      "card_text": "Mandatory handoff: desk_over_capacity. 4 helicopters on the desk (cap 3) parse: Callsign heard as 'Seven Six One November Yankee' (761NY) snapped to N761NY (score 1.00); intent checkin (cues: checking in, lifting); slots position=East 34th, altitude_ft=500, direction=southbound, corridor=East River, origin=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser). 4 helicopters on the desk (cap 3) router (shadow): router cannot relax a policy decision MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+      "proposal_id": "42e0a61cd3",
+      "source": "policy",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 5318,
+     "total_latency_ms": 5320,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.L4.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N761NY",
+       "actual": "N761NY",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S6.L4.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "desk_over_capacity"
+       ],
+       "actual": [
+        "desk_over_capacity"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S6.L4.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "desk_count",
+     "t": 57.0,
+     "facts": {
+      "count": 4,
+      "regs": [
+       "N2646X",
+       "N38BL",
+       "N312LM",
+       "N761NY"
+      ]
+     },
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.E1.geometry.count",
+       "field": "count",
+       "expected": 4,
+       "actual": 4,
+       "status": "pass",
+       "detail": "['N2646X', 'N38BL', 'N312LM', 'N761NY']"
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S6.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S6.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 3,
+     "actual": 3,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S6.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 10702,
+     "server_ms": 1,
+     "total_ms": 10703,
+     "source": "gemini"
+    },
+    {
+     "line": "L2",
+     "speech_ms": 5844,
+     "server_ms": 2,
+     "total_ms": 5846,
+     "source": "gemini"
+    },
+    {
+     "line": "L3",
+     "speech_ms": 5802,
+     "server_ms": 1,
+     "total_ms": 5803,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.\n      heard : Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.intent                    expected checkin  actual checkin\n      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.corridor            expected East River  actual East River\n      PASS  L1.parse.slots.direction           expected northbound  actual northbound\n      PASS  L1.parse.slots.altitude_ft         expected 400  actual 400  (within 50 ft (diff 0))\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.spoken_contains        expected [\"Downtown Skyport\"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=27.0   L2  N38BL  [PASS]\n      said  : Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.\n      heard : Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L2.parse.callsign.snapped_to       expected N38BL  actual N38BL\n      PASS  L2.parse.intent                    expected checkin  actual checkin\n      PASS  L2.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L2.parse.slots.direction           expected northbound  actual northbound\n      PASS  L2.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L2.response.mode                   expected speak  actual speak\n      PASS  L2.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L2.response.tier                   expected auto  actual auto\n      PASS  L2.response.spoken_contains        expected [\"Downtown Skyport\"]  actual MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L2.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=42.0   L3  N312LM  [PASS]\n      said  : Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.\n      heard : Landed desk, Medevac 312 Lima, Hudson southbound 1000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L3.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L3.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L3.parse.slots.direction           expected southbound  actual southbound\n      PASS  L3.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L3.response.mode                   expected speak  actual speak\n      PASS  L3.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L3.response.tier                   expected auto  actual auto\n      PASS  L3.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=57.0   L4  N761NY  [PASS]\n      said  : Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.\n      heard : Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.   (asr 0.95, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['desk_over_capacity'] src=policy  \"MEDEVAC Seven Six One November Yankee, standby, controller will be with you\"\n      PASS  L4.parse.callsign.snapped_to       expected N761NY  actual N761NY\n      PASS  L4.parse.intent                    expected checkin  actual checkin\n      PASS  L4.parse.slots.origin              expected East 34th  actual East 34th\n      PASS  L4.parse.slots.corridor            expected East River  actual East River\n      PASS  L4.parse.slots.direction           expected southbound  actual southbound\n      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L4.response.mode                   expected handoff  actual handoff\n      PASS  L4.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L4.response.tier                   expected handoff  actual handoff\n      PASS  L4.response.triggers               expected [\"desk_over_capacity\"]  actual [\"desk_over_capacity\"]\n      PASS  L4.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Seven Six One November Yankee, standby, controller will be with you\nt=57.0   E1  event:desk_count  [PASS]\n      PASS  E1.geometry.count                  expected 4  actual 4  (['N2646X', 'N38BL', 'N312LM', 'N761NY'])\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 3  actual 3\n      PASS  summary.handoffs                   expected 1  actual 1"
+  }
+ ],
+ "aggregate": {
+  "runs": 3,
+  "all_judged_passed_every_run": true,
+  "judged": 45,
+  "pending": 0
+ },
+ "per_check": {
+  "S6.L1.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.parse.slots.origin": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L1.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.parse.slots.origin": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L2.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L3.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L3.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L3.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L3.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L3.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L3.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L3.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L3.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.parse.slots.origin": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.response.triggers": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.L4.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.E1.geometry.count": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.E2.geometry.no_alert>=advisory": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.summary.auto_transmissions": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S6.summary.handoffs": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  }
+ },
+ "wall_s": 1.3
+}

@@ -1,0 +1,2963 @@
+{
+ "generated_at": "2026-10-11T17:02:20.468619+00:00",
+ "simulation": true,
+ "totals": {
+  "scenarios": 7,
+  "three_of_three": 7,
+  "judged_pass": 236,
+  "judged_fail": 0,
+  "gaps": 0,
+  "pending": 0
+ },
+ "scenarios": [
+  {
+   "id": "S1",
+   "title": "Clean autonomous run, JRB to 6N5",
+   "timestamp": "20261011T170214Z",
+   "file": "S1-20261011T170214Z.json",
+   "mode": "pinned",
+   "server_in_loop": true,
+   "repeat": 3,
+   "three_of_three": true,
+   "all_judged_passed_every_run": true,
+   "tally": {
+    "pass": 45,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 45
+   },
+   "judged": 45,
+   "pending_checks": 0,
+   "counts": {
+    "autonomous": 4,
+    "approval_cards": 0,
+    "handed_off": 0,
+    "silent": 0
+   },
+   "latency_ms": {
+    "server_median": 1,
+    "server_max": 3,
+    "speech_median": 4276,
+    "n_auto": 12
+   },
+   "curation": null,
+   "checks": [
+    {
+     "id": "S1.E1.geometry.no_alert>=advisory",
+     "expected": "none",
+     "actual": "none",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.parse.emergency",
+     "expected": false,
+     "actual": false,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.parse.intent",
+     "expected": "checkin",
+     "actual": "checkin",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.parse.slots.altitude_ft",
+     "expected": 500,
+     "actual": 500,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.parse.slots.corridor",
+     "expected": "East River",
+     "actual": "East River",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.parse.slots.direction",
+     "expected": "northbound",
+     "actual": "northbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.parse.slots.origin",
+     "expected": "Downtown Skyport",
+     "actual": "Downtown Skyport",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.parse.slots.position",
+     "expected": "Downtown Skyport",
+     "actual": "Downtown Skyport",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 3,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.response.spoken_contains",
+     "expected": [
+      "Landed advisory",
+      "radar contact",
+      "Downtown Skyport"
+     ],
+     "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.response.template_id",
+     "expected": "ACK_CHECKIN",
+     "actual": "ACK_CHECKIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L1.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.parse.intent",
+     "expected": "position_report",
+     "actual": "position_report",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.parse.slots.altitude_ft",
+     "expected": 500,
+     "actual": 500,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.parse.slots.position",
+     "expected": "Brooklyn Bridge",
+     "actual": "Brooklyn Bridge",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.response.spoken_contains",
+     "expected": [
+      "roger"
+     ],
+     "actual": "MEDEVAC Two Six Four Six X-Ray, roger",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.response.template_id",
+     "expected": "REPORT_ACK",
+     "actual": "REPORT_ACK",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L2.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.parse.intent",
+     "expected": "position_report",
+     "actual": "position_report",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.parse.slots.altitude_ft",
+     "expected": 500,
+     "actual": 500,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.parse.slots.destination",
+     "expected": "East 34th",
+     "actual": "East 34th",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.parse.slots.position",
+     "expected": "Williamsburg Bridge",
+     "actual": "Williamsburg Bridge",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 2,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.response.spoken_contains",
+     "expected": [
+      "traffic"
+     ],
+     "actual": "MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.response.template_id",
+     "expected": "TRAFFIC",
+     "actual": "TRAFFIC",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L3.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.parse.intent",
+     "expected": "position_report",
+     "actual": "position_report",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.parse.slots.altitude_ft",
+     "expected": 500,
+     "actual": 500,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.parse.slots.position",
+     "expected": "East 34th",
+     "actual": "East 34th",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 3,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.response.spoken_contains",
+     "expected": [
+      "roger"
+     ],
+     "actual": "MEDEVAC Two Six Four Six X-Ray, roger",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.response.template_id",
+     "expected": "REPORT_ACK",
+     "actual": "REPORT_ACK",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.L4.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.summary.auto_transmissions",
+     "expected": 4,
+     "actual": 4,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.summary.cards",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S1.summary.handoffs",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    }
+   ]
+  },
+  {
+   "id": "S2",
+   "title": "Medevac crosses the LGA Rwy 22 final, handoff",
+   "timestamp": "20261011T170214Z",
+   "file": "S2-20261011T170214Z.json",
+   "mode": "pinned",
+   "server_in_loop": true,
+   "repeat": 3,
+   "three_of_three": true,
+   "all_judged_passed_every_run": true,
+   "tally": {
+    "pass": 21,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 21
+   },
+   "judged": 21,
+   "pending_checks": 0,
+   "counts": {
+    "autonomous": 0,
+    "approval_cards": 0,
+    "handed_off": 1,
+    "silent": 0
+   },
+   "latency_ms": {
+    "server_median": null,
+    "server_max": null,
+    "speech_median": null,
+    "n_auto": 0
+   },
+   "curation": null,
+   "checks": [
+    {
+     "id": "S2.E1.geometry.confidence>=",
+     "expected": 0.8,
+     "actual": 1.0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.E1.geometry.exists",
+     "expected": "handoff lga22_final_seg*",
+     "actual": "lga22_final_seg2",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.E1.geometry.lead_s",
+     "expected": [
+      80.0,
+      90.0
+     ],
+     "actual": 83.109375,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.E1.geometry.t_first",
+     "expected": [
+      380.0,
+      400.0
+     ],
+     "actual": 392.0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.E1.response.card_contains",
+     "expected": [
+      "Rwy 22"
+     ],
+     "actual": "N312LM: Projected path crosses LGA Rwy 22 final at 600 ft - inside the arrival glidepath band (248-1,367 ft) in 83 s. Also overlaps: LGA Rwy 4 departure corridor. engine geometry confidence 0.56 MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.E1.response.mode",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.E1.response.tier",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.E1.response.triggers",
+     "expected": [
+      "path_protected_volume"
+     ],
+     "actual": [
+      "path_protected_volume"
+     ],
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.ENGINE.geometry.no_unexpected_alert",
+     "expected": "none",
+     "actual": "none",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.parse.callsign.snapped_to",
+     "expected": "N312LM",
+     "actual": "N312LM",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.parse.emergency",
+     "expected": false,
+     "actual": false,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.parse.intent",
+     "expected": "request_route",
+     "actual": "request_route",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.parse.slots.altitude_ft",
+     "expected": 600,
+     "actual": 600,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.parse.slots.destination",
+     "expected": "College Point",
+     "actual": "College Point",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.parse.slots.position",
+     "expected": "East 34th",
+     "actual": "East 34th",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.response.mode",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.response.spoken_contains",
+     "expected": [
+      "standby",
+      "controller will be with you"
+     ],
+     "actual": "MEDEVAC Three One Two Lima Mike, standby, controller will be with you",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.response.template_id",
+     "expected": "STANDBY_HANDOFF",
+     "actual": "STANDBY_HANDOFF",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.response.tier",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.L1.response.triggers",
+     "expected": [
+      "out_of_whitelist"
+     ],
+     "actual": [
+      "out_of_whitelist"
+     ],
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S2.summary.handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    }
+   ]
+  },
+  {
+   "id": "S3A",
+   "title": "Weather, descend below the Hudson minimum",
+   "timestamp": "20261011T170214Z",
+   "file": "S3A-20261011T170214Z.json",
+   "mode": "pinned",
+   "server_in_loop": true,
+   "repeat": 3,
+   "three_of_three": true,
+   "all_judged_passed_every_run": true,
+   "tally": {
+    "pass": 25,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 25
+   },
+   "judged": 25,
+   "pending_checks": 0,
+   "counts": {
+    "autonomous": 1,
+    "approval_cards": 0,
+    "handed_off": 1,
+    "silent": 0
+   },
+   "latency_ms": {
+    "server_median": 1,
+    "server_max": 3,
+    "speech_median": 4320,
+    "n_auto": 3
+   },
+   "curation": null,
+   "checks": [
+    {
+     "id": "S3A.E1.geometry.no_alert>=advisory",
+     "expected": "none",
+     "actual": "none",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.parse.emergency",
+     "expected": false,
+     "actual": false,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.parse.slots.altitude_ft",
+     "expected": 1000,
+     "actual": 1000,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.parse.slots.corridor",
+     "expected": "Hudson",
+     "actual": "Hudson",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.parse.slots.direction",
+     "expected": "southbound",
+     "actual": "southbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 3,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.response.template_id",
+     "expected": "ACK_CHECKIN",
+     "actual": "ACK_CHECKIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L1.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.parse.emergency",
+     "expected": false,
+     "actual": false,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.parse.intent",
+     "expected": "request_altitude",
+     "actual": "request_altitude",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.parse.slots.altitude_ft",
+     "expected": 600,
+     "actual": 600,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.parse.slots.corridor",
+     "expected": "Hudson",
+     "actual": "Hudson",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.parse.slots.direction",
+     "expected": "southbound",
+     "actual": "southbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.parse.slots.weather_phrase",
+     "expected": "ceilings coming down",
+     "actual": "ceilings coming down",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.response.card_contains",
+     "expected": [
+      "ceilings",
+      "Hudson"
+     ],
+     "actual": "Mandatory handoff: out_of_whitelist, below_transit_min, weather. intent 'request_altitude' / request outside the phrase whitelist; requested altitude 600 ft is below the Hudson transit minimum 1000 ft; weather phrase: 'ceilings coming down' parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser). intent 'request_altitude' / request outside the phrase whitelist requested altitude 600 ft is below the Hudson transit minimum 1000 ft weather phrase: 'ceilings coming down' router (shadow): router cannot relax a policy decision MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.response.mode",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.response.spoken_contains",
+     "expected": [
+      "standby",
+      "controller will be with you"
+     ],
+     "actual": "MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.response.template_id",
+     "expected": "STANDBY_HANDOFF",
+     "actual": "STANDBY_HANDOFF",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.response.tier",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.L2.response.triggers",
+     "expected": [
+      "weather",
+      "below_transit_min",
+      "out_of_whitelist"
+     ],
+     "actual": [
+      "out_of_whitelist",
+      "below_transit_min",
+      "weather"
+     ],
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.summary.auto_transmissions",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3A.summary.handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    }
+   ]
+  },
+  {
+   "id": "S3B",
+   "title": "Silent drift to the wrong Hudson shoreline",
+   "timestamp": "20261011T170214Z",
+   "file": "S3B-20261011T170214Z.json",
+   "mode": "pinned",
+   "server_in_loop": true,
+   "repeat": 3,
+   "three_of_three": true,
+   "all_judged_passed_every_run": true,
+   "tally": {
+    "pass": 20,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 20
+   },
+   "judged": 20,
+   "pending_checks": 0,
+   "counts": {
+    "autonomous": 1,
+    "approval_cards": 0,
+    "handed_off": 0,
+    "silent": 0
+   },
+   "latency_ms": {
+    "server_median": 1,
+    "server_max": 2,
+    "speech_median": 3095,
+    "n_auto": 3
+   },
+   "curation": null,
+   "checks": [
+    {
+     "id": "S3B.E1.geometry.confidence>=",
+     "expected": 0.8,
+     "actual": 1.0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E1.geometry.exists",
+     "expected": "shoreline alert",
+     "actual": "N2646X: southbound aircraft on the east shoreline (0.30 nm east of the Hudson centre line, 68-83 s); opposing traffic N77TH 1.9 nm.",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E1.geometry.first_seen_t",
+     "expected": [
+      40.0,
+      100.0
+     ],
+     "actual": 83.0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E1.geometry.opposing_traffic_nm",
+     "expected": [
+      0.5,
+      3.5
+     ],
+     "actual": 1.91,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E1.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E1.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E1.response.spoken_contains",
+     "expected": [
+      "traffic"
+     ],
+     "actual": "MEDEVAC Two Six Four Six X-Ray, traffic twelve o'clock two miles helicopter niner hundred",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E1.response.template_id",
+     "expected": "TRAFFIC",
+     "actual": "TRAFFIC",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E1.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.E2.geometry.no_alert>=advisory",
+     "expected": "none",
+     "actual": "none",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.parse.emergency",
+     "expected": false,
+     "actual": false,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.parse.slots.altitude_ft",
+     "expected": 1000,
+     "actual": 1000,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.parse.slots.corridor",
+     "expected": "Hudson",
+     "actual": "Hudson",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.parse.slots.direction",
+     "expected": "southbound",
+     "actual": "southbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 2,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.response.template_id",
+     "expected": "ACK_CHECKIN",
+     "actual": "ACK_CHECKIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.L1.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S3B.summary.handoffs",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    }
+   ]
+  },
+  {
+   "id": "S4",
+   "title": "Confusable callsigns, say again then handoff",
+   "timestamp": "20261011T170214Z",
+   "file": "S4-20261011T170214Z.json",
+   "mode": "pinned",
+   "server_in_loop": true,
+   "repeat": 3,
+   "three_of_three": true,
+   "all_judged_passed_every_run": true,
+   "tally": {
+    "pass": 53,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 53
+   },
+   "judged": 53,
+   "pending_checks": 0,
+   "counts": {
+    "autonomous": 3,
+    "approval_cards": 0,
+    "handed_off": 1,
+    "silent": 0
+   },
+   "latency_ms": {
+    "server_median": 1,
+    "server_max": 2,
+    "speech_median": 3348,
+    "n_auto": 9
+   },
+   "curation": null,
+   "checks": [
+    {
+     "id": "S4.E1.geometry.best_match",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.E1.geometry.score>=",
+     "expected": 0.85,
+     "actual": 0.979,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.E1.geometry.unique",
+     "expected": true,
+     "actual": true,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.E2.geometry.best_match",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.E2.geometry.score>=",
+     "expected": 0.8,
+     "actual": 0.871,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.E2.geometry.unique",
+     "expected": true,
+     "actual": true,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.E3.geometry.no_alert>=advisory",
+     "expected": "none",
+     "actual": "none",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.parse.callsign.snapped_to",
+     "expected": "N2464X",
+     "actual": "N2464X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.parse.intent",
+     "expected": "checkin",
+     "actual": "checkin",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.parse.slots.altitude_ft",
+     "expected": 1000,
+     "actual": 1000,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.parse.slots.corridor",
+     "expected": "Hudson",
+     "actual": "Hudson",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.parse.slots.direction",
+     "expected": "northbound",
+     "actual": "northbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.parse.slots.origin",
+     "expected": "Downtown Skyport",
+     "actual": "Downtown Skyport",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.parse.slots.position",
+     "expected": "Downtown Skyport",
+     "actual": "Downtown Skyport",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 2,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.response.spoken_contains",
+     "expected": [
+      "Downtown Skyport"
+     ],
+     "actual": "MEDEVAC Two Four Six Four X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.response.template_id",
+     "expected": "ACK_CHECKIN",
+     "actual": "ACK_CHECKIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L1.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.parse.intent",
+     "expected": "checkin",
+     "actual": "checkin",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.parse.slots.altitude_ft",
+     "expected": 500,
+     "actual": 500,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.parse.slots.corridor",
+     "expected": "East River",
+     "actual": "East River",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.parse.slots.direction",
+     "expected": "southbound",
+     "actual": "southbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.parse.slots.origin",
+     "expected": "East 34th",
+     "actual": "East 34th",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.parse.slots.position",
+     "expected": "East 34th",
+     "actual": "East 34th",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 2,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.response.spoken_contains",
+     "expected": [
+      "East 34th"
+     ],
+     "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact East 34th Street, altimeter two niner niner two",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.response.template_id",
+     "expected": "ACK_CHECKIN",
+     "actual": "ACK_CHECKIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L2.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.parse.callsign.ambiguous",
+     "expected": true,
+     "actual": true,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.parse.callsign.candidates",
+     "expected": [
+      "N2646X",
+      "N2464X"
+     ],
+     "actual": [
+      "N2464X",
+      "N2646X"
+     ],
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.parse.intent",
+     "expected": "position_report",
+     "actual": "position_report",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.parse.slots.position",
+     "expected": "Brooklyn Bridge",
+     "actual": "Brooklyn Bridge",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.response.spoken_contains",
+     "expected": [
+      "say again"
+     ],
+     "actual": "Aircraft calling Landed desk, say again callsign",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.response.template_id",
+     "expected": "SAY_AGAIN",
+     "actual": "SAY_AGAIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L3.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.parse.callsign.ambiguous",
+     "expected": true,
+     "actual": true,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.parse.callsign.candidates",
+     "expected": [
+      "N2646X",
+      "N2464X"
+     ],
+     "actual": [
+      "N2464X",
+      "N2646X"
+     ],
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.parse.intent",
+     "expected": "position_report",
+     "actual": "position_report",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.parse.slots.altitude_ft",
+     "expected": 500,
+     "actual": 500,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.parse.slots.position",
+     "expected": "Brooklyn Bridge",
+     "actual": "Brooklyn Bridge",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.response.card_contains",
+     "expected": [
+      "2646X",
+      "ADS-B position match"
+     ],
+     "actual": "Mandatory handoff: callsign_ambiguity. callsign ambiguous with N2646X; likely N2646X (ADS-B position match 1.0), unconfirmed by voice parse: Callsign heard as 'Two Six X-Ray' (26X) snapped to N2464X (score 0.80), but also close to N2646X: do not guess, confirm by voice or ADS-B; intent position_report (cues: abeam); slots position=Brooklyn Bridge, altitude_ft=500; ASR confidence 0.73, parse confidence 0.34 (grammar parser). callsign ambiguous with N2646X likely N2646X (ADS-B position match 1.0), unconfirmed by voice router (shadow): router cannot relax a policy decision MEDEVAC Two Four Six Four X-Ray, standby, controller will be with you",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.response.mode",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.response.spoken_contains",
+     "expected": [
+      "standby",
+      "controller will be with you"
+     ],
+     "actual": "MEDEVAC Two Four Six Four X-Ray, standby, controller will be with you",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.response.template_id",
+     "expected": "STANDBY_HANDOFF",
+     "actual": "STANDBY_HANDOFF",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.response.tier",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.L4.response.triggers",
+     "expected": [
+      "callsign_ambiguity"
+     ],
+     "actual": [
+      "callsign_ambiguity"
+     ],
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.summary.auto_transmissions",
+     "expected": 3,
+     "actual": 3,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S4.summary.handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    }
+   ]
+  },
+  {
+   "id": "S5",
+   "title": "MAYDAY and 7700, agent goes silent",
+   "timestamp": "20261011T170214Z",
+   "file": "S5-20261011T170214Z.json",
+   "mode": "pinned",
+   "server_in_loop": true,
+   "repeat": 3,
+   "three_of_three": true,
+   "all_judged_passed_every_run": true,
+   "tally": {
+    "pass": 27,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 27
+   },
+   "judged": 27,
+   "pending_checks": 0,
+   "counts": {
+    "autonomous": 0,
+    "approval_cards": 0,
+    "handed_off": 1,
+    "silent": 2
+   },
+   "latency_ms": {
+    "server_median": null,
+    "server_max": null,
+    "speech_median": null,
+    "n_auto": 0
+   },
+   "curation": null,
+   "checks": [
+    {
+     "id": "S5.E1.geometry.exists",
+     "expected": "7700",
+     "actual": "7700",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.E1.geometry.t",
+     "expected": [
+      72.0,
+      80.0
+     ],
+     "actual": 75.0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.E1.response.mode",
+     "expected": "locked_silent",
+     "actual": "locked_silent",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.E2.geometry.no_alert>=advisory",
+     "expected": "none",
+     "actual": "none",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.parse.callsign.snapped_to",
+     "expected": "N312LM",
+     "actual": "N312LM",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.parse.emergency",
+     "expected": true,
+     "actual": true,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.parse.intent",
+     "expected": "emergency",
+     "actual": "emergency",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.parse.slots.destination",
+     "expected": "East 34th",
+     "actual": "East 34th",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.response.card_contains",
+     "expected": [
+      "heliport ops"
+     ],
+     "actual": "Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. heard: 'Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.' MEDEVAC Three One Two Lima Mike, controller taking over Optional: notify heliport ops (simulated Vapi call, test number only). Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. SIMULATED call to heliport ops, TEST number 555-0100: MEDEVAC N312LM declared an emergency.",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.response.mode",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.response.spoken_contains",
+     "expected": [
+      "controller taking over"
+     ],
+     "actual": "MEDEVAC Three One Two Lima Mike, controller taking over",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.response.template_id",
+     "expected": "CONTROLLER_TAKING_OVER",
+     "actual": "CONTROLLER_TAKING_OVER",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.response.tier",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L1.response.triggers",
+     "expected": [
+      "emergency"
+     ],
+     "actual": [
+      "emergency"
+     ],
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L2.parse.callsign.snapped_to",
+     "expected": "N312LM",
+     "actual": "N312LM",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L2.parse.intent",
+     "expected": "position_report",
+     "actual": "position_report",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L2.parse.slots.position",
+     "expected": "East 34th",
+     "actual": "East 34th",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L2.response.mode",
+     "expected": "locked_silent",
+     "actual": "locked_silent",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L3.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L3.parse.intent",
+     "expected": "position_report",
+     "actual": "position_report",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L3.parse.slots.altitude_ft",
+     "expected": 800,
+     "actual": 800,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L3.parse.slots.corridor",
+     "expected": "East River",
+     "actual": "East River",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L3.parse.slots.direction",
+     "expected": "southbound",
+     "actual": "southbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L3.parse.slots.position",
+     "expected": "Williamsburg Bridge",
+     "actual": "Williamsburg Bridge",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.L3.response.mode",
+     "expected": "locked_silent",
+     "actual": "locked_silent",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.summary.transmissions",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S5.summary.transmissions_after_lock",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    }
+   ]
+  },
+  {
+   "id": "S6",
+   "title": "Volume cap, the fourth helicopter is handed off",
+   "timestamp": "20261011T170214Z",
+   "file": "S6-20261011T170214Z.json",
+   "mode": "pinned",
+   "server_in_loop": true,
+   "repeat": 3,
+   "three_of_three": true,
+   "all_judged_passed_every_run": true,
+   "tally": {
+    "pass": 45,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 45
+   },
+   "judged": 45,
+   "pending_checks": 0,
+   "counts": {
+    "autonomous": 3,
+    "approval_cards": 0,
+    "handed_off": 1,
+    "silent": 0
+   },
+   "latency_ms": {
+    "server_median": 2,
+    "server_max": 3,
+    "speech_median": 5844,
+    "n_auto": 9
+   },
+   "curation": null,
+   "checks": [
+    {
+     "id": "S6.E1.geometry.count",
+     "expected": 4,
+     "actual": 4,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.E2.geometry.no_alert>=advisory",
+     "expected": "none",
+     "actual": "none",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.parse.callsign.snapped_to",
+     "expected": "N2646X",
+     "actual": "N2646X",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.parse.intent",
+     "expected": "checkin",
+     "actual": "checkin",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.parse.slots.altitude_ft",
+     "expected": 400,
+     "actual": 400,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.parse.slots.corridor",
+     "expected": "East River",
+     "actual": "East River",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.parse.slots.direction",
+     "expected": "northbound",
+     "actual": "northbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.parse.slots.origin",
+     "expected": "Downtown Skyport",
+     "actual": "Downtown Skyport",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 2,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.response.spoken_contains",
+     "expected": [
+      "Downtown Skyport"
+     ],
+     "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.response.template_id",
+     "expected": "ACK_CHECKIN",
+     "actual": "ACK_CHECKIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L1.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.parse.callsign.snapped_to",
+     "expected": "N38BL",
+     "actual": "N38BL",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.parse.intent",
+     "expected": "checkin",
+     "actual": "checkin",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.parse.slots.altitude_ft",
+     "expected": 1000,
+     "actual": 1000,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.parse.slots.corridor",
+     "expected": "Hudson",
+     "actual": "Hudson",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.parse.slots.direction",
+     "expected": "northbound",
+     "actual": "northbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.parse.slots.origin",
+     "expected": "Downtown Skyport",
+     "actual": "Downtown Skyport",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 2,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.response.spoken_contains",
+     "expected": [
+      "Downtown Skyport"
+     ],
+     "actual": "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.response.template_id",
+     "expected": "ACK_CHECKIN",
+     "actual": "ACK_CHECKIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L2.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L3.parse.callsign.snapped_to",
+     "expected": "N312LM",
+     "actual": "N312LM",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L3.parse.slots.altitude_ft",
+     "expected": 1000,
+     "actual": 1000,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L3.parse.slots.corridor",
+     "expected": "Hudson",
+     "actual": "Hudson",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L3.parse.slots.direction",
+     "expected": "southbound",
+     "actual": "southbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L3.response.latency_ms",
+     "expected": "<=3000",
+     "actual": 3,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L3.response.mode",
+     "expected": "speak",
+     "actual": "speak",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L3.response.template_id",
+     "expected": "ACK_CHECKIN",
+     "actual": "ACK_CHECKIN",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L3.response.tier",
+     "expected": "auto",
+     "actual": "auto",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.parse.callsign.snapped_to",
+     "expected": "N761NY",
+     "actual": "N761NY",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.parse.intent",
+     "expected": "checkin",
+     "actual": "checkin",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.parse.slots.altitude_ft",
+     "expected": 500,
+     "actual": 500,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.parse.slots.corridor",
+     "expected": "East River",
+     "actual": "East River",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.parse.slots.direction",
+     "expected": "southbound",
+     "actual": "southbound",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.parse.slots.origin",
+     "expected": "East 34th",
+     "actual": "East 34th",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.response.mode",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.response.spoken_contains",
+     "expected": [
+      "standby",
+      "controller will be with you"
+     ],
+     "actual": "MEDEVAC Seven Six One November Yankee, standby, controller will be with you",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.response.template_id",
+     "expected": "STANDBY_HANDOFF",
+     "actual": "STANDBY_HANDOFF",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.response.tier",
+     "expected": "handoff",
+     "actual": "handoff",
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.L4.response.triggers",
+     "expected": [
+      "desk_over_capacity"
+     ],
+     "actual": [
+      "desk_over_capacity"
+     ],
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.summary.auto_transmissions",
+     "expected": 3,
+     "actual": 3,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    },
+    {
+     "id": "S6.summary.handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "passes": 3,
+     "runs": 3,
+     "pending": 0,
+     "gap": 0,
+     "stable": true
+    }
+   ]
+  }
+ ]
+}

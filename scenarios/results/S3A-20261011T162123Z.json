@@ -1,0 +1,1332 @@
+{
+ "scenario": "S3A",
+ "title": "Weather, descend below the Hudson minimum",
+ "timestamp": "20261011T162123Z",
+ "mode": "pinned",
+ "dry_run": false,
+ "server": {
+  "url": "http://127.0.0.1:8787",
+  "reachable": true,
+  "context_pushed": true
+ },
+ "repeat": 3,
+ "curation": {
+  "attempts": 1,
+  "misses_before": []
+ },
+ "runs": [
+  {
+   "run": 1,
+   "status": "pass",
+   "tally": {
+    "pass": 25,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 25
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 30.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.319389343261719,
+      "parse_latency_s": 0.0009
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text. model (gemini): Pilot is checking in on the Hudson corridor southbound. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "1874d85645",
+      "source": "gemini",
+      "confidence": 0.95
+     },
+     "server_error": null,
+     "speech_latency_ms": 4320,
+     "total_latency_ms": 4322,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3A.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 70.0,
+     "aircraft": "N2646X",
+     "text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descend to six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.",
+      "asr_confidence": 0.8708333333333332,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8708333333333332,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "request_altitude",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": "ceilings coming down"
+       }
+      },
+      "asr_latency_s": 6.367598056793213,
+      "parse_latency_s": 0.0008
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "out_of_whitelist",
+       "weather"
+      ],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+      "card_text": "Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outside the phrase whitelist; weather phrase: 'ceilings coming down' parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser). intent 'request_altitude' / request outside the phrase whitelist weather phrase: 'ceilings coming down' MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+      "proposal_id": "ab34798f2f",
+      "source": "policy",
+      "confidence": 0.8708
+     },
+     "server_error": null,
+     "speech_latency_ms": 6368,
+     "total_latency_ms": 6370,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.intent",
+       "field": "intent",
+       "expected": "request_altitude",
+       "actual": "request_altitude",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.weather_phrase",
+       "field": "slots.weather_phrase",
+       "expected": "ceilings coming down",
+       "actual": "ceilings coming down",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3A.L2.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "weather",
+        "out_of_whitelist"
+       ],
+       "actual": [
+        "out_of_whitelist",
+        "weather"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "ceilings",
+        "Hudson"
+       ],
+       "actual": "Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outside the phrase whitelist; weather phrase: 'ceilings coming down' parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser). intent 'request_altitude' / request outside the phrase whitelist weather phrase: 'ceilings coming down' MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.E1.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3A.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S3A.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 4320,
+     "server_ms": 1,
+     "total_ms": 4322,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=30.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=70.0   L2  N2646X  [PASS]\n      said  : MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descend to six hundred.\n      heard : MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.   (asr 0.87, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['out_of_whitelist', 'weather'] src=policy  \"MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you\"\n      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L2.parse.intent                    expected request_altitude  actual request_altitude\n      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L2.parse.slots.direction           expected southbound  actual southbound\n      PASS  L2.parse.slots.weather_phrase      expected ceilings coming down  actual ceilings coming down\n      PASS  L2.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L2.parse.emergency                 expected false  actual false\n      PASS  L2.response.mode                   expected handoff  actual handoff\n      PASS  L2.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L2.response.tier                   expected handoff  actual handoff\n      PASS  L2.response.triggers               expected [\"weather\", \"out_of_whitelist\"]  actual [\"out_of_whitelist\", \"weather\"]\n      PASS  L2.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you\n      PASS  L2.response.card_contains          expected [\"ceilings\", \"Hudson\"]  actual Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outsi...\nt=0.0    E1  event:no_alerts  [PASS]\n      PASS  E1.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 1  actual 1\n      PASS  summary.handoffs                   expected 1  actual 1"
+  },
+  {
+   "run": 2,
+   "status": "pass",
+   "tally": {
+    "pass": 25,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 25
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 30.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.319389343261719,
+      "parse_latency_s": 0.0009
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text. model (gemini): Pilot is checking in on the Hudson corridor southbound. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "046edcce05",
+      "source": "gemini",
+      "confidence": 0.95
+     },
+     "server_error": null,
+     "speech_latency_ms": 4320,
+     "total_latency_ms": 4322,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3A.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 2,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 70.0,
+     "aircraft": "N2646X",
+     "text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descend to six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.",
+      "asr_confidence": 0.8708333333333332,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8708333333333332,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "request_altitude",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": "ceilings coming down"
+       }
+      },
+      "asr_latency_s": 6.367598056793213,
+      "parse_latency_s": 0.0008
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "out_of_whitelist",
+       "weather"
+      ],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+      "card_text": "Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outside the phrase whitelist; weather phrase: 'ceilings coming down' parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser). intent 'request_altitude' / request outside the phrase whitelist weather phrase: 'ceilings coming down' MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+      "proposal_id": "cfed77db47",
+      "source": "policy",
+      "confidence": 0.8708
+     },
+     "server_error": null,
+     "speech_latency_ms": 6368,
+     "total_latency_ms": 6370,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.intent",
+       "field": "intent",
+       "expected": "request_altitude",
+       "actual": "request_altitude",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.weather_phrase",
+       "field": "slots.weather_phrase",
+       "expected": "ceilings coming down",
+       "actual": "ceilings coming down",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3A.L2.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "weather",
+        "out_of_whitelist"
+       ],
+       "actual": [
+        "out_of_whitelist",
+        "weather"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "ceilings",
+        "Hudson"
+       ],
+       "actual": "Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outside the phrase whitelist; weather phrase: 'ceilings coming down' parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser). intent 'request_altitude' / request outside the phrase whitelist weather phrase: 'ceilings coming down' MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.E1.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3A.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S3A.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 4320,
+     "server_ms": 2,
+     "total_ms": 4322,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=30.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=70.0   L2  N2646X  [PASS]\n      said  : MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descend to six hundred.\n      heard : MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.   (asr 0.87, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['out_of_whitelist', 'weather'] src=policy  \"MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you\"\n      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L2.parse.intent                    expected request_altitude  actual request_altitude\n      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L2.parse.slots.direction           expected southbound  actual southbound\n      PASS  L2.parse.slots.weather_phrase      expected ceilings coming down  actual ceilings coming down\n      PASS  L2.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L2.parse.emergency                 expected false  actual false\n      PASS  L2.response.mode                   expected handoff  actual handoff\n      PASS  L2.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L2.response.tier                   expected handoff  actual handoff\n      PASS  L2.response.triggers               expected [\"weather\", \"out_of_whitelist\"]  actual [\"out_of_whitelist\", \"weather\"]\n      PASS  L2.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you\n      PASS  L2.response.card_contains          expected [\"ceilings\", \"Hudson\"]  actual Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outsi...\nt=0.0    E1  event:no_alerts  [PASS]\n      PASS  E1.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 1  actual 1\n      PASS  summary.handoffs                   expected 1  actual 1"
+  },
+  {
+   "run": 3,
+   "status": "pass",
+   "tally": {
+    "pass": 25,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 25
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 30.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "llm",
+       "raw_text": "Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text.",
+       "slots": {
+        "altitude_ft": 1000,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.319389343261719,
+      "parse_latency_s": 0.0009
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin; slots altitude_ft=1000, direction=southbound, corridor=Hudson; ASR confidence 0.95, parse confidence 1.00 (llm parser). Grammar was unsure; LLM output kept only values found in the text. model (gemini): Pilot is checking in on the Hudson corridor southbound. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two",
+      "proposal_id": "a79f806de5",
+      "source": "gemini",
+      "confidence": 0.95
+     },
+     "server_error": null,
+     "speech_latency_ms": 4320,
+     "total_latency_ms": 4322,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 1000,
+       "actual": 1000,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3A.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 70.0,
+     "aircraft": "N2646X",
+     "text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descend to six hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.",
+      "asr_confidence": 0.8708333333333332,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.8708333333333332,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "request_altitude",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 600,
+        "corridor": "Hudson",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": "ceilings coming down"
+       }
+      },
+      "asr_latency_s": 6.367598056793213,
+      "parse_latency_s": 0.0008
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "STANDBY_HANDOFF",
+      "tier": "handoff",
+      "triggers": [
+       "out_of_whitelist",
+       "weather"
+      ],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+      "card_text": "Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outside the phrase whitelist; weather phrase: 'ceilings coming down' parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser). intent 'request_altitude' / request outside the phrase whitelist weather phrase: 'ceilings coming down' MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+      "proposal_id": "73f0988a33",
+      "source": "policy",
+      "confidence": 0.8708
+     },
+     "server_error": null,
+     "speech_latency_ms": 6368,
+     "total_latency_ms": 6369,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.intent",
+       "field": "intent",
+       "expected": "request_altitude",
+       "actual": "request_altitude",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "Hudson",
+       "actual": "Hudson",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.weather_phrase",
+       "field": "slots.weather_phrase",
+       "expected": "ceilings coming down",
+       "actual": "ceilings coming down",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 600,
+       "actual": 600,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S3A.L2.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.template_id",
+       "field": "template_id",
+       "expected": "STANDBY_HANDOFF",
+       "actual": "STANDBY_HANDOFF",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "weather",
+        "out_of_whitelist"
+       ],
+       "actual": [
+        "out_of_whitelist",
+        "weather"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "standby",
+        "controller will be with you"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S3A.L2.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "ceilings",
+        "Hudson"
+       ],
+       "actual": "Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outside the phrase whitelist; weather phrase: 'ceilings coming down' parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent request_altitude (cues: request); slots altitude_ft=600, direction=southbound, corridor=Hudson, weather_phrase=ceilings coming down; ASR confidence 0.87, parse confidence 1.00 (grammar parser). intent 'request_altitude' / request outside the phrase whitelist weather phrase: 'ceilings coming down' MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S3A.E1.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S3A.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S3A.summary.handoffs",
+     "field": "handoffs",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 4320,
+     "server_ms": 1,
+     "total_ms": 4322,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=30.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.\n      heard : Landed desk, MEDEVAC Two Six Four Six X-ray, Hudson southbound 1,000.   (asr 0.95, llm parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L1.parse.slots.direction           expected southbound  actual southbound\n      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=70.0   L2  N2646X  [PASS]\n      said  : MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descend to six hundred.\n      heard : MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings are coming down, request descent to 600.   (asr 0.87, grammar parser, pinned)\n      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['out_of_whitelist', 'weather'] src=policy  \"MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you\"\n      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L2.parse.intent                    expected request_altitude  actual request_altitude\n      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson\n      PASS  L2.parse.slots.direction           expected southbound  actual southbound\n      PASS  L2.parse.slots.weather_phrase      expected ceilings coming down  actual ceilings coming down\n      PASS  L2.parse.slots.altitude_ft         expected 600  actual 600  (within 50 ft (diff 0))\n      PASS  L2.parse.emergency                 expected false  actual false\n      PASS  L2.response.mode                   expected handoff  actual handoff\n      PASS  L2.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF\n      PASS  L2.response.tier                   expected handoff  actual handoff\n      PASS  L2.response.triggers               expected [\"weather\", \"out_of_whitelist\"]  actual [\"out_of_whitelist\", \"weather\"]\n      PASS  L2.response.spoken_contains        expected [\"standby\", \"controller will be with you\"]  actual MEDEVAC Two Six Four Six X-Ray, standby, controller will be with you\n      PASS  L2.response.card_contains          expected [\"ceilings\", \"Hudson\"]  actual Mandatory handoff: out_of_whitelist, weather. intent 'request_altitude' / request outsi...\nt=0.0    E1  event:no_alerts  [PASS]\n      PASS  E1.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 1  actual 1\n      PASS  summary.handoffs                   expected 1  actual 1"
+  }
+ ],
+ "aggregate": {
+  "runs": 3,
+  "all_judged_passed_every_run": true,
+  "judged": 25,
+  "pending": 0
+ },
+ "per_check": {
+  "S3A.L1.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L1.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L1.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L1.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L1.parse.emergency": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L1.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L1.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L1.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L1.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.parse.slots.weather_phrase": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.parse.emergency": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.response.triggers": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.L2.response.card_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.E1.geometry.no_alert>=advisory": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.summary.auto_transmissions": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S3A.summary.handoffs": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  }
+ },
+ "wall_s": 1.34
+}

@@ -1,0 +1,1 @@
+{"name": "choose_template", "args": {"reason": "Pilot made a routine position report matching ADS-B.", "template_id": "REPORT_ACK", "slots": {"reg": "N2646X"}}}

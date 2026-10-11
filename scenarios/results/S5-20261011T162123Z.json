@@ -1,0 +1,1660 @@
+{
+ "scenario": "S5",
+ "title": "MAYDAY and 7700, agent goes silent",
+ "timestamp": "20261011T162123Z",
+ "mode": "pinned",
+ "dry_run": false,
+ "server": {
+  "url": "http://127.0.0.1:8787",
+  "reachable": true,
+  "context_pushed": true
+ },
+ "repeat": 3,
+ "curation": {
+  "attempts": 1,
+  "misses_before": []
+ },
+ "runs": [
+  {
+   "run": 1,
+   "status": "pass",
+   "tally": {
+    "pass": 27,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 27
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 73.0,
+     "aircraft": "N312LM",
+     "text": "MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": true,
+       "intent": "emergency",
+       "parse_confidence": 0.7338,
+       "parser": "grammar",
+       "raw_text": "Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent emergency; slots destination=East 34th; EMERGENCY keyword or squawk present; ASR confidence 0.95, parse confidence 0.73 (grammar parser).",
+       "slots": {
+        "altitude_ft": null,
+        "corridor": null,
+        "destination": "East 34th",
+        "direction": null,
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 7.724277019500732,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "CONTROLLER_TAKING_OVER",
+      "tier": "handoff",
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, controller taking over",
+      "card_text": "Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. heard: 'Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.' MEDEVAC Three One Two Lima Mike, controller taking over Optional: notify heliport ops (simulated Vapi call, test number only). Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. SIMULATED call to heliport ops, TEST number 555-0100: MEDEVAC N312LM declared an emergency.",
+      "proposal_id": "4fb6d50cc7",
+      "source": "policy",
+      "confidence": 1.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 7724,
+     "total_latency_ms": 7726,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.intent",
+       "field": "intent",
+       "expected": "emergency",
+       "actual": "emergency",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.emergency",
+       "field": "emergency",
+       "expected": true,
+       "actual": true,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.template_id",
+       "field": "template_id",
+       "expected": "CONTROLLER_TAKING_OVER",
+       "actual": "CONTROLLER_TAKING_OVER",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "emergency"
+       ],
+       "actual": [
+        "emergency"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "controller taking over"
+       ],
+       "actual": "MEDEVAC Three One Two Lima Mike, controller taking over",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "heliport ops"
+       ],
+       "actual": "Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. heard: 'Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.' MEDEVAC Three One Two Lima Mike, controller taking over Optional: notify heliport ops (simulated Vapi call, test number only). Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. SIMULATED call to heliport ops, TEST number 555-0100: MEDEVAC N312LM declared an emergency.",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 110.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Williamsburg Bridge, altitude_ft=800, direction=southbound, corridor=East River; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 800,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": "Williamsburg Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.707589864730835,
+      "parse_latency_s": 0.0001
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": null,
+      "card_text": "Emergency declared or squawk 7700/7600/7500 (ADS-B squawk on N312LM). Agent speaks once and then locks silent; the controller owns the frequency.",
+      "proposal_id": "242224ce67",
+      "source": "policy",
+      "confidence": 0.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 3708,
+     "total_latency_ms": 3709,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Williamsburg Bridge",
+       "actual": "Williamsburg Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 800,
+       "actual": 800,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S5.L3.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 125.0,
+     "aircraft": "N312LM",
+     "text": "MEDEVAC Three One Two Lima, approaching East 34th.",
+     "picker_cache": [],
+     "heard": {
+      "text": "MEDEVAC 312 Lima approaching East 34th.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.675,
+       "parser": "grammar",
+       "raw_text": "MEDEVAC 312 Lima approaching East 34th.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent position_report (cues: approaching); slots position=East 34th; ASR confidence 0.95, parse confidence 0.68 (grammar parser).",
+       "slots": {
+        "altitude_ft": null,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.3188488483428955,
+      "parse_latency_s": 0.0005
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": null,
+      "card_text": "Emergency declared or squawk 7700/7600/7500 (ADS-B squawk on N312LM). Agent speaks once and then locks silent; the controller owns the frequency.",
+      "proposal_id": "c173e63cd2",
+      "source": "policy",
+      "confidence": 0.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 3319,
+     "total_latency_ms": 3320,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "squawk",
+     "t": 75.0,
+     "facts": {
+      "t": 75.0,
+      "code": "7700"
+     },
+     "alert": {
+      "id": "N312LM:squawk7700",
+      "kind": "squawk",
+      "squawk": "7700",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "severity": "handoff",
+      "confidence": 1.0,
+      "reason": "N312LM: squawk 7700 on simulated ADS-B.",
+      "first_seen_t": 75.0,
+      "last_seen_t": 75.0
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [],
+      "spoken_text": null,
+      "card_text": null,
+      "proposal_id": null,
+      "source": null,
+      "confidence": null
+     },
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.E1.geometry.exists",
+       "field": "exists",
+       "expected": "7700",
+       "actual": "7700",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.E1.geometry.t",
+       "field": "t",
+       "expected": [
+        72.0,
+        80.0
+       ],
+       "actual": 75.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.E1.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S5.summary.transmissions",
+     "field": "transmissions",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S5.summary.transmissions_after_lock",
+     "field": "transmissions_after_lock",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=73.0   L1  N312LM  [PASS]\n      said  : MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.\n      heard : Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.   (asr 0.95, grammar parser, pinned)\n      agent : handoff CONTROLLER_TAKING_OVER tier=handoff triggers=['emergency'] src=policy  \"MEDEVAC Three One Two Lima Mike, controller taking over\"\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected emergency  actual emergency\n      PASS  L1.parse.slots.destination         expected East 34th  actual East 34th\n      PASS  L1.parse.emergency                 expected true  actual true\n      PASS  L1.response.mode                   expected handoff  actual handoff\n      PASS  L1.response.template_id            expected CONTROLLER_TAKING_OVER  actual CONTROLLER_TAKING_OVER\n      PASS  L1.response.tier                   expected handoff  actual handoff\n      PASS  L1.response.triggers               expected [\"emergency\"]  actual [\"emergency\"]\n      PASS  L1.response.spoken_contains        expected [\"controller taking over\"]  actual MEDEVAC Three One Two Lima Mike, controller taking over\n      PASS  L1.response.card_contains          expected [\"heliport ops\"]  actual Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; t...\nt=75.0   E1  event:squawk  [PASS]\n      agent : locked_silent None tier=None triggers=[]  \"\"\n      PASS  E1.geometry.exists                 expected 7700  actual 7700\n      PASS  E1.geometry.t                      expected [72.0, 80.0]  actual 75.0\n      PASS  E1.response.mode                   expected locked_silent  actual locked_silent\nt=110.0  L3  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.\n      heard : Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.   (asr 0.95, grammar parser, pinned)\n      agent : locked_silent None tier=None triggers=['emergency'] src=policy  \"\"\n      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L3.parse.intent                    expected position_report  actual position_report\n      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge\n      PASS  L3.parse.slots.corridor            expected East River  actual East River\n      PASS  L3.parse.slots.direction           expected southbound  actual southbound\n      PASS  L3.parse.slots.altitude_ft         expected 800  actual 800  (within 50 ft (diff 0))\n      PASS  L3.response.mode                   expected locked_silent  actual locked_silent\nt=125.0  L2  N312LM  [PASS]\n      said  : MEDEVAC Three One Two Lima, approaching East 34th.\n      heard : MEDEVAC 312 Lima approaching East 34th.   (asr 0.95, grammar parser, pinned)\n      agent : locked_silent None tier=None triggers=['emergency'] src=policy  \"\"\n      PASS  L2.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L2.parse.intent                    expected position_report  actual position_report\n      PASS  L2.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L2.response.mode                   expected locked_silent  actual locked_silent\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.transmissions              expected 1  actual 1\n      PASS  summary.transmissions_after_lock   expected 0  actual 0"
+  },
+  {
+   "run": 2,
+   "status": "pass",
+   "tally": {
+    "pass": 27,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 27
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 73.0,
+     "aircraft": "N312LM",
+     "text": "MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": true,
+       "intent": "emergency",
+       "parse_confidence": 0.7338,
+       "parser": "grammar",
+       "raw_text": "Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent emergency; slots destination=East 34th; EMERGENCY keyword or squawk present; ASR confidence 0.95, parse confidence 0.73 (grammar parser).",
+       "slots": {
+        "altitude_ft": null,
+        "corridor": null,
+        "destination": "East 34th",
+        "direction": null,
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 7.724277019500732,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "CONTROLLER_TAKING_OVER",
+      "tier": "handoff",
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, controller taking over",
+      "card_text": "Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. heard: 'Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.' MEDEVAC Three One Two Lima Mike, controller taking over Optional: notify heliport ops (simulated Vapi call, test number only). Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. SIMULATED call to heliport ops, TEST number 555-0100: MEDEVAC N312LM declared an emergency.",
+      "proposal_id": "ea0499fc14",
+      "source": "policy",
+      "confidence": 1.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 7724,
+     "total_latency_ms": 7726,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.intent",
+       "field": "intent",
+       "expected": "emergency",
+       "actual": "emergency",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.emergency",
+       "field": "emergency",
+       "expected": true,
+       "actual": true,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.template_id",
+       "field": "template_id",
+       "expected": "CONTROLLER_TAKING_OVER",
+       "actual": "CONTROLLER_TAKING_OVER",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "emergency"
+       ],
+       "actual": [
+        "emergency"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "controller taking over"
+       ],
+       "actual": "MEDEVAC Three One Two Lima Mike, controller taking over",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "heliport ops"
+       ],
+       "actual": "Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. heard: 'Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.' MEDEVAC Three One Two Lima Mike, controller taking over Optional: notify heliport ops (simulated Vapi call, test number only). Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. SIMULATED call to heliport ops, TEST number 555-0100: MEDEVAC N312LM declared an emergency.",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 110.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Williamsburg Bridge, altitude_ft=800, direction=southbound, corridor=East River; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 800,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": "Williamsburg Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.707589864730835,
+      "parse_latency_s": 0.0001
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": null,
+      "card_text": "Emergency declared or squawk 7700/7600/7500 (ADS-B squawk on N312LM). Agent speaks once and then locks silent; the controller owns the frequency.",
+      "proposal_id": "e5c475fc9a",
+      "source": "policy",
+      "confidence": 0.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 3708,
+     "total_latency_ms": 3708,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Williamsburg Bridge",
+       "actual": "Williamsburg Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 800,
+       "actual": 800,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S5.L3.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 125.0,
+     "aircraft": "N312LM",
+     "text": "MEDEVAC Three One Two Lima, approaching East 34th.",
+     "picker_cache": [],
+     "heard": {
+      "text": "MEDEVAC 312 Lima approaching East 34th.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.675,
+       "parser": "grammar",
+       "raw_text": "MEDEVAC 312 Lima approaching East 34th.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent position_report (cues: approaching); slots position=East 34th; ASR confidence 0.95, parse confidence 0.68 (grammar parser).",
+       "slots": {
+        "altitude_ft": null,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.3188488483428955,
+      "parse_latency_s": 0.0005
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": null,
+      "card_text": "Emergency declared or squawk 7700/7600/7500 (ADS-B squawk on N312LM). Agent speaks once and then locks silent; the controller owns the frequency.",
+      "proposal_id": "333c028519",
+      "source": "policy",
+      "confidence": 0.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 3319,
+     "total_latency_ms": 3320,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "squawk",
+     "t": 75.0,
+     "facts": {
+      "t": 75.0,
+      "code": "7700"
+     },
+     "alert": {
+      "id": "N312LM:squawk7700",
+      "kind": "squawk",
+      "squawk": "7700",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "severity": "handoff",
+      "confidence": 1.0,
+      "reason": "N312LM: squawk 7700 on simulated ADS-B.",
+      "first_seen_t": 75.0,
+      "last_seen_t": 75.0
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [],
+      "spoken_text": null,
+      "card_text": null,
+      "proposal_id": null,
+      "source": null,
+      "confidence": null
+     },
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.E1.geometry.exists",
+       "field": "exists",
+       "expected": "7700",
+       "actual": "7700",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.E1.geometry.t",
+       "field": "t",
+       "expected": [
+        72.0,
+        80.0
+       ],
+       "actual": 75.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.E1.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S5.summary.transmissions",
+     "field": "transmissions",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S5.summary.transmissions_after_lock",
+     "field": "transmissions_after_lock",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=73.0   L1  N312LM  [PASS]\n      said  : MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.\n      heard : Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.   (asr 0.95, grammar parser, pinned)\n      agent : handoff CONTROLLER_TAKING_OVER tier=handoff triggers=['emergency'] src=policy  \"MEDEVAC Three One Two Lima Mike, controller taking over\"\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected emergency  actual emergency\n      PASS  L1.parse.slots.destination         expected East 34th  actual East 34th\n      PASS  L1.parse.emergency                 expected true  actual true\n      PASS  L1.response.mode                   expected handoff  actual handoff\n      PASS  L1.response.template_id            expected CONTROLLER_TAKING_OVER  actual CONTROLLER_TAKING_OVER\n      PASS  L1.response.tier                   expected handoff  actual handoff\n      PASS  L1.response.triggers               expected [\"emergency\"]  actual [\"emergency\"]\n      PASS  L1.response.spoken_contains        expected [\"controller taking over\"]  actual MEDEVAC Three One Two Lima Mike, controller taking over\n      PASS  L1.response.card_contains          expected [\"heliport ops\"]  actual Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; t...\nt=75.0   E1  event:squawk  [PASS]\n      agent : locked_silent None tier=None triggers=[]  \"\"\n      PASS  E1.geometry.exists                 expected 7700  actual 7700\n      PASS  E1.geometry.t                      expected [72.0, 80.0]  actual 75.0\n      PASS  E1.response.mode                   expected locked_silent  actual locked_silent\nt=110.0  L3  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.\n      heard : Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.   (asr 0.95, grammar parser, pinned)\n      agent : locked_silent None tier=None triggers=['emergency'] src=policy  \"\"\n      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L3.parse.intent                    expected position_report  actual position_report\n      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge\n      PASS  L3.parse.slots.corridor            expected East River  actual East River\n      PASS  L3.parse.slots.direction           expected southbound  actual southbound\n      PASS  L3.parse.slots.altitude_ft         expected 800  actual 800  (within 50 ft (diff 0))\n      PASS  L3.response.mode                   expected locked_silent  actual locked_silent\nt=125.0  L2  N312LM  [PASS]\n      said  : MEDEVAC Three One Two Lima, approaching East 34th.\n      heard : MEDEVAC 312 Lima approaching East 34th.   (asr 0.95, grammar parser, pinned)\n      agent : locked_silent None tier=None triggers=['emergency'] src=policy  \"\"\n      PASS  L2.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L2.parse.intent                    expected position_report  actual position_report\n      PASS  L2.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L2.response.mode                   expected locked_silent  actual locked_silent\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.transmissions              expected 1  actual 1\n      PASS  summary.transmissions_after_lock   expected 0  actual 0"
+  },
+  {
+   "run": 3,
+   "status": "pass",
+   "tally": {
+    "pass": 27,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 27
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 73.0,
+     "aircraft": "N312LM",
+     "text": "MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": true,
+       "intent": "emergency",
+       "parse_confidence": 0.7338,
+       "parser": "grammar",
+       "raw_text": "Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent emergency; slots destination=East 34th; EMERGENCY keyword or squawk present; ASR confidence 0.95, parse confidence 0.73 (grammar parser).",
+       "slots": {
+        "altitude_ft": null,
+        "corridor": null,
+        "destination": "East 34th",
+        "direction": null,
+        "origin": null,
+        "position": null,
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 7.724277019500732,
+      "parse_latency_s": 0.0002
+     },
+     "outcome": {
+      "mode": "handoff",
+      "template_id": "CONTROLLER_TAKING_OVER",
+      "tier": "handoff",
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": "MEDEVAC Three One Two Lima Mike, controller taking over",
+      "card_text": "Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. heard: 'Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.' MEDEVAC Three One Two Lima Mike, controller taking over Optional: notify heliport ops (simulated Vapi call, test number only). Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. SIMULATED call to heliport ops, TEST number 555-0100: MEDEVAC N312LM declared an emergency.",
+      "proposal_id": "0bf00f8068",
+      "source": "policy",
+      "confidence": 1.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 7724,
+     "total_latency_ms": 7726,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.intent",
+       "field": "intent",
+       "expected": "emergency",
+       "actual": "emergency",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.parse.emergency",
+       "field": "emergency",
+       "expected": true,
+       "actual": true,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.mode",
+       "field": "mode",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.template_id",
+       "field": "template_id",
+       "expected": "CONTROLLER_TAKING_OVER",
+       "actual": "CONTROLLER_TAKING_OVER",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.tier",
+       "field": "tier",
+       "expected": "handoff",
+       "actual": "handoff",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.triggers",
+       "field": "triggers",
+       "expected": [
+        "emergency"
+       ],
+       "actual": [
+        "emergency"
+       ],
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "controller taking over"
+       ],
+       "actual": "MEDEVAC Three One Two Lima Mike, controller taking over",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L1.response.card_contains",
+       "field": "card_contains",
+       "expected": [
+        "heliport ops"
+       ],
+       "actual": "Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. heard: 'Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.' MEDEVAC Three One Two Lima Mike, controller taking over Optional: notify heliport ops (simulated Vapi call, test number only). Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; the controller owns the frequency. SIMULATED call to heliport ops, TEST number 555-0100: MEDEVAC N312LM declared an emergency.",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 110.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Williamsburg Bridge, altitude_ft=800, direction=southbound, corridor=East River; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 800,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "southbound",
+        "origin": null,
+        "position": "Williamsburg Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.707589864730835,
+      "parse_latency_s": 0.0001
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": null,
+      "card_text": "Emergency declared or squawk 7700/7600/7500 (ADS-B squawk on N312LM). Agent speaks once and then locks silent; the controller owns the frequency.",
+      "proposal_id": "8382864048",
+      "source": "policy",
+      "confidence": 0.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 3708,
+     "total_latency_ms": 3708,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Williamsburg Bridge",
+       "actual": "Williamsburg Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "southbound",
+       "actual": "southbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 800,
+       "actual": 800,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S5.L3.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 125.0,
+     "aircraft": "N312LM",
+     "text": "MEDEVAC Three One Two Lima, approaching East 34th.",
+     "picker_cache": [],
+     "heard": {
+      "text": "MEDEVAC 312 Lima approaching East 34th.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "312L",
+        "snap_score": 0.9,
+        "snapped_to": "N312LM",
+        "spoken": "Three One Two Lima"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.675,
+       "parser": "grammar",
+       "raw_text": "MEDEVAC 312 Lima approaching East 34th.",
+       "reason": "Callsign heard as 'Three One Two Lima' (312L) snapped to N312LM (score 0.90); intent position_report (cues: approaching); slots position=East 34th; ASR confidence 0.95, parse confidence 0.68 (grammar parser).",
+       "slots": {
+        "altitude_ft": null,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.3188488483428955,
+      "parse_latency_s": 0.0005
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [
+       "emergency"
+      ],
+      "spoken_text": null,
+      "card_text": "Emergency declared or squawk 7700/7600/7500 (ADS-B squawk on N312LM). Agent speaks once and then locks silent; the controller owns the frequency.",
+      "proposal_id": "7e24216f6f",
+      "source": "policy",
+      "confidence": 0.0
+     },
+     "server_error": null,
+     "speech_latency_ms": 3319,
+     "total_latency_ms": 3320,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N312LM",
+       "actual": "N312LM",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.L2.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "squawk",
+     "t": 75.0,
+     "facts": {
+      "t": 75.0,
+      "code": "7700"
+     },
+     "alert": {
+      "id": "N312LM:squawk7700",
+      "kind": "squawk",
+      "squawk": "7700",
+      "aircraft": {
+       "hex": "SIM312LM",
+       "reg": "N312LM"
+      },
+      "severity": "handoff",
+      "confidence": 1.0,
+      "reason": "N312LM: squawk 7700 on simulated ADS-B.",
+      "first_seen_t": 75.0,
+      "last_seen_t": 75.0
+     },
+     "outcome": {
+      "mode": "locked_silent",
+      "template_id": null,
+      "tier": null,
+      "triggers": [],
+      "spoken_text": null,
+      "card_text": null,
+      "proposal_id": null,
+      "source": null,
+      "confidence": null
+     },
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.E1.geometry.exists",
+       "field": "exists",
+       "expected": "7700",
+       "actual": "7700",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.E1.geometry.t",
+       "field": "t",
+       "expected": [
+        72.0,
+        80.0
+       ],
+       "actual": 75.0,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S5.E1.response.mode",
+       "field": "mode",
+       "expected": "locked_silent",
+       "actual": "locked_silent",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    },
+    {
+     "id": "E2",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S5.E2.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S5.summary.transmissions",
+     "field": "transmissions",
+     "expected": 1,
+     "actual": 1,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S5.summary.transmissions_after_lock",
+     "field": "transmissions_after_lock",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [],
+   "log": "t=73.0   L1  N312LM  [PASS]\n      said  : MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately.\n      heard : Mayday, Mayday, Mayday, MEDEVAC 312 Lima, engine chip light, landing East 34th immediately.   (asr 0.95, grammar parser, pinned)\n      agent : handoff CONTROLLER_TAKING_OVER tier=handoff triggers=['emergency'] src=policy  \"MEDEVAC Three One Two Lima Mike, controller taking over\"\n      PASS  L1.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L1.parse.intent                    expected emergency  actual emergency\n      PASS  L1.parse.slots.destination         expected East 34th  actual East 34th\n      PASS  L1.parse.emergency                 expected true  actual true\n      PASS  L1.response.mode                   expected handoff  actual handoff\n      PASS  L1.response.template_id            expected CONTROLLER_TAKING_OVER  actual CONTROLLER_TAKING_OVER\n      PASS  L1.response.tier                   expected handoff  actual handoff\n      PASS  L1.response.triggers               expected [\"emergency\"]  actual [\"emergency\"]\n      PASS  L1.response.spoken_contains        expected [\"controller taking over\"]  actual MEDEVAC Three One Two Lima Mike, controller taking over\n      PASS  L1.response.card_contains          expected [\"heliport ops\"]  actual Emergency declared or squawk 7700/7600/7500. Agent speaks once and then locks silent; t...\nt=75.0   E1  event:squawk  [PASS]\n      agent : locked_silent None tier=None triggers=[]  \"\"\n      PASS  E1.geometry.exists                 expected 7700  actual 7700\n      PASS  E1.geometry.t                      expected [72.0, 80.0]  actual 75.0\n      PASS  E1.response.mode                   expected locked_silent  actual locked_silent\nt=110.0  L3  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, East River southbound, eight hundred.\n      heard : Landed desk, Medevac 2646 X-ray, abeam Williamsburg Bridge, East River, southbound, 800.   (asr 0.95, grammar parser, pinned)\n      agent : locked_silent None tier=None triggers=['emergency'] src=policy  \"\"\n      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L3.parse.intent                    expected position_report  actual position_report\n      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge\n      PASS  L3.parse.slots.corridor            expected East River  actual East River\n      PASS  L3.parse.slots.direction           expected southbound  actual southbound\n      PASS  L3.parse.slots.altitude_ft         expected 800  actual 800  (within 50 ft (diff 0))\n      PASS  L3.response.mode                   expected locked_silent  actual locked_silent\nt=125.0  L2  N312LM  [PASS]\n      said  : MEDEVAC Three One Two Lima, approaching East 34th.\n      heard : MEDEVAC 312 Lima approaching East 34th.   (asr 0.95, grammar parser, pinned)\n      agent : locked_silent None tier=None triggers=['emergency'] src=policy  \"\"\n      PASS  L2.parse.callsign.snapped_to       expected N312LM  actual N312LM\n      PASS  L2.parse.intent                    expected position_report  actual position_report\n      PASS  L2.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L2.response.mode                   expected locked_silent  actual locked_silent\nt=0.0    E2  event:no_alerts  [PASS]\n      PASS  E2.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.transmissions              expected 1  actual 1\n      PASS  summary.transmissions_after_lock   expected 0  actual 0"
+  }
+ ],
+ "aggregate": {
+  "runs": 3,
+  "all_judged_passed_every_run": true,
+  "judged": 27,
+  "pending": 0
+ },
+ "per_check": {
+  "S5.L1.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.parse.slots.destination": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.parse.emergency": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.response.triggers": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L1.response.card_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.E1.geometry.exists": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.E1.geometry.t": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.E1.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L3.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L3.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L3.parse.slots.position": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L3.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L3.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L3.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L3.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L2.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L2.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L2.parse.slots.position": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.L2.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.E2.geometry.no_alert>=advisory": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.summary.transmissions": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S5.summary.transmissions_after_lock": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  }
+ },
+ "wall_s": 0.7
+}

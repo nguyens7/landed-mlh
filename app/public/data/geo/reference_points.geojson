@@ -1,0 +1,255 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "source": "AirNav (heliports, see each feature's own `source` property); SPEC.md Sec 0.6/1.2 and the FAA SFRA kneeboard (reporting points, named list only)",
+  "generated_by": "geo/build.py",
+  "generated_at": "2026-10-11T15:41:50+00:00",
+  "approximate_note": "Heliport points are not approximate (published AirNav coordinates). Reporting points are approximate: placed at the named landmark's public centroid, since no FAA-published point coordinate was retrieved for them."
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.972122,
+     40.742447
+    ]
+   },
+   "properties": {
+    "id": "6N5",
+    "name": "East 34th Street Heliport",
+    "kind": "heliport",
+    "source": "https://www.airnav.com/airport/6N5"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.009028,
+     40.701214
+    ]
+   },
+   "properties": {
+    "id": "JRB",
+    "name": "Downtown Manhattan/Wall St Heliport (Downtown Skyport)",
+    "kind": "heliport",
+    "source": "https://airnav.com/airport/JRB"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.190842,
+     40.740847
+    ]
+   },
+   "properties": {
+    "id": "NJ87",
+    "name": "University Hospital Rooftop, Newark",
+    "kind": "heliport",
+    "source": "https://airnav.com/airport/NJ87"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.083261,
+     40.584203
+    ]
+   },
+   "properties": {
+    "id": "NY52",
+    "name": "Staten Island University Hospital",
+    "kind": "heliport",
+    "source": "https://airnav.com/airport/NY52"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.928,
+     40.954
+    ]
+   },
+   "properties": {
+    "id": "alpine_tower",
+    "name": "Alpine Tower",
+    "kind": "reporting_point",
+    "corridor": "Hudson",
+    "mandatory": true,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.9527,
+     40.8517
+    ]
+   },
+   "properties": {
+    "id": "gwb",
+    "name": "George Washington Bridge",
+    "kind": "reporting_point",
+    "corridor": "Hudson",
+    "mandatory": true,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.0006,
+     40.7642
+    ]
+   },
+   "properties": {
+    "id": "intrepid",
+    "name": "Intrepid Museum (Pier 86)",
+    "kind": "reporting_point",
+    "corridor": "Hudson",
+    "mandatory": true,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.0343,
+     40.7179
+    ]
+   },
+   "properties": {
+    "id": "clock",
+    "name": "Colgate Clock (Jersey City)",
+    "kind": "reporting_point",
+    "corridor": "Hudson",
+    "mandatory": true,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.0445,
+     40.6892
+    ]
+   },
+   "properties": {
+    "id": "statue_of_liberty",
+    "name": "Statue of Liberty",
+    "kind": "reporting_point",
+    "corridor": "Hudson",
+    "mandatory": true,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.0442,
+     40.6065
+    ]
+   },
+   "properties": {
+    "id": "vz",
+    "name": "Verrazzano-Narrows Bridge",
+    "kind": "reporting_point",
+    "corridor": "Hudson",
+    "mandatory": true,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.9718,
+     40.7132
+    ]
+   },
+   "properties": {
+    "id": "williamsburg_bridge",
+    "name": "Williamsburg Bridge",
+    "kind": "reporting_point",
+    "corridor": "East River",
+    "mandatory": false,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.0164,
+     40.6895
+    ]
+   },
+   "properties": {
+    "id": "governors_island",
+    "name": "Governors Island",
+    "kind": "reporting_point",
+    "corridor": "East River",
+    "mandatory": false,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.9969,
+     40.7061
+    ]
+   },
+   "properties": {
+    "id": "brooklyn_bridge",
+    "name": "Brooklyn Bridge",
+    "kind": "reporting_point",
+    "corridor": "East River",
+    "mandatory": false,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.9465,
+     40.7714
+    ]
+   },
+   "properties": {
+    "id": "roosevelt_island_north",
+    "name": "Roosevelt Island (north tip)",
+    "kind": "reporting_point",
+    "corridor": "East River",
+    "mandatory": false,
+    "source": "SPEC.md Sec 0.6/1.2, FAA SFRA kneeboard (https://www.faasafety.gov/files/gslac/courses/content/79/775/kneeboard.pdf) names the point; lat/lon is the public landmark centroid (approximate, FAA point coordinate not retrieved)"
+   }
+  }
+ ]
+}

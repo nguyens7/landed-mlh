@@ -1,0 +1,7 @@
+approach,reg,type,role,min_lat_nm,along_nm,heli_alt_ft,glidepath_ft,vert_sep_ft,time
+LGA22,N592PD,B407,other/charter/tour/private,0.04,7.42,220.0,2370,-2150,16:01:26
+LGA22,N1308,S76,other/charter/tour/private,0.09,9.4,1045.0,3002,-1957,10:05:14
+LGA22,N36HF,S76,other/charter/tour/private,0.1,9.49,895.0,3031,-2136,17:20:22
+LGA22,N551HY,A139,other/charter/tour/private,0.18,9.98,945.0,3186,-2241,18:25:25
+LGA22,N555ZA,B407,other/charter/tour/private,0.36,10.1,920.0,3192,-2272,18:57:39
+LGA22,N119RW,A119,other/charter/tour/private,0.58,10.42,1020.0,3192,-2172,17:45:55

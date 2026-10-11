@@ -1,0 +1,1 @@
+{"name": "choose_template", "args": {"reason": "Pilot is checking in at JRB on the Hudson, northbound at 1000 feet.", "template_id": "ACK_CHECKIN", "slots": {"altimeter_inhg": 29.92, "position": "JRB", "reg": "N2464X"}}}

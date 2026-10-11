@@ -1,0 +1,891 @@
+{
+  "status": "Reference-blind Gemini-assisted audit; not human adjudication or validated gold",
+  "protocol_sha256": "4d30215a3c134f47d3a9b69e5afe21e2c992fe2e23f21dad4c669810022317cc",
+  "attempted": 25,
+  "structured_reviews": 24,
+  "failed_attempts": 1,
+  "human_adjudicated": 0,
+  "gold_changes": 0,
+  "languages_model_proposed_clip_counts": {
+    "cs": 7,
+    "en": 17,
+    "pl": 1,
+    "es": 2,
+    "ru": 1
+  },
+  "field_type_model_proposed_counts": {
+    "callsign": 21,
+    "frequency": 4,
+    "runway": 8,
+    "other": 10,
+    "speed": 1,
+    "qnh": 1,
+    "time": 1
+  },
+  "normalized_exact_reference_matches": 4,
+  "model_uncertain_field_count": 10,
+  "cost": {
+    "audit_known_usage_estimated_usd": 0.031461750000000004,
+    "audit_unknown_usage_attempts": 0,
+    "audit_conservative_reserved_usd": 0.8448000000000001,
+    "parent_known_success_estimated_usd": 0.11352675,
+    "parent_unknown_usage_attempts": 3,
+    "parent_response_cache_sha256": "bfc092e59b0879fc05e946bdcfc32c478d8d384fc051f8250797862ae657d874",
+    "combined_known_usage_estimated_usd": 0.1449885,
+    "combined_conservative_reserved_usd": 9.022464,
+    "note": "Estimates, not receipts. Unknown-usage failures retain full reservations."
+  },
+  "limitations": [
+    "Same Gemini family as evaluated ASR; reference blindness does not make it an independent human judge.",
+    "Model language labels, field certainty, alternatives, and timestamps are unverified.",
+    "Schema speed field conflates possible wind/aircraft speed; no operational field accuracy calculated.",
+    "Normalized matches do not validate acoustic correctness; nonmatches do not prove bad references.",
+    "Noncommercial, error-enriched development sample; no fresh holdout or model-selection evidence."
+  ],
+  "cases": [
+    {
+      "id": "uwb-atcc_TWR-zq9TaC_000057_000528_PI",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "cs"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": null,
+          "alternatives": [
+            "OK hotel"
+          ],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            2.2
+          ]
+        }
+      ],
+      "private_result_sha256": "7df6782019b82a8054eca0c9a90bb0b47aab78a33236b2cfcebd4bec007fe0d1"
+    },
+    {
+      "id": "uwb-atcc_TWR-ybuLTX_001539_002052_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "cs"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 0,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "OK-LIN",
+          "alternatives": [
+            "OKLIN"
+          ],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            2.1
+          ]
+        },
+        {
+          "kind": "frequency",
+          "value": "118.3",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            3.0,
+            4.4
+          ]
+        }
+      ],
+      "private_result_sha256": "d553099c31d84b9a81294cac705ee6cfa2e9e9f615ab5d2cc44f51579a056a6b"
+    },
+    {
+      "id": "uwb-atcc_TWR-iDQ8Oj_000605_000865_PI",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "frequency",
+          "value": "121.9",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.1
+          ]
+        }
+      ],
+      "private_result_sha256": "3bf17d4629633eb45edec514276afac1d7624f138f6a15e7baffbc0555c1763d"
+    },
+    {
+      "id": "uwb-atcc_TWR-OPcLbI_000760_001321_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "cs"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "Kalibra 40",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.2
+          ]
+        },
+        {
+          "kind": "runway",
+          "value": "31",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            4.5,
+            5.8
+          ]
+        }
+      ],
+      "private_result_sha256": "4ce533954b05fabf972d0d2173f76080dcd6789ee9e0f170033b3642a8e23f52"
+    },
+    {
+      "id": "uwb-atcc_TWR-Q9VzyB_000000_000462_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "pl"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 2,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "other",
+          "value": "52",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            1.4,
+            2.2
+          ]
+        },
+        {
+          "kind": "callsign",
+          "value": null,
+          "alternatives": [
+            "WZZ"
+          ],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            2.5,
+            3.1
+          ]
+        },
+        {
+          "kind": "other",
+          "value": "320",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            3.1,
+            3.8
+          ]
+        }
+      ],
+      "private_result_sha256": "60fcdf23ad88fdbd33cf471b3f99b37ed15340be538bc68bbbe39e6df3198ee9"
+    },
+    {
+      "id": "uwb-atcc_TWR-XwCoKq_002268_002474_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 0,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "EZY68P",
+          "alternatives": [
+            "Easy 68 Papa"
+          ],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.9
+          ]
+        }
+      ],
+      "private_result_sha256": "0ff3f058967928e2dc0f0b3942737e7654fa0d4449397a286e7a7dc759d3f327"
+    },
+    {
+      "id": "uwb-atcc_TWR-t05WHO_001481_001798_PI",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "es"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "OKB",
+          "alternatives": [
+            "Oscar Kilo Bravo"
+          ],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            1.7,
+            3.4
+          ]
+        }
+      ],
+      "private_result_sha256": "53ddeae96224ee5e65794d07351accb3c96fbca1c44b2c0091c1fa9a1c97bbe1"
+    },
+    {
+      "id": "uwb-atcc_TWR-xWBicz_000193_000851_PIAT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en",
+        "ru"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "CC4NK",
+          "alternatives": [
+            "CC4AK"
+          ],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.3
+          ]
+        },
+        {
+          "kind": "frequency",
+          "value": "121.900",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            1.8,
+            2.5
+          ]
+        },
+        {
+          "kind": "frequency",
+          "value": "121.900",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            3.4,
+            4.3
+          ]
+        },
+        {
+          "kind": "callsign",
+          "value": "CC4NK",
+          "alternatives": [
+            "CC4AK"
+          ],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            4.8,
+            6.3
+          ]
+        }
+      ],
+      "private_result_sha256": "c0dddeaf7c919b08da7a704bb6d278a3fa78fc91f6bd65259f96fcde7757b992"
+    },
+    {
+      "id": "uwb-atcc_TWR-Pd3zip_000676_000936_PI",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "es"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 2,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "other",
+          "value": "1",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.8,
+            1.2
+          ]
+        },
+        {
+          "kind": "other",
+          "value": "V2",
+          "alternatives": [
+            "B2"
+          ],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            2.0,
+            2.5
+          ]
+        }
+      ],
+      "private_result_sha256": "043d561b69c362fde38b858a34e424ebd1a43623f2fcc77eb65019e883b4ee5f"
+    },
+    {
+      "id": "uwb-atcc_TWR-iWc9VQ_000087_000759_PIAT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en",
+        "cs"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 2,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "CSA5MB",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.6,
+            1.9
+          ]
+        },
+        {
+          "kind": "runway",
+          "value": "13",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            2.7,
+            3.3
+          ]
+        },
+        {
+          "kind": "callsign",
+          "value": "CSA5MB",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            3.8,
+            5.2
+          ]
+        },
+        {
+          "kind": "other",
+          "value": "160",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            5.9,
+            6.8
+          ]
+        }
+      ],
+      "private_result_sha256": "92446eb411a37411a56dba5f1cf19afb88459cedc567e657e642f28e9b8cc26d"
+    },
+    {
+      "id": "uwb-atcc_TWR-hlhXbw_000601_000953_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "544",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.1
+          ]
+        }
+      ],
+      "private_result_sha256": "ab23604964ae010f13f961989969a0d715e9a6b4998824edd9e11673b4d1d54b"
+    },
+    {
+      "id": "uwb-atcc_TWR-VkJgsW_002379_002618_PI",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "904",
+          "alternatives": [],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            0.5,
+            2.2
+          ]
+        }
+      ],
+      "private_result_sha256": "b88c3439ddb7d3e4db937cfe99510a455819e40a58334ca92ce99271e5b98d17"
+    },
+    {
+      "id": "uwb-atcc_TWR-y6U2vL_002224_002734_PIAT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "cs",
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "CSA857",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.8,
+            1.8
+          ]
+        }
+      ],
+      "private_result_sha256": "692b72c479efed78b1ecc3f47082706bfbad87768b4e3cde8bb3a8f06c2ccfc5"
+    },
+    {
+      "id": "uwb-atcc_TWR-Kc4ziu_000952_001548_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "runway",
+          "value": "13",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.5,
+            2.1
+          ]
+        }
+      ],
+      "private_result_sha256": "0003d6303e1970781529bdc106406f8975b2338f2b93a1ac108bf186b1dfe05c"
+    },
+    {
+      "id": "uwb-atcc_TWR-DeVSyo_001521_001776_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": true,
+      "matches_cached_baseline_after_normalization": true,
+      "model_cautions_count": 0,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "Austrian 708 Papa",
+          "alternatives": [
+            "AUA708P"
+          ],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.7
+          ]
+        },
+        {
+          "kind": "runway",
+          "value": "31",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            1.8,
+            2.5
+          ]
+        }
+      ],
+      "private_result_sha256": "17e5195d768dcfde361b91c0660cd89571f1ce67270a954797e9c3434e7fc6cb"
+    },
+    {
+      "id": "uwb-atcc_TWR-GsdsEp_001655_001880_PI",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": true,
+      "matches_cached_baseline_after_normalization": true,
+      "model_cautions_count": 0,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "DLH8LL",
+          "alternatives": [
+            "Lufthansa 8 Lima Lima",
+            "Lufthansa 8LL"
+          ],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            1.0,
+            2.5
+          ]
+        }
+      ],
+      "private_result_sha256": "1274656c5b46ce4d469a96f259055f4f1fa327a0595d9ce97c0d4a1d3bee7255"
+    },
+    {
+      "id": "uwb-atcc_TWR-PwCXyy_000000_000297_AT",
+      "human_validated": false,
+      "error": "ValueError: Incomplete model review: NO_CANDIDATE",
+      "model_languages_unvalidated": [],
+      "matches_frozen_reference_after_normalization": null,
+      "matches_cached_baseline_after_normalization": null,
+      "model_cautions_count": null,
+      "model_proposed_fields_not_gold": [],
+      "private_result_sha256": "7816669a9bee4b212f629d57a6acbeee40c39ec347641ac3db947c76588d4f7e"
+    },
+    {
+      "id": "uwb-atcc_TWR-FxfhED_006180_006806_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": true,
+      "matches_cached_baseline_after_normalization": true,
+      "model_cautions_count": 0,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "EIN645",
+          "alternatives": [
+            "Shamrock 645"
+          ],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            1.2,
+            2.5
+          ]
+        },
+        {
+          "kind": "runway",
+          "value": "31",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            3.4,
+            3.9
+          ]
+        },
+        {
+          "kind": "other",
+          "value": "120 degrees",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            4.6,
+            5.4
+          ]
+        },
+        {
+          "kind": "speed",
+          "value": "5 knots",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            5.4,
+            5.9
+          ]
+        }
+      ],
+      "private_result_sha256": "c5d477be539d1c31d96329c61d570d3c50ab34b1b3e8724026e5feaa9c7c3e6a"
+    },
+    {
+      "id": "uwb-atcc_TWR-thLWob_002243_002533_PI",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": true,
+      "matches_cached_baseline_after_normalization": true,
+      "model_cautions_count": 0,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "DLH2JW",
+          "alternatives": [
+            "Lufthansa 2 Juliet Whiskey"
+          ],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.8,
+            2.4
+          ]
+        }
+      ],
+      "private_result_sha256": "be2041e574a1b0c8d9ca830c984a5698a5e7d900cb2f02b71f166f3875d2c323"
+    },
+    {
+      "id": "uwb-atcc_TWR-nTIjqH_000767_001272_PIAT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "cs"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [],
+      "private_result_sha256": "a5d15dea2780a47e900f675fdc910295a360a00a1d07b570e52b60f39a6f4742"
+    },
+    {
+      "id": "uwb-atcc_TWR-A91jjm_001375_002009_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "63906",
+          "alternatives": [
+            "C3906",
+            "6396"
+          ],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.7
+          ]
+        },
+        {
+          "kind": "other",
+          "value": "Mike",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            2.6,
+            2.9
+          ]
+        },
+        {
+          "kind": "qnh",
+          "value": "1018",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            3.3,
+            4.5
+          ]
+        },
+        {
+          "kind": "time",
+          "value": "17",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            5.1,
+            6.0
+          ]
+        }
+      ],
+      "private_result_sha256": "565c01a8160b076a8817c4b698c24e1134fc833af3f4663db1b6357377f2e31a"
+    },
+    {
+      "id": "uwb-atcc_TWR-RRaAMu_000245_000632_PIAT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "cs",
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "CSK493",
+          "alternatives": [
+            "CSA 493"
+          ],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.7
+          ]
+        }
+      ],
+      "private_result_sha256": "dcdd2cbaa701b46fc5dd6a74760634eba3be5428386912f464e9442fd8bdbf83"
+    },
+    {
+      "id": "uwb-atcc_TWR-FVLEMW_000401_000627_PI",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "other",
+          "value": "1 deg",
+          "alternatives": [],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            0.8
+          ]
+        },
+        {
+          "kind": "runway",
+          "value": "13",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.8,
+            1.7
+          ]
+        },
+        {
+          "kind": "other",
+          "value": "30",
+          "alternatives": [
+            "wind 300"
+          ],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            1.7,
+            2.6
+          ]
+        }
+      ],
+      "private_result_sha256": "b822db0eabe6068d50ea6550e09e74c7269fe0986bea00a9fe4f3d4b1127330f"
+    },
+    {
+      "id": "uwb-atcc_TWR-sk4Eh7_000172_000588_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": true,
+      "model_cautions_count": 0,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "Budget 300",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.7
+          ]
+        },
+        {
+          "kind": "runway",
+          "value": "13",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            2.2,
+            3.6
+          ]
+        }
+      ],
+      "private_result_sha256": "9306741d88d1130724ba1af11204cc8359a0b798f60e696593c688461e3ef106"
+    },
+    {
+      "id": "uwb-atcc_TWR-HhPTbJ_000000_000391_AT",
+      "human_validated": false,
+      "error": null,
+      "model_languages_unvalidated": [
+        "en"
+      ],
+      "matches_frozen_reference_after_normalization": false,
+      "matches_cached_baseline_after_normalization": false,
+      "model_cautions_count": 1,
+      "model_proposed_fields_not_gold": [
+        {
+          "kind": "callsign",
+          "value": "Southern Air 500",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            0.0,
+            1.7
+          ]
+        },
+        {
+          "kind": "runway",
+          "value": "31",
+          "alternatives": [],
+          "model_certainty_unvalidated": "clear",
+          "approximate_span_s_unvalidated": [
+            1.7,
+            2.6
+          ]
+        },
+        {
+          "kind": "other",
+          "value": null,
+          "alternatives": [
+            "170"
+          ],
+          "model_certainty_unvalidated": "uncertain",
+          "approximate_span_s_unvalidated": [
+            3.2,
+            3.7
+          ]
+        }
+      ],
+      "private_result_sha256": "5fbeb43b25316162be0e3caaea0e3bd2715dae93a26b6ce762ea79365ccc71e3"
+    }
+  ]
+}

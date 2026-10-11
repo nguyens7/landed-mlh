@@ -1,0 +1,193 @@
+{
+  "stage": "User-authorized reference-blind Gemini-assisted audio audit; not prompt tuning or human adjudication",
+  "ids": [
+    "uwb-atcc_TWR-zq9TaC_000057_000528_PI",
+    "uwb-atcc_TWR-ybuLTX_001539_002052_AT",
+    "uwb-atcc_TWR-iDQ8Oj_000605_000865_PI",
+    "uwb-atcc_TWR-OPcLbI_000760_001321_AT",
+    "uwb-atcc_TWR-Q9VzyB_000000_000462_AT",
+    "uwb-atcc_TWR-XwCoKq_002268_002474_AT",
+    "uwb-atcc_TWR-t05WHO_001481_001798_PI",
+    "uwb-atcc_TWR-xWBicz_000193_000851_PIAT",
+    "uwb-atcc_TWR-Pd3zip_000676_000936_PI",
+    "uwb-atcc_TWR-iWc9VQ_000087_000759_PIAT",
+    "uwb-atcc_TWR-hlhXbw_000601_000953_AT",
+    "uwb-atcc_TWR-VkJgsW_002379_002618_PI",
+    "uwb-atcc_TWR-y6U2vL_002224_002734_PIAT",
+    "uwb-atcc_TWR-Kc4ziu_000952_001548_AT",
+    "uwb-atcc_TWR-DeVSyo_001521_001776_AT",
+    "uwb-atcc_TWR-GsdsEp_001655_001880_PI",
+    "uwb-atcc_TWR-PwCXyy_000000_000297_AT",
+    "uwb-atcc_TWR-FxfhED_006180_006806_AT",
+    "uwb-atcc_TWR-thLWob_002243_002533_PI",
+    "uwb-atcc_TWR-nTIjqH_000767_001272_PIAT",
+    "uwb-atcc_TWR-A91jjm_001375_002009_AT",
+    "uwb-atcc_TWR-RRaAMu_000245_000632_PIAT",
+    "uwb-atcc_TWR-FVLEMW_000401_000627_PI",
+    "uwb-atcc_TWR-sk4Eh7_000172_000588_AT",
+    "uwb-atcc_TWR-HhPTbJ_000000_000391_AT"
+  ],
+  "source_freeze_sha256": "1107bb4a68a229c26068ba8ae6c32f515f7ba24490f4db0f13f32eae974d4380",
+  "parent_budget_sha256": "a0b91123f672cea2d46178e88b94c3c38b166be7bd0a8cf8a877ada29c4808a8",
+  "previous_reserved_usd": 8.177664,
+  "new_ceiling_usd": 0.8448000000000001,
+  "model": "gemini-3.8-flash",
+  "prompt": "Review this short aviation radio recording without any reference transcript. Transcribe only audible speech, preserving repetitions and original languages; do not translate. Use [?] for unintelligible material; do not reconstruct a standard clearance. Identify the languages and approximate time spans. Extract every audible callsign and critical numeric field: heading, altitude, frequency, runway, QNH, time, speed, squawk, other numbers. For each field record the spoken wording and a canonical value preserving digit order, leading zeros, callsign letters, decimal frequency boundaries, and explicitly spoken units. Never infer a field type, unit, number, or airline from convention. If a field is unclear, set its value to null, record plausible alternatives only if audible, and mark it uncertain. Empty fields are allowed when none are audible. All times are approximate seconds relative to this clip. Describe limitations in cautions. Your output is model-assisted evidence, not validated ground truth.",
+  "schema": {
+    "$defs": {
+      "CriticalField": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "callsign",
+              "heading",
+              "altitude",
+              "frequency",
+              "runway",
+              "qnh",
+              "time",
+              "speed",
+              "squawk",
+              "other"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "spoken": {
+            "title": "Spoken",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "alternatives": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Alternatives",
+            "type": "array"
+          },
+          "start_s": {
+            "maximum": 20,
+            "minimum": 0,
+            "title": "Start S",
+            "type": "number"
+          },
+          "end_s": {
+            "maximum": 20,
+            "minimum": 0,
+            "title": "End S",
+            "type": "number"
+          },
+          "certainty": {
+            "enum": [
+              "clear",
+              "uncertain"
+            ],
+            "title": "Certainty",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "spoken",
+          "value",
+          "alternatives",
+          "start_s",
+          "end_s",
+          "certainty"
+        ],
+        "title": "CriticalField",
+        "type": "object"
+      },
+      "Span": {
+        "properties": {
+          "start_s": {
+            "maximum": 20,
+            "minimum": 0,
+            "title": "Start S",
+            "type": "number"
+          },
+          "end_s": {
+            "maximum": 20,
+            "minimum": 0,
+            "title": "End S",
+            "type": "number"
+          },
+          "language": {
+            "title": "Language",
+            "type": "string"
+          },
+          "transcript": {
+            "title": "Transcript",
+            "type": "string"
+          }
+        },
+        "required": [
+          "start_s",
+          "end_s",
+          "language",
+          "transcript"
+        ],
+        "title": "Span",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "transcript": {
+        "title": "Transcript",
+        "type": "string"
+      },
+      "languages": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Languages",
+        "type": "array"
+      },
+      "spans": {
+        "items": {
+          "$ref": "#/$defs/Span"
+        },
+        "title": "Spans",
+        "type": "array"
+      },
+      "fields": {
+        "items": {
+          "$ref": "#/$defs/CriticalField"
+        },
+        "title": "Fields",
+        "type": "array"
+      },
+      "cautions": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Cautions",
+        "type": "array"
+      }
+    },
+    "required": [
+      "transcript",
+      "languages",
+      "spans",
+      "fields",
+      "cautions"
+    ],
+    "title": "AudioReview",
+    "type": "object"
+  },
+  "max_output_tokens": 8192,
+  "max_input_tokens_assumption": 4096,
+  "thinking": "low",
+  "temperature": 0,
+  "no_references_or_prior_outputs_sent": true
+}

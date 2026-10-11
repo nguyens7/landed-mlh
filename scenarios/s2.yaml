@@ -1,0 +1,68 @@
+# S2. Route crosses the LGA Rwy 22 final: hand off. SIMULATION ONLY (fictional N312LM, frequency "SIM DESK").
+# The track is the same one replay/build_replay.py writes to app/public/data/replay/sim_medevac.json:
+# E 34th St heliport (6N5) up the East River at 600 ft past the north side of Rikers Island, then "direct College
+# Point area". It crosses the Rwy 22 final ~1.1 nm out, inside the 0-730 ft band. A DCA-like situation: a helicopter
+# crossing an airliner's short final. The engine hands off about 84 s before entry into the glidepath volume.
+id: S2
+title: Medevac crosses the LGA Rwy 22 final, handoff
+spec: "SPEC.md section 4, S2; issue #9 (600 ft, 1.1 nm, ~84 s)"
+summary: >-
+  N312LM asks for direct College Point at 600 ft. The agent stands by and hands the flight to the human; the engine
+  raises a Rwy 22 final handoff with a time-to-entry of about 84 s.
+window_s: 900
+aircraft:
+  - reg: N312LM
+    hex: SIM312LM
+    spoken: MEDEVAC Three One Two Lima
+    type: EC35
+    voice: Fenrir
+    cruise_alt_ft: 600
+    cruise_kt: 110
+    climb_fpm: 800
+    align_entry: {volume_prefix: lga22_final_seg, t: 450}   # liftoff chosen so volume entry lands at window mid
+    route:   # == replay/landed_geo.py SIM_MEDEVAC_ROUTE
+      - {name: 6N5, lat: 40.7424472, lon: -73.9721222}
+      - {name: East River off Roosevelt Island north tip, lat: 40.772, lon: -73.938}
+      - {name: past Hell Gate, lat: 40.797, lon: -73.905}
+      - {name: north of Rikers Island, lat: 40.806, lon: -73.885}
+      - {name: College Point area, lat: 40.797, lon: -73.835}
+lines:
+  - id: L1
+    t: 222
+    aircraft: N312LM
+    text: Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.
+    voice: Fenrir
+    snr: "20"
+    near: {ref: 6N5, max_nm: 0.3}
+    expect:
+      parse:
+        callsign: {snapped_to: N312LM}
+        intent: request_route
+        slots: {position: East 34th, destination: College Point, altitude_ft: 600}
+        emergency: false
+      response:
+        mode: handoff
+        template_id: STANDBY_HANDOFF
+        tier: handoff
+        triggers: [out_of_whitelist]
+        spoken_contains: [standby, controller will be with you]
+events:
+  - id: E1
+    kind: engine_alert
+    aircraft: N312LM
+    volume_prefix: lga22_final_seg
+    severity: handoff
+    min_confidence: 0.8
+    lead_s: [80, 90]
+    t_window: [380, 400]
+    note: Engine handoff on the Rwy 22 final glidepath volume, about 84 s before entry.
+    response:
+      mode: handoff
+      tier: handoff
+      triggers: [path_protected_volume]
+      card_contains: ["Rwy 22"]
+geo:
+  must_enter: {N312LM: [lga22_final_seg]}
+  may_enter: {N312LM: [lga4_departure, lga13_departure]}
+  corridors: {N312LM: []}   # leaves the East River corridor by design
+expected_summary: {handoffs: 1}

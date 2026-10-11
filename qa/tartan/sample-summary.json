@@ -1,0 +1,43 @@
+{
+  "airport": "KBTP",
+  "selection": "two small WAVs on first shared available November day after default sample; exploratory, not random",
+  "audio": {
+    "member": "11-14-20_audio/6.wav",
+    "sha256": "93d96b65dfce386bec42e777cf2514d0e0fab89422994057a08c8a7e1cf92375",
+    "metadata_sha256": "fa27f287b7601fb4e4d1d687d5dcc5a921fbd57b9f40788b976da94af9530404",
+    "sample_rate": 44100,
+    "channels": 1,
+    "duration_s": 81.0409977324263,
+    "metadata_start_utc": "2020-11-14T13:53:43.494879+00:00",
+    "metadata_end_utc": "2020-11-14T13:55:04.630872+00:00",
+    "metadata_duration_s": 81.135993,
+    "rms_window_s": 0.1,
+    "rms_dbfs_percentiles_10_50_90": [
+      -76.09426545334414,
+      -75.61151285087004,
+      -72.85407275914675
+    ],
+    "windows_above_minus30_dbfs": 6,
+    "window_count": 811,
+    "energy_note": "Energy is not a speech detector or verified utterance count."
+  },
+  "adsb": {
+    "member": "11-14-20/1.csv",
+    "sha256": "d8a139526e51533ecc5c7dc4d46c6a0618c22c6bc6ed2a286a05135af4e75ed4",
+    "valid_rows": 76684,
+    "blank_rows": 314,
+    "invalid_nonblank_rows": 1,
+    "first_utc": "2020-11-14T12:49:15.637105+00:00",
+    "last_utc": "2020-11-15T03:59:30.882259+00:00",
+    "aircraft_ids": 41,
+    "rows_in_audio_window": 114,
+    "aircraft_ids_in_audio_window": 2,
+    "unique_position_time_tuples_in_window": 18,
+    "age_s_range_in_window": [
+      0.396028,
+      59.491189
+    ]
+  },
+  "alignment": "UTC interval overlap only; recorder clock offset and audio speaker/aircraft association are unverified.",
+  "license": "Raw data license scope unresolved; keep downloaded audio, CSV, and per-aircraft tracks private."
+}

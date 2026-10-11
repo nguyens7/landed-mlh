@@ -1,0 +1,6 @@
+{
+ "source": "Iowa Environmental Mesonet ASOS request, station=LGA, data=alti (https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py)",
+ "generated_by": "geo/build.py",
+ "generated_at": "2026-10-11T15:41:50+00:00",
+ "approximate_note": "Not approximate -- raw hourly METAR altimeter readings for the local (America/New_York) 2026-10-10 calendar day. Sidecar file: the main altimeter_KLGA_2026-10-10.json stays a plain array (its documented schema) so existing consumers are not broken; this file carries the same metadata block used on the GeoJSON outputs."
+}

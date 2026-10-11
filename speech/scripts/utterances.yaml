@@ -1,0 +1,344 @@
+# Ground-truth bank of pilot transmissions for Landed (all fictional / simulated).
+# `text` is the exact words sent to TTS. Truth follows speech/models.py ParsedTransmission.
+# callsign.normalized = alphanumerics as spoken (N-prefix only if "November" was said);
+# callsign.snapped_to = the roster registration the pilot actually is; ambiguous = a correct
+# parser must flag a near-tie (scenario S4). Null/missing slots mean "not stated".
+# style: normal | urgent (TTS delivery instruction) ; partial = deliberately truncated call.
+
+# ---------------------------------------------------------------- S1: clean autonomous
+- id: s1_01
+  scenario: S1
+  text: "Landed desk, MEDEVAC Two Six Four Six X-Ray, Downtown Skyport, lifting, East River northbound, five hundred, landing East 34th."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: checkin
+  slots: {position: Downtown Skyport, origin: Downtown Skyport, destination: East 34th, corridor: East River, direction: northbound, altitude_ft: 500}
+- id: s1_02
+  scenario: S1
+  text: "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: position_report
+  slots: {position: Brooklyn Bridge, altitude_ft: 500}
+- id: s1_03
+  scenario: S1
+  text: "Landed desk, MEDEVAC Two Six Four Six X-Ray, landing East 34th."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: position_report
+  slots: {destination: East 34th}
+- id: s1_04
+  scenario: S1
+  text: "MEDEVAC Two Six Four Six X-Ray, roger, will report Brooklyn Bridge."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: readback
+  slots: {position: Brooklyn Bridge}
+
+# ---------------------------------------------------------------- S2: route crosses LGA approach
+- id: s2_01
+  scenario: S2
+  text: "Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: request_route
+  slots: {position: East 34th, destination: College Point, altitude_ft: 600}
+- id: s2_02
+  scenario: S2
+  text: "Remain east of Roosevelt Island, at or below one thousand, MEDEVAC Three One Two Lima."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: readback
+  slots: {position: Roosevelt Island, altitude_ft: 1000}
+
+# ---------------------------------------------------------------- S3: weather
+- id: s3_01
+  scenario: S3
+  text: "MEDEVAC Two Six Four Six X-Ray, Hudson southbound, ceilings coming down, request descend to six hundred."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: request_altitude
+  slots: {corridor: Hudson, direction: southbound, weather_phrase: ceilings coming down, altitude_ft: 600}
+- id: s3_02
+  scenario: S3
+  text: "MEDEVAC Three One Two Lima, Hudson southbound, inadvertent IMC, request immediate descent to five hundred."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: request_altitude
+  slots: {corridor: Hudson, direction: southbound, weather_phrase: inadvertent imc, altitude_ft: 500}
+- id: s3_03
+  scenario: S3
+  text: "MEDEVAC Two Six Four Six X-Ray, losing visual, Hudson southbound, request descend to four hundred."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: request_altitude
+  slots: {corridor: Hudson, direction: southbound, weather_phrase: losing visual, altitude_ft: 400}
+- id: s3_04
+  scenario: S3
+  text: "MEDEVAC Two Six Four Six X-Ray, East River northbound, ceilings coming down, abeam Roosevelt Island, seven hundred."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: position_report
+  slots: {position: Roosevelt Island, corridor: East River, direction: northbound, weather_phrase: ceilings coming down, altitude_ft: 700}
+- id: s3_05
+  scenario: S3
+  text: "MEDEVAC Two Four Six Four X-Ray, Hudson southbound, now in IMC, request descend to five hundred."
+  callsign: {normalized: "2464X", snapped_to: N2464X}
+  intent: request_altitude
+  slots: {corridor: Hudson, direction: southbound, weather_phrase: imc, altitude_ft: 500}
+- id: s3_06
+  scenario: S3
+  text: "MEDEVAC Three One Two Lima, request Special VFR, Hudson northbound, one thousand."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: request_route
+  slots: {corridor: Hudson, direction: northbound, weather_phrase: special vfr, altitude_ft: 1000}
+
+# ---------------------------------------------------------------- S4: confusable callsigns
+- id: s4_01
+  scenario: S4
+  text: "Landed desk, MEDEVAC Two Four Six Four X-Ray, abeam Brooklyn Bridge, five hundred."
+  callsign: {normalized: "2464X", snapped_to: N2464X}
+  intent: position_report
+  slots: {position: Brooklyn Bridge, altitude_ft: 500}
+- id: s4_02
+  scenario: S4
+  text: "Six Four X-Ray, Brooklyn Bridge."
+  style: partial
+  callsign: {normalized: "64X", snapped_to: N2646X, ambiguous: true}
+  intent: position_report
+  slots: {position: Brooklyn Bridge}
+- id: s4_03
+  scenario: S4
+  text: "MEDEVAC Two Six Four X-Ray, abeam Brooklyn Bridge, five hundred."
+  style: partial
+  callsign: {normalized: "264X", snapped_to: N2646X, ambiguous: true}
+  intent: position_report
+  slots: {position: Brooklyn Bridge, altitude_ft: 500}
+- id: s4_04
+  scenario: S4
+  text: "MEDEVAC Two Six X-Ray, abeam Brooklyn Bridge, five hundred."
+  style: partial
+  callsign: {normalized: "26X", snapped_to: N2646X, ambiguous: true}
+  intent: position_report
+  slots: {position: Brooklyn Bridge, altitude_ft: 500}
+- id: s4_05
+  scenario: S4
+  text: "MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: position_report
+  slots: {position: Brooklyn Bridge, altitude_ft: 500}
+
+# ---------------------------------------------------------------- S5: emergency
+- id: s5_01
+  scenario: S5
+  style: urgent
+  text: "MAYDAY MAYDAY MAYDAY, MEDEVAC Three One Two Lima, engine chip light, landing East 34th immediately."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: emergency
+  slots: {destination: East 34th}
+  emergency: true
+- id: s5_02
+  scenario: S5
+  style: urgent
+  text: "MAYDAY MAYDAY, MEDEVAC Two Six Four Six X-Ray, engine failure, Hudson southbound, five hundred."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: emergency
+  slots: {corridor: Hudson, direction: southbound, altitude_ft: 500}
+  emergency: true
+- id: s5_03
+  scenario: S5
+  style: urgent
+  text: "PAN PAN, PAN PAN, PAN PAN, MEDEVAC Two Four Six Four X-Ray, low fuel, landing East 34th."
+  callsign: {normalized: "2464X", snapped_to: N2464X}
+  intent: emergency
+  slots: {destination: East 34th}
+  emergency: true
+- id: s5_04
+  scenario: S5
+  style: urgent
+  text: "MEDEVAC Three One Two Lima, squawking seven seven zero zero, emergency, landing Downtown Skyport."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: emergency
+  slots: {destination: Downtown Skyport, squawk: "7700"}
+  emergency: true
+- id: s5_05
+  scenario: S5
+  style: urgent
+  text: "Mayday, mayday, mayday, November Seven Six One November Yankee, loss of tail rotor, East River northbound, abeam Roosevelt Island, four hundred."
+  callsign: {normalized: "N761NY", snapped_to: N761NY}
+  intent: emergency
+  slots: {position: Roosevelt Island, corridor: East River, direction: northbound, altitude_ft: 400}
+  emergency: true
+
+# ---------------------------------------------------------------- variants: check-ins
+- id: v_ci_01
+  scenario: variant
+  text: "Landed desk, November Three One Two Lima Mike, Downtown Skyport, departing, Hudson southbound, one thousand."
+  callsign: {normalized: "N312LM", snapped_to: N312LM}
+  intent: checkin
+  slots: {position: Downtown Skyport, origin: Downtown Skyport, corridor: Hudson, direction: southbound, altitude_ft: 1000}
+- id: v_ci_02
+  scenario: variant
+  text: "MEDEVAC Two Six Four Six X-Ray, lifting from East 34th, East River southbound, six hundred, landing Downtown Skyport."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: checkin
+  slots: {position: East 34th, origin: East 34th, destination: Downtown Skyport, corridor: East River, direction: southbound, altitude_ft: 600}
+- id: v_ci_03
+  scenario: variant
+  text: "Landed desk, MEDEVAC Two Four Six Four X-Ray, Downtown Skyport, airborne, Hudson northbound, one thousand."
+  callsign: {normalized: "2464X", snapped_to: N2464X}
+  intent: checkin
+  slots: {position: Downtown Skyport, origin: Downtown Skyport, corridor: Hudson, direction: northbound, altitude_ft: 1000}
+- id: v_ci_04
+  scenario: variant
+  text: "Landed desk, MEDEVAC Seven Six One November Yankee, East 34th, lifting, East River southbound, five hundred."
+  callsign: {normalized: "761NY", snapped_to: N761NY}
+  intent: checkin
+  slots: {position: East 34th, origin: East 34th, corridor: East River, direction: southbound, altitude_ft: 500}
+- id: v_ci_05
+  scenario: variant
+  text: "MEDEVAC Three Eight Bravo Lima, Downtown Skyport, lifting, Hudson northbound, eight hundred."
+  callsign: {normalized: "38BL", snapped_to: N38BL}
+  intent: checkin
+  slots: {position: Downtown Skyport, origin: Downtown Skyport, corridor: Hudson, direction: northbound, altitude_ft: 800}
+- id: v_ci_06
+  scenario: variant
+  text: "MEDEVAC Two One Seven Mike Hotel checking in, abeam Roosevelt Island, East River northbound, seven hundred."
+  callsign: {normalized: "217MH", snapped_to: N217MH}
+  intent: checkin
+  slots: {position: Roosevelt Island, corridor: East River, direction: northbound, altitude_ft: 700}
+- id: v_ci_07
+  scenario: variant
+  text: "Landed desk, MEDEVAC Three Six Echo November, Downtown Skyport, lifting, Hudson southbound, niner hundred."
+  callsign: {normalized: "36EN", snapped_to: N36EN}
+  intent: checkin
+  slots: {position: Downtown Skyport, origin: Downtown Skyport, corridor: Hudson, direction: southbound, altitude_ft: 900}
+- id: v_ci_08
+  scenario: variant
+  text: "MEDEVAC Four Zero Six Tango Delta, East 34th, lifting, East River northbound, fifteen hundred."
+  callsign: {normalized: "406TD", snapped_to: N406TD}
+  intent: checkin
+  slots: {position: East 34th, origin: East 34th, corridor: East River, direction: northbound, altitude_ft: 1500}
+
+# ---------------------------------------------------------------- variants: position reports
+- id: v_pr_01
+  scenario: variant
+  text: "MEDEVAC Two Six Four Six X-Ray, abeam the Intrepid, southbound, one thousand."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: position_report
+  slots: {position: Intrepid, direction: southbound, altitude_ft: 1000}
+- id: v_pr_02
+  scenario: variant
+  text: "MEDEVAC Three One Two Lima, over the Statue of Liberty, Hudson northbound, one thousand two hundred."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: position_report
+  slots: {position: Statue of Liberty, corridor: Hudson, direction: northbound, altitude_ft: 1200}
+- id: v_pr_03
+  scenario: variant
+  text: "MEDEVAC Two Four Six Four X-Ray, passing the George Washington Bridge, Hudson northbound, one thousand."
+  callsign: {normalized: "2464X", snapped_to: N2464X}
+  intent: position_report
+  slots: {position: George Washington Bridge, corridor: Hudson, direction: northbound, altitude_ft: 1000}
+- id: v_pr_04
+  scenario: variant
+  text: "MEDEVAC Two Six Four Six X-Ray, approaching Brooklyn Bridge, East River northbound, five hundred."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: position_report
+  slots: {position: Brooklyn Bridge, corridor: East River, direction: northbound, altitude_ft: 500}
+- id: v_pr_05
+  scenario: variant
+  text: "MEDEVAC Two One Seven Mike Hotel, Hell Gate, northbound, six hundred."
+  callsign: {normalized: "217MH", snapped_to: N217MH}
+  intent: position_report
+  slots: {position: Hell Gate, direction: northbound, altitude_ft: 600}
+- id: v_pr_06
+  scenario: variant
+  text: "Landed desk, November Eight Four Bravo Lima, abeam Williamsburg Bridge, East River southbound, five hundred."
+  callsign: {normalized: "N84BL", snapped_to: N84BL}
+  intent: position_report
+  slots: {position: Williamsburg Bridge, corridor: East River, direction: southbound, altitude_ft: 500}
+
+# ---------------------------------------------------------------- variants: requests
+- id: v_rq_01
+  scenario: variant
+  text: "MEDEVAC Three One Two Lima, request climb to one thousand five hundred."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: request_altitude
+  slots: {altitude_ft: 1500}
+- id: v_rq_02
+  scenario: variant
+  text: "MEDEVAC Two Six Four Six X-Ray, request transit LaGuardia Class Bravo, one thousand five hundred."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: request_route
+  slots: {destination: LaGuardia, altitude_ft: 1500}
+- id: v_rq_03
+  scenario: variant
+  text: "MEDEVAC Three One Two Lima, request direct Bellevue, six hundred."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: request_route
+  slots: {destination: Bellevue, altitude_ft: 600}
+- id: v_rq_04
+  scenario: variant
+  text: "MEDEVAC Two Four Six Four X-Ray, request descend to five hundred."
+  callsign: {normalized: "2464X", snapped_to: N2464X}
+  intent: request_altitude
+  slots: {altitude_ft: 500}
+
+# ---------------------------------------------------------------- variants: readbacks
+- id: v_rb_01
+  scenario: variant
+  text: "Report Brooklyn Bridge, MEDEVAC Two Four Six Four X-Ray."
+  callsign: {normalized: "2464X", snapped_to: N2464X}
+  intent: readback
+  slots: {position: Brooklyn Bridge}
+- id: v_rb_02
+  scenario: variant
+  text: "Roger, East River northbound, report Brooklyn Bridge, MEDEVAC Three One Two Lima."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: readback
+  slots: {position: Brooklyn Bridge, corridor: East River, direction: northbound}
+- id: v_rb_03
+  scenario: variant
+  text: "Roger, MEDEVAC Two Six Four Six X-Ray."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: readback
+  slots: {}
+- id: v_rb_04
+  scenario: variant
+  text: "MEDEVAC Three One Two Lima, wilco, remain east of Roosevelt Island."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: readback
+  slots: {position: Roosevelt Island}
+
+# ---------------------------------------------------------------- variants: partial / garbled / unknown
+- id: v_gb_01
+  scenario: variant
+  text: "Landed desk, MEDEVAC Three One Two, Downtown Skyport, lifting."
+  style: partial
+  callsign: {normalized: "312", snapped_to: N312LM}
+  intent: checkin
+  slots: {position: Downtown Skyport, origin: Downtown Skyport}
+- id: v_gb_02
+  scenario: variant
+  text: "Landed desk, MEDEVAC, Downtown Skyport, lifting, East River northbound."
+  style: partial
+  callsign: {}
+  intent: checkin
+  slots: {position: Downtown Skyport, origin: Downtown Skyport, corridor: East River, direction: northbound}
+- id: v_gb_03
+  scenario: variant
+  text: "Landed desk, MEDEVAC Two Six Four Six X-Ray, radio check."
+  callsign: {normalized: "2646X", snapped_to: N2646X}
+  intent: unknown
+  slots: {}
+- id: v_gb_04
+  scenario: variant
+  text: "MEDEVAC Three One Two Lima, say again your last."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: unknown
+  slots: {}
+- id: v_gb_05
+  scenario: variant
+  text: "Uh, Landed desk, MEDEVAC Two Four Six Four X-Ray, uh, abeam, uh, Brooklyn Bridge, five hundred."
+  callsign: {normalized: "2464X", snapped_to: N2464X}
+  intent: position_report
+  slots: {position: Brooklyn Bridge, altitude_ft: 500}
+
+# ---------------------------------------------------------------- S2 near-miss (appended last to keep voice rotation stable)
+- id: s2_03
+  scenario: S2
+  # near-miss phrasing test: the older "Flushing" wording must still parse (destination Flushing Hospital)
+  text: "MEDEVAC Three One Two Lima, East 34th, request direct Flushing Hospital area, six hundred."
+  callsign: {normalized: "312L", snapped_to: N312LM}
+  intent: request_route
+  slots: {position: East 34th, destination: Flushing Hospital, altitude_ft: 600}

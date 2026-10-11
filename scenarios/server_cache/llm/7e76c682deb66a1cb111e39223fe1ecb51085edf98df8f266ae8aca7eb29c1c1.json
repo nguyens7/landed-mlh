@@ -1,0 +1,1 @@
+{"name": "choose_template", "args": {"template_id": "ACK_CHECKIN", "reason": "Pilot N312LM is checking in at 1000 feet on the Hudson southbound.", "slots": {"reg": "N312LM", "altimeter_inhg": 29.92, "position": "roosevelt_island_north"}}}

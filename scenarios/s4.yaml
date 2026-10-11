@@ -1,0 +1,130 @@
+# S4. Confusable callsigns 2646X vs 2464X near the Brooklyn Bridge. SIMULATION ONLY.
+# A garbled low-SNR readback ("... six four X-ray, Brooklyn Bridge") fits both callsigns. The agent must not guess:
+# SAY_AGAIN first, then a handoff on the second ambiguity. ADS-B shows only N2646X at the Brooklyn Bridge, so the
+# human card says "likely 2646X (ADS-B position match), unconfirmed by voice".
+id: S4
+title: Confusable callsigns, say again then handoff
+spec: "SPEC.md section 4, S4; section 2.2 check 4"
+summary: >-
+  N2464X (Hudson northbound) and N2646X (East River southbound) are on the desk. N2646X's position report arrives
+  as "six four X-ray" at low SNR. The first ambiguous call gets SAY_AGAIN; the second ambiguous call hands off, with
+  the ADS-B position match shown on the card.
+window_s: 260
+roster_extra: []
+aircraft:
+  - reg: N2464X
+    spoken: MEDEVAC Two Four Six Four X-Ray
+    type: EC35
+    voice: Charon
+    liftoff_t: 10
+    airborne: true
+    cruise_alt_ft: 1000
+    cruise_kt: 100
+    route:   # climbed out of JRB, now west of the Battery heading for the Hudson east shoreline (northbound)
+      - {lat: 40.6985, lon: -74.0225}
+      - {lat: 40.700, lon: -74.0209}
+      - {lat: 40.720, lon: -74.0169}
+      - {lat: 40.740, lon: -74.0130}
+      - {lat: 40.760, lon: -74.0028}
+      - {lat: 40.775, lon: -73.9913}
+  - reg: N2646X
+    spoken: MEDEVAC Two Six Four Six X-Ray
+    type: EC35
+    voice: Kore
+    liftoff_t: 20
+    airborne: true
+    cruise_alt_ft: 500
+    cruise_kt: 90
+    route:   # 6N5 to JRB, East River southbound
+      - {name: 6N5, lat: 40.7424472, lon: -73.9721222}
+      - {lat: 40.7400, lon: -73.9680}
+      - {lat: 40.7330, lon: -73.9655}
+      - {lat: 40.7210, lon: -73.9705}
+      - {name: Williamsburg Bridge, ref: williamsburg_bridge}
+      - {lat: 40.7100, lon: -73.9830}
+      - {lat: 40.7080, lon: -73.9903}
+      - {name: Brooklyn Bridge, ref: brooklyn_bridge}
+      - {lat: 40.7035, lon: -74.0000}
+      - {name: JRB, lat: 40.7012136, lon: -74.0090283}
+lines:
+  - id: L1
+    t: 14
+    aircraft: N2464X
+    text: Landed desk, MEDEVAC Two Four Six Four X-Ray, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.
+    snr: clean
+    expect:
+      parse:
+        callsign: {snapped_to: N2464X}
+        intent: checkin
+        slots: {position: Downtown Skyport, origin: Downtown Skyport, corridor: Hudson, direction: northbound, altitude_ft: 1000}
+      response: {mode: speak, template_id: ACK_CHECKIN, tier: auto, spoken_contains: [Downtown Skyport]}
+  - id: L2
+    t: 24
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, East 34th, lifting, East River southbound, five hundred.
+    snr: clean
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        intent: checkin
+        slots: {position: East 34th, origin: East 34th, corridor: East River, direction: southbound, altitude_ft: 500}
+      response: {mode: speak, template_id: ACK_CHECKIN, tier: auto, spoken_contains: [East 34th]}
+  - id: L3
+    t: 144
+    aircraft: N2646X
+    text: Six Four X-Ray, Brooklyn Bridge.
+    voice: Kore
+    snr: "5"
+    rotor: true
+    near: {ref: brooklyn_bridge, max_nm: 0.3}
+    note: Garbled readback, first ambiguity.
+    expect:
+      parse:
+        callsign: {ambiguous: true, candidates_include: [N2646X, N2464X]}
+        intent: position_report
+        slots: {position: Brooklyn Bridge}
+      response:
+        mode: speak
+        template_id: SAY_AGAIN
+        tier: auto
+        spoken_contains: [say again]
+  - id: L4
+    t: 150
+    aircraft: N2646X
+    text: MEDEVAC Two Six X-Ray, abeam Brooklyn Bridge, five hundred.
+    voice: Kore
+    snr: "5"
+    rotor: true
+    near: {ref: brooklyn_bridge, max_nm: 0.4}
+    note: Second try is still ambiguous (callsign truncated), so the agent hands off.
+    expect:
+      parse:
+        callsign: {ambiguous: true, candidates_include: [N2646X, N2464X]}
+        intent: position_report
+        slots: {position: Brooklyn Bridge, altitude_ft: 500}
+      response:
+        mode: handoff
+        template_id: STANDBY_HANDOFF
+        tier: handoff
+        triggers: [callsign_ambiguity]
+        spoken_contains: [standby, controller will be with you]
+        card_contains: [2646X, ADS-B position match]
+events:
+  - id: E1
+    kind: position_match
+    at_line: L3
+    reported: brooklyn_bridge
+    min_score: 0.85
+    note: Only N2646X is at the Brooklyn Bridge when the first garbled call is made.
+  - id: E2
+    kind: position_match
+    at_line: L4
+    reported: brooklyn_bridge
+    min_score: 0.8
+    note: Still only N2646X at the bridge at the second call; this feeds the handoff card.
+  - id: E3
+    kind: no_alerts
+    min_severity: advisory
+geo:
+  corridors: {N2646X: [sfra_east_river_south, sfra_east_river_north], N2464X: [sfra_hudson, sfra_east_river_south]}
+expected_summary: {auto_transmissions: 3, handoffs: 1}

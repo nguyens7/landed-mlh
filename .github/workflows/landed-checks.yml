@@ -1,0 +1,154 @@
+name: Landed checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - claude/helicopter-conflict-detection-fc6cce
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: landed-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app:
+    name: App tests, lint, and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build
+
+  speech:
+    name: Speech unit tests (no provider calls)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: speech
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: '0.12.1'
+          python-version: '3.13'
+          enable-cache: true
+          cache-dependency-glob: speech/uv.lock
+      - run: uv sync --locked
+      - run: uv run --offline --no-sync ruff check ../qa
+      - name: Run deterministic speech tests with network and subprocesses blocked
+        env:
+          PYTHONPATH: ${{ github.workspace }}/qa
+        run: uv run --offline --no-sync python -m pytest -p offline_pytest -q
+
+  python-lint:
+    name: ${{ matrix.project }} ruff and tests (offline)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [agent, server, speech, replay, geo, scenarios]
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      # scenarios/ exists only once the integration branch lands on this branch.
+      - name: Skip projects that are not on this branch
+        id: present
+        run: |
+          if [ -f "${PROJECT}/pyproject.toml" ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          fi
+        working-directory: .
+        env:
+          PROJECT: ${{ matrix.project }}
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        if: steps.present.outputs.found == 'true'
+        with:
+          version: '0.12.1'
+          python-version: '3.13'
+          enable-cache: true
+          cache-dependency-glob: ${{ matrix.project }}/uv.lock
+      - name: Sync locked dependencies
+        if: steps.present.outputs.found == 'true'
+        run: uv sync --locked
+      - name: Ruff check
+        if: steps.present.outputs.found == 'true'
+        run: uv run --offline --no-sync ruff check .
+      - name: Pytest (offline)
+        if: steps.present.outputs.found == 'true' && matrix.project == 'scenarios'
+        run: uv run --offline --no-sync pytest -q
+
+  agent-server:
+    name: ${{ matrix.project }} tests (no provider calls)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [agent, server]
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: '0.12.1'
+          python-version: '3.13'
+          enable-cache: true
+          # server/ has an editable path dependency on agent/.
+          cache-dependency-glob: |
+            agent/uv.lock
+            server/uv.lock
+      - run: uv sync --locked
+      - name: Run tests with network and subprocesses blocked
+        env:
+          PYTHONPATH: ${{ github.workspace }}/qa
+        run: uv run --offline --no-sync python -m pytest -p offline_pytest -q
+      - name: Verify HTTP flows with mocked providers
+        if: matrix.project == 'server'
+        env:
+          PYTHONPATH: ${{ github.workspace }}/qa
+        run: |
+          uv run --offline --no-sync uvicorn mock_server:make_app --factory --host 127.0.0.1 --port 8788 > "$RUNNER_TEMP/landed-qa-server.log" 2>&1 &
+          qa_server_pid=$!
+          trap 'kill "$qa_server_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --silent --fail --max-time 1 http://127.0.0.1:8788/qa-mode > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          if ! uv run --offline --no-sync python ../qa/check_server.py; then
+            cat "$RUNNER_TEMP/landed-qa-server.log"
+            exit 1
+          fi

@@ -1,0 +1,2359 @@
+{
+ "scenario": "S1",
+ "title": "Clean autonomous run, JRB to 6N5",
+ "timestamp": "20261011T163542Z",
+ "mode": "pinned",
+ "dry_run": false,
+ "server": {
+  "url": "http://127.0.0.1:8787",
+  "reachable": true,
+  "context_pushed": true
+ },
+ "repeat": 3,
+ "curation": null,
+ "runs": [
+  {
+   "run": 1,
+   "status": "pass",
+   "tally": {
+    "pass": 45,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 45
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=500, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 6.230780839920044,
+      "parse_latency_s": 0.0008
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=500, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). model (gemini): Pilot checking in from JRB reporting East River northbound at 500 feet, altimeter 29.92. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "01e27b70c9",
+      "source": "gemini",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 6232,
+     "total_latency_ms": 6234,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Landed advisory",
+        "radar contact",
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 2,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 36.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Brooklyn Bridge, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "Brooklyn Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.851670742034912,
+      "parse_latency_s": 0.0005
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "REPORT_ACK",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, roger",
+      "card_text": "Routine, confidence 0.81, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Brooklyn Bridge, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser). model (gemini): Pilot reporting position at Brooklyn Bridge, matching ADS-B. MEDEVAC Two Six Four Six X-Ray, roger",
+      "proposal_id": "29e09185dd",
+      "source": "gemini",
+      "confidence": 0.8075
+     },
+     "server_error": null,
+     "speech_latency_ms": 3852,
+     "total_latency_ms": 3853,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Brooklyn Bridge",
+       "actual": "Brooklyn Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L2.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.template_id",
+       "field": "template_id",
+       "expected": "REPORT_ACK",
+       "actual": "REPORT_ACK",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "roger"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, roger",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 84.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, five hundred, landing East 34th.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam, landing); slots position=Williamsburg Bridge, altitude_ft=500, destination=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": "East 34th",
+        "direction": null,
+        "origin": null,
+        "position": "Williamsburg Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.6989381313323975,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "TRAFFIC",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam, landing); slots position=Williamsburg Bridge, altitude_ft=500, destination=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser). model (gemini): Pilot stated destination / landing, and there is traffic in the desk traffic list. MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+      "proposal_id": "657662b1d7",
+      "source": "gemini",
+      "confidence": 0.9499
+     },
+     "server_error": null,
+     "speech_latency_ms": 4700,
+     "total_latency_ms": 4701,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Williamsburg Bridge",
+       "actual": "Williamsburg Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L3.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": "TRAFFIC",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L4",
+     "t": 156.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, approaching East 34th, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: approaching); slots position=East 34th, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 2.396254777908325,
+      "parse_latency_s": 0.0004
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "REPORT_ACK",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, roger",
+      "card_text": "Routine, confidence 0.80, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: approaching); slots position=East 34th, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser). model (gemini): Pilot made a routine position report matching ADS-B. MEDEVAC Two Six Four Six X-Ray, roger",
+      "proposal_id": "0a1c312926",
+      "source": "gemini",
+      "confidence": 0.8028
+     },
+     "server_error": null,
+     "speech_latency_ms": 2397,
+     "total_latency_ms": 2398,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L4.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L4.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.template_id",
+       "field": "template_id",
+       "expected": "REPORT_ACK",
+       "actual": "REPORT_ACK",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "roger"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, roger",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.E1.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S1.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 4,
+     "actual": 4,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S1.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S1.summary.cards",
+     "field": "cards",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 6232,
+     "server_ms": 2,
+     "total_ms": 6234,
+     "source": "gemini"
+    },
+    {
+     "line": "L2",
+     "speech_ms": 3852,
+     "server_ms": 1,
+     "total_ms": 3853,
+     "source": "gemini"
+    },
+    {
+     "line": "L3",
+     "speech_ms": 4700,
+     "server_ms": 1,
+     "total_ms": 4701,
+     "source": "gemini"
+    },
+    {
+     "line": "L4",
+     "speech_ms": 2397,
+     "server_ms": 1,
+     "total_ms": 2398,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.\n      heard : Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.intent                    expected checkin  actual checkin\n      PASS  L1.parse.slots.position            expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.corridor            expected East River  actual East River\n      PASS  L1.parse.slots.direction           expected northbound  actual northbound\n      PASS  L1.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.spoken_contains        expected [\"Landed advisory\", \"radar contact\", \"Downtown Skyport\"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L1.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=36.0   L2  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred.\n      heard : Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak REPORT_ACK tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, roger\"\n      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L2.parse.intent                    expected position_report  actual position_report\n      PASS  L2.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge\n      PASS  L2.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L2.response.mode                   expected speak  actual speak\n      PASS  L2.response.template_id            expected REPORT_ACK  actual REPORT_ACK\n      PASS  L2.response.tier                   expected auto  actual auto\n      PASS  L2.response.spoken_contains        expected [\"roger\"]  actual MEDEVAC Two Six Four Six X-Ray, roger\n      PASS  L2.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=84.0   L3  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, five hundred, landing East 34th.\n      heard : Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.   (asr 0.95, grammar parser, pinned)\n      agent : speak TRAFFIC tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred\"\n      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L3.parse.intent                    expected position_report  actual position_report\n      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge\n      PASS  L3.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L3.parse.slots.destination         expected East 34th  actual East 34th\n      PASS  L3.response.mode                   expected speak  actual speak\n      PASS  L3.response.template_id            expected TRAFFIC  actual TRAFFIC\n      PASS  L3.response.tier                   expected auto  actual auto\n      PASS  L3.response.spoken_contains        expected [\"traffic\"]  actual MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter e...\n      PASS  L3.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=156.0  L4  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, approaching East 34th, five hundred.\n      heard : Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak REPORT_ACK tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, roger\"\n      PASS  L4.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L4.parse.intent                    expected position_report  actual position_report\n      PASS  L4.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L4.response.mode                   expected speak  actual speak\n      PASS  L4.response.template_id            expected REPORT_ACK  actual REPORT_ACK\n      PASS  L4.response.tier                   expected auto  actual auto\n      PASS  L4.response.spoken_contains        expected [\"roger\"]  actual MEDEVAC Two Six Four Six X-Ray, roger\n      PASS  L4.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=0.0    E1  event:no_alerts  [PASS]\n      PASS  E1.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 4  actual 4\n      PASS  summary.handoffs                   expected 0  actual 0\n      PASS  summary.cards                      expected 0  actual 0"
+  },
+  {
+   "run": 2,
+   "status": "pass",
+   "tally": {
+    "pass": 45,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 45
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=500, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 6.230780839920044,
+      "parse_latency_s": 0.0008
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=500, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). model (gemini): Pilot checking in from JRB reporting East River northbound at 500 feet, altimeter 29.92. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "de5c0dc128",
+      "source": "gemini",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 6232,
+     "total_latency_ms": 6233,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Landed advisory",
+        "radar contact",
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 36.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Brooklyn Bridge, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "Brooklyn Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.851670742034912,
+      "parse_latency_s": 0.0005
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "REPORT_ACK",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, roger",
+      "card_text": "Routine, confidence 0.81, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Brooklyn Bridge, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser). model (gemini): Pilot reporting position at Brooklyn Bridge, matching ADS-B. MEDEVAC Two Six Four Six X-Ray, roger",
+      "proposal_id": "d16afadc87",
+      "source": "gemini",
+      "confidence": 0.8075
+     },
+     "server_error": null,
+     "speech_latency_ms": 3852,
+     "total_latency_ms": 3853,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Brooklyn Bridge",
+       "actual": "Brooklyn Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L2.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.template_id",
+       "field": "template_id",
+       "expected": "REPORT_ACK",
+       "actual": "REPORT_ACK",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "roger"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, roger",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 84.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, five hundred, landing East 34th.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam, landing); slots position=Williamsburg Bridge, altitude_ft=500, destination=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": "East 34th",
+        "direction": null,
+        "origin": null,
+        "position": "Williamsburg Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.6989381313323975,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "TRAFFIC",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam, landing); slots position=Williamsburg Bridge, altitude_ft=500, destination=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser). model (gemini): Pilot stated destination / landing, and there is traffic in the desk traffic list. MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+      "proposal_id": "2e6cde51db",
+      "source": "gemini",
+      "confidence": 0.9499
+     },
+     "server_error": null,
+     "speech_latency_ms": 4700,
+     "total_latency_ms": 4701,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Williamsburg Bridge",
+       "actual": "Williamsburg Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L3.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": "TRAFFIC",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L4",
+     "t": 156.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, approaching East 34th, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: approaching); slots position=East 34th, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 2.396254777908325,
+      "parse_latency_s": 0.0004
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "REPORT_ACK",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, roger",
+      "card_text": "Routine, confidence 0.80, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: approaching); slots position=East 34th, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser). model (gemini): Pilot made a routine position report matching ADS-B. MEDEVAC Two Six Four Six X-Ray, roger",
+      "proposal_id": "1a6699224e",
+      "source": "gemini",
+      "confidence": 0.8028
+     },
+     "server_error": null,
+     "speech_latency_ms": 2397,
+     "total_latency_ms": 2398,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L4.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L4.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.template_id",
+       "field": "template_id",
+       "expected": "REPORT_ACK",
+       "actual": "REPORT_ACK",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "roger"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, roger",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.E1.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S1.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 4,
+     "actual": 4,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S1.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S1.summary.cards",
+     "field": "cards",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 6232,
+     "server_ms": 1,
+     "total_ms": 6233,
+     "source": "gemini"
+    },
+    {
+     "line": "L2",
+     "speech_ms": 3852,
+     "server_ms": 1,
+     "total_ms": 3853,
+     "source": "gemini"
+    },
+    {
+     "line": "L3",
+     "speech_ms": 4700,
+     "server_ms": 1,
+     "total_ms": 4701,
+     "source": "gemini"
+    },
+    {
+     "line": "L4",
+     "speech_ms": 2397,
+     "server_ms": 1,
+     "total_ms": 2398,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.\n      heard : Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.intent                    expected checkin  actual checkin\n      PASS  L1.parse.slots.position            expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.corridor            expected East River  actual East River\n      PASS  L1.parse.slots.direction           expected northbound  actual northbound\n      PASS  L1.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.spoken_contains        expected [\"Landed advisory\", \"radar contact\", \"Downtown Skyport\"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=36.0   L2  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred.\n      heard : Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak REPORT_ACK tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, roger\"\n      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L2.parse.intent                    expected position_report  actual position_report\n      PASS  L2.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge\n      PASS  L2.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L2.response.mode                   expected speak  actual speak\n      PASS  L2.response.template_id            expected REPORT_ACK  actual REPORT_ACK\n      PASS  L2.response.tier                   expected auto  actual auto\n      PASS  L2.response.spoken_contains        expected [\"roger\"]  actual MEDEVAC Two Six Four Six X-Ray, roger\n      PASS  L2.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=84.0   L3  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, five hundred, landing East 34th.\n      heard : Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.   (asr 0.95, grammar parser, pinned)\n      agent : speak TRAFFIC tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred\"\n      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L3.parse.intent                    expected position_report  actual position_report\n      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge\n      PASS  L3.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L3.parse.slots.destination         expected East 34th  actual East 34th\n      PASS  L3.response.mode                   expected speak  actual speak\n      PASS  L3.response.template_id            expected TRAFFIC  actual TRAFFIC\n      PASS  L3.response.tier                   expected auto  actual auto\n      PASS  L3.response.spoken_contains        expected [\"traffic\"]  actual MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter e...\n      PASS  L3.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=156.0  L4  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, approaching East 34th, five hundred.\n      heard : Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak REPORT_ACK tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, roger\"\n      PASS  L4.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L4.parse.intent                    expected position_report  actual position_report\n      PASS  L4.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L4.response.mode                   expected speak  actual speak\n      PASS  L4.response.template_id            expected REPORT_ACK  actual REPORT_ACK\n      PASS  L4.response.tier                   expected auto  actual auto\n      PASS  L4.response.spoken_contains        expected [\"roger\"]  actual MEDEVAC Two Six Four Six X-Ray, roger\n      PASS  L4.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=0.0    E1  event:no_alerts  [PASS]\n      PASS  E1.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 4  actual 4\n      PASS  summary.handoffs                   expected 0  actual 0\n      PASS  summary.cards                      expected 0  actual 0"
+  },
+  {
+   "run": 3,
+   "status": "pass",
+   "tally": {
+    "pass": 45,
+    "fail": 0,
+    "partial": 0,
+    "pending": 0,
+    "gap": 0,
+    "total": 45
+   },
+   "lines": [
+    {
+     "id": "L1",
+     "t": 12.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "checkin",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=500, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": "East River",
+        "destination": null,
+        "direction": "northbound",
+        "origin": "Downtown Skyport",
+        "position": "Downtown Skyport",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 6.230780839920044,
+      "parse_latency_s": 0.0008
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "ACK_CHECKIN",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent checkin (cues: checking in, lifting); slots position=Downtown Skyport, altitude_ft=500, direction=northbound, corridor=East River, origin=Downtown Skyport; ASR confidence 0.95, parse confidence 1.00 (grammar parser). model (gemini): Pilot checking in from JRB reporting East River northbound at 500 feet, altimeter 29.92. MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+      "proposal_id": "9237c18ab7",
+      "source": "gemini",
+      "confidence": 0.9489
+     },
+     "server_error": null,
+     "speech_latency_ms": 6232,
+     "total_latency_ms": 6233,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L1.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.intent",
+       "field": "intent",
+       "expected": "checkin",
+       "actual": "checkin",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.origin",
+       "field": "slots.origin",
+       "expected": "Downtown Skyport",
+       "actual": "Downtown Skyport",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.corridor",
+       "field": "slots.corridor",
+       "expected": "East River",
+       "actual": "East River",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.direction",
+       "field": "slots.direction",
+       "expected": "northbound",
+       "actual": "northbound",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L1.parse.emergency",
+       "field": "emergency",
+       "expected": false,
+       "actual": false,
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.template_id",
+       "field": "template_id",
+       "expected": "ACK_CHECKIN",
+       "actual": "ACK_CHECKIN",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "Landed advisory",
+        "radar contact",
+        "Downtown Skyport"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L1.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L2",
+     "t": 36.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Brooklyn Bridge, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "Brooklyn Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 3.851670742034912,
+      "parse_latency_s": 0.0005
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "REPORT_ACK",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, roger",
+      "card_text": "Routine, confidence 0.81, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam); slots position=Brooklyn Bridge, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser). model (gemini): Pilot reporting position at Brooklyn Bridge, matching ADS-B. MEDEVAC Two Six Four Six X-Ray, roger",
+      "proposal_id": "b1f56c8a6c",
+      "source": "gemini",
+      "confidence": 0.8075
+     },
+     "server_error": null,
+     "speech_latency_ms": 3852,
+     "total_latency_ms": 3853,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L2.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Brooklyn Bridge",
+       "actual": "Brooklyn Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L2.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.template_id",
+       "field": "template_id",
+       "expected": "REPORT_ACK",
+       "actual": "REPORT_ACK",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "roger"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, roger",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L2.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L3",
+     "t": 84.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, five hundred, landing East 34th.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 1.0,
+       "parser": "grammar",
+       "raw_text": "Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam, landing); slots position=Williamsburg Bridge, altitude_ft=500, destination=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": "East 34th",
+        "direction": null,
+        "origin": null,
+        "position": "Williamsburg Bridge",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 4.6989381313323975,
+      "parse_latency_s": 0.0007
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "TRAFFIC",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+      "card_text": "Routine, confidence 0.95, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: abeam, landing); slots position=Williamsburg Bridge, altitude_ft=500, destination=East 34th; ASR confidence 0.95, parse confidence 1.00 (grammar parser). model (gemini): Pilot stated destination / landing, and there is traffic in the desk traffic list. MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+      "proposal_id": "5e3228a597",
+      "source": "gemini",
+      "confidence": 0.9499
+     },
+     "server_error": null,
+     "speech_latency_ms": 4700,
+     "total_latency_ms": 4701,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L3.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.slots.position",
+       "field": "slots.position",
+       "expected": "Williamsburg Bridge",
+       "actual": "Williamsburg Bridge",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L3.parse.slots.destination",
+       "field": "slots.destination",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.template_id",
+       "field": "template_id",
+       "expected": "TRAFFIC",
+       "actual": "TRAFFIC",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "traffic"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L3.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    },
+    {
+     "id": "L4",
+     "t": 156.0,
+     "aircraft": "N2646X",
+     "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, approaching East 34th, five hundred.",
+     "picker_cache": [],
+     "heard": {
+      "text": "Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.",
+      "asr_confidence": 0.95,
+      "source": "pinned",
+      "parsed": {
+       "asr_confidence": 0.95,
+       "callsign": {
+        "ambiguous_with": [],
+        "normalized": "2646X",
+        "snap_score": 1.0,
+        "snapped_to": "N2646X",
+        "spoken": "Two Six Four Six X-Ray"
+       },
+       "emergency": false,
+       "intent": "position_report",
+       "parse_confidence": 0.85,
+       "parser": "grammar",
+       "raw_text": "Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.",
+       "reason": "Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: approaching); slots position=East 34th, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser).",
+       "slots": {
+        "altitude_ft": 500,
+        "corridor": null,
+        "destination": null,
+        "direction": null,
+        "origin": null,
+        "position": "East 34th",
+        "squawk": null,
+        "weather_phrase": null
+       }
+      },
+      "asr_latency_s": 2.396254777908325,
+      "parse_latency_s": 0.0004
+     },
+     "outcome": {
+      "mode": "speak",
+      "template_id": "REPORT_ACK",
+      "tier": "auto",
+      "triggers": [],
+      "spoken_text": "MEDEVAC Two Six Four Six X-Ray, roger",
+      "card_text": "Routine, confidence 0.80, no active alert parse: Callsign heard as 'Two Six Four Six X-Ray' (2646X) snapped to N2646X (score 1.00); intent position_report (cues: approaching); slots position=East 34th, altitude_ft=500; ASR confidence 0.95, parse confidence 0.85 (grammar parser). model (gemini): Pilot made a routine position report matching ADS-B. MEDEVAC Two Six Four Six X-Ray, roger",
+      "proposal_id": "c77d7acd5b",
+      "source": "gemini",
+      "confidence": 0.8028
+     },
+     "server_error": null,
+     "speech_latency_ms": 2397,
+     "total_latency_ms": 2397,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.L4.parse.callsign.snapped_to",
+       "field": "callsign.snapped_to",
+       "expected": "N2646X",
+       "actual": "N2646X",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.intent",
+       "field": "intent",
+       "expected": "position_report",
+       "actual": "position_report",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.slots.position",
+       "field": "slots.position",
+       "expected": "East 34th",
+       "actual": "East 34th",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.parse.slots.altitude_ft",
+       "field": "slots.altitude_ft",
+       "expected": 500,
+       "actual": 500,
+       "status": "pass",
+       "detail": "within 50 ft (diff 0)"
+      },
+      {
+       "id": "S1.L4.response.mode",
+       "field": "mode",
+       "expected": "speak",
+       "actual": "speak",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.template_id",
+       "field": "template_id",
+       "expected": "REPORT_ACK",
+       "actual": "REPORT_ACK",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.tier",
+       "field": "tier",
+       "expected": "auto",
+       "actual": "auto",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.spoken_contains",
+       "field": "spoken_contains",
+       "expected": [
+        "roger"
+       ],
+       "actual": "MEDEVAC Two Six Four Six X-Ray, roger",
+       "status": "pass",
+       "detail": ""
+      },
+      {
+       "id": "S1.L4.response.latency_ms",
+       "field": "latency_ms",
+       "expected": "<=3000",
+       "actual": 1,
+       "status": "pass",
+       "detail": "server round trip: transmission in -> audio ready (ASR and parse reported separately)"
+      }
+     ]
+    }
+   ],
+   "events": [
+    {
+     "id": "E1",
+     "kind": "no_alerts",
+     "t": 0.0,
+     "facts": {},
+     "alert": null,
+     "outcome": null,
+     "status": "pass",
+     "checks": [
+      {
+       "id": "S1.E1.geometry.no_alert>=advisory",
+       "field": "no_alert>=advisory",
+       "expected": "none",
+       "actual": "none",
+       "status": "pass",
+       "detail": ""
+      }
+     ]
+    }
+   ],
+   "summary_checks": [
+    {
+     "id": "S1.summary.auto_transmissions",
+     "field": "auto_transmissions",
+     "expected": 4,
+     "actual": 4,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S1.summary.handoffs",
+     "field": "handoffs",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    },
+    {
+     "id": "S1.summary.cards",
+     "field": "cards",
+     "expected": 0,
+     "actual": 0,
+     "status": "pass",
+     "detail": ""
+    }
+   ],
+   "auto_latencies": [
+    {
+     "line": "L1",
+     "speech_ms": 6232,
+     "server_ms": 1,
+     "total_ms": 6233,
+     "source": "gemini"
+    },
+    {
+     "line": "L2",
+     "speech_ms": 3852,
+     "server_ms": 1,
+     "total_ms": 3853,
+     "source": "gemini"
+    },
+    {
+     "line": "L3",
+     "speech_ms": 4700,
+     "server_ms": 1,
+     "total_ms": 4701,
+     "source": "gemini"
+    },
+    {
+     "line": "L4",
+     "speech_ms": 2397,
+     "server_ms": 1,
+     "total_ms": 2397,
+     "source": "gemini"
+    }
+   ],
+   "log": "t=12.0   L1  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.\n      heard : Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two\"\n      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L1.parse.intent                    expected checkin  actual checkin\n      PASS  L1.parse.slots.position            expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport\n      PASS  L1.parse.slots.corridor            expected East River  actual East River\n      PASS  L1.parse.slots.direction           expected northbound  actual northbound\n      PASS  L1.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L1.parse.emergency                 expected false  actual false\n      PASS  L1.response.mode                   expected speak  actual speak\n      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN\n      PASS  L1.response.tier                   expected auto  actual auto\n      PASS  L1.response.spoken_contains        expected [\"Landed advisory\", \"radar contact\", \"Downtown Skyport\"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...\n      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=36.0   L2  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred.\n      heard : Landed desk, Medevac 2646 X-ray, abeam Brooklyn Bridge, 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak REPORT_ACK tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, roger\"\n      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L2.parse.intent                    expected position_report  actual position_report\n      PASS  L2.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge\n      PASS  L2.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L2.response.mode                   expected speak  actual speak\n      PASS  L2.response.template_id            expected REPORT_ACK  actual REPORT_ACK\n      PASS  L2.response.tier                   expected auto  actual auto\n      PASS  L2.response.spoken_contains        expected [\"roger\"]  actual MEDEVAC Two Six Four Six X-Ray, roger\n      PASS  L2.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=84.0   L3  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, five hundred, landing East 34th.\n      heard : Landed desk, Medevac 2646 X-ray abeam Williamsburg Bridge, 500, landing East 34th.   (asr 0.95, grammar parser, pinned)\n      agent : speak TRAFFIC tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter eight hundred\"\n      PASS  L3.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L3.parse.intent                    expected position_report  actual position_report\n      PASS  L3.parse.slots.position            expected Williamsburg Bridge  actual Williamsburg Bridge\n      PASS  L3.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L3.parse.slots.destination         expected East 34th  actual East 34th\n      PASS  L3.response.mode                   expected speak  actual speak\n      PASS  L3.response.template_id            expected TRAFFIC  actual TRAFFIC\n      PASS  L3.response.tier                   expected auto  actual auto\n      PASS  L3.response.spoken_contains        expected [\"traffic\"]  actual MEDEVAC Two Six Four Six X-Ray, traffic ten o'clock three point five miles helicopter e...\n      PASS  L3.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=156.0  L4  N2646X  [PASS]\n      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, approaching East 34th, five hundred.\n      heard : Landed desk, MEDEVAC 2646 X-ray, approaching East 34th, 500.   (asr 0.95, grammar parser, pinned)\n      agent : speak REPORT_ACK tier=auto triggers=[] src=gemini  \"MEDEVAC Two Six Four Six X-Ray, roger\"\n      PASS  L4.parse.callsign.snapped_to       expected N2646X  actual N2646X\n      PASS  L4.parse.intent                    expected position_report  actual position_report\n      PASS  L4.parse.slots.position            expected East 34th  actual East 34th\n      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))\n      PASS  L4.response.mode                   expected speak  actual speak\n      PASS  L4.response.template_id            expected REPORT_ACK  actual REPORT_ACK\n      PASS  L4.response.tier                   expected auto  actual auto\n      PASS  L4.response.spoken_contains        expected [\"roger\"]  actual MEDEVAC Two Six Four Six X-Ray, roger\n      PASS  L4.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))\nt=0.0    E1  event:no_alerts  [PASS]\n      PASS  E1.geometry.no_alert>=advisory     expected none  actual none\nsummary\n      PASS  summary.auto_transmissions         expected 4  actual 4\n      PASS  summary.handoffs                   expected 0  actual 0\n      PASS  summary.cards                      expected 0  actual 0"
+  }
+ ],
+ "aggregate": {
+  "runs": 3,
+  "all_judged_passed_every_run": true,
+  "judged": 45,
+  "pending": 0
+ },
+ "per_check": {
+  "S1.L1.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.parse.slots.position": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.parse.slots.origin": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.parse.slots.corridor": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.parse.slots.direction": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.parse.emergency": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L1.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.parse.slots.position": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L2.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.parse.slots.position": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.parse.slots.destination": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L3.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.parse.callsign.snapped_to": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.parse.intent": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.parse.slots.position": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.parse.slots.altitude_ft": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.response.mode": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.response.template_id": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.response.tier": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.response.spoken_contains": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.L4.response.latency_ms": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.E1.geometry.no_alert>=advisory": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.summary.auto_transmissions": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.summary.handoffs": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  },
+  "S1.summary.cards": {
+   "passes": 3,
+   "runs": 3,
+   "judged": 3,
+   "pending": 0,
+   "gap": 0,
+   "stable": true
+  }
+ },
+ "wall_s": 1.76
+}

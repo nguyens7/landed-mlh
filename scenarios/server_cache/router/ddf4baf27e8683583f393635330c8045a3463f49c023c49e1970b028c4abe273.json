@@ -1,0 +1,1 @@
+{"label": "routine", "probabilities": {"routine": 0.6, "needs_review": 0.27, "emergency": 0.12, "unknown": 0.01}, "attention_p": 0.06, "provider": "OpenAI Decisions", "model": "gpt-6-luna", "latency_ms": 1128, "abstained": false, "reason": ""}

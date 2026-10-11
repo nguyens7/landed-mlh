@@ -1,0 +1,67 @@
+{
+ "scenarios": [
+  {
+   "id": "S1",
+   "title": "Clean autonomous run, JRB to 6N5",
+   "summary": "A medevac lifts from Downtown Skyport and flies the East River northbound at 500 ft. Landed answers four times on its own (check-in, Brooklyn Bridge, Williamsburg Bridge, landing traffic call) and never hands off.",
+   "spec": "SPEC.md section 4, S1",
+   "window_s": 240,
+   "tracks": "scenarios/S1/tracks.json",
+   "lines": "scenarios/S1/lines.json"
+  },
+  {
+   "id": "S2",
+   "title": "Medevac crosses the LGA Rwy 22 final, handoff",
+   "summary": "N312LM asks for direct College Point at 600 ft. The agent stands by and hands the flight to the human; the engine raises a Rwy 22 final handoff with a time-to-entry of about 84 s.",
+   "spec": "SPEC.md section 4, S2; issue #9 (600 ft, 1.1 nm, ~84 s)",
+   "window_s": 900,
+   "tracks": "scenarios/S2/tracks.json",
+   "lines": "scenarios/S2/lines.json"
+  },
+  {
+   "id": "S3A",
+   "title": "Weather, descend below the Hudson minimum",
+   "summary": "N2646X is southbound on the Hudson west shoreline at 1,000 ft. It reports ceilings coming down and asks to descend to 600 ft. That is below the 1,000 ft Hudson transit minimum and carries a weather phrase, so the agent stands by and hands the flight to the human. The track itself never conflicts with an LGA volume.",
+   "spec": "SPEC.md section 4, S3 variant A",
+   "window_s": 200,
+   "tracks": "scenarios/S3A/tracks.json",
+   "lines": "scenarios/S3A/lines.json"
+  },
+  {
+   "id": "S3B",
+   "title": "Silent drift to the wrong Hudson shoreline",
+   "summary": "N2646X checks in southbound on the west shoreline, then drifts toward the east shoreline without saying anything. Opposing traffic (a simulated tour helicopter) is northbound on the east lane. The scenario-side shoreline check alerts; the agent proposes a TRAFFIC call, auto-spoken when confidence is at least 0.8.",
+   "spec": "SPEC.md section 4, S3 variant B; section 2.2 (shoreline rule)",
+   "window_s": 200,
+   "tracks": "scenarios/S3B/tracks.json",
+   "lines": "scenarios/S3B/lines.json"
+  },
+  {
+   "id": "S4",
+   "title": "Confusable callsigns, say again then handoff",
+   "summary": "N2464X (Hudson northbound) and N2646X (East River southbound) are on the desk. N2646X's position report arrives as \"six four X-ray\" at low SNR. The first ambiguous call gets SAY_AGAIN; the second ambiguous call hands off, with the ADS-B position match shown on the card.",
+   "spec": "SPEC.md section 4, S4; section 2.2 check 4",
+   "window_s": 260,
+   "tracks": "scenarios/S4/tracks.json",
+   "lines": "scenarios/S4/lines.json"
+  },
+  {
+   "id": "S5",
+   "title": "MAYDAY and 7700, agent goes silent",
+   "summary": "N312LM, inbound to the E 34th St heliport on the East River, calls MAYDAY with an engine chip light and squawks 7700. Landed says \"controller taking over\" once and locks silent. A later routine call from the same aircraft and a check-in from a second helicopter both get no reply.",
+   "spec": "SPEC.md section 4, S5; section 2.1 item 4; JO 7110.65 2-1-4a",
+   "window_s": 200,
+   "tracks": "scenarios/S5/tracks.json",
+   "lines": "scenarios/S5/lines.json"
+  },
+  {
+   "id": "S6",
+   "title": "Volume cap, the fourth helicopter is handed off",
+   "summary": "Three helicopters check in and are acknowledged. A fourth (N761NY) checks in 15 s later and is handed off with STANDBY_HANDOFF; the desk keeps the original three. No track enters an LGA volume.",
+   "spec": "SPEC.md section 4, S6; section 2 (more than 3 helicopters on the desk)",
+   "window_s": 220,
+   "tracks": "scenarios/S6/tracks.json",
+   "lines": "scenarios/S6/lines.json"
+  }
+ ]
+}

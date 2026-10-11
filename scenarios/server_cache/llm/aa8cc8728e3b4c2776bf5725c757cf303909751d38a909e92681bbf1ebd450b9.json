@@ -1,0 +1,1 @@
+{"name": "choose_template", "args": {"reason": "Pilot checking in from JRB reporting East River northbound at 500 feet, altimeter 29.92.", "template_id": "ACK_CHECKIN", "slots": {"reg": "N2646X", "position": "JRB", "altimeter_inhg": 29.92}}}

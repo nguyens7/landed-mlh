@@ -1,0 +1,16 @@
+{
+  "n": 75,
+  "bootstrap_replicates": 10000,
+  "seed": 41,
+  "wer_delta_domain_minus_control": -0.04277286135693215,
+  "bootstrap_95_percentile_interval": [
+    -0.09855072463768116,
+    0.013720035840625575
+  ],
+  "clips_improved": 35,
+  "clips_worsened": 21,
+  "clips_tied": 19,
+  "numeric_proxy_gained": 8,
+  "numeric_proxy_lost": 12,
+  "caveat": "Exploratory clip bootstrap; source filename groups are disjoint but speaker/session independence and single-run model variability are not established. Includes failed requests as empty hypotheses."
+}

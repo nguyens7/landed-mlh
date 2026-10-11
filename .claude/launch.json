@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "landed-app",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "app", "run", "dev", "--", "--port", "5173"],
+      "port": 5173
+    },
+    {
+      "name": "landed-server",
+      "runtimeExecutable": "server/scripts/with_gemini_key.sh",
+      "runtimeArgs": ["uv", "run", "--project", "server", "uvicorn", "landed_server.app:app", "--host", "127.0.0.1", "--port", "8787"],
+      "port": 8787
+    }
+  ]
+}

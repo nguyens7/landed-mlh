@@ -1,0 +1,215 @@
+S4  Confusable callsigns, say again then handoff
+mode=pinned server=no (dry run) repeat=3  20261011T162358Z
+
+--- run 1/3: PENDING {'pass': 30, 'fail': 0, 'partial': 0, 'pending': 23, 'gap': 0, 'total': 53}
+t=14.0   L1  N2464X  [PENDING]
+      said  : Landed desk, MEDEVAC Two Four Six Four X-Ray, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.
+      heard : Landed desk, Medevac 2464 X-ray checking in Downtown Skyport, airborne Hudson, northbound 1000.   (asr 0.95, grammar parser, pinned)
+      PASS  L1.parse.callsign.snapped_to       expected N2464X  actual N2464X
+      PASS  L1.parse.intent                    expected checkin  actual checkin
+      PASS  L1.parse.slots.position            expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L1.parse.slots.direction           expected northbound  actual northbound
+      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PEND  L1.response.mode                   expected speak  actual null  (pending server)
+      PEND  L1.response.template_id            expected ACK_CHECKIN  actual null  (pending server)
+      PEND  L1.response.tier                   expected auto  actual null  (pending server)
+      PEND  L1.response.spoken_contains        expected ["Downtown Skyport"]  actual null  (pending server)
+      PEND  L1.response.latency_ms             expected <=3000  actual null  (pending server)
+t=24.0   L2  N2646X  [PENDING]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, East 34th, lifting, East River southbound, five hundred.
+      heard : Landed desk MEDEVAC 2646 X-ray checking in East 34th lifting East River southbound 500.   (asr 0.95, grammar parser, pinned)
+      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L2.parse.intent                    expected checkin  actual checkin
+      PASS  L2.parse.slots.position            expected East 34th  actual East 34th
+      PASS  L2.parse.slots.origin              expected East 34th  actual East 34th
+      PASS  L2.parse.slots.corridor            expected East River  actual East River
+      PASS  L2.parse.slots.direction           expected southbound  actual southbound
+      PASS  L2.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PEND  L2.response.mode                   expected speak  actual null  (pending server)
+      PEND  L2.response.template_id            expected ACK_CHECKIN  actual null  (pending server)
+      PEND  L2.response.tier                   expected auto  actual null  (pending server)
+      PEND  L2.response.spoken_contains        expected ["East 34th"]  actual null  (pending server)
+      PEND  L2.response.latency_ms             expected <=3000  actual null  (pending server)
+t=144.0  L3  N2646X  [PENDING]
+      said  : Six Four X-Ray, Brooklyn Bridge.
+      heard : 64 X-Ray Brooklyn Bridge.   (asr 0.8, llm parser, pinned)
+      PASS  L3.parse.callsign.ambiguous        expected true  actual true
+      PASS  L3.parse.callsign.candidates       expected ["N2646X", "N2464X"]  actual ["N2464X", "N2646X"]
+      PASS  L3.parse.intent                    expected position_report  actual position_report
+      PASS  L3.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge
+      PEND  L3.response.mode                   expected speak  actual null  (pending server)
+      PEND  L3.response.template_id            expected SAY_AGAIN  actual null  (pending server)
+      PEND  L3.response.tier                   expected auto  actual null  (pending server)
+      PEND  L3.response.spoken_contains        expected ["say again"]  actual null  (pending server)
+      PEND  L3.response.latency_ms             expected <=3000  actual null  (pending server)
+t=144.0  E1  event:position_match  [PASS]
+      PASS  E1.geometry.best_match             expected N2646X  actual N2646X
+      PASS  E1.geometry.score>=                expected 0.85  actual 0.979
+      PASS  E1.geometry.unique                 expected true  actual true
+t=150.0  L4  N2646X  [PENDING]
+      said  : MEDEVAC Two Six X-Ray, abeam Brooklyn Bridge, five hundred.
+      heard : Medevac 26 X-Ray abeam Brooklyn Bridge 500.   (asr 0.73, grammar parser, pinned)
+      PASS  L4.parse.callsign.ambiguous        expected true  actual true
+      PASS  L4.parse.callsign.candidates       expected ["N2646X", "N2464X"]  actual ["N2464X", "N2646X"]
+      PASS  L4.parse.intent                    expected position_report  actual position_report
+      PASS  L4.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge
+      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PEND  L4.response.mode                   expected handoff  actual null  (pending server)
+      PEND  L4.response.template_id            expected STANDBY_HANDOFF  actual null  (pending server)
+      PEND  L4.response.tier                   expected handoff  actual null  (pending server)
+      PEND  L4.response.triggers               expected ["callsign_ambiguity"]  actual null  (pending server)
+      PEND  L4.response.spoken_contains        expected ["standby", "controller will be with you"]  actual null  (pending server)
+      PEND  L4.response.card_contains          expected ["2646X", "ADS-B position match"]  actual null  (pending server)
+t=150.0  E2  event:position_match  [PASS]
+      PASS  E2.geometry.best_match             expected N2646X  actual N2646X
+      PASS  E2.geometry.score>=                expected 0.8  actual 0.871
+      PASS  E2.geometry.unique                 expected true  actual true
+t=0.0    E3  event:no_alerts  [PASS]
+      PASS  E3.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PEND  summary.auto_transmissions         expected 3  actual null  (pending server)
+      PEND  summary.handoffs                   expected 1  actual null  (pending server)
+
+--- run 2/3: PENDING {'pass': 30, 'fail': 0, 'partial': 0, 'pending': 23, 'gap': 0, 'total': 53}
+t=14.0   L1  N2464X  [PENDING]
+      said  : Landed desk, MEDEVAC Two Four Six Four X-Ray, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.
+      heard : Landed desk, Medevac 2464 X-ray checking in Downtown Skyport, airborne Hudson, northbound 1000.   (asr 0.95, grammar parser, pinned)
+      PASS  L1.parse.callsign.snapped_to       expected N2464X  actual N2464X
+      PASS  L1.parse.intent                    expected checkin  actual checkin
+      PASS  L1.parse.slots.position            expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L1.parse.slots.direction           expected northbound  actual northbound
+      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PEND  L1.response.mode                   expected speak  actual null  (pending server)
+      PEND  L1.response.template_id            expected ACK_CHECKIN  actual null  (pending server)
+      PEND  L1.response.tier                   expected auto  actual null  (pending server)
+      PEND  L1.response.spoken_contains        expected ["Downtown Skyport"]  actual null  (pending server)
+      PEND  L1.response.latency_ms             expected <=3000  actual null  (pending server)
+t=24.0   L2  N2646X  [PENDING]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, East 34th, lifting, East River southbound, five hundred.
+      heard : Landed desk MEDEVAC 2646 X-ray checking in East 34th lifting East River southbound 500.   (asr 0.95, grammar parser, pinned)
+      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L2.parse.intent                    expected checkin  actual checkin
+      PASS  L2.parse.slots.position            expected East 34th  actual East 34th
+      PASS  L2.parse.slots.origin              expected East 34th  actual East 34th
+      PASS  L2.parse.slots.corridor            expected East River  actual East River
+      PASS  L2.parse.slots.direction           expected southbound  actual southbound
+      PASS  L2.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PEND  L2.response.mode                   expected speak  actual null  (pending server)
+      PEND  L2.response.template_id            expected ACK_CHECKIN  actual null  (pending server)
+      PEND  L2.response.tier                   expected auto  actual null  (pending server)
+      PEND  L2.response.spoken_contains        expected ["East 34th"]  actual null  (pending server)
+      PEND  L2.response.latency_ms             expected <=3000  actual null  (pending server)
+t=144.0  L3  N2646X  [PENDING]
+      said  : Six Four X-Ray, Brooklyn Bridge.
+      heard : 64 X-Ray Brooklyn Bridge.   (asr 0.8, llm parser, pinned)
+      PASS  L3.parse.callsign.ambiguous        expected true  actual true
+      PASS  L3.parse.callsign.candidates       expected ["N2646X", "N2464X"]  actual ["N2464X", "N2646X"]
+      PASS  L3.parse.intent                    expected position_report  actual position_report
+      PASS  L3.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge
+      PEND  L3.response.mode                   expected speak  actual null  (pending server)
+      PEND  L3.response.template_id            expected SAY_AGAIN  actual null  (pending server)
+      PEND  L3.response.tier                   expected auto  actual null  (pending server)
+      PEND  L3.response.spoken_contains        expected ["say again"]  actual null  (pending server)
+      PEND  L3.response.latency_ms             expected <=3000  actual null  (pending server)
+t=144.0  E1  event:position_match  [PASS]
+      PASS  E1.geometry.best_match             expected N2646X  actual N2646X
+      PASS  E1.geometry.score>=                expected 0.85  actual 0.979
+      PASS  E1.geometry.unique                 expected true  actual true
+t=150.0  L4  N2646X  [PENDING]
+      said  : MEDEVAC Two Six X-Ray, abeam Brooklyn Bridge, five hundred.
+      heard : Medevac 26 X-Ray abeam Brooklyn Bridge 500.   (asr 0.73, grammar parser, pinned)
+      PASS  L4.parse.callsign.ambiguous        expected true  actual true
+      PASS  L4.parse.callsign.candidates       expected ["N2646X", "N2464X"]  actual ["N2464X", "N2646X"]
+      PASS  L4.parse.intent                    expected position_report  actual position_report
+      PASS  L4.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge
+      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PEND  L4.response.mode                   expected handoff  actual null  (pending server)
+      PEND  L4.response.template_id            expected STANDBY_HANDOFF  actual null  (pending server)
+      PEND  L4.response.tier                   expected handoff  actual null  (pending server)
+      PEND  L4.response.triggers               expected ["callsign_ambiguity"]  actual null  (pending server)
+      PEND  L4.response.spoken_contains        expected ["standby", "controller will be with you"]  actual null  (pending server)
+      PEND  L4.response.card_contains          expected ["2646X", "ADS-B position match"]  actual null  (pending server)
+t=150.0  E2  event:position_match  [PASS]
+      PASS  E2.geometry.best_match             expected N2646X  actual N2646X
+      PASS  E2.geometry.score>=                expected 0.8  actual 0.871
+      PASS  E2.geometry.unique                 expected true  actual true
+t=0.0    E3  event:no_alerts  [PASS]
+      PASS  E3.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PEND  summary.auto_transmissions         expected 3  actual null  (pending server)
+      PEND  summary.handoffs                   expected 1  actual null  (pending server)
+
+--- run 3/3: PENDING {'pass': 30, 'fail': 0, 'partial': 0, 'pending': 23, 'gap': 0, 'total': 53}
+t=14.0   L1  N2464X  [PENDING]
+      said  : Landed desk, MEDEVAC Two Four Six Four X-Ray, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.
+      heard : Landed desk, Medevac 2464 X-ray checking in Downtown Skyport, airborne Hudson, northbound 1000.   (asr 0.95, grammar parser, pinned)
+      PASS  L1.parse.callsign.snapped_to       expected N2464X  actual N2464X
+      PASS  L1.parse.intent                    expected checkin  actual checkin
+      PASS  L1.parse.slots.position            expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L1.parse.slots.direction           expected northbound  actual northbound
+      PASS  L1.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PEND  L1.response.mode                   expected speak  actual null  (pending server)
+      PEND  L1.response.template_id            expected ACK_CHECKIN  actual null  (pending server)
+      PEND  L1.response.tier                   expected auto  actual null  (pending server)
+      PEND  L1.response.spoken_contains        expected ["Downtown Skyport"]  actual null  (pending server)
+      PEND  L1.response.latency_ms             expected <=3000  actual null  (pending server)
+t=24.0   L2  N2646X  [PENDING]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, East 34th, lifting, East River southbound, five hundred.
+      heard : Landed desk MEDEVAC 2646 X-ray checking in East 34th lifting East River southbound 500.   (asr 0.95, grammar parser, pinned)
+      PASS  L2.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L2.parse.intent                    expected checkin  actual checkin
+      PASS  L2.parse.slots.position            expected East 34th  actual East 34th
+      PASS  L2.parse.slots.origin              expected East 34th  actual East 34th
+      PASS  L2.parse.slots.corridor            expected East River  actual East River
+      PASS  L2.parse.slots.direction           expected southbound  actual southbound
+      PASS  L2.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PEND  L2.response.mode                   expected speak  actual null  (pending server)
+      PEND  L2.response.template_id            expected ACK_CHECKIN  actual null  (pending server)
+      PEND  L2.response.tier                   expected auto  actual null  (pending server)
+      PEND  L2.response.spoken_contains        expected ["East 34th"]  actual null  (pending server)
+      PEND  L2.response.latency_ms             expected <=3000  actual null  (pending server)
+t=144.0  L3  N2646X  [PENDING]
+      said  : Six Four X-Ray, Brooklyn Bridge.
+      heard : 64 X-Ray Brooklyn Bridge.   (asr 0.8, llm parser, pinned)
+      PASS  L3.parse.callsign.ambiguous        expected true  actual true
+      PASS  L3.parse.callsign.candidates       expected ["N2646X", "N2464X"]  actual ["N2464X", "N2646X"]
+      PASS  L3.parse.intent                    expected position_report  actual position_report
+      PASS  L3.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge
+      PEND  L3.response.mode                   expected speak  actual null  (pending server)
+      PEND  L3.response.template_id            expected SAY_AGAIN  actual null  (pending server)
+      PEND  L3.response.tier                   expected auto  actual null  (pending server)
+      PEND  L3.response.spoken_contains        expected ["say again"]  actual null  (pending server)
+      PEND  L3.response.latency_ms             expected <=3000  actual null  (pending server)
+t=144.0  E1  event:position_match  [PASS]
+      PASS  E1.geometry.best_match             expected N2646X  actual N2646X
+      PASS  E1.geometry.score>=                expected 0.85  actual 0.979
+      PASS  E1.geometry.unique                 expected true  actual true
+t=150.0  L4  N2646X  [PENDING]
+      said  : MEDEVAC Two Six X-Ray, abeam Brooklyn Bridge, five hundred.
+      heard : Medevac 26 X-Ray abeam Brooklyn Bridge 500.   (asr 0.73, grammar parser, pinned)
+      PASS  L4.parse.callsign.ambiguous        expected true  actual true
+      PASS  L4.parse.callsign.candidates       expected ["N2646X", "N2464X"]  actual ["N2464X", "N2646X"]
+      PASS  L4.parse.intent                    expected position_report  actual position_report
+      PASS  L4.parse.slots.position            expected Brooklyn Bridge  actual Brooklyn Bridge
+      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PEND  L4.response.mode                   expected handoff  actual null  (pending server)
+      PEND  L4.response.template_id            expected STANDBY_HANDOFF  actual null  (pending server)
+      PEND  L4.response.tier                   expected handoff  actual null  (pending server)
+      PEND  L4.response.triggers               expected ["callsign_ambiguity"]  actual null  (pending server)
+      PEND  L4.response.spoken_contains        expected ["standby", "controller will be with you"]  actual null  (pending server)
+      PEND  L4.response.card_contains          expected ["2646X", "ADS-B position match"]  actual null  (pending server)
+t=150.0  E2  event:position_match  [PASS]
+      PASS  E2.geometry.best_match             expected N2646X  actual N2646X
+      PASS  E2.geometry.score>=                expected 0.8  actual 0.871
+      PASS  E2.geometry.unique                 expected true  actual true
+t=0.0    E3  event:no_alerts  [PASS]
+      PASS  E3.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PEND  summary.auto_transmissions         expected 3  actual null  (pending server)
+      PEND  summary.handoffs                   expected 1  actual null  (pending server)

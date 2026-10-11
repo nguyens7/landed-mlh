@@ -1,0 +1,1 @@
+{"name": "choose_template", "args": {"slots": {"clock": 10, "distance_nm": 3.5, "reg": "N2646X", "traffic_type": "helicopter"}, "reason": "Pilot stated destination / landing, and there is traffic in the desk traffic list.", "template_id": "TRAFFIC"}}

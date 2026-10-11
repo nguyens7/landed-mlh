@@ -1,0 +1,41 @@
+{
+  "source": "https://www2.spsc.tugraz.at/databases/ATCOSIM/TXTdata/fulldata.csv",
+  "sha256": "e4dffacf8ddab03c6c0dfa7f80bc6d3e711b75ba6d473ae89437d0ab5d0418b9",
+  "rows": 10078,
+  "hours": 10.686042916527777,
+  "speakers": {
+    "sm1": 1167,
+    "sm2": 1848,
+    "sm3": 808,
+    "sm4": 1162,
+    "gf1": 238,
+    "gm1": 384,
+    "gm2": 378,
+    "zf1": 1716,
+    "zf2": 1739,
+    "zf3": 638
+  },
+  "sessions": 50,
+  "duration_median": 3.7185155749999996,
+  "duration_min": 0.03775,
+  "duration_max": 38.8811875,
+  "corrupt": {
+    "0": 10066,
+    "1": 12
+  },
+  "unique_transcripts": 7597,
+  "keyword_utterance_counts": {
+    "helicopter": 0,
+    "heli": 0,
+    "mayday": 0,
+    "pan pan": 0,
+    "emergency": 0,
+    "visual": 0,
+    "vfr": 0,
+    "say again": 43,
+    "weather": 0,
+    "climb": 1408,
+    "descend": 638,
+    "flight level": 2189
+  }
+}

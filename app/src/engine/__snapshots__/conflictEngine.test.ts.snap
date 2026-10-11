@@ -1,0 +1,72 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ConflictEngine: real Saturday traffic > logs and snapshots the Class B floor handoff/caution breakdown per aircraft 1`] = `
+[
+  {
+    "first_t": 183,
+    "max_alt_in_polygon_ft": 1040,
+    "reg": "N207MH",
+    "severity": "caution",
+  },
+  {
+    "first_t": 691,
+    "max_alt_in_polygon_ft": 965,
+    "reg": "N401FN",
+    "severity": "caution",
+  },
+  {
+    "first_t": 239,
+    "max_alt_in_polygon_ft": 1640,
+    "reg": "N403TD",
+    "severity": "handoff",
+  },
+  {
+    "first_t": 90,
+    "max_alt_in_polygon_ft": 1615,
+    "reg": "N404TD",
+    "severity": "handoff",
+  },
+  {
+    "first_t": 14,
+    "max_alt_in_polygon_ft": 965,
+    "reg": "N405LP",
+    "severity": "caution",
+  },
+  {
+    "first_t": 359,
+    "max_alt_in_polygon_ft": 1615,
+    "reg": "N406TD",
+    "severity": "handoff",
+  },
+  {
+    "first_t": 9,
+    "max_alt_in_polygon_ft": 1665,
+    "reg": "N410CK",
+    "severity": "handoff",
+  },
+  {
+    "first_t": 39,
+    "max_alt_in_polygon_ft": 1765,
+    "reg": "N62ZA",
+    "severity": "handoff",
+  },
+  {
+    "first_t": 355,
+    "max_alt_in_polygon_ft": 1015,
+    "reg": "N65DJ",
+    "severity": "caution",
+  },
+  {
+    "first_t": 845,
+    "max_alt_in_polygon_ft": 640,
+    "reg": "N84BL",
+    "severity": "caution",
+  },
+  {
+    "first_t": 7,
+    "max_alt_in_polygon_ft": 1540,
+    "reg": "N98EG",
+    "severity": "handoff",
+  },
+]
+`;

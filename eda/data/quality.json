@@ -1,0 +1,29 @@
+{
+ "points": 78310,
+ "helos": 39,
+ "median_dt_s": 2.359999895095825,
+ "p90_dt_s": 8.170000076293945,
+ "gaps_gt_60s": 314,
+ "pct_alt_baro_missing": 1.0190269441961435,
+ "pct_on_ground": 1.0190269441961435,
+ "pct_alt_geom_missing": 1.7979823777295365,
+ "src_counts": {
+  "adsb_icao": 62964,
+  "adsr_icao": 13124,
+  "tisb_icao": 1314,
+  "mlat": 908
+ },
+ "live_polls": 60,
+ "live_poll_errors": 0,
+ "live_unique_aircraft": 163,
+ "live_helos": 3,
+ "live_cat_counts": {
+  "A1": 191,
+  "A3": 3410,
+  "A2": 1136,
+  "A5": 404,
+  "null": 74,
+  "A7": 108,
+  "A4": 27
+ }
+}

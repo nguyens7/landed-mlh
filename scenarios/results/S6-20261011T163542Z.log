@@ -1,0 +1,200 @@
+S6  Volume cap, the fourth helicopter is handed off
+mode=pinned server=yes repeat=3  20261011T163542Z
+
+--- run 1/3: PASS {'pass': 45, 'fail': 0, 'partial': 0, 'pending': 0, 'gap': 0, 'total': 45}
+t=12.0   L1  N2646X  [PASS]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.
+      heard : Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.   (asr 0.95, grammar parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two"
+      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L1.parse.intent                    expected checkin  actual checkin
+      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.corridor            expected East River  actual East River
+      PASS  L1.parse.slots.direction           expected northbound  actual northbound
+      PASS  L1.parse.slots.altitude_ft         expected 400  actual 400  (within 50 ft (diff 0))
+      PASS  L1.response.mode                   expected speak  actual speak
+      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L1.response.tier                   expected auto  actual auto
+      PASS  L1.response.spoken_contains        expected ["Downtown Skyport"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...
+      PASS  L1.response.latency_ms             expected <=3000  actual 2  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=27.0   L2  N38BL  [PASS]
+      said  : Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.
+      heard : Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.   (asr 0.95, grammar parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two"
+      PASS  L2.parse.callsign.snapped_to       expected N38BL  actual N38BL
+      PASS  L2.parse.intent                    expected checkin  actual checkin
+      PASS  L2.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L2.parse.slots.direction           expected northbound  actual northbound
+      PASS  L2.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PASS  L2.response.mode                   expected speak  actual speak
+      PASS  L2.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L2.response.tier                   expected auto  actual auto
+      PASS  L2.response.spoken_contains        expected ["Downtown Skyport"]  actual MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altime...
+      PASS  L2.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=42.0   L3  N312LM  [PASS]
+      said  : Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.
+      heard : Landed desk, Medevac 312 Lima, Hudson southbound 1000.   (asr 0.95, llm parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two"
+      PASS  L3.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L3.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L3.parse.slots.direction           expected southbound  actual southbound
+      PASS  L3.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PASS  L3.response.mode                   expected speak  actual speak
+      PASS  L3.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L3.response.tier                   expected auto  actual auto
+      PASS  L3.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=57.0   L4  N761NY  [PASS]
+      said  : Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.
+      heard : Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.   (asr 0.95, grammar parser, pinned)
+      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['desk_over_capacity'] src=policy  "MEDEVAC Seven Six One November Yankee, standby, controller will be with you"
+      PASS  L4.parse.callsign.snapped_to       expected N761NY  actual N761NY
+      PASS  L4.parse.intent                    expected checkin  actual checkin
+      PASS  L4.parse.slots.origin              expected East 34th  actual East 34th
+      PASS  L4.parse.slots.corridor            expected East River  actual East River
+      PASS  L4.parse.slots.direction           expected southbound  actual southbound
+      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PASS  L4.response.mode                   expected handoff  actual handoff
+      PASS  L4.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF
+      PASS  L4.response.tier                   expected handoff  actual handoff
+      PASS  L4.response.triggers               expected ["desk_over_capacity"]  actual ["desk_over_capacity"]
+      PASS  L4.response.spoken_contains        expected ["standby", "controller will be with you"]  actual MEDEVAC Seven Six One November Yankee, standby, controller will be with you
+t=57.0   E1  event:desk_count  [PASS]
+      PASS  E1.geometry.count                  expected 4  actual 4  (['N2646X', 'N38BL', 'N312LM', 'N761NY'])
+t=0.0    E2  event:no_alerts  [PASS]
+      PASS  E2.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PASS  summary.auto_transmissions         expected 3  actual 3
+      PASS  summary.handoffs                   expected 1  actual 1
+
+--- run 2/3: PASS {'pass': 45, 'fail': 0, 'partial': 0, 'pending': 0, 'gap': 0, 'total': 45}
+t=12.0   L1  N2646X  [PASS]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.
+      heard : Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.   (asr 0.95, grammar parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two"
+      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L1.parse.intent                    expected checkin  actual checkin
+      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.corridor            expected East River  actual East River
+      PASS  L1.parse.slots.direction           expected northbound  actual northbound
+      PASS  L1.parse.slots.altitude_ft         expected 400  actual 400  (within 50 ft (diff 0))
+      PASS  L1.response.mode                   expected speak  actual speak
+      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L1.response.tier                   expected auto  actual auto
+      PASS  L1.response.spoken_contains        expected ["Downtown Skyport"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...
+      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=27.0   L2  N38BL  [PASS]
+      said  : Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.
+      heard : Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.   (asr 0.95, grammar parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two"
+      PASS  L2.parse.callsign.snapped_to       expected N38BL  actual N38BL
+      PASS  L2.parse.intent                    expected checkin  actual checkin
+      PASS  L2.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L2.parse.slots.direction           expected northbound  actual northbound
+      PASS  L2.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PASS  L2.response.mode                   expected speak  actual speak
+      PASS  L2.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L2.response.tier                   expected auto  actual auto
+      PASS  L2.response.spoken_contains        expected ["Downtown Skyport"]  actual MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altime...
+      PASS  L2.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=42.0   L3  N312LM  [PASS]
+      said  : Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.
+      heard : Landed desk, Medevac 312 Lima, Hudson southbound 1000.   (asr 0.95, llm parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two"
+      PASS  L3.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L3.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L3.parse.slots.direction           expected southbound  actual southbound
+      PASS  L3.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PASS  L3.response.mode                   expected speak  actual speak
+      PASS  L3.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L3.response.tier                   expected auto  actual auto
+      PASS  L3.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=57.0   L4  N761NY  [PASS]
+      said  : Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.
+      heard : Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.   (asr 0.95, grammar parser, pinned)
+      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['desk_over_capacity'] src=policy  "MEDEVAC Seven Six One November Yankee, standby, controller will be with you"
+      PASS  L4.parse.callsign.snapped_to       expected N761NY  actual N761NY
+      PASS  L4.parse.intent                    expected checkin  actual checkin
+      PASS  L4.parse.slots.origin              expected East 34th  actual East 34th
+      PASS  L4.parse.slots.corridor            expected East River  actual East River
+      PASS  L4.parse.slots.direction           expected southbound  actual southbound
+      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PASS  L4.response.mode                   expected handoff  actual handoff
+      PASS  L4.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF
+      PASS  L4.response.tier                   expected handoff  actual handoff
+      PASS  L4.response.triggers               expected ["desk_over_capacity"]  actual ["desk_over_capacity"]
+      PASS  L4.response.spoken_contains        expected ["standby", "controller will be with you"]  actual MEDEVAC Seven Six One November Yankee, standby, controller will be with you
+t=57.0   E1  event:desk_count  [PASS]
+      PASS  E1.geometry.count                  expected 4  actual 4  (['N2646X', 'N38BL', 'N312LM', 'N761NY'])
+t=0.0    E2  event:no_alerts  [PASS]
+      PASS  E2.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PASS  summary.auto_transmissions         expected 3  actual 3
+      PASS  summary.handoffs                   expected 1  actual 1
+
+--- run 3/3: PASS {'pass': 45, 'fail': 0, 'partial': 0, 'pending': 0, 'gap': 0, 'total': 45}
+t=12.0   L1  N2646X  [PASS]
+      said  : Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.
+      heard : Landed desk MEDEVAC 2646 X-ray checking in, Downtown Skyport, lifting East River northbound 400.   (asr 0.95, grammar parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two"
+      PASS  L1.parse.callsign.snapped_to       expected N2646X  actual N2646X
+      PASS  L1.parse.intent                    expected checkin  actual checkin
+      PASS  L1.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L1.parse.slots.corridor            expected East River  actual East River
+      PASS  L1.parse.slots.direction           expected northbound  actual northbound
+      PASS  L1.parse.slots.altitude_ft         expected 400  actual 400  (within 50 ft (diff 0))
+      PASS  L1.response.mode                   expected speak  actual speak
+      PASS  L1.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L1.response.tier                   expected auto  actual auto
+      PASS  L1.response.spoken_contains        expected ["Downtown Skyport"]  actual MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altime...
+      PASS  L1.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=27.0   L2  N38BL  [PASS]
+      said  : Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.
+      heard : Landed desk, Medevac 3 8 Bravo Lima, checking in Downtown Skyport, airborne Hudson, northbound 1,000.   (asr 0.95, grammar parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two"
+      PASS  L2.parse.callsign.snapped_to       expected N38BL  actual N38BL
+      PASS  L2.parse.intent                    expected checkin  actual checkin
+      PASS  L2.parse.slots.origin              expected Downtown Skyport  actual Downtown Skyport
+      PASS  L2.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L2.parse.slots.direction           expected northbound  actual northbound
+      PASS  L2.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PASS  L2.response.mode                   expected speak  actual speak
+      PASS  L2.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L2.response.tier                   expected auto  actual auto
+      PASS  L2.response.spoken_contains        expected ["Downtown Skyport"]  actual MEDEVAC Three Eight Bravo Lima, Landed advisory, radar contact Downtown Skyport, altime...
+      PASS  L2.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=42.0   L3  N312LM  [PASS]
+      said  : Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.
+      heard : Landed desk, Medevac 312 Lima, Hudson southbound 1000.   (asr 0.95, llm parser, pinned)
+      agent : speak ACK_CHECKIN tier=auto triggers=[] src=gemini  "MEDEVAC Three One Two Lima Mike, Landed advisory, radar contact Roosevelt Island north tip, altimeter two niner niner two"
+      PASS  L3.parse.callsign.snapped_to       expected N312LM  actual N312LM
+      PASS  L3.parse.slots.corridor            expected Hudson  actual Hudson
+      PASS  L3.parse.slots.direction           expected southbound  actual southbound
+      PASS  L3.parse.slots.altitude_ft         expected 1000  actual 1000  (within 50 ft (diff 0))
+      PASS  L3.response.mode                   expected speak  actual speak
+      PASS  L3.response.template_id            expected ACK_CHECKIN  actual ACK_CHECKIN
+      PASS  L3.response.tier                   expected auto  actual auto
+      PASS  L3.response.latency_ms             expected <=3000  actual 1  (server round trip: transmission in -> audio ready (ASR and parse reported separately))
+t=57.0   L4  N761NY  [PASS]
+      said  : Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.
+      heard : Landed desk, Medevac 761 November Yankee, checking in, East 34th, lifting, East River southbound, 500.   (asr 0.95, grammar parser, pinned)
+      agent : handoff STANDBY_HANDOFF tier=handoff triggers=['desk_over_capacity'] src=policy  "MEDEVAC Seven Six One November Yankee, standby, controller will be with you"
+      PASS  L4.parse.callsign.snapped_to       expected N761NY  actual N761NY
+      PASS  L4.parse.intent                    expected checkin  actual checkin
+      PASS  L4.parse.slots.origin              expected East 34th  actual East 34th
+      PASS  L4.parse.slots.corridor            expected East River  actual East River
+      PASS  L4.parse.slots.direction           expected southbound  actual southbound
+      PASS  L4.parse.slots.altitude_ft         expected 500  actual 500  (within 50 ft (diff 0))
+      PASS  L4.response.mode                   expected handoff  actual handoff
+      PASS  L4.response.template_id            expected STANDBY_HANDOFF  actual STANDBY_HANDOFF
+      PASS  L4.response.tier                   expected handoff  actual handoff
+      PASS  L4.response.triggers               expected ["desk_over_capacity"]  actual ["desk_over_capacity"]
+      PASS  L4.response.spoken_contains        expected ["standby", "controller will be with you"]  actual MEDEVAC Seven Six One November Yankee, standby, controller will be with you
+t=57.0   E1  event:desk_count  [PASS]
+      PASS  E1.geometry.count                  expected 4  actual 4  (['N2646X', 'N38BL', 'N312LM', 'N761NY'])
+t=0.0    E2  event:no_alerts  [PASS]
+      PASS  E2.geometry.no_alert>=advisory     expected none  actual none
+summary
+      PASS  summary.auto_transmissions         expected 3  actual 3
+      PASS  summary.handoffs                   expected 1  actual 1

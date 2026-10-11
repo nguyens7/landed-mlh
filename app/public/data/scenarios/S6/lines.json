@@ -1,0 +1,153 @@
+{
+ "scenario": "S6",
+ "title": "Volume cap, the fourth helicopter is handed off",
+ "note": "SIMULATION ONLY. Fictional registrations. Frequency shown as SIM DESK.",
+ "lines": [
+  {
+   "id": "L1",
+   "t": 12.0,
+   "aircraft": "N2646X",
+   "spoken_callsign": "MEDEVAC Two Six Four Six X-Ray",
+   "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, four hundred.",
+   "voice": "Kore",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s6_l1__Kore__clean.wav",
+   "hash": "ecae932238b9a607",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N2646X"
+     },
+     "intent": "checkin",
+     "slots": {
+      "origin": "Downtown Skyport",
+      "corridor": "East River",
+      "direction": "northbound",
+      "altitude_ft": 400
+     }
+    },
+    "response": {
+     "mode": "speak",
+     "template_id": "ACK_CHECKIN",
+     "tier": "auto"
+    }
+   }
+  },
+  {
+   "id": "L2",
+   "t": 27.0,
+   "aircraft": "N38BL",
+   "spoken_callsign": "MEDEVAC Three Eight Bravo Lima",
+   "text": "Landed desk, MEDEVAC Three Eight Bravo Lima, checking in, Downtown Skyport, airborne, Hudson northbound, one thousand.",
+   "voice": "Charon",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s6_l2__Charon__clean.wav",
+   "hash": "67fca8f967aba329",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N38BL"
+     },
+     "intent": "checkin",
+     "slots": {
+      "origin": "Downtown Skyport",
+      "corridor": "Hudson",
+      "direction": "northbound",
+      "altitude_ft": 1000
+     }
+    },
+    "response": {
+     "mode": "speak",
+     "template_id": "ACK_CHECKIN",
+     "tier": "auto"
+    }
+   }
+  },
+  {
+   "id": "L3",
+   "t": 42.0,
+   "aircraft": "N312LM",
+   "spoken_callsign": "MEDEVAC Three One Two Lima",
+   "text": "Landed desk, MEDEVAC Three One Two Lima, Hudson southbound, one thousand.",
+   "voice": "Fenrir",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s6_l3__Fenrir__clean.wav",
+   "hash": "87323dadf8e96866",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N312LM"
+     },
+     "slots": {
+      "corridor": "Hudson",
+      "direction": "southbound",
+      "altitude_ft": 1000
+     }
+    },
+    "response": {
+     "mode": "speak",
+     "template_id": "ACK_CHECKIN",
+     "tier": "auto"
+    }
+   }
+  },
+  {
+   "id": "L4",
+   "t": 57.0,
+   "aircraft": "N761NY",
+   "spoken_callsign": "MEDEVAC Seven Six One November Yankee",
+   "text": "Landed desk, MEDEVAC Seven Six One November Yankee, checking in, East 34th, lifting, East River southbound, five hundred.",
+   "voice": "Kore",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s6_l4__Kore__clean.wav",
+   "hash": "8cf2b360027cc84f",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N761NY"
+     },
+     "intent": "checkin",
+     "slots": {
+      "origin": "East 34th",
+      "corridor": "East River",
+      "direction": "southbound",
+      "altitude_ft": 500
+     }
+    },
+    "response": {
+     "mode": "handoff",
+     "template_id": "STANDBY_HANDOFF",
+     "tier": "handoff",
+     "triggers": [
+      "desk_over_capacity"
+     ],
+     "spoken_contains": [
+      "standby",
+      "controller will be with you"
+     ]
+    }
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "E1",
+   "kind": "desk_count",
+   "note": "Four helicopters are airborne on the desk when the fourth checks in.",
+   "count": 4,
+   "at_t": 57.0
+  },
+  {
+   "id": "E2",
+   "kind": "no_alerts"
+  }
+ ]
+}

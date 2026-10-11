@@ -1,0 +1,154 @@
+{
+ "scenario": "S1",
+ "title": "Clean autonomous run, JRB to 6N5",
+ "note": "SIMULATION ONLY. Fictional registrations. Frequency shown as SIM DESK.",
+ "lines": [
+  {
+   "id": "L1",
+   "t": 12.0,
+   "aircraft": "N2646X",
+   "spoken_callsign": "MEDEVAC Two Six Four Six X-Ray",
+   "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.",
+   "voice": "Kore",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s1_l1__Kore__clean.wav",
+   "hash": "e86a57546da1831f",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N2646X"
+     },
+     "intent": "checkin",
+     "slots": {
+      "position": "Downtown Skyport",
+      "origin": "Downtown Skyport",
+      "corridor": "East River",
+      "direction": "northbound",
+      "altitude_ft": 500
+     },
+     "emergency": false
+    },
+    "response": {
+     "mode": "speak",
+     "template_id": "ACK_CHECKIN",
+     "tier": "auto",
+     "spoken_contains": [
+      "Landed advisory",
+      "radar contact",
+      "Downtown Skyport"
+     ]
+    }
+   }
+  },
+  {
+   "id": "L2",
+   "t": 36.0,
+   "aircraft": "N2646X",
+   "spoken_callsign": "MEDEVAC Two Six Four Six X-Ray",
+   "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Brooklyn Bridge, five hundred.",
+   "voice": "Kore",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s1_l2__Kore__clean.wav",
+   "hash": "2cb088acf41b5611",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N2646X"
+     },
+     "intent": "position_report",
+     "slots": {
+      "position": "Brooklyn Bridge",
+      "altitude_ft": 500
+     }
+    },
+    "response": {
+     "mode": "speak",
+     "template_id": "REPORT_ACK",
+     "tier": "auto",
+     "spoken_contains": [
+      "roger"
+     ]
+    }
+   }
+  },
+  {
+   "id": "L3",
+   "t": 84.0,
+   "aircraft": "N2646X",
+   "spoken_callsign": "MEDEVAC Two Six Four Six X-Ray",
+   "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, abeam Williamsburg Bridge, five hundred, landing East 34th.",
+   "voice": "Kore",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s1_l3__Kore__clean.wav",
+   "hash": "edb7bfa8a9008e9d",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N2646X"
+     },
+     "intent": "position_report",
+     "slots": {
+      "position": "Williamsburg Bridge",
+      "altitude_ft": 500,
+      "destination": "East 34th"
+     }
+    },
+    "response": {
+     "mode": "speak",
+     "template_id": "TRAFFIC",
+     "tier": "auto",
+     "spoken_contains": [
+      "traffic"
+     ]
+    }
+   }
+  },
+  {
+   "id": "L4",
+   "t": 138.0,
+   "aircraft": "N2646X",
+   "spoken_callsign": "MEDEVAC Two Six Four Six X-Ray",
+   "text": "Landed desk, MEDEVAC Two Six Four Six X-Ray, approaching East 34th, five hundred.",
+   "voice": "Kore",
+   "snr": "clean",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s1_l4__Kore__clean.wav",
+   "hash": "f6dbd8e1110f67a0",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N2646X"
+     },
+     "intent": "position_report",
+     "slots": {
+      "position": "East 34th",
+      "altitude_ft": 500
+     }
+    },
+    "response": {
+     "mode": "speak",
+     "template_id": "REPORT_ACK",
+     "tier": "auto",
+     "spoken_contains": [
+      "roger"
+     ]
+    }
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "E1",
+   "kind": "no_alerts",
+   "aircraft": "N2646X",
+   "note": "The projected path never comes within 1 nm of any LGA volume."
+  }
+ ]
+}

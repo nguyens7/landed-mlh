@@ -1,0 +1,75 @@
+{
+ "scenario": "S2",
+ "title": "Medevac crosses the LGA Rwy 22 final, handoff",
+ "note": "SIMULATION ONLY. Fictional registrations. Frequency shown as SIM DESK.",
+ "lines": [
+  {
+   "id": "L1",
+   "t": 222.0,
+   "aircraft": "N312LM",
+   "spoken_callsign": "MEDEVAC Three One Two Lima",
+   "text": "Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.",
+   "voice": "Fenrir",
+   "snr": "20",
+   "rotor": false,
+   "style": "normal",
+   "audio": "audio/s2_l1__Fenrir__20.wav",
+   "hash": "bf39bb50c25759b0",
+   "expect": {
+    "parse": {
+     "callsign": {
+      "snapped_to": "N312LM"
+     },
+     "intent": "request_route",
+     "slots": {
+      "position": "East 34th",
+      "destination": "College Point",
+      "altitude_ft": 600
+     },
+     "emergency": false
+    },
+    "response": {
+     "mode": "handoff",
+     "template_id": "STANDBY_HANDOFF",
+     "tier": "handoff",
+     "triggers": [
+      "out_of_whitelist"
+     ],
+     "spoken_contains": [
+      "standby",
+      "controller will be with you"
+     ]
+    }
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "E1",
+   "kind": "engine_alert",
+   "aircraft": "N312LM",
+   "note": "Engine handoff on the Rwy 22 final glidepath volume, about 84 s before entry.",
+   "volume_prefix": "lga22_final_seg",
+   "severity": "handoff",
+   "min_confidence": 0.8,
+   "lead_s": [
+    80.0,
+    90.0
+   ],
+   "t_window": [
+    380.0,
+    400.0
+   ],
+   "response": {
+    "mode": "handoff",
+    "tier": "handoff",
+    "triggers": [
+     "path_protected_volume"
+    ],
+    "card_contains": [
+     "Rwy 22"
+    ]
+   }
+  }
+ ]
+}

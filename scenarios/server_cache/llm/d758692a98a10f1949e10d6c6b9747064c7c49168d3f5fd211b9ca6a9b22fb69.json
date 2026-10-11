@@ -1,0 +1,1 @@
+{"name": "choose_template", "args": {"reason": "Acknowledge check-in for N38BL at JRB with altimeter.", "template_id": "ACK_CHECKIN", "slots": {"altimeter_inhg": 29.92, "reg": "N38BL", "position": "JRB"}}}

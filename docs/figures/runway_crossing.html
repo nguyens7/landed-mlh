@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Runway 22 Crossing</title>
+<meta name="viewport" content="width=1920">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=block" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F141B; --water: #0F141B; --land: #222C39; --land-edge: #34404F;
+    --ink: #EEF0EA; --ink2: #B8C2CE; --amber: #F29E4C; --red: #E66767; --blue: #6CB0EE;
+  }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body { width: 1920px; height: 1080px; overflow: hidden; }
+  svg { display: block; }
+  text { font-family: "IBM Plex Sans", sans-serif; }
+  .h { font-family: "Space Grotesk", sans-serif; }
+</style>
+</head>
+<body>
+<svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script>
+// ---- Projection: equirectangular around lat 40.79 with cos(lat) scaling ----
+const LAT0 = 40.79, LON0 = -73.89, K = 12000;            // px per degree of latitude
+const COS = Math.cos(LAT0 * Math.PI / 180);
+const NM = K / 60;                                        // px per nautical mile (200)
+const P = (lat, lon) => [960 + (lon - LON0) * K * COS, 540 - (lat - LAT0) * K];
+const pts = arr => arr.map(([la, lo]) => P(la, lo).map(v => v.toFixed(1)).join(",")).join(" ");
+const dm = s => { const [d, m] = s.slice(0, -1).split("-"); const v = +d + +m / 60; return /[SW]$/.test(s) ? -v : v; };
+const dest = (lat, lon, brg, nm) => { const b = brg * Math.PI / 180;
+  return [lat + nm / 60 * Math.cos(b), lon + nm / 60 * Math.sin(b) / Math.cos(lat * Math.PI / 180)]; };
+
+// ---- Facts from the repo ----
+const R22 = [dm("40-47.126200N"), dm("073-52.240402W")];  // replay/landed_geo.py R22_THR (AirNav)
+const R31 = [dm("40-46.324287N"), dm("073-51.426695W")];  // R31_THR (AirNav)
+const RWY_LEN_NM = 7001 / 6076.12;                        // 4/22 and 13/31 are ~7,000 ft
+const R04 = dest(...R22, 212, RWY_LEN_NM);                // far end, along bearing_true 212
+const R13 = dest(...R31, 302, RWY_LEN_NM);                // far end, along bearing_true 302
+const HELI_6N5 = [40.7424472, -73.9721222];
+const ROUTE = [HELI_6N5, [40.772, -73.938], [40.797, -73.905], [40.806, -73.885], [40.797, -73.835]];
+// lga22_final_seg0..seg3 from protected_volumes.geojson, [lon,lat]
+const SEGS = [
+ [[-73.86833034258298,40.80396955612381],[-73.84969793603393,40.79515182401861],[-73.86135716339214,40.78102780061407],[-73.87998956994119,40.78984553271927]],
+ [[-73.85666735990424,40.81809334373744],[-73.83803253893996,40.809273735114],[-73.84969672882632,40.79515088575949],[-73.8683315497906,40.80397049438293]],
+ [[-73.84499941072222,40.832215956805015],[-73.8263621749448,40.82339447048483],[-73.83803133153339,40.809272796265624],[-73.8566685673108,40.81809428258581]],
+ [[-73.83332649085837,40.846337394240514],[-73.81468683987161,40.837514029044435],[-73.82636096734014,40.82339353104688],[-73.84500061832689,40.83221689624296]],
+];
+const bandPx = SEGS.map(s => s.map(([lo, la]) => P(la, lo)));
+
+// ---- Simplified basemap (approximate shorelines, hand-traced, not to survey accuracy) ----
+const MANHATTAN = [[40.70,-74.10],[40.70,-73.975],[40.7445,-73.9715],[40.752,-73.965],[40.760,-73.957],[40.768,-73.949],
+  [40.776,-73.942],[40.785,-73.939],[40.793,-73.933],[40.800,-73.930],[40.808,-73.933],[40.818,-73.935],[40.830,-73.937],[40.850,-73.930],[40.90,-73.93],[40.90,-74.10]];
+const BRONX = [[40.90,-73.927],[40.850,-73.926],[40.830,-73.932],[40.818,-73.930],[40.806,-73.928],[40.800,-73.922],[40.801,-73.912],
+  [40.803,-73.902],[40.808,-73.893],[40.810,-73.884],[40.806,-73.877],[40.809,-73.870],[40.814,-73.866],[40.809,-73.858],[40.807,-73.850],
+  [40.813,-73.846],[40.811,-73.836],[40.816,-73.826],[40.813,-73.812],[40.806,-73.800],[40.811,-73.788],[40.806,-73.770],[40.90,-73.70]];
+const QUEENS = [[40.70,-73.966],[40.735,-73.962],[40.745,-73.959],[40.755,-73.953],[40.763,-73.944],[40.771,-73.938],[40.778,-73.936],
+  [40.781,-73.925],[40.783,-73.913],[40.781,-73.900],[40.778,-73.891],[40.775,-73.886],
+  [40.768,-73.866],[40.762,-73.858],[40.759,-73.850],[40.766,-73.846],[40.776,-73.848],[40.785,-73.846],[40.791,-73.842],
+  [40.794,-73.836],[40.795,-73.826],[40.791,-73.812],[40.793,-73.800],[40.790,-73.785],[40.787,-73.770],[40.70,-73.70]];
+// LGA airfield on fill (approximate outline around the real runway ends)
+const LGA = [[40.7835,-73.8835],[40.7870,-73.8728],[40.7852,-73.8672],[40.7768,-73.8603],[40.7712,-73.8530],[40.7678,-73.8555],
+  [40.7660,-73.8700],[40.7672,-73.8870],[40.7740,-73.8905]];
+const RIKERS = [[40.7995,-73.8935],[40.8003,-73.8830],[40.7975,-73.8765],[40.7905,-73.8742],[40.7858,-73.8800],[40.7862,-73.8905],[40.7915,-73.8955]];
+const RANDALLS = [[40.7860,-73.9300],[40.7960,-73.9290],[40.8040,-73.9230],[40.8030,-73.9150],[40.7930,-73.9130],[40.7840,-73.9220]];
+const ROOSEVELT = [[40.7505,-73.9625],[40.7560,-73.9585],[40.7700,-73.9455],[40.7720,-73.9455],[40.7705,-73.9490],[40.7580,-73.9600],[40.7515,-73.9640]];
+const NBROTHER = [[40.8000,-73.9005],[40.8012,-73.8975],[40.7997,-73.8960],[40.7985,-73.8990]];
+
+// ---- Geometry helpers ----
+const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+function segInt(p1, p2, q1, q2) {   // returns t on p1->p2
+  const r = [p2[0]-p1[0], p2[1]-p1[1]], s = [q2[0]-q1[0], q2[1]-q1[1]];
+  const den = r[0]*s[1] - r[1]*s[0]; if (Math.abs(den) < 1e-9) return null;
+  const qp = [q1[0]-p1[0], q1[1]-p1[1]];
+  const t = (qp[0]*s[1] - qp[1]*s[0]) / den, u = (qp[0]*r[1] - qp[1]*r[0]) / den;
+  return (t >= 0 && t <= 1 && u >= -0.01 && u <= 4.01) ? t : null;
+}
+// Band edges (NW and SE) in px, from seg0 threshold corners out through seg3
+const nwEdge = [bandPx[0][3], bandPx[3][0]], seEdge = [bandPx[0][2], bandPx[3][1]];
+const L1 = P(...ROUTE[3]), L2 = P(...ROUTE[4]);
+const tIn = segInt(L1, L2, nwEdge[0], nwEdge[1]), tOut = segInt(L1, L2, seEdge[0], seEdge[1]);
+const ENTRY = lerp(L1, L2, tIn), EXIT = lerp(L1, L2, tOut);
+const thrPx = P(...R22);
+const entryNm = Math.hypot(ENTRY[0]-thrPx[0], ENTRY[1]-thrPx[1]) / NM;
+console.log("entry nm from thr", entryNm.toFixed(2), "entry px", ENTRY.map(Math.round), "thr px", thrPx.map(Math.round));
+
+// ---- Build SVG ----
+const svg = document.getElementById("s");
+let h = "";
+h += `<defs>
+  <clipPath id="map"><rect x="0" y="0" width="1920" height="1080"/></clipPath>
+  <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0F141B" stop-opacity="0.85"/><stop offset="0.7" stop-color="#0F141B" stop-opacity="0.6"/><stop offset="1" stop-color="#0F141B" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="foot" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0F141B" stop-opacity="0"/><stop offset="1" stop-color="#0F141B" stop-opacity="0.95"/>
+  </linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+  <pattern id="water" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+    <rect width="14" height="14" fill="#0C131B"/><line x1="0" y1="7" x2="14" y2="7" stroke="#111C27" stroke-width="2"/>
+  </pattern>
+</defs>`;
+h += `<rect width="1920" height="1080" fill="url(#water)"/>`;
+h += `<g clip-path="url(#map)" fill="var(--land)" stroke="var(--land-edge)" stroke-width="2" stroke-linejoin="round">`;
+for (const poly of [MANHATTAN, BRONX, QUEENS, LGA, RIKERS, RANDALLS, ROOSEVELT, NBROTHER]) h += `<polygon points="${pts(poly)}"/>`;
+h += `</g>`;
+h += `<rect x="0" y="0" width="1920" height="190" fill="url(#scrim)"/>`;
+
+// Runways: light-gray strips, ~150 ft wide
+const rwW = 150 / 6076.12 * NM;
+const strip = (a, b) => { const A = P(...a), B = P(...b); return `<line x1="${A[0]}" y1="${A[1]}" x2="${B[0]}" y2="${B[1]}" stroke="#C9CED6" stroke-width="${Math.max(rwW, 9)}" stroke-linecap="butt"/>`; };
+h += strip(R22, R04) + strip(R31, R13);
+// Runway 22 threshold bar
+{ const A = P(...R22), B = P(...R04); const dx = B[0]-A[0], dy = B[1]-A[1], L = Math.hypot(dx, dy); const nx = -dy/L*10, ny = dx/L*10;
+  h += `<line x1="${A[0]+nx}" y1="${A[1]+ny}" x2="${A[0]-nx}" y2="${A[1]-ny}" stroke="#EEF0EA" stroke-width="4"/>`; }
+
+// Arrival band (lga22_final_seg0..3)
+h += `<g>`;
+h += `<polygon points="${[nwEdge[0], nwEdge[1], seEdge[1], seEdge[0]].map(p => p.join(",")).join(" ")}" fill="#F29E4C" fill-opacity="0.22" stroke="none"/>`;
+h += `<line x1="${nwEdge[0][0]}" y1="${nwEdge[0][1]}" x2="${nwEdge[1][0]}" y2="${nwEdge[1][1]}" stroke="#F29E4C" stroke-opacity="0.75" stroke-width="2.5"/>`;
+h += `<line x1="${seEdge[0][0]}" y1="${seEdge[0][1]}" x2="${seEdge[1][0]}" y2="${seEdge[1][1]}" stroke="#F29E4C" stroke-opacity="0.75" stroke-width="2.5"/>`;
+{ const far = P(...dest(...R22, 32, 4)); h += `<line x1="${thrPx[0]}" y1="${thrPx[1]}" x2="${far[0]}" y2="${far[1]}" stroke="#F29E4C" stroke-opacity="0.8" stroke-width="2.5" stroke-dasharray="14 10"/>`; }
+h += `</g>`;
+
+// Plane icons along the centerline, pointing toward the runway (true heading 212)
+const plane = (d) => { const [x, y] = P(...dest(...R22, 32, d));
+  return `<g transform="translate(${x},${y}) rotate(212) scale(1.55)">
+    <path d="M0,-20 C2.2,-20 3,-17 3,-14 L3,-5 L19,4 L19,8 L3,3 L3,12 L8,16 L8,19 L0,17 L-8,19 L-8,16 L-3,12 L-3,3 L-19,8 L-19,4 L-3,-5 L-3,-14 C-3,-17 -2.2,-20 0,-20 Z"
+      fill="#F29E4C" stroke="#0F141B" stroke-width="1.5" stroke-linejoin="round"/></g>`; };
+h += plane(0.55) + plane(1.95) + plane(2.95);
+
+// Medevac route
+const rp = ROUTE.map(r => P(...r));
+const solid = [rp[0], rp[1], rp[2], rp[3], ENTRY];
+h += `<polyline points="${solid.map(p => p.join(",")).join(" ")}" fill="none" stroke="#0F141B" stroke-width="12" stroke-linejoin="round" stroke-opacity="0.6"/>`;
+h += `<polyline points="${solid.map(p => p.join(",")).join(" ")}" fill="none" stroke="#E66767" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>`;
+h += `<line x1="${ENTRY[0]}" y1="${ENTRY[1]}" x2="${EXIT[0]}" y2="${EXIT[1]}" stroke="#E66767" stroke-width="6" stroke-dasharray="16 11" stroke-linecap="butt"/>`;
+h += `<line x1="${EXIT[0]}" y1="${EXIT[1]}" x2="${rp[4][0]}" y2="${rp[4][1]}" stroke="#E66767" stroke-opacity="0.45" stroke-width="4" stroke-dasharray="6 10"/>`;
+// arrowhead at the end of the leg
+{ const a = Math.atan2(rp[4][1]-rp[3][1], rp[4][0]-rp[3][0]) * 180 / Math.PI;
+  h += `<path d="M0,0 L-18,-10 L-18,10 Z" fill="#E66767" fill-opacity="0.6" transform="translate(${rp[4][0]},${rp[4][1]}) rotate(${a})"/>`; }
+// small waypoint marker at the turn
+h += `<circle cx="${rp[3][0]}" cy="${rp[3][1]}" r="6" fill="#0F141B" stroke="#E66767" stroke-width="3"/>`;
+
+// Conflict ring at entry (pulse-style: concentric rings)
+h += `<circle cx="${ENTRY[0]}" cy="${ENTRY[1]}" r="34" fill="#E66767" fill-opacity="0.35" filter="url(#glow)"/>`;
+h += `<circle cx="${ENTRY[0]}" cy="${ENTRY[1]}" r="62" fill="none" stroke="#E66767" stroke-width="2" stroke-opacity="0.35"/>`;
+h += `<circle cx="${ENTRY[0]}" cy="${ENTRY[1]}" r="46" fill="none" stroke="#E66767" stroke-width="3" stroke-opacity="0.65"/>`;
+h += `<circle cx="${ENTRY[0]}" cy="${ENTRY[1]}" r="28" fill="none" stroke="#E66767" stroke-width="5"/>`;
+h += `<circle cx="${ENTRY[0]}" cy="${ENTRY[1]}" r="6" fill="#EEF0EA"/>`;
+
+// Helicopter icon on the turn leg, before entry
+{ const hp = lerp(L1, ENTRY, 0.38); const a = Math.atan2(L2[1]-L1[1], L2[0]-L1[0]) * 180 / Math.PI + 90;
+  h += `<g transform="translate(${hp[0]},${hp[1]})">
+    <circle r="31" fill="#0F141B" stroke="#E66767" stroke-width="3"/>
+    <g transform="rotate(${a})" fill="#EEF0EA">
+      <ellipse cx="0" cy="-2" rx="7" ry="11"/><rect x="-1.8" y="7" width="3.6" height="17" rx="1.5"/><rect x="-6" y="21" width="12" height="3" rx="1.5"/>
+      <line x1="-21" y1="-17" x2="21" y2="13" stroke="#EEF0EA" stroke-width="2.5"/><line x1="-21" y1="13" x2="21" y2="-17" stroke="#EEF0EA" stroke-width="2.5"/>
+    </g>
+    <g transform="translate(24,-24)"><circle r="13" fill="#E66767" stroke="#0F141B" stroke-width="2.5"/>
+      <rect x="-2.6" y="-8" width="5.2" height="16" fill="#fff"/><rect x="-8" y="-2.6" width="16" height="5.2" fill="#fff"/></g>
+  </g>`;
+  window.HELI = hp; }
+
+// ---- Labels ----
+const T = (x, y, txt, o = {}) => `<text x="${x}" y="${y}" font-size="${o.s||24}" fill="${o.c||'#B8C2CE'}" font-weight="${o.w||400}" text-anchor="${o.a||'start'}" ${o.t?`transform="${o.t}"`:''} ${o.ls?`letter-spacing="${o.ls}"`:''} ${o.cls?`class="${o.cls}"`:''} ${o.st?`style="${o.st}"`:''}>${txt}</text>`;
+const halo = "paint-order:stroke;stroke:#0F141B;stroke-width:6px;stroke-linejoin:round";
+
+// place names
+{ const [x, y] = P(40.7935, -73.8885); h += T(x, y + 8, "Rikers Island", { a: "middle", c: "#B8C2CE", st: halo }); }
+{ const [x, y] = P(40.7700, -73.8735); h += T(x - 10, y + 62, "LaGuardia (LGA)", { a: "middle", c: "#EEF0EA", w: 600, s: 26, st: halo }); }
+{ h += T(1392, 712, "Flushing Bay", { a: "end", c: "#6CB0EE", st: halo + ";font-style:italic" }); }
+{ let [x, y] = P(40.7590, -73.9495); x += 30; y += 30; h += T(x, y, "East River", { a: "middle", c: "#6CB0EE", t: `rotate(-47 ${x} ${y})`, st: halo + ";font-style:italic" }); }
+{ const [x, y] = P(40.7700, -73.9850); h += T(x, y, "Manhattan", { a: "middle", c: "#7F8B99", s: 24, ls: 3, t: `rotate(-60 ${x} ${y})` }); }
+{ const [x, y] = P(40.7550, -73.9140); h += T(x, y, "Queens", { a: "middle", c: "#7F8B99", s: 24, ls: 3 }); }
+{ const [x, y] = P(40.8150, -73.9200); h += T(x, y, "The Bronx", { a: "middle", c: "#7F8B99", s: 24, ls: 3 }); }
+
+// Runway 22 label at the landing end
+h += T(thrPx[0] - 26, thrPx[1] + 6, "Runway 22", { a: "end", c: "#EEF0EA", w: 600, s: 26, st: halo });
+
+// Arrivals label
+{ const [x, y] = P(...dest(...R22, 32, 2.45));
+  h += T(x + 135, y - 8, "Airliners landing", { c: "#F29E4C", w: 600, s: 30, cls: "h", st: halo });
+  h += T(x + 135, y + 28, "on Runway 22", { c: "#F29E4C", w: 600, s: 30, cls: "h", st: halo }); }
+
+// Medevac label
+{ const hp = window.HELI;
+  h += T(hp[0] - 44, hp[1] - 58, "SIM medevac N312LM, 600 ft", { a: "end", c: "#E66767", w: 600, s: 28, cls: "h", st: halo });
+  h += T(hp[0] - 44, hp[1] - 26, "turning direct College Point", { a: "end", c: "#B8C2CE", s: 24, st: halo }); }
+// Route origin label
+h += T(rp[1][0] + 30, rp[1][1] + 46, "up the East River", { c: "#E66767", s: 24, st: halo + ";font-style:italic" });
+
+// Callout card
+{ const cx = 1408, cy = 548, cw = 476, ch = 222;
+  // leader from ring to card
+  h += `<path d="M${ENTRY[0]+30},${ENTRY[1]+24} L${ENTRY[0]+110},${ENTRY[1]+110} L${cx},${cy+40}" fill="none" stroke="#E66767" stroke-width="2.5"/>`;
+  h += `<rect x="${cx}" y="${cy}" width="${cw}" height="${ch}" rx="14" fill="#141B24" stroke="#E66767" stroke-width="2.5"/>`;
+  h += `<rect x="${cx}" y="${cy}" width="10" height="${ch}" rx="5" fill="#E66767"/>`;
+  h += T(cx + 32, cy + 46, "Landed: handoff about", { c: "#EEF0EA", w: 700, s: 30, cls: "h" });
+  h += T(cx + 32, cy + 84, "84 s before entry", { c: "#E66767", w: 700, s: 30, cls: "h" });
+  h += T(cx + 32, cy + 124, "Arrivals here: about 360 to 410 ft.", { c: "#B8C2CE", s: 24 });
+  h += T(cx + 32, cy + 156, "Medevac: 600 ft, inside the", { c: "#B8C2CE", s: 24 });
+  h += T(cx + 32, cy + 188, "protected band (0 to 730 ft).", { c: "#B8C2CE", s: 24 });
+}
+
+// Mini side-view inset
+{ const ix = 1408, iy = 800, iw = 476, ih = 200;
+  h += `<rect x="${ix}" y="${iy}" width="${iw}" height="${ih}" rx="14" fill="#141B24" stroke="#2A3442" stroke-width="2"/>`;
+  h += T(ix + 24, iy + 36, "Side view near the conflict", { c: "#EEF0EA", w: 600, s: 24, cls: "h" });
+  const gx0 = ix + 40, gy0 = iy + ih - 34, gw = iw - 80, gh = 110;  // 0..1.6 nm, 0..800 ft
+  const X = nm => gx0 + nm / 1.6 * gw, Y = ft => gy0 - ft / 800 * gh;
+  h += `<rect x="${X(0)}" y="${Y(730)}" width="${X(1.6)-X(0)}" height="${Y(0)-Y(730)}" fill="#F29E4C" fill-opacity="0.12"/>`;
+  h += `<line x1="${gx0}" y1="${gy0}" x2="${gx0+gw}" y2="${gy0}" stroke="#7F8B99" stroke-width="2"/>`;
+  h += `<line x1="${X(0)}" y1="${Y(0)}" x2="${X(1.6)}" y2="${Y(1.6*318)}" stroke="#F29E4C" stroke-width="3"/>`;
+  const ax = X(1.1), ay = Y(1.1 * 318 + 20);
+  h += `<line x1="${ax}" y1="${Y(600)}" x2="${ax}" y2="${ay}" stroke="#B8C2CE" stroke-width="2" stroke-dasharray="4 4"/>`;
+  h += `<circle cx="${ax}" cy="${ay}" r="7" fill="#F29E4C"/>`;
+  h += `<circle cx="${ax}" cy="${Y(600)}" r="10" fill="#E66767" stroke="#0F141B" stroke-width="2"/>`;
+  h += T(ax - 22, Y(600) + 8, "600 ft vs about 400 ft", { a: "end", c: "#EEF0EA", w: 600, s: 24, st: "paint-order:stroke;stroke:#141B24;stroke-width:6px" });
+  h += T(gx0 - 4, gy0 + 26, "runway", { c: "#8E99A6", s: 22 });
+  h += T(ax, gy0 + 26, "1.1 nm", { a: "middle", c: "#8E99A6", s: 22 });
+}
+
+// Scale bar + north arrow (top-right)
+{ const sx = 1600, sy = 92;
+  h += `<rect x="${sx}" y="${sy}" width="${NM}" height="10" fill="#EEF0EA"/><rect x="${sx+NM/2}" y="${sy}" width="${NM/2}" height="10" fill="#0F141B" stroke="#EEF0EA" stroke-width="2"/>`;
+  h += `<rect x="${sx}" y="${sy}" width="${NM}" height="10" fill="none" stroke="#EEF0EA" stroke-width="2"/>`;
+  h += T(sx, sy - 14, "0", { c: "#B8C2CE", a: "middle", s: 22 }) + T(sx + NM, sy - 14, "1 nm", { c: "#B8C2CE", a: "middle", s: 22 });
+  const nx = 1860, ny = 70;
+  h += `<path d="M${nx},${ny-34} L${nx+16},${ny+14} L${nx},${ny+4} L${nx-16},${ny+14} Z" fill="#EEF0EA"/>`;
+  h += T(nx, ny + 44, "N", { a: "middle", c: "#EEF0EA", w: 700, s: 24, cls: "h" });
+}
+
+// Title scrim + title
+h += T(56, 84, "A medevac heads across LaGuardia's arrival path", { c: "#EEF0EA", w: 700, s: 52, cls: "h" });
+h += T(58, 132, `Top-down view. Runway 22 arrivals in <tspan fill="#F29E4C" font-weight="600">amber</tspan>; the simulated medevac in <tspan fill="#E66767" font-weight="600">red</tspan>.`, { c: "#B8C2CE", s: 28 });
+
+// Footer
+h += `<rect x="0" y="1000" width="1920" height="80" fill="url(#foot)"/>`;
+h += T(56, 1056, "Schematic map. Geometry from FAA sources (14 CFR 93, CIFP). SIM: simulated flight. Not for operational use.", { c: "#8E99A6", s: 22 });
+
+svg.innerHTML = h;
+</script>
+</body>
+</html>

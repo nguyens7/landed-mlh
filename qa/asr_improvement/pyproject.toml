@@ -1,0 +1,21 @@
+[project]
+name = "landed-asr-experiments"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "faster-whisper>=1.2.1",
+    "google-genai>=2.29.0",
+    "jiwer>=4.0.0",
+    "numpy>=2.5.4",
+    "pydantic>=2.14.0",
+    "scipy>=1.18.1",
+    "soundfile>=0.14.0",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501", "B905"]

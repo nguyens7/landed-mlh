@@ -1,0 +1,77 @@
+# S3 variant B. Silent deviation: a southbound helicopter drifts from the west to the east Hudson shoreline.
+# SIMULATION ONLY. No pilot call after check-in; ADS-B alone raises the alert (SPEC section 2.2, check 1).
+id: S3B
+title: Silent drift to the wrong Hudson shoreline
+spec: "SPEC.md section 4, S3 variant B; section 2.2 (shoreline rule)"
+summary: >-
+  N2646X checks in southbound on the west shoreline, then drifts toward the east shoreline without saying anything.
+  Opposing traffic (a simulated tour helicopter) is northbound on the east lane. The scenario-side shoreline check
+  alerts; the agent proposes a TRAFFIC call, auto-spoken when confidence is at least 0.8.
+window_s: 200
+aircraft:
+  - reg: N2646X
+    spoken: MEDEVAC Two Six Four Six X-Ray
+    type: EC35
+    voice: Kore
+    liftoff_t: 5
+    airborne: true
+    cruise_alt_ft: 1000
+    cruise_kt: 100
+    route:   # west shoreline, then a steady drift east across the centre line (offsets -0.15 -> +0.40 nm)
+      - {lat: 40.775, lon: -74.0001}
+      - {lat: 40.760, lon: -74.0105}
+      - {lat: 40.748, lon: -74.0111}
+      - {lat: 40.735, lon: -74.0117}
+      - {lat: 40.715, lon: -74.0146}
+      - {lat: 40.700, lon: -74.0176}
+  - reg: N77TH
+    role: traffic
+    role_guess: tour
+    spoken: Tour Seven Seven Tango Hotel
+    type: AS350
+    voice: Fenrir
+    airborne: true
+    liftoff_t: 62
+    airborne: true
+    cruise_alt_ft: 900
+    cruise_kt: 100
+    route:   # northbound on the east shoreline (the correct lane for northbound traffic)
+      - {lat: 40.700, lon: -74.0209}
+      - {lat: 40.720, lon: -74.0169}
+      - {lat: 40.740, lon: -74.0130}
+      - {lat: 40.760, lon: -74.0028}
+      - {lat: 40.775, lon: -73.9913}
+lines:
+  - id: L1
+    t: 12
+    aircraft: N2646X
+    text: Landed desk, MEDEVAC Two Six Four Six X-Ray, Hudson southbound, one thousand.
+    snr: clean
+    expect:
+      parse:
+        callsign: {snapped_to: N2646X}
+        slots: {corridor: Hudson, direction: southbound, altitude_ft: 1000}
+        emergency: false
+      response: {mode: speak, template_id: ACK_CHECKIN, tier: auto}
+events:
+  - id: E1
+    kind: shoreline
+    aircraft: N2646X
+    severity: caution
+    min_confidence: 0.8
+    t_window: [40, 100]
+    traffic_nm: [0.5, 3.5]
+    note: Southbound aircraft on the east shoreline with opposing traffic nearby.
+    response:
+      mode: speak
+      template_id: TRAFFIC
+      tier: auto
+      spoken_contains: [traffic]
+  - id: E2
+    kind: no_alerts
+    aircraft: N2646X
+    min_severity: advisory
+    note: No LGA volume alert; the deviation is a corridor-rule alert only.
+geo:
+  corridors: {N2646X: [sfra_hudson], N77TH: [sfra_hudson]}
+expected_summary: {handoffs: 0}

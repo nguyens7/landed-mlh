@@ -1,0 +1,33 @@
+[project]
+name = "landed-scenarios"
+version = "0.1.0"
+description = "Landed scripted demo scenarios S1-S6: sim tracks, pilot audio, expected-vs-actual runner and scoreboard"
+requires-python = ">=3.13"
+dependencies = [
+    "google-genai>=2.29.0",
+    "httpx>=0.28.0",
+    "jiwer>=4.0.0",
+    "numpy>=2.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0.0",
+    "scipy>=1.14.0",
+    "soundfile>=0.13.0",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = ["pytest>=9.0.0", "ruff>=0.17.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501", "B905"]

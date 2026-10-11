@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DCA January 2025</title>
+<meta name="viewport" content="width=1920">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@500;600;700&display=block" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F141B; --water: #0F141B; --land: #222C39; --land-edge: #34404F;
+    --ink: #EEF0EA; --ink2: #B8C2CE; --amber: #F29E4C; --red: #E66767; --blue: #6CB0EE;
+  }
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body { width: 1920px; height: 1080px; overflow: hidden; }
+  svg { display: block; }
+  text { font-family: "IBM Plex Sans", sans-serif; }
+  .h { font-family: "Space Grotesk", sans-serif; }
+</style>
+</head>
+<body>
+<svg id="s" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"></svg>
+<script>
+// Sources for every element are listed in SOURCES.md (same folder).
+// ---- Projection: equirectangular, 300 px per nm, centered on the collision point ----
+const NM = 300, K = NM * 60;                               // px per degree of latitude
+const COS = Math.cos(38.85 * Math.PI / 180);
+const dm = s => { const [d, m] = s.slice(0, -1).split("-"); const v = +d + +m / 60; return /[SW]$/.test(s) ? -v : v; };
+const dest = (lat, lon, brg, nm) => { const b = brg * Math.PI / 180;
+  return [lat + nm / 60 * Math.cos(b), lon + nm / 60 * Math.sin(b) / Math.cos(lat * Math.PI / 180)]; };
+
+// ---- Facts ----
+// AirNav DCA runway ends (FAA data)
+const R33 = [dm("38-50.988243N"), dm("077-01.932547W")];
+const R15 = [dm("38-51.669687N"), dm("077-02.597818W")];
+const R01 = [dm("38-50.494092N"), dm("077-02.204907W")];
+const R19 = [dm("38-51.671555N"), dm("077-02.323422W")];
+// AIR-26-02: collided "about 2,500 ft from the runway 33 threshold", airplane on final for 33
+// (runway 33 true course 323, so the point lies on the extended centerline, bearing 143 from the threshold)
+const COLL = dest(...R33, 143, 2500 / 6076.12);
+const LAT0 = COLL[0], LON0 = COLL[1], CX = 900, CY = 640;
+const P = (lat, lon) => [CX + (lon - LON0) * K * COS, CY - (lat - LAT0) * K];
+const pts = arr => arr.map(([la, lo]) => P(la, lo).map(v => v.toFixed(1)).join(",")).join(" ");
+
+// ---- Simplified basemap (hand-traced, approximate, not to survey accuracy) ----
+const VIRGINIA = [[38.90,-77.12],[38.90,-77.058],[38.885,-77.053],[38.876,-77.048],[38.870,-77.0435],[38.866,-77.0405],
+  [38.8625,-77.0368],[38.858,-77.0345],[38.854,-77.0325],[38.8505,-77.0310],[38.8475,-77.0318],[38.8435,-77.0335],
+  [38.8405,-77.0350],[38.837,-77.0385],[38.828,-77.0395],[38.818,-77.0392],[38.800,-77.0400],[38.790,-77.0420],[38.790,-77.12]];
+const DC_NORTH = [[38.90,-77.050],[38.885,-77.046],[38.878,-77.043],[38.873,-77.038],[38.866,-77.031],[38.860,-77.0245],
+  [38.8577,-77.0218],[38.8582,-77.0198],[38.8615,-77.0190],[38.8625,-77.0135],[38.866,-77.006],[38.870,-76.998],
+  [38.873,-76.985],[38.876,-76.970],[38.880,-76.950],[38.885,-76.92],[38.90,-76.92]];
+const DC_SOUTH = [[38.878,-76.92],[38.876,-76.955],[38.872,-76.975],[38.866,-76.993],[38.860,-77.006],[38.855,-77.0140],
+  [38.851,-77.0175],[38.845,-77.0195],[38.838,-77.0205],[38.830,-77.0215],[38.822,-77.0225],[38.812,-77.0240],
+  [38.800,-77.0250],[38.790,-77.0220],[38.790,-76.92]];
+const DCA = [[38.8665,-77.0418],[38.8625,-77.0370],[38.8578,-77.0347],[38.8505,-77.0313],[38.8438,-77.0337],
+  [38.8398,-77.0368],[38.8392,-77.0418],[38.8470,-77.0452],[38.8560,-77.0448],[38.8640,-77.0450]];
+
+// ---- Paths ----
+// Route 4 per FAA chart text quoted in AIR-25-01: from Hains Point, "via east bank of Potomac River" toward Wilson Bridge
+const ROUTE4 = [[38.8572,-77.0226],[38.8515,-77.0200],[38.8450,-77.0213],[38.8380,-77.0222],[38.8300,-77.0232],
+ [38.8255,-77.0238]];
+// Route 1 (schematic): Washington Channel along East Potomac Park down to Hains Point
+const ROUTE1 = [[38.8800,-77.0330],[38.8700,-77.0270],[38.8620,-77.0225],[38.8572,-77.0226]];
+
+// ---- Build SVG ----
+const svg = document.getElementById("s");
+let h = "";
+h += `<defs>
+  <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0F141B" stop-opacity="0.85"/><stop offset="0.7" stop-color="#0F141B" stop-opacity="0.6"/><stop offset="1" stop-color="#0F141B" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="foot" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0F141B" stop-opacity="0"/><stop offset="1" stop-color="#0F141B" stop-opacity="0.95"/>
+  </linearGradient>
+  <pattern id="water" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+    <rect width="14" height="14" fill="#0C131B"/><line x1="0" y1="7" x2="14" y2="7" stroke="#111C27" stroke-width="2"/>
+  </pattern>
+</defs>`;
+h += `<rect width="1920" height="1080" fill="url(#water)"/>`;
+h += `<g fill="var(--land)" stroke="var(--land-edge)" stroke-width="2" stroke-linejoin="round">`;
+for (const poly of [VIRGINIA, DC_NORTH, DC_SOUTH]) h += `<polygon points="${pts(poly)}"/>`;
+h += `</g>`;
+h += `<polygon points="${pts(DCA)}" fill="#273241" stroke="#3E4A5A" stroke-width="2" stroke-linejoin="round"/>`;
+h += `<rect x="0" y="0" width="1920" height="190" fill="url(#scrim)"/>`;
+
+// Runways: light-gray strips, 150 ft wide (AirNav)
+const rwW = Math.max(150 / 6076.12 * NM, 9);
+const strip = (a, b, c) => { const A = P(...a), B = P(...b); return `<line x1="${A[0]}" y1="${A[1]}" x2="${B[0]}" y2="${B[1]}" stroke="${c}" stroke-width="${rwW}" stroke-linecap="butt"/>`; };
+h += strip(R01, R19, "#3F4957");
+h += strip(R33, R15, "#C9CED6");
+const T33 = P(...R33);
+{ const B = P(...R15); const dx = B[0]-T33[0], dy = B[1]-T33[1], L = Math.hypot(dx, dy); const nx = -dy/L*10, ny = dx/L*10;
+  h += `<line x1="${T33[0]+nx}" y1="${T33[1]+ny}" x2="${T33[0]-nx}" y2="${T33[1]-ny}" stroke="#EEF0EA" stroke-width="4"/>`; }
+
+// Route 1 (thin) and Route 4 (dashed blue)
+const r1 = ROUTE1.map(p => P(...p)), r4 = ROUTE4.map(p => P(...p));
+const poly = a => a.map(p => p.join(",")).join(" ");
+h += `<polyline points="${poly(r1)}" fill="none" stroke="#6CB0EE" stroke-opacity="0.5" stroke-width="3" stroke-dasharray="8 9" stroke-linejoin="round"/>`;
+h += `<polyline points="${poly(r4)}" fill="none" stroke="#0F141B" stroke-opacity="0.6" stroke-width="10" stroke-linejoin="round"/>`;
+h += `<polyline points="${poly(r4)}" fill="none" stroke="#6CB0EE" stroke-width="5" stroke-dasharray="16 11" stroke-linejoin="round"/>`;
+// Hains Point marker (open triangle = noncompulsory reporting point on the FAA chart, per AIR-25-01)
+{ const [x, y] = P(38.8577, -77.0218);
+  h += `<path d="M${x},${y-12} L${x+11},${y+8} L${x-11},${y+8} Z" fill="#0F141B" stroke="#6CB0EE" stroke-width="2.5"/>`; }
+
+// Jet: schematic approach from the south along the river, left turn onto runway 33 final (AIR-26-02 fig. 2)
+const C = P(...COLL);
+const FIN = P(...dest(...COLL, 143, 0.22));    // wings level on final about 6 s before the collision (AIR-26-02)
+const J0 = P(38.8255, -77.0278);
+const FIN2 = P(...dest(...COLL, 143, 0.10)), PRE = P(38.8360, -77.0254);
+const jetD = `M${J0} L${PRE} Q${FIN} ${FIN2} L${C}`;
+h += `<path d="${jetD}" fill="none" stroke="#0F141B" stroke-opacity="0.6" stroke-width="11" stroke-linejoin="round"/>`;
+h += `<path d="${jetD}" fill="none" stroke="#F29E4C" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>`;
+h += `<line x1="${C[0]}" y1="${C[1]}" x2="${T33[0]}" y2="${T33[1]}" stroke="#F29E4C" stroke-opacity="0.55" stroke-width="3" stroke-dasharray="6 9"/>`;
+
+// One plane icon on the approach, heading north
+const planeAt = (x, y, rot) => `<g transform="translate(${x},${y}) rotate(${rot}) scale(1.45)">
+    <path d="M0,-20 C2.2,-20 3,-17 3,-14 L3,-5 L19,4 L19,8 L3,3 L3,12 L8,16 L8,19 L0,17 L-8,19 L-8,16 L-3,12 L-3,3 L-19,8 L-19,4 L-3,-5 L-3,-14 C-3,-17 -2.2,-20 0,-20 Z"
+      fill="#F29E4C" stroke="#0F141B" stroke-width="1.5" stroke-linejoin="round"/></g>`;
+const PL = P(38.8290, -77.0270);
+h += planeAt(PL[0], PL[1], 4);
+
+// Helicopter on Route 4, south of Hains Point, heading south
+const HP = P(38.8528, -77.0204);
+h += `<g transform="translate(${HP[0]},${HP[1]})">
+    <circle r="28" fill="#0F141B" stroke="#6CB0EE" stroke-width="3"/>
+    <g transform="rotate(195)" fill="#EEF0EA">
+      <ellipse cx="0" cy="-2" rx="6.5" ry="10"/><rect x="-1.7" y="6" width="3.4" height="15" rx="1.5"/><rect x="-5.5" y="18" width="11" height="3" rx="1.5"/>
+      <line x1="-19" y1="-15" x2="19" y2="11" stroke="#EEF0EA" stroke-width="2.5"/><line x1="-19" y1="11" x2="19" y2="-15" stroke="#EEF0EA" stroke-width="2.5"/>
+    </g></g>`;
+
+// Where the paths met: small quiet ring
+h += `<circle cx="${C[0]}" cy="${C[1]}" r="20" fill="none" stroke="#E66767" stroke-width="2.5"/>`;
+
+// ---- Labels ----
+const T = (x, y, txt, o = {}) => `<text x="${x}" y="${y}" font-size="${o.s||24}" fill="${o.c||'#B8C2CE'}" font-weight="${o.w||400}" text-anchor="${o.a||'start'}" ${o.t?`transform="${o.t}"`:''} ${o.ls?`letter-spacing="${o.ls}"`:''} ${o.cls?`class="${o.cls}"`:''} ${o.st?`style="${o.st}"`:''}>${txt}</text>`;
+const halo = "paint-order:stroke;stroke:#0F141B;stroke-width:6px;stroke-linejoin:round";
+
+{ const [x, y] = P(38.8325, -77.0700); h += T(x, y, "Virginia", { a: "middle", c: "#7F8B99", s: 24, ls: 3 }); }
+{ const [x, y] = P(38.8410, -77.0020); h += T(x, y, "Washington, DC", { a: "middle", c: "#7F8B99", s: 24, ls: 3 }); }
+{ const [x, y] = P(38.8700, -77.0080); h += T(x, y, "Washington, DC", { a: "middle", c: "#7F8B99", s: 24, ls: 3 }); }
+{ let [x, y] = P(38.8668, -77.0312); h += T(x, y, "Potomac River", { a: "middle", c: "#6CB0EE", t: `rotate(-54 ${x} ${y})`, st: halo + ";font-style:italic" }); }
+{ const [x, y] = P(38.8577, -77.0218); h += T(x + 22, y - 10, "Hains Point", { c: "#B8C2CE", s: 24, st: halo }); }
+{ const [x, y] = P(38.8560, -77.0452); h += T(x - 18, y + 8, "Reagan National (DCA)", { a: "end", c: "#EEF0EA", w: 600, s: 26, st: halo }); }
+{ const A = P(38.8565, -77.0362); h += T(A[0] + 18, A[1] + 8, "Runway 33", { c: "#EEF0EA", w: 600, s: 26, st: halo }); }
+
+// Jet label
+h += T(PL[0] - 40, PL[1] - 6, "PSA 5342,", { a: "end", c: "#F29E4C", w: 600, s: 30, cls: "h", st: halo });
+h += T(PL[0] - 40, PL[1] + 30, "landing Runway 33", { a: "end", c: "#F29E4C", w: 600, s: 30, cls: "h", st: halo });
+
+// Helicopter + route labels
+h += T(HP[0] + 42, HP[1] + 10, "PAT25 (UH-60)", { c: "#6CB0EE", w: 600, s: 30, cls: "h", st: halo });
+{ const [x, y] = P(38.8300, -77.0232);
+  h += T(x + 30, y - 6, "Helicopter Route 4,", { c: "#6CB0EE", w: 600, s: 28, cls: "h", st: halo });
+  h += T(x + 30, y + 28, "max 200 ft", { c: "#6CB0EE", w: 600, s: 28, cls: "h", st: halo }); }
+
+// Ring label
+h += T(C[0] - 32, C[1] + 8, "Paths met at about 278 ft", { a: "end", c: "#EEF0EA", w: 600, s: 26, cls: "h", st: halo });
+
+// ---- Fact strip: three cards ----
+const card = (y, big, l1, l2) => {
+  const x = 1408, w = 476, ch = 128;
+  let s = `<rect x="${x}" y="${y}" width="${w}" height="${ch}" rx="14" fill="#141B24" stroke="#2A3442" stroke-width="2"/>`;
+  s += `<rect x="${x}" y="${y}" width="8" height="${ch}" rx="4" fill="#7F8B99"/>`;
+  s += T(x + 30, y + 46, big, { c: "#EEF0EA", w: 700, s: 32, cls: "h" });
+  s += T(x + 30, y + 82, l1, { c: "#B8C2CE", s: 24 });
+  s += T(x + 30, y + 112, l2, { c: "#B8C2CE", s: 24 });
+  return s; };
+h += card(290, "1 controller", "on combined helicopter and", "local positions");
+h += card(432, "2 frequencies", "the crews could not hear", "each other (119.1 and 134.35)");
+h += card(574, "26 s", "of conflict alert before", "the collision");
+
+// ---- Side-view inset ----
+{ const ix = 1408, iy = 730, iw = 476, ih = 262;
+  h += `<rect x="${ix}" y="${iy}" width="${iw}" height="${ih}" rx="14" fill="#141B24" stroke="#2A3442" stroke-width="2"/>`;
+  h += T(ix + 24, iy + 38, "Side view near the collision", { c: "#EEF0EA", w: 600, s: 24, cls: "h" });
+  const gx0 = ix + 40, gy0 = iy + ih - 40, gw = iw - 80, gh = 150;   // 0..3,500 ft along track, 0..400 ft altitude
+  const X = ft => gx0 + ft / 3500 * gw, Y = ft => gy0 - ft / 400 * gh;
+  h += `<rect x="${X(0)}" y="${Y(200)}" width="${gw}" height="${Y(0)-Y(200)}" fill="#6CB0EE" fill-opacity="0.12"/>`;
+  h += `<line x1="${X(0)}" y1="${Y(200)}" x2="${X(3500)}" y2="${Y(200)}" stroke="#6CB0EE" stroke-width="2.5" stroke-dasharray="10 7"/>`;
+  h += `<line x1="${gx0}" y1="${gy0}" x2="${gx0+gw}" y2="${gy0}" stroke="#7F8B99" stroke-width="2"/>`;
+  h += T(X(80), Y(200) + 28, "Route 4 limit 200 ft", { c: "#6CB0EE", w: 600, s: 24 });
+  const ax = X(2500), ay = Y(278);
+  h += `<line x1="${ax}" y1="${gy0}" x2="${ax}" y2="${ay + 12}" stroke="#B8C2CE" stroke-width="2" stroke-dasharray="4 4"/>`;
+  h += `<circle cx="${ax}" cy="${ay}" r="11" fill="none" stroke="#E66767" stroke-width="2.5"/>`;
+  h += T(ax - 22, ay + 8, "collision about 278 ft", { a: "end", c: "#EEF0EA", w: 600, s: 24, st: "paint-order:stroke;stroke:#141B24;stroke-width:6px" });
+  h += T(gx0 - 4, gy0 + 28, "Runway 33", { c: "#8E99A6", s: 22 });
+  h += T(ax, gy0 + 28, "about 2,500 ft", { a: "middle", c: "#8E99A6", s: 22 });
+}
+
+// Scale bar + north arrow (top-right)
+{ const sx = 1500, sy = 92;
+  h += `<rect x="${sx}" y="${sy}" width="${NM}" height="10" fill="#EEF0EA"/><rect x="${sx+NM/2}" y="${sy}" width="${NM/2}" height="10" fill="#0F141B" stroke="#EEF0EA" stroke-width="2"/>`;
+  h += `<rect x="${sx}" y="${sy}" width="${NM}" height="10" fill="none" stroke="#EEF0EA" stroke-width="2"/>`;
+  h += T(sx, sy - 14, "0", { c: "#B8C2CE", a: "middle", s: 22 }) + T(sx + NM, sy - 14, "1 nm", { c: "#B8C2CE", a: "middle", s: 22 });
+  const nx = 1860, ny = 70;
+  h += `<path d="M${nx},${ny-34} L${nx+16},${ny+14} L${nx},${ny+4} L${nx-16},${ny+14} Z" fill="#EEF0EA"/>`;
+  h += T(nx, ny + 44, "N", { a: "middle", c: "#EEF0EA", w: 700, s: 24, cls: "h" });
+}
+
+// Title + subtitle
+h += T(56, 84, "Washington, DC, January 29, 2025", { c: "#EEF0EA", w: 700, s: 52, cls: "h" });
+h += T(58, 132, `A helicopter on <tspan fill="#6CB0EE" font-weight="600">Route 4</tspan> and a jet landing on <tspan fill="#F29E4C" font-weight="600">Runway 33</tspan>. 67 people died.`, { c: "#B8C2CE", s: 28 });
+
+// Footer
+h += `<rect x="0" y="1000" width="1920" height="80" fill="url(#foot)"/>`;
+h += T(56, 1056, "Schematic based on NTSB DCA25MA108 / AIR-26-02. Positions approximate. In memory of the 67 people who died.", { c: "#8E99A6", s: 22 });
+
+svg.innerHTML = h;
+</script>
+</body>
+</html>

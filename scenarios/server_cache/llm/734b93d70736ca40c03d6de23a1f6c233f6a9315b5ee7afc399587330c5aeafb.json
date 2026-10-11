@@ -1,0 +1,1 @@
+{"name": "choose_template", "args": {"reason": "Pilot checking in on the Hudson corridor southbound at 1000 feet.", "slots": {"reg": "N2646X", "position": "roosevelt_island_north", "altimeter_inhg": 29.92}, "template_id": "ACK_CHECKIN"}}
