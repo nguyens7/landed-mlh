@@ -223,6 +223,17 @@ describe("ConflictEngine: Class B floor trigger", () => {
     expect(reasons.at(-1)).toContain("Class B floor 1,300 − 100 ft");
   });
 
+  it("gives a Class B handoff a non-zero confidence even with a stale sample (sparse-gap data age)", () => {
+    const engine = new ConflictEngine();
+    let conf = 0;
+    for (let i = 0; i < 6; i++) {
+      const ac = straightFlightSnapshot({ lat: 40.75, lon: -73.85, t: i * 4, alt_ft: 1500, gs_kt: 0, climb_fpm: 0 });
+      const alerts = engine.tick([{ ...ac, data_age_s: 25 }], [classBVolume()], ac.t);
+      if (alerts[0]?.severity === "handoff") conf = alerts[0].confidence;
+    }
+    expect(conf).toBeGreaterThan(0.5);
+  });
+
   it("keeps the handoff alive across one dip below the threshold (hysteresis)", () => {
     const { sev } = runAltitudes([1500, 1500, 1500, 1500, 1500, 1100]);
     expect(sev.slice(-2)).toEqual(["handoff", "handoff"]);

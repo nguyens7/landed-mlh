@@ -40,3 +40,10 @@ export function iconId(shape: IconShape, color: string): string {
 export const AIRLINER_COLOR = "#aab6c4";
 export const MEDEVAC_COLOR = "#ff5fe0";
 export const HELI_COLORS = ["#39c0ff", "#ffb020", "#ff3b3b"];
+
+/** Every shape x color image the map registers; the aircraft layers can only reference these ids. */
+export const ICON_COMBOS: [IconShape, string][] = [
+  ...HELI_COLORS.map((c) => ["heli", c] as [IconShape, string]),
+  ...[MEDEVAC_COLOR, ...HELI_COLORS].map((c) => ["medevac", c] as [IconShape, string]),
+  ["plane", AIRLINER_COLOR],
+];

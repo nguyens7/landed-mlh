@@ -24,8 +24,9 @@
 //                      extended to 2x the 90 s horizon so a late entry is not penalized for
 //                      the horizon cutting the penetration short; normalized by 0.5 nm, so a
 //                      half-mile sustained penetration is full depth and a clip is near 0.
-//                      Class B handoff: how far the smoothed altitude is above floor - 100,
-//                      normalized by 300 ft. Class B caution: the sustained climb rate
+//                      Class B handoff: 0.5 plus half of how far the smoothed altitude is above
+//                      floor - 100, normalized by 300 ft; freshness is not applied (the rule
+//                      reads current altitude, so a sparse sample gap must not zero it). Class B caution: the sustained climb rate
 //                      normalized by the 1,500 fpm clamp. Near-miss (caution/advisory):
 //                      proximity, 1 - dist / 1 nm.
 //   stabilityScore  - 1 - (circular std-dev of the last few track headings / 60 deg). A turn
@@ -268,8 +269,11 @@ export class ConflictEngine {
     const inside = pointInPolygon(ac.lat, ac.lon, v.ring);
 
     if (inside && est.alt_ft >= threshold) {
-      const depth = clamp01((est.alt_ft - threshold) / CLASS_B_ALT_REFERENCE_FT);
-      const confidence = combineConfidence(depth, stability, freshness);
+      // The rule is a current-altitude test, so a sparse sample gap (interpolated data_age_s)
+      // must not gate it to 0.00: freshness is not applied. Depth starts at 0.5 when the rule
+      // has just fired and reaches 1 at CLASS_B_ALT_REFERENCE_FT above floor - 100.
+      const depth = 0.5 + 0.5 * clamp01((est.alt_ft - threshold) / CLASS_B_ALT_REFERENCE_FT);
+      const confidence = combineConfidence(depth, stability, 1);
       return {
         severity: "handoff",
         confidence,

@@ -20,9 +20,11 @@ export function ReplayControls() {
 
   return (
     <div className="replay-controls">
-      <button className="btn btn-primary" onClick={() => (playing ? pause() : play())}>
+      <button className="btn btn-primary btn-play" onClick={() => (playing ? pause() : play())}>
         {playing ? "Pause" : "Play"}
       </button>
+      {/* display: contents outside presenter mode, so the full console layout is unchanged */}
+      <div className="replay-compact">
       <div className="speed-group">
         {([1, 4, 16] as Speed[]).map((sp) => (
           <button key={sp} className={`btn btn-speed ${speed === sp ? "active" : ""}`} onClick={() => setSpeed(sp)}>
@@ -40,8 +42,10 @@ export function ReplayControls() {
         max={windowSeconds}
         step={1}
         value={currentT}
+        aria-label="Replay position"
         onChange={(e) => seek(Number(e.target.value))}
       />
+      </div>
       <button className="btn btn-conflict" onClick={jumpToConflict}>
         Jump to conflict
       </button>

@@ -1,24 +1,31 @@
 import { useEffect, useRef } from "react";
 import "./App.css";
+import "./presenter/presenter.css";
 import { useDeskStore } from "./store/useDeskStore";
 import { MapView } from "./components/MapView";
 import { ReplayControls } from "./components/ReplayControls";
 import { AlertCard } from "./components/AlertCard";
 import { AlertLog } from "./components/AlertLog";
 import { Header } from "./components/Header";
+import { HeroCard } from "./components/HeroCard";
+import { PresenterRail } from "./components/PresenterRail";
 import { AuditPanel, EmergencyBanner, VoiceBridge, VoiceOverlay } from "./voice/VoicePanels";
+import { installPresenterHotkey, usePresenterStore } from "./presenter/usePresenterStore";
 
 export default function App() {
   const load = useDeskStore((s) => s.load);
   const loaded = useDeskStore((s) => s.loaded);
   const error = useDeskStore((s) => s.error);
   const advance = useDeskStore((s) => s.advance);
+  const presenter = usePresenterStore((s) => s.on);
   const rafRef = useRef<number | null>(null);
   const lastFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     load();
   }, [load]);
+
+  useEffect(() => installPresenterHotkey(), []);
 
   useEffect(() => {
     const tick = (now: number) => {
@@ -39,7 +46,7 @@ export default function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${presenter ? "presenter" : ""}`}>
       <Header />
       <VoiceBridge />
       <EmergencyBanner />
@@ -47,13 +54,16 @@ export default function App() {
         <div className="map-pane">
           {loaded && <MapView />}
           <div className="map-attribution">ADS-B data: adsb.lol (ODbL)</div>
-          <AlertCard />
-          <VoiceOverlay />
+          {presenter ? <HeroCard /> : <AlertCard />}
+          {presenter && <PresenterRail />}
+          <VoiceOverlay hideHandoff={presenter} />
         </div>
-        <div className="side-pane">
-          <AlertLog />
-          <AuditPanel />
-        </div>
+        {!presenter && (
+          <div className="side-pane">
+            <AlertLog />
+            <AuditPanel />
+          </div>
+        )}
       </div>
       <ReplayControls />
     </div>

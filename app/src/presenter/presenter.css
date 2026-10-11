@@ -1,0 +1,334 @@
+/* Presenter mode (default on; P toggles). Full console styles in App.css are untouched;
+ * everything here is either a new component or scoped under .presenter. */
+
+.app-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.presenter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+.presenter-chip.on {
+  color: var(--accent);
+  border-color: rgba(57, 192, 255, 0.5);
+}
+.presenter-chip kbd {
+  font-family: var(--mono);
+  font-size: 11px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 0 4px;
+  opacity: 0.8;
+}
+.presenter-chip:focus-visible,
+.rail-chip:focus-visible,
+.presenter .btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Outside presenter mode the compact group is transparent to layout. */
+.replay-compact {
+  display: contents;
+}
+
+.presenter .app-header {
+  padding: 8px 20px;
+}
+.presenter .app-header-sim-banner {
+  font-size: 14px;
+}
+.presenter .map-attribution {
+  font-size: 12px;
+  color: #b3c0cc;
+}
+
+/* Hero card */
+.hero-card {
+  --tone: var(--advisory);
+  --tone-bg: #0c1622;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: min(700px, calc(100% - 40px));
+  z-index: 11;
+  background: var(--tone-bg);
+  border: 1px solid color-mix(in srgb, var(--tone) 55%, transparent);
+  border-left: 8px solid var(--tone);
+  border-radius: 10px;
+  padding: 18px 24px 20px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  color: var(--text);
+}
+.hero-card.tone-caution {
+  --tone: var(--caution);
+  --tone-bg: #1c1506;
+}
+.hero-card.tone-handoff {
+  --tone: var(--handoff);
+  --tone-bg: #1e090b;
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.55),
+    0 0 48px rgba(255, 59, 59, 0.28);
+}
+.hero-idle {
+  width: min(560px, calc(100% - 40px));
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--tone);
+}
+.hero-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tone);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--tone) 25%, transparent);
+}
+.hero-chip {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 12px 3px 4px;
+  border: 2px solid var(--chip);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--chip) 14%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--chip) 40%, transparent);
+}
+.hero-chip-icon {
+  width: 34px;
+  height: 34px;
+}
+.hero-chip-reg {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--chip);
+}
+.hero-chip-tag {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--chip);
+}
+
+.hero-main {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 20px;
+}
+.hero-headline {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.12;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.hero-idle .hero-headline {
+  font-size: 28px;
+  margin-top: 6px;
+}
+.hero-countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+}
+.hero-count {
+  font-size: 96px;
+  font-weight: 800;
+  color: var(--tone);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+.hero-count-unit {
+  font-size: 18px;
+  font-weight: 600;
+  color: #c9d3dd;
+  margin-top: 4px;
+}
+
+.hero-detail {
+  margin: 14px 0 0;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #c9d3dd;
+  max-width: 62ch;
+}
+.hero-said {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--tone);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0 6px 6px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-said-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #c9d3dd;
+}
+.hero-said-words {
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.hero-actions .btn {
+  font-size: 18px;
+  padding: 10px 20px;
+}
+.hero-decided {
+  margin-top: 14px;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+/* Collapsed logs, top right of the map */
+.presenter-rail {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 420px;
+  max-height: calc(100% - 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 11;
+}
+.rail-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  color: var(--text);
+  background: rgba(16, 22, 31, 0.92);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.rail-chip:hover,
+.rail-chip.open {
+  border-color: #3a5068;
+}
+.rail-chip-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rail-chip-caret {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.rail-chip-audit .rail-chip-text {
+  color: #c9d3dd;
+}
+.rail-panel {
+  background: rgba(16, 22, 31, 0.97);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 42vh;
+  overflow-y: auto;
+}
+
+/* Bottom bar: primary actions first and large; speed and scrubber tucked into one group. */
+.presenter .replay-controls {
+  gap: 12px;
+  padding: 10px 20px;
+}
+.presenter .replay-controls .btn {
+  font-size: 16px;
+  padding: 9px 18px;
+}
+.presenter .btn-conflict {
+  order: 1;
+  font-size: 17px;
+}
+.presenter .btn-play {
+  order: 2;
+  min-width: 96px;
+}
+.presenter .scenario-picker {
+  order: 3;
+}
+.presenter .btn-scoreboard,
+.presenter .scenario-status {
+  display: none;
+}
+.presenter .replay-compact {
+  order: 4;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+}
+.presenter .replay-controls .replay-compact .btn {
+  font-size: 12px;
+  padding: 3px 8px;
+}
+.presenter .replay-compact .clock {
+  min-width: 0;
+  font-size: 13px;
+}
+.presenter .replay-compact .scrubber {
+  flex: 0 0 220px;
+  width: 220px;
+}
+
+/* Voice approval card readable at projector distance */
+.presenter .voice-stack {
+  width: min(760px, 60%);
+}
+.presenter .approval-card .alert-reason,
+.presenter .approval-words {
+  font-size: 20px;
+}
+.presenter .approval-label,
+.presenter .approval-conf,
+.presenter .approval-router,
+.presenter .approval-evidence {
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alert-card {
+    animation: none;
+  }
+}

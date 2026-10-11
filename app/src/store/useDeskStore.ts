@@ -40,6 +40,9 @@ interface DeskState {
   conflictEntryT: number | null; // precomputed: when the sim medevac first enters a volume
   /** Alert whose card the controller dismissed; cleared on every seek. */
   dismissedAlertId: string | null;
+  /** Aircraft the hero card is about; the map rings it and dims the rest. null = default to the
+   * top-ranked handoff (the AlertCard alert). */
+  focusedHex: string | null;
   /** Incremented on every seek so views can drop derived state (trails). */
   seekEpoch: number;
 
@@ -58,6 +61,7 @@ interface DeskState {
   acknowledge: (alertId: string) => void;
   takeOver: (alertId: string) => void;
   dismissAlert: (alertId: string) => void;
+  setFocusedHex: (hex: string | null) => void;
 }
 
 /** Cap on the real-time delta one frame may advance the replay by, so a resumed background
@@ -122,6 +126,10 @@ export const useDeskStore = create<DeskState>((set, get) => ({
   decisions: [],
   conflictEntryT: null,
   dismissedAlertId: null,
+  focusedHex: null,
+  setFocusedHex: (hex) => {
+    if (get().focusedHex !== hex) set({ focusedHex: hex });
+  },
   seekEpoch: 0,
   scenarioId: null,
 

@@ -11,11 +11,12 @@ export function VoiceBridge() {
   return null;
 }
 
-/** Cards that float over the map (bottom centre, above the replay controls). */
-export function VoiceOverlay() {
+/** Cards that float over the map (bottom centre, above the replay controls). In presenter
+ * mode the hero card already carries the handoff call, so `hideHandoff` drops the duplicate. */
+export function VoiceOverlay({ hideHandoff = false }: { hideHandoff?: boolean }) {
   return (
     <div className="voice-stack">
-      <HandoffCards />
+      {!hideHandoff && <HandoffCards />}
       <ApprovalCard />
     </div>
   );

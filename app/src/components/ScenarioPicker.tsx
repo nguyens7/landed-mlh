@@ -66,7 +66,7 @@ export function ScenarioPicker() {
       <button className="btn" onClick={() => void reset()}>
         Reset
       </button>
-      <button className={`btn ${open ? "btn-speed active" : ""}`} onClick={toggleScoreboard}>
+      <button className={`btn btn-scoreboard ${open ? "btn-speed active" : ""}`} onClick={toggleScoreboard}>
         Scoreboard
       </button>
       {status && <span className="mono scenario-status">{status}</span>}

@@ -13,12 +13,31 @@ import { interpolateAircraft } from "../data/interpolate";
 import {
   AIRLINER_COLOR,
   HELI_COLORS,
+  ICON_COMBOS,
   MEDEVAC_COLOR,
   iconDataUrl,
   iconId,
   iconSvg,
   type IconShape,
 } from "./mapIcons";
+
+import { DEFAULT_RUNWAY_CONFIG } from "../engine/runwayConfig";
+import { destPoint } from "../engine/geometry";
+import { runwayStrips, volumeState } from "./runwayStyle";
+import { pickProminentAlert } from "../store/prominentAlert";
+import {
+  DIM_OPACITY,
+  calloutText,
+  effectiveFocusHex,
+  focusOpacity,
+  focusRingColor,
+  focusSortKey,
+  pulseAt,
+} from "./focusStyle";
+
+const AMBER = "#F29E4C";
+const RUNWAY_GRAY = "#C9CED6";
+const MUTED_GRAY = "#8b9bab";
 
 maplibregl.setWorkerUrl(maplibreWorkerUrl as string);
 
@@ -53,6 +72,73 @@ export function MapView() {
   const aircraftByHex = useDeskStore((s) => s.aircraftByHex);
   const fixedWingByHex = useDeskStore((s) => s.fixedWingByHex);
 
+  const volumes = useDeskStore((s) => s.volumes);
+  const storeFocusHex = useDeskStore((s) => s.focusedHex);
+  // default focus: the aircraft the AlertCard is about
+  const focusHex = effectiveFocusHex(storeFocusHex, pickProminentAlert(alerts, volumes));
+  // Stable key so the static-geometry effect reruns only when the alerted volumes change, not every
+  // tick (re-setting the volumes source each tick keeps isStyleLoaded() false and starves the aircraft
+  // effect). With a focused aircraft, only its volume turns red, so other alerts don't compete.
+  const alertVolumeKey = [
+    ...new Set((focusHex ? alerts.filter((a) => a.aircraft.hex === focusHex) : alerts).map((a) => a.volume_id)),
+  ]
+    .sort()
+    .join("|");
+  const snapshotsRef = useRef(snapshots);
+  snapshotsRef.current = snapshots;
+
+  // dim everyone else, raise the focused aircraft
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      if (!map.getLayer("aircraft-icon")) return;
+      map.setPaintProperty("aircraft-icon", "icon-opacity", focusOpacity(focusHex) as never);
+      map.setLayoutProperty("aircraft-icon", "symbol-sort-key", focusSortKey(focusHex) as never);
+      map.setPaintProperty("aircraft-label", "text-opacity", focusOpacity(focusHex) as never);
+      map.setPaintProperty("aircraft-label-sim", "text-opacity", focusOpacity(focusHex) as never);
+      // airliners have no hex: dim them as a group
+      map.setPaintProperty("fixedwing-icon", "icon-opacity", focusHex ? 0.8 * DIM_OPACITY : 0.8);
+      map.setPaintProperty("fixedwing-label", "text-opacity", focusHex ? DIM_OPACITY : 1);
+      // the callout replaces the focused aircraft's own label
+      const notFocused: unknown[] = focusHex ? ["!=", ["get", "hex"], focusHex] : ["literal", true];
+      map.setFilter("aircraft-label", ["all", ["!", ["get", "simulated"]], notFocused] as never);
+      map.setFilter("aircraft-label-sim", ["all", ["get", "simulated"], notFocused] as never);
+    };
+    if (map.getLayer("aircraft-icon")) apply();
+    else map.once("load", apply);
+  }, [focusHex, loaded]);
+
+  // ease the camera only when the focus changes, and only if the aircraft is off-screen or under a card
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !focusHex) return;
+    const s = snapshotsRef.current.find((x) => x.hex === focusHex);
+    if (!s) return;
+    const { x, y } = map.project([s.lon, s.lat]);
+    const { clientWidth: w, clientHeight: h } = map.getContainer();
+    if (x < 60 || x > w - 60 || y < 230 || y > h - 300) {
+      map.easeTo({ center: [s.lon, s.lat], duration: 800, zoom: Math.min(map.getZoom() + 1, map.getZoom()) });
+    }
+  }, [focusHex]);
+
+  // pulse the ring
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !focusHex) return;
+    let raf = 0;
+    const tick = (ms: number) => {
+      if (map.getLayer("focus-ring")) {
+        const p = pulseAt(ms);
+        map.setPaintProperty("focus-ring", "circle-radius", p.radius);
+        map.setPaintProperty("focus-ring", "circle-stroke-opacity", p.opacity);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [focusHex]);
+
   // one-time map + static layer setup
   useEffect(() => {
     if (!mapDivRef.current || mapRef.current) return;
@@ -74,26 +160,111 @@ export function MapView() {
         paint: { "line-color": "#39c0ff", "line-width": 10, "line-opacity": 0.12 },
       });
 
+      // Approach centerlines: the active arrival's is amber dashed, inactive finals are muted gray.
+      const arrivalActive: maplibregl.ExpressionSpecification = [
+        "in",
+        ["get", "runway"],
+        ["literal", DEFAULT_RUNWAY_CONFIG.arrivals],
+      ];
       map.addSource("approach-paths", { type: "geojson", data: emptyFC() });
       map.addLayer({
         id: "approach-paths-line",
         type: "line",
         source: "approach-paths",
-        paint: { "line-color": "#ff8a3d", "line-width": 2, "line-dasharray": [2, 2] },
+        paint: {
+          "line-color": ["case", arrivalActive, AMBER, MUTED_GRAY],
+          "line-width": 1.5,
+          "line-opacity": ["case", arrivalActive, 0.9, 0.3],
+          "line-dasharray": [3, 3],
+        },
       });
 
+      // Protected volumes carry a computed `state` (see runwayStyle.ts); red only for alerted ones.
       map.addSource("protected-volumes", { type: "geojson", data: emptyFC() });
       map.addLayer({
-        id: "protected-volumes-fill",
+        id: "protected-volumes-arrival-fill",
         type: "fill",
         source: "protected-volumes",
-        paint: { "fill-color": "#ff3b3b", "fill-opacity": 0.08 },
+        filter: ["==", ["get", "state"], "active-arrival"],
+        paint: { "fill-color": AMBER, "fill-opacity": 0.22 },
       });
       map.addLayer({
-        id: "protected-volumes-outline",
+        id: "protected-volumes-arrival-outline",
         type: "line",
         source: "protected-volumes",
-        paint: { "line-color": "#ff3b3b", "line-width": 1.5, "line-opacity": 0.5 },
+        filter: ["==", ["get", "state"], "active-arrival"],
+        paint: { "line-color": AMBER, "line-width": 1, "line-opacity": 0.55 },
+      });
+      map.addLayer({
+        id: "protected-volumes-departure-outline",
+        type: "line",
+        source: "protected-volumes",
+        filter: ["==", ["get", "state"], "active-departure"],
+        paint: { "line-color": MUTED_GRAY, "line-width": 1, "line-opacity": 0.5, "line-dasharray": [3, 3] },
+      });
+      map.addLayer({
+        id: "protected-volumes-inactive-outline",
+        type: "line",
+        source: "protected-volumes",
+        filter: ["==", ["get", "state"], "inactive"],
+        paint: { "line-color": MUTED_GRAY, "line-width": 1, "line-opacity": 0.22 },
+      });
+      map.addLayer({
+        id: "protected-volumes-alert-fill",
+        type: "fill",
+        source: "protected-volumes",
+        filter: ["==", ["get", "state"], "alert"],
+        paint: { "fill-color": "#ff3b3b", "fill-opacity": 0.14 },
+      });
+      map.addLayer({
+        id: "protected-volumes-alert-outline",
+        type: "line",
+        source: "protected-volumes",
+        filter: ["==", ["get", "state"], "alert"],
+        paint: { "line-color": "#ff3b3b", "line-width": 1.75, "line-opacity": 0.8 },
+      });
+
+      // Runway pavement: light-gray strips, ~150 ft wide at real scale (width doubles per zoom
+      // level), with a floor so they stay visible when zoomed out.
+      map.addSource("runways", { type: "geojson", data: emptyFC() });
+      map.addLayer({
+        id: "runways-line",
+        type: "line",
+        source: "runways",
+        layout: { "line-cap": "butt" },
+        paint: {
+          "line-color": RUNWAY_GRAY,
+          "line-width": ["interpolate", ["exponential", 2], ["zoom"], 9, 3, 11, 5, 14, 11, 16, 28],
+        },
+      });
+      map.addSource("map-labels", { type: "geojson", data: emptyFC() });
+      map.addLayer({
+        id: "runway-label",
+        type: "symbol",
+        source: "map-labels",
+        filter: ["==", ["get", "kind"], "runway"],
+        layout: {
+          "text-field": ["get", "text"],
+          "text-size": 11,
+          "text-offset": [-2.2, 2.2],
+          "text-anchor": "top-right",
+          "text-allow-overlap": true,
+        },
+        paint: { "text-color": "#e6edf3", "text-halo-color": "#0a0e14", "text-halo-width": 1.2 },
+      });
+      map.addLayer({
+        id: "arrival-label",
+        type: "symbol",
+        source: "map-labels",
+        filter: ["==", ["get", "kind"], "arrival"],
+        layout: {
+          "text-field": ["get", "text"],
+          "text-size": 12,
+          "text-anchor": "left",
+          "text-offset": [1.2, 0],
+          "text-allow-overlap": true,
+        },
+        paint: { "text-color": AMBER, "text-halo-color": "#0a0e14", "text-halo-width": 1.2 },
       });
 
       map.addSource("reference-points", { type: "geojson", data: emptyFC() });
@@ -221,6 +392,38 @@ export function MapView() {
         paint: labelPaint,
       });
 
+      // Focused aircraft: pulsing ring (radius animated in an rAF loop) and a callout above it,
+      // both above every other aircraft layer.
+      map.addSource("focus", { type: "geojson", data: emptyFC() });
+      map.addLayer({
+        id: "focus-ring",
+        type: "circle",
+        source: "focus",
+        paint: {
+          "circle-radius": 24,
+          "circle-color": ["get", "color"],
+          "circle-opacity": 0.12,
+          "circle-stroke-color": ["get", "color"],
+          "circle-stroke-width": 3,
+          "circle-stroke-opacity": 0.8,
+          "circle-pitch-alignment": "map",
+        },
+      });
+      map.addLayer({
+        id: "focus-callout",
+        type: "symbol",
+        source: "focus",
+        layout: {
+          "text-field": ["get", "text"],
+          "text-size": 16,
+          "text-anchor": "bottom",
+          "text-offset": [0, -2.4],
+          "text-allow-overlap": true,
+          "text-ignore-placement": true,
+        },
+        paint: { "text-color": "#ffffff", "text-halo-color": "#0a0e14", "text-halo-width": 2.5 },
+      });
+
       registerIcons(map);
     });
 
@@ -236,16 +439,73 @@ export function MapView() {
     if (!map) return;
     const apply = () => {
       if (corridors) (map.getSource("corridors") as maplibregl.GeoJSONSource)?.setData(corridors as GeoJSON.FeatureCollection);
-      if (protectedVolumesGeo)
-        (map.getSource("protected-volumes") as maplibregl.GeoJSONSource)?.setData(protectedVolumesGeo as GeoJSON.FeatureCollection);
-      if (approachPaths)
+      if (protectedVolumesGeo) {
+        const feats = (protectedVolumesGeo as GeoJSON.FeatureCollection).features;
+        const allProps = feats.map((f) => (f.properties ?? {}) as { id?: string; kind?: string; runway?: string | null });
+        // an alert lights up its whole logical volume (every segment of that final) red
+        const alertIds = new Set(alertVolumeKey ? alertVolumeKey.split("|") : []);
+        const styled: GeoJSON.FeatureCollection = {
+          type: "FeatureCollection",
+          features: feats.map((f, i) => ({
+            ...f,
+            properties: { ...f.properties, state: volumeState(allProps[i], alertIds, allProps) },
+          })),
+        };
+        (map.getSource("protected-volumes") as maplibregl.GeoJSONSource)?.setData(styled);
+      }
+      if (approachPaths) {
         (map.getSource("approach-paths") as maplibregl.GeoJSONSource)?.setData(approachPaths as GeoJSON.FeatureCollection);
+        const props = (approachPaths as GeoJSON.FeatureCollection).features.map(
+          (f) => (f.properties ?? {}) as Record<string, number | string>,
+        );
+        const { lines, labels } = runwayStrips(
+          props.map((p) => ({
+            runway: String(p.runway),
+            threshold_lat: p.threshold_lat as number,
+            threshold_lon: p.threshold_lon as number,
+            bearing_true: p.bearing_true as number,
+          })),
+        );
+        (map.getSource("runways") as maplibregl.GeoJSONSource)?.setData({
+          type: "FeatureCollection",
+          features: lines.map((coordinates) => ({
+            type: "Feature",
+            properties: {},
+            geometry: { type: "LineString", coordinates },
+          })),
+        });
+        // Only the active arrival runway is labelled: "Runway 22" at its threshold and on the amber band.
+        const labelFeatures: GeoJSON.Feature[] = [];
+        for (const l of labels) {
+          if (!DEFAULT_RUNWAY_CONFIG.arrivals.some((r) => l.name === `Runway ${r}`)) continue;
+          labelFeatures.push({
+            type: "Feature",
+            properties: { kind: "runway", text: l.name },
+            geometry: { type: "Point", coordinates: [l.lon, l.lat] },
+          });
+        }
+        for (const p of props) {
+          if (!DEFAULT_RUNWAY_CONFIG.arrivals.includes(String(p.runway))) continue;
+          // the reciprocal of the landing heading points out along the final; label 3.2 nm out
+          const pt = destPoint(p.threshold_lat as number, p.threshold_lon as number, (p.bearing_true as number) + 180, 3.2);
+          labelFeatures.push({
+            type: "Feature",
+            properties: { kind: "arrival", text: `Runway ${String(p.runway)} arrivals` },
+            geometry: { type: "Point", coordinates: [pt.lon, pt.lat] },
+          });
+        }
+        (map.getSource("map-labels") as maplibregl.GeoJSONSource)?.setData({
+          type: "FeatureCollection",
+          features: labelFeatures,
+        });
+      }
       if (referencePoints)
         (map.getSource("reference-points") as maplibregl.GeoJSONSource)?.setData(referencePoints as GeoJSON.FeatureCollection);
     };
-    if (map.isStyleLoaded()) apply();
+    // layers/sources are added in the load handler; once they exist setData is safe regardless of idle state
+    if (map.getSource("runways")) apply();
     else map.once("load", apply);
-  }, [corridors, protectedVolumesGeo, approachPaths, referencePoints, loaded]);
+  }, [corridors, protectedVolumesGeo, approachPaths, referencePoints, loaded, alertVolumeKey]);
 
   // live aircraft + trails + alert cones, every tick
   useEffect(() => {
@@ -325,6 +585,23 @@ export function MapView() {
       features: trailFeatures,
     });
 
+    const focusSnap = focusHex ? snapshots.find((s) => s.hex === focusHex) : undefined;
+    (map.getSource("focus") as maplibregl.GeoJSONSource)?.setData({
+      type: "FeatureCollection",
+      features: focusSnap
+        ? [
+            {
+              type: "Feature",
+              properties: {
+                color: focusRingColor(severityByHex.get(focusSnap.hex)),
+                text: calloutText(focusSnap.reg, focusSnap.alt_ft),
+              },
+              geometry: { type: "Point", coordinates: [focusSnap.lon, focusSnap.lat] },
+            },
+          ]
+        : [],
+    });
+
     const coneFeatures: GeoJSON.Feature[] = [];
     for (const a of alerts) {
       if (a.severity !== "handoff") continue;
@@ -351,7 +628,7 @@ export function MapView() {
       type: "FeatureCollection",
       features: coneFeatures,
     });
-  }, [snapshots, alerts, currentT, seekEpoch, aircraftByHex, fixedWingByHex]);
+  }, [snapshots, alerts, currentT, seekEpoch, aircraftByHex, fixedWingByHex, focusHex]);
 
   return (
     <>
@@ -372,12 +649,7 @@ function emptyFC(): GeoJSON.FeatureCollection {
 /** Rasterize each shape x color to a map image (sync-free: images load async, the layer
  * simply renders each icon once its image lands). */
 function registerIcons(map: maplibregl.Map): void {
-  const combos: [IconShape, string][] = [
-    ...HELI_COLORS.map((c) => ["heli", c] as [IconShape, string]),
-    ...[MEDEVAC_COLOR, ...HELI_COLORS].map((c) => ["medevac", c] as [IconShape, string]),
-    ["plane", AIRLINER_COLOR],
-  ];
-  for (const [shape, color] of combos) {
+  for (const [shape, color] of ICON_COMBOS) {
     const id = iconId(shape, color);
     const img = new Image();
     img.onload = () => {
@@ -400,6 +672,15 @@ const LEGEND_ITEMS: { shape: IconShape; color: string; text: string }[] = [
   { shape: "plane", color: AIRLINER_COLOR, text: "Airliner" },
 ];
 
+const STATUS_ITEMS: { color: string; text: string }[] = [
+  { color: SEVERITY_COLOR.advisory, text: "Blue: normal" },
+  { color: SEVERITY_COLOR.caution, text: "Amber: caution" },
+  { color: SEVERITY_COLOR.handoff, text: "Red: handoff to controller" },
+];
+
+const legendRow: React.CSSProperties = { display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" };
+const legendItem: React.CSSProperties = { display: "inline-flex", alignItems: "center", gap: 6 };
+
 function MapLegend() {
   return (
     <div
@@ -409,8 +690,8 @@ function MapLegend() {
         left: 12,
         bottom: 40,
         display: "flex",
-        gap: 16,
-        alignItems: "center",
+        flexDirection: "column",
+        gap: 6,
         padding: "6px 12px",
         background: "rgba(10,14,20,0.82)",
         border: "1px solid #2a3441",
@@ -421,15 +702,40 @@ function MapLegend() {
         pointerEvents: "none",
       }}
     >
-      {LEGEND_ITEMS.map((it) => (
-        <span key={it.text} style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+      <div style={legendRow}>
+        {LEGEND_ITEMS.map((it) => (
+          <span key={it.text} style={legendItem}>
+            <span
+              style={{ width: 22, height: 22, display: "inline-block" }}
+              dangerouslySetInnerHTML={{ __html: iconSvg(it.shape, it.color).replace(/width="64" height="64"/, 'width="22" height="22"') }}
+            />
+            {it.text}
+          </span>
+        ))}
+      </div>
+      <div style={legendRow}>
+        {STATUS_ITEMS.map((it) => (
+          <span key={it.text} style={legendItem}>
+            <span style={{ width: 10, height: 10, borderRadius: "50%", background: it.color, display: "inline-block" }} />
+            {it.text}
+          </span>
+        ))}
+      </div>
+      <div style={legendRow}>
+        <span style={legendItem}>
           <span
-            style={{ width: 22, height: 22, display: "inline-block" }}
-            dangerouslySetInnerHTML={{ __html: iconSvg(it.shape, it.color).replace(/width="64" height="64"/, 'width="22" height="22"') }}
+            style={{
+              width: 22,
+              height: 12,
+              display: "inline-block",
+              background: "rgba(242,158,76,0.22)",
+              border: `1px solid ${AMBER}`,
+              borderRadius: 2,
+            }}
           />
-          {it.text}
+          Runway 22 arrivals
         </span>
-      ))}
+      </div>
     </div>
   );
 }
