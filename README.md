@@ -4,6 +4,8 @@ An AI voice agent and safety net for medevac helicopters in NYC airspace. Simula
 
 > **Safety disclaimer.** Landed is a simulation and replay prototype. It is not for operational use, it never transmits on aviation frequencies, and it uses no LiveATC audio.
 
+**[Watch the 48-second demo](docs/media/landed_demo.mp4)**: a simulated medevac asks to cross LaGuardia's Runway 22 arrivals, Landed hands it to the controller about 84 s early, then Gemini handles a routine check-in.
+
 ## Run the demo
 
 ### Prerequisites
