@@ -1,6 +1,6 @@
 # TartanAviation exploration and ASR diagnosis
 
-Issue: [#37](https://github.com/nguyens7/landed/issues/37). This is a bounded research inspection, not an app integration or an accuracy improvement. It makes no provider calls. Raw WAV, CSV, per-aircraft tracks, and full UWB transcripts stay outside Git.
+Issue: #37. This is a bounded research inspection, not an app integration or an accuracy improvement. It makes no provider calls. Raw WAV, CSV, per-aircraft tracks, and full UWB transcripts stay outside Git.
 
 ## License finding
 

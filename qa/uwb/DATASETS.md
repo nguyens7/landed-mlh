@@ -2,7 +2,7 @@
 
 Research by the delegated dataset agent on 2026-10-11. No additional audio or
 provider calls were used for this survey. The UWB evaluation is tracked in
-[#34](https://github.com/nguyens7/landed/issues/34).
+#34.
 
 | Dataset | Additive coverage | Recommended use and limits |
 |---|---|---|

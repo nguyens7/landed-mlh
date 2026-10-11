@@ -32,7 +32,7 @@ branch protection or repository permissions.
 
 Use a branch containing the app and speech code. The initial `main` commit
 `0e98291` contains only the spec, EDA, and reference tree. See
-[coordination issue #9](https://github.com/nguyens7/landed/issues/9) for the active
+coordination issue #9 for the active
 integration branch and ownership. Use a separate worktree when agents are active.
 
 Install Node.js 24 and uv, then run from the repository root:
@@ -142,7 +142,7 @@ value need not equal the confidence after continuous playback.
 ![Handoff card overlaps the log in a narrow app panel](../qa/handoff-narrow.jpg)
 
 The app owner has the layout and map-attribution findings in
-[issue #1](https://github.com/nguyens7/landed/issues/1#issuecomment-6110803679).
+issue #1.
 The visible credit names adsb.lol while MapLibre attribution is disabled; the
 CARTO/OSM credit needs owner review. No app-owned paths were edited for this PR.
 The console also reports `InvalidStateError: The source image could not be decoded`
@@ -153,14 +153,14 @@ inline SVG via `map.loadImage`; the heading-symbol path needs owner review.
 
 At the tested commit, `server/`, `agent/`, and `scenarios/` are absent from the
 pushed tree. Track their landing commits on
-[issue #18](https://github.com/nguyens7/landed/issues/18). The checks above cannot
+issue #18. The checks above cannot
 certify a complete voice workflow or all five scripted scenarios.
 
 | Dependency | Evidence needed after landing |
 |---|---|
 | #10: server and parsed-call integration | A call reaches the desk; stated intent affects projection; keys stay server-side |
 | #4: bounded voice agent | Spoken input is a rendered template; arm delay; expired proposals never send; emergency locks silent |
-| #5 and #17: scenarios and scoreboard | S1–S5 run 3/3 with expected/actual action, trigger, latency, and decision records |
+| #5 and #17: scenarios and scoreboard | S1 to S6 run 3/3 (7/7) with expected/actual action, trigger, latency, and decision records |
 | #15: corridor rules | Altitude and shoreline deviations cause the expected handoff |
 | #16: emergency gate | Squawk and low-confidence emergency paths bypass routine parsing and hand off |
 | #6 and #8: pitch and submission | Copy matches tested behavior, lead time, data window, and evaluation limits |
@@ -171,7 +171,7 @@ callsign errors, emergency recall, latency, and confidence calibration before
 using model comparisons in the pitch. Synthetic TTS scores alone are insufficient.
 
 Public release remains gated by
-[issue #7](https://github.com/nguyens7/landed/issues/7), including repository-history
+issue #7, including repository-history
 cleanup. This QA work does not merge, publish, rewrite history, or claim operational
 aviation readiness.
 

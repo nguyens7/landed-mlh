@@ -1,6 +1,6 @@
 # Cost-bounded ASR improvement experiment
 
-Tracked and claimed in [#41](https://github.com/nguyens7/landed/issues/41). This research compares prompting, conservative segmentation, and an independent local model. All changes are confined to `qa/asr_improvement/`; no speech default, app, server, or pitch behavior changes. The speech owner was contacted on #3 before any proposed shared-path change. No reply or shared-path permission is assumed.
+Tracked and claimed in #41. This research compares prompting, conservative segmentation, and an independent local model. All changes are confined to `qa/asr_improvement/`; no speech default, app, server, or pitch behavior changes. The speech owner was contacted on #3 before any proposed shared-path change. No reply or shared-path permission is assumed.
 
 ## Decision
 

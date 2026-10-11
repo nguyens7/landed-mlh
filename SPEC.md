@@ -1,13 +1,13 @@
 # Landed v2: medevac helicopter voice agent for NYC (hackathon spec)
 
-Updated 2026-10-11 against integration commit `a2a0357` and the canonical decisions on [#9](https://github.com/nguyens7/landed/issues/9) and [#24](https://github.com/nguyens7/landed/issues/24). The original design is in `SPEC-v1.md`. **Pending verification** means the cited material does not establish a current operational fact or permission; **not modeled** means the demo has no corresponding feature. Historical sources retain their dates. **Everything is simulation or replay. Landed never transmits on a real aviation frequency.**
+Updated 2026-10-11 against integration commit `a2a0357` and the canonical decisions on #9 and #24. The original design is in `SPEC-v1.md`. **Pending verification** means the cited material does not establish a current operational fact or permission; **not modeled** means the demo has no corresponding feature. Historical sources retain their dates. **Everything is simulation or replay. Landed never transmits on a real aviation frequency.**
 
 ## 0.0 Pitch script (lead with DC)
 
 1. **Open with DC (~30 s).** "January 29, 2025. An Army helicopter and an American Eagle jet collide over the Potomac near Reagan National. 67 people die. The NTSB found one tower controller working both the helicopters and the runway. They were also handling a medical helicopter headed to a hospital, and they were 'a little overwhelmed.' The two crews were on different frequencies and couldn't hear each other. The official finding was 'inadequate traffic advisories, and the lack of safety alerts.'"
 2. **Explain the risk.** "In New York, helicopters in the Hudson and East River exclusions self-announce on charted advisory frequencies. The rule requires those pilot calls, but does not require an ATC facility to monitor them. The demo explores whether a separate advisory desk can reduce routine workload and flag a projected conflict."
 3. **Introduce Landed.** "Landed is a simulated AI teammate for the controller. It processes pilot audio, cross-checks available ADS-B replay tracks, and handles routine medevac check-ins. When a projected track enters a modeled approach volume, it hands that flight to the human with a reason and a countdown."
-4. **Show the demo.** Replay S2: simulated N312LM requests direct College Point area at **600 ft**, crossing the LGA runway 22 final about **1.1 nm** out. The projected-volume alert provides **about 84 s** of warning before entry. This is a DCA-like situation: a helicopter crossing an airliner's short final. Sources: `scenarios/s2.yaml`, `scenarios/SCOREBOARD.md`, and [#9 correction](https://github.com/nguyens7/landed/issues/9#issuecomment-6110673055).
+4. **Show the demo.** Replay S2: simulated N312LM requests direct College Point area at **600 ft**, crossing the LGA runway 22 final about **1.1 nm** out. The projected-volume alert provides **about 84 s** of warning before entry. This is a DCA-like situation: a helicopter crossing an airliner's short final. Sources: `scenarios/s2.yaml`, `scenarios/SCOREBOARD.md`, and #9 correction.
 5. **Close with the honest claim.** "We cannot say Landed would have prevented DC. This simulation demonstrates routine check-ins, an early projected-conflict alert, and a handoff to the human. A commenter on r/ATC suggested routine medevac work as a starting point; we built a bounded demonstration of that idea."
 
 Line that answers "so what": the NTSB's own finding, "the lack of safety alerts." Sources in §0.5. Handle the 67 fatalities with care on slides.
@@ -20,7 +20,7 @@ Landed demonstrates **routine medevac helicopter advisories in NYC river corrido
 >
 > A commenter on r/ATC, [original comment](https://www.reddit.com/r/ATC/comments/1vmyqe1/comment/p3gkv7x/).
 
-**Verification:** [#23](https://github.com/nguyens7/landed/issues/23) records the comment as verified. The author's professional role remains **pending verification**; describe them only as a commenter, not as a verified controller.
+**Verification:** #23 records the comment as verified. The author's professional role remains **pending verification**; describe them only as a commenter, not as a verified controller.
 
 ## 0.5 Pitch and framing
 
@@ -28,21 +28,21 @@ Landed demonstrates **routine medevac helicopter advisories in NYC river corrido
 
 **Analogy.** A bounded assistant handles routine simulated river legs and asks the controller to take over before a modeled approach conflict. Landed issues advisories; it does not fly the helicopter.
 
-**The measured demo window.** Saturday, October 10, 2026, **11:00 to 11:15 a.m. Eastern**, with **17 real helicopters** in the background replay and fictional scenario tracks overlaid. S2 uses N312LM at 600 ft toward College Point area, about 1.1 nm from runway 22, with about 84 s to projected-volume entry. The scoreboard records 83.109375 s for the pinned S2 run; "about 84 s" is the canonical rounded demo wording. This is not an actual medevac incident or a claim about LGA overnight staffing. Sources: `scenarios/s2.yaml`, `scenarios/SCOREBOARD.md`, [#9](https://github.com/nguyens7/landed/issues/9#issuecomment-6110673055).
+**The measured demo window.** Saturday, October 10, 2026, **11:00 to 11:15 a.m. Eastern**, with **17 real helicopters** in the background replay and fictional scenario tracks overlaid. S2 uses N312LM at 600 ft toward College Point area, about 1.1 nm from runway 22, with about 84 s to projected-volume entry. The scoreboard records 83.109375 s for the pinned S2 run; "about 84 s" is the canonical rounded demo wording. This is not an actual medevac incident or a claim about LGA overnight staffing. Sources: `scenarios/s2.yaml`, `scenarios/SCOREBOARD.md`, #9.
 
 ### What's built
 
 - **Replay desk and conflict engine:** map, replay controls, modeled LGA volumes, projected paths, reason/countdown cards, and one alert per aircraft. Default runway configuration: arrivals 22, departures 13. Sources: `app/src/engine/conflictEngine.ts`, `app/src/engine/runwayConfig.ts`, `replay/build_replay.py`.
 - **Speech and bounded voice agent:** Gemini ASR, callsign snapping, grammar parser with Gemini JSON fallback, validated templates, simulated speech, approval/edit/reject flow, emergency silence lock, and audit log. Sources: `speech/asr.py`, `speech/parse.py`, `agent/landed_agent/agent.py`, `server/landed_server/hub.py`.
-- **Typed decision router:** OpenAI Decisions is live in the configured demo in **shadow mode**. It labels/logs radio calls and annotates cards without changing the policy tier. TypeSafe AI Jev and Gemini router adapters also exist. Hard safety rules stay in code; routing thresholds are not validated for enforcement. Sources: `agent/landed_agent/router.py`, `agent/landed_agent/agent.py`, [#24 router status](https://github.com/nguyens7/landed/issues/24#issuecomment-6111343345). Provider availability depends on runtime configuration; a keyless clone does not run the live router.
+- **Typed decision router:** OpenAI Decisions is live in the configured demo in **shadow mode**. It labels/logs radio calls and annotates cards without changing the policy tier. TypeSafe AI Jev and Gemini router adapters also exist. Hard safety rules stay in code; routing thresholds are not validated for enforcement. Sources: `agent/landed_agent/router.py`, `agent/landed_agent/agent.py`, #24 router status. Provider availability depends on runtime configuration; a keyless clone does not run the live router.
 
 ### Canonical demo evidence
 
-- **Seven scored scenario variants:** S1 to S6, with S3A/S3B, pass **3 out of 3 with the server: 7/7, 236 checks, 0 failures, 0 gaps**. These use pinned ASR and prewarmed, validated choices; cached response times are not live model latency. Sources: `scenarios/SCOREBOARD.md`, [#24 final result](https://github.com/nguyens7/landed/issues/24#issuecomment-6111500306). The app has a scenario picker and scoreboard (`app/src/components/ScenarioPicker.tsx`).
-- **Canonical background replay result:** **0 false approach or departure handoffs across 17 real helicopters in the demo window (Sat Oct 10, 11:00 to 11:15 ET)**; **6 Class B floor handoffs** and **5 Class B floor cautions**. The six are flagged for the controller, not labeled violations: the replay does not expose clearances. This is one 15-minute snapshot, not an operational false-alarm rate. Sources: `app/src/engine/conflictEngine.test.ts`, [#24 canonical counts](https://github.com/nguyens7/landed/issues/24#issuecomment-6111258818).
+- **Seven scored scenario variants:** S1 to S6, with S3A/S3B, pass **3 out of 3 with the server: 7/7, 236 checks, 0 failures, 0 gaps**. These use pinned ASR and prewarmed, validated choices; cached response times are not live model latency. Sources: `scenarios/SCOREBOARD.md`, #24 final result. The app has a scenario picker and scoreboard (`app/src/components/ScenarioPicker.tsx`).
+- **Canonical background replay result:** **0 false approach or departure handoffs across 17 real helicopters in the demo window (Sat Oct 10, 11:00 to 11:15 ET)**; **6 Class B floor handoffs** and **5 Class B floor cautions**. The six are flagged for the controller, not labeled violations: the replay does not expose clearances. This is one 15-minute snapshot, not an operational false-alarm rate. Sources: `app/src/engine/conflictEngine.test.ts`, #24 canonical counts.
 - **Speech evidence:** `speech/RESULTS.md` reports all #3 gates passed: 50/50 valid JSON outputs, 0.89 s median forced-LLM parse latency (p95 1.13 s), and reasons on 400/400 synthetic parses. Gemini ASR has **2.4% WER on 150 clean synthetic clips** and **33.2% WER on 100 real ATCO2 clips**. Synthetic scripts overlap the parser's design bank; European ATCO2 audio is a stress test, not NYC accuracy. License confirmation remains pending (#29); no permission to redistribute the dataset is implied.
 
-**Planned or incomplete:** stated-intent extension of the 90 s projection, full SFRA corridor-rule enforcement (#15), JFK/EWR protection, continuous live-frequency ingestion, and real dispatch integrations. Parsed calls already affect agent policy and handoff cards; they do not steer the geometric projection. Sources: `app/src/engine/conflictEngine.ts`, `agent/landed_agent/policy.py`, [#24 scope](https://github.com/nguyens7/landed/issues/24#issuecomment-6110840254).
+**Planned or incomplete:** stated-intent extension of the 90 s projection, full SFRA corridor-rule enforcement (#15), JFK/EWR protection, continuous live-frequency ingestion, and real dispatch integrations. Parsed calls already affect agent policy and handoff cards; they do not steer the geometric projection. Sources: `app/src/engine/conflictEngine.ts`, `agent/landed_agent/policy.py`, #24 scope.
 
 **Workload hypothesis (not operationally measured).**
 
@@ -168,7 +168,7 @@ The simulated desk handles check-ins, position reports, and routine traffic advi
 
 **Engine confidence** = `freshness × (0.65 × depth + 0.35 × stability)`. Depth measures geometric penetration/proximity, stability measures recent heading variation, and freshness gates stale ADS-B data. **Agent confidence** separately combines ASR, parse, and available geometric evidence. Neither score is a calibrated operational safety probability. Sources: `app/src/engine/conflictEngine.ts`, `agent/landed_agent/policy.py`, `speech/RESULTS.md`.
 
-Shoreline-direction cautions and ADS-B position hints for ambiguous callsigns are demonstrated in S3B/S4. Full corridor-rule enforcement (#15), generalized readback checking, and intent-driven route projection remain planned. Sources: `scenarios/SCOREBOARD.md`, `scenarios/scn_engine.py`, [#24 freeze scope](https://github.com/nguyens7/landed/issues/24#issuecomment-6111343345).
+Shoreline-direction cautions and ADS-B position hints for ambiguous callsigns are demonstrated in S3B/S4. Full corridor-rule enforcement (#15), generalized readback checking, and intent-driven route projection remain planned. Sources: `scenarios/SCOREBOARD.md`, `scenarios/scn_engine.py`, #24 freeze scope.
 
 ## 3. Built architecture
 
@@ -207,7 +207,7 @@ All scenario registrations are fictional and the channel is **SIM DESK**. `scena
 
 **S2 wording:** "MEDEVAC Three One Two Lima Mike, standby, controller will be with you." The normalized registration is **N312LM**, including Mike, even though the scripted input abbreviates the spoken callsign. This is a **DCA-like situation: a helicopter crossing an airliner's short final**, not identical DCA geometry. A medical-priority request that affects fixed-wing sequencing belongs to the human (§1.4).
 
-The canonical outcome is **S1 to S6 pass 3 out of 3 with the server: 7/7, 236 checks, 0 failures, 0 gaps**. These repeat cached/pinned demo choices; they are not seven independent real-world safety trials. Source: `scenarios/SCOREBOARD.md`, [#24](https://github.com/nguyens7/landed/issues/24#issuecomment-6111500306).
+The canonical outcome is **S1 to S6 pass 3 out of 3 with the server: 7/7, 236 checks, 0 failures, 0 gaps**. These repeat cached/pinned demo choices; they are not seven independent real-world safety trials. Source: `scenarios/SCOREBOARD.md`, #24.
 
 ## 5. What the demo establishes
 

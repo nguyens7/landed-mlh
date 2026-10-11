@@ -41,7 +41,7 @@ Result: S1 to S6 pass 3 out of 3 with the server: 7/7, 236 checks, 0 failures, 0
 Every radio call is also routed by a typed decision model (OpenAI Decisions) that returns a label with a probability in about a third of a second. It runs in shadow mode while we calibrate thresholds; hard safety rules stay in code.
 
 ### Tests
-Checked on Oct 11, 2026 from a fresh worktree on Node 20: app 58, agent 73, server 12, speech 81 tests passing. The README and CI target Node 24.
+Checked on Oct 11, 2026 from a fresh clone on Node 24: app 93, agent 146, server 22, speech 104, scenarios 30 tests passing.
 ```bash
 npm --prefix app test
 (cd agent && uv run pytest -q)
