@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDeskStore } from "../store/useDeskStore";
 import { ApiError, decide, post, wsUrl } from "./api";
-import { playProposal } from "./audio";
+import { enqueueLanded } from "../radio/scenarioRadio";
 import { activeCard } from "./reduce";
 import { resolveKey } from "./keys";
 import { useVoiceStore } from "./useVoiceStore";
@@ -37,7 +37,10 @@ export function useVoiceBridge(): void {
         const ev = JSON.parse(m.data as string) as ServerEvent;
         if (ev.type === "snapshot") for (const p of ev.proposals) played.add(p.id); // never replay old audio
         useVoiceStore.getState().apply(ev);
-        if (ev.type === "proposal") maybePlay(ev.proposal.id, ev.proposal.status, ev.proposal.audio_ready);
+        if (ev.type === "proposal") {
+          const p = ev.proposal;
+          maybePlay(p.id, p.status, p.audio_ready, p.spoken_text_preview);
+        }
       };
     };
     connect();
@@ -113,9 +116,10 @@ export function runAction(kind: "approve" | "edit" | "reject", proposalId: strin
   });
 }
 
-function maybePlay(id: string, status: string, audioReady: boolean): void {
+/** Every cleared proposal goes on the radio queue, so Landed never talks over a pilot. */
+function maybePlay(id: string, status: string, audioReady: boolean, text: string): void {
   if (!audioReady || played.has(id)) return;
   if (status !== "auto_spoken" && status !== "handoff_spoken" && status !== "approved") return;
   played.add(id);
-  playProposal(id).catch(() => undefined);
+  enqueueLanded(id, text);
 }

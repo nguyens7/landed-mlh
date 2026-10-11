@@ -9,6 +9,7 @@ import { AlertLog } from "./components/AlertLog";
 import { Header } from "./components/Header";
 import { HeroCard } from "./components/HeroCard";
 import { PresenterRail } from "./components/PresenterRail";
+import { RadioStrip } from "./radio/RadioStrip";
 import { AuditPanel, EmergencyBanner, VoiceBridge, VoiceOverlay } from "./voice/VoicePanels";
 import { installPresenterHotkey, usePresenterStore } from "./presenter/usePresenterStore";
 
@@ -56,6 +57,7 @@ export default function App() {
           <div className="map-attribution">ADS-B data: adsb.lol (ODbL)</div>
           {presenter ? <HeroCard /> : <AlertCard />}
           {presenter && <PresenterRail />}
+          <RadioStrip rows={presenter ? 3 : 2} />
           <VoiceOverlay hideHandoff={presenter} />
         </div>
         {!presenter && (

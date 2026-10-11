@@ -3,6 +3,8 @@
 import { create } from "zustand";
 import type { ReplayAircraft, ReplayFile } from "../data/types";
 import { useDeskStore } from "../store/useDeskStore";
+import { resetScenarioRadio, scheduleScenarioRadio } from "../radio/scenarioRadio";
+import type { TimedLine } from "../radio/scenarioRadio";
 import { post } from "../voice/api";
 import { emptyVoice } from "../voice/reduce";
 import { useVoiceStore } from "../voice/useVoiceStore";
@@ -22,7 +24,7 @@ export interface ScoreRow {
 }
 
 interface LinesFile {
-  lines: { t: number }[];
+  lines: { id: string; t: number; text?: string }[];
 }
 
 interface ScenarioState {
@@ -102,8 +104,14 @@ export const useScenarioStore = create<ScenarioState>((set, get) => ({
       });
       await new Promise((r) => setTimeout(r, 400)); // let the bridge's roster / rewind posts land first
       let status = `${id} running`;
+      resetScenarioRadio();
       try {
-        await post(`/scenario/${id}/play`, { start_t: startT, speed: useDeskStore.getState().speed });
+        const res = await post<{ lines: TimedLine[] }>(`/scenario/${id}/play`, {
+          start_t: startT,
+          speed: useDeskStore.getState().speed,
+        });
+        const texts = Object.fromEntries(lines.lines.map((l) => [l.id, l.text ?? ""]));
+        scheduleScenarioRadio(id, res.lines, texts);
       } catch (e) {
         status = `${id} replay only: server ${e instanceof Error ? e.message : "unreachable"}`;
       }
@@ -117,6 +125,7 @@ export const useScenarioStore = create<ScenarioState>((set, get) => ({
   // Clear the desk, the proposals and the emergency lock, server and local; rewind the clock; stay paused.
   reset: async () => {
     useDeskStore.getState().pause();
+    resetScenarioRadio();
     let status = "reset";
     try {
       await post("/scenario/reset");

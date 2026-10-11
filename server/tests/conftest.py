@@ -11,6 +11,14 @@ from landed_server.app import create_app
 
 ROSTER = ["N2646X", "N312LM", "N405LP"]
 
+
+@pytest.fixture(autouse=True)
+def _no_pilot_audio(tmp_path, monkeypatch):
+    """Keep the answer lead (pilot clip length) at zero unless a test builds a clip."""
+    from landed_server import scenarios_api
+
+    monkeypatch.setattr(scenarios_api, "AUDIO_DIR", tmp_path / "no_audio")
+
 ACK = {
     "template_id": "ACK_CHECKIN",
     "slots": {"reg": "N2646X", "position": "JRB", "altimeter_inhg": 29.92},

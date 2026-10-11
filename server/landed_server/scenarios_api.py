@@ -17,16 +17,20 @@ import contextlib
 import itertools
 import json
 import math
+import wave
 from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import FileResponse
 from landed_agent.models import AdsbPosition, ParsedTransmission
 from pydantic import BaseModel
 
 REPO = Path(__file__).resolve().parents[2]
 DATA_DIR = REPO / "app" / "public" / "data" / "scenarios"
 PINS_FILE = REPO / "scenarios" / "pins" / "asr_pins.json"
+MANIFEST_FILE = REPO / "scenarios" / "manifest.json"
+AUDIO_DIR = REPO / "scenarios" / "audio"  # gitignored; built by `scenarios/build.py --audio`
 SCENARIO_IDS = ("S1", "S2", "S3A", "S3B", "S4", "S5", "S6")
 
 # Same mapping as scenarios/adapter.py PLACE_MAP: the speech parser's place names to the agent's position ids.
@@ -46,9 +50,53 @@ PLACE_MAP = {
 class PlayBody(BaseModel):
     start_t: float | None = None  # scenario time the app clock starts at; default: 10 s before the first line
     speed: float = 1.0
+    reset: bool = True  # False: keep the desk (Jump to conflict already owns it)
+    only: list[str] | None = None  # play just these line ids
 
 
 # ---------------------------------------------------------------- data
+
+
+def pilot_audio_path(
+    sid: str,
+    line_id: str,
+) -> Path | None:
+    """The radio-filtered pilot clip for a scenario line, or None when it has not been built.
+
+    Resolved through the build manifest ("<sid>/<line>" -> "audio/lines/<file>.wav"), falling back to the
+    file name recorded in the scenario's lines.json. Only files inside ``audio_dir`` are ever returned.
+    """
+    data_dir, manifest_file, audio_dir = DATA_DIR, MANIFEST_FILE, AUDIO_DIR  # module globals, read at call time
+    if sid not in SCENARIO_IDS:
+        return None
+    names: list[str] = []
+    try:
+        entry = json.loads(manifest_file.read_text()).get(f"{sid}/{line_id}")
+        if entry and entry.get("audio"):
+            names.append(Path(entry["audio"]).name)
+    except (OSError, ValueError):
+        pass
+    try:
+        for ln in json.loads((data_dir / sid / "lines.json").read_text())["lines"]:
+            if ln["id"] == line_id and ln.get("audio"):
+                names.append(Path(ln["audio"]).name)
+    except (OSError, ValueError, KeyError):
+        pass
+    for name in names:
+        for cand in (audio_dir / "lines" / name, audio_dir / name):
+            if cand.is_file() and cand.resolve().is_relative_to(audio_dir.resolve()):
+                return cand
+    return None
+
+
+def clip_seconds(path: Path | None) -> float:
+    if path is None:
+        return 0.0
+    try:
+        with wave.open(str(path)) as w:
+            return w.getnframes() / float(w.getframerate())
+    except (OSError, wave.Error, EOFError):
+        return 0.0
 
 
 def load_scenario(
@@ -171,7 +219,17 @@ class Player:
                 await self.task
         self.task, self.sid = None, None
 
-    async def run(self, hub: Any, tracks: dict, lines: list[dict], start_t: float, speed: float) -> None:
+    async def run(
+        self,
+        hub: Any,
+        tracks: dict,
+        lines: list[dict],
+        start_t: float,
+        speed: float,
+        lead: dict[str, float] | None = None,
+    ) -> None:
+        """``lead``: seconds Landed waits after a line's scripted time before answering, so the pilot's clip
+        finishes first (the app plays pilot, then Landed, never overlapping)."""
         roster: list[str] = []
         traffic: list[dict] = []
         loop = asyncio.get_running_loop()
@@ -198,6 +256,8 @@ class Player:
                                 reg=a["reg"], lat=p[0], lon=p[1], alt_ft=p[2], squawk=squawk_at(a, t)
                             )
                         )
+                if lead and lead.get(ln["id"], 0) > 0:
+                    await asyncio.sleep(lead[ln["id"]])
                 await hub.transmission(ParsedTransmission.model_validate(ln["parsed"]))
             except Exception:  # one bad line must not stop the demo
                 continue
@@ -221,23 +281,37 @@ def build_router() -> APIRouter:
         await hub.reset()  # desk (roster, alerts), proposals and the emergency lock (fresh DeskState)
         return {"ok": True, "locked": hub.desk.locked}
 
+    @router.get("/{sid}/audio/{line_id}")
+    async def pilot_audio(sid: str, line_id: str):
+        path = pilot_audio_path(sid, line_id)
+        if path is None:
+            raise HTTPException(404, "pilot audio not built (run scenarios/build.py --audio)")
+        return FileResponse(path, media_type="audio/wav", headers={"Cache-Control": "no-store"})
+
     @router.post("/{sid}/play")
     async def play(sid: str, request: Request, body: PlayBody | None = None):
         body = body or PlayBody()
         tracks, lines = load_scenario(sid)
         hub = hub_of(request)
+        if body.only:
+            lines = [ln for ln in lines if ln["id"] in body.only]
         await player.stop()
-        await hub.reset()
+        if body.reset:
+            await hub.reset()
         speed = max(0.25, min(32.0, body.speed))
         start_t = body.start_t if body.start_t is not None else max(0.0, (lines[0]["t"] if lines else 0) - 10)
         player.sid = sid
-        player.task = asyncio.create_task(player.run(hub, tracks, lines, start_t, speed))
+        clips = {ln["id"]: pilot_audio_path(sid, ln["id"]) for ln in lines}
+        lead = {lid: (clip_seconds(p) + 0.6 if p else 0.0) for lid, p in clips.items()}
+        player.task = asyncio.create_task(player.run(hub, tracks, lines, start_t, speed, lead))
         timed = [
             {
                 "id": ln["id"],
                 "t": ln["t"],
                 "aircraft": ln["aircraft"],
                 "in_s": round((ln["t"] - start_t) / speed, 2),
+                "audio_url": f"/scenario/{sid}/audio/{ln['id']}" if clips[ln["id"]] else None,
+                "audio_s": round(clip_seconds(clips[ln["id"]]), 2),
             }
             for ln in lines
             if ln["t"] >= start_t

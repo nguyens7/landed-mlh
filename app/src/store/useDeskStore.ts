@@ -4,6 +4,7 @@ import type { Alert, AircraftSnapshot, ProtectedVolume } from "../engine/types";
 import { loadFixedWing, loadGeoData, loadReplayData } from "../data/loadData";
 import { interpolateAircraft } from "../data/interpolate";
 import type { GeoFeatureCollection, ReplayAircraft } from "../data/types";
+import { startJumpExchange } from "../radio/scenarioRadio";
 
 export type Speed = 1 | 4 | 16;
 
@@ -228,6 +229,9 @@ export const useDeskStore = create<DeskState>((set, get) => ({
   jumpToConflict: () => {
     const { conflictEntryT } = get();
     if (conflictEntryT === null) return;
+    // The pilot's radio call goes first (queued now); Landed's standby follows when the handoff proposal lands.
+    const sid = get().scenarioId;
+    if (sid === null || sid === "S2") startJumpExchange();
     get().seek(Math.max(0, conflictEntryT - JUMP_LEAD_S));
     set({ playing: true });
   },

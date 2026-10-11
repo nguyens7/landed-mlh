@@ -1,0 +1,148 @@
+/* Radio transcript strip (bottom-left of the map). Presenter mode is large; the full console is compact. */
+.radio-strip {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  width: min(820px, calc(100% - 40px));
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.radio-row {
+  --who: var(--sim);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  column-gap: 14px;
+  padding: 10px 16px;
+  background: rgba(10, 14, 20, 0.92);
+  border: 1px solid color-mix(in srgb, var(--who) 40%, transparent);
+  border-left: 6px solid var(--who);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: var(--text);
+  font-size: 16px;
+  opacity: 0.9;
+  animation: radio-in 0.35s ease-out;
+}
+.radio-landed {
+  --who: var(--advisory);
+}
+.radio-row.speaking {
+  opacity: 1;
+  background: color-mix(in srgb, var(--who) 16%, rgba(10, 14, 20, 0.96));
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 26px color-mix(in srgb, var(--who) 45%, transparent);
+}
+.radio-label {
+  font-size: 0.8em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--who);
+  white-space: nowrap;
+}
+.radio-text {
+  line-height: 1.3;
+  font-weight: 600;
+}
+.radio-bars {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 1.1em;
+  width: 1.4em;
+  visibility: hidden;
+}
+.radio-row.speaking .radio-bars {
+  visibility: visible;
+}
+.radio-bars i {
+  display: block;
+  width: 4px;
+  height: 100%;
+  background: var(--who);
+  border-radius: 2px;
+  transform-origin: center;
+  animation: radio-bar 0.7s ease-in-out infinite;
+}
+.radio-bars i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.radio-bars i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes radio-bar {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes radio-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .radio-row,
+  .radio-bars i {
+    animation: none;
+  }
+}
+
+/* Presenter: 22 px or larger on a 1920 wide screen. */
+.presenter .radio-strip {
+  width: min(900px, calc(100% - 40px));
+}
+.presenter .radio-row {
+  font-size: 22px;
+  padding: 12px 18px;
+}
+
+/* Sound button in the header */
+.sound-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 5px 14px;
+  border: 1px solid var(--panel-border);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+.sound-btn .sound-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.sound-btn.off {
+  color: #0a0e14;
+  background: var(--caution);
+  border-color: var(--caution);
+  animation: sound-pulse 1.8s ease-in-out infinite;
+}
+.sound-btn.on {
+  color: #5be38a;
+  border-color: rgba(91, 227, 138, 0.5);
+  cursor: default;
+}
+@keyframes sound-pulse {
+  50% {
+    box-shadow: 0 0 0 6px rgba(255, 176, 32, 0.25);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sound-btn.off {
+    animation: none;
+  }
+}
