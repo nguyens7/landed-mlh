@@ -8,6 +8,7 @@ import { useVoiceStore } from "./useVoiceStore";
 import type { ServerEvent } from "./types";
 
 const played = new Set<string>();
+const handedOff = new Set<string>(); // regs Landed has handed to the controller; it stops auto-talking to them
 let needRoster = false; // set on (re)connect; the next store update re-posts the roster
 
 // Server calls that depend on order (rewind, then the alert set) go through one chain.
@@ -35,11 +36,14 @@ export function useVoiceBridge(): void {
       };
       ws.onmessage = (m) => {
         const ev = JSON.parse(m.data as string) as ServerEvent;
-        if (ev.type === "snapshot") for (const p of ev.proposals) played.add(p.id); // never replay old audio
+        if (ev.type === "snapshot") {
+          for (const p of ev.proposals) played.add(p.id); // never replay old audio
+          handedOff.clear();
+        }
         useVoiceStore.getState().apply(ev);
         if (ev.type === "proposal") {
           const p = ev.proposal;
-          maybePlay(p.id, p.status, p.audio_ready, p.spoken_text_preview);
+          maybePlay(p.id, p.status, p.audio_ready, p.spoken_text_preview, p.reg);
         }
       };
     };
@@ -116,10 +120,19 @@ export function runAction(kind: "approve" | "edit" | "reject", proposalId: strin
   });
 }
 
-/** Every cleared proposal goes on the radio queue, so Landed never talks over a pilot. */
-function maybePlay(id: string, status: string, audioReady: boolean, text: string): void {
+/** True while the conflict engine has a handoff alert on this aircraft: the controller owns it, so routine
+ * replies to it stay off the air. */
+function inHandoff(reg: string): boolean {
+  return useDeskStore.getState().alerts.some((a) => a.severity === "handoff" && a.aircraft.reg === reg);
+}
+
+/** Every cleared proposal goes on the radio queue, so Landed never talks over a pilot. Once Landed has told a
+ * pilot "standby, controller will be with you", it stays quiet to that aircraft unless the controller approves. */
+function maybePlay(id: string, status: string, audioReady: boolean, text: string, reg: string | null): void {
   if (!audioReady || played.has(id)) return;
   if (status !== "auto_spoken" && status !== "handoff_spoken" && status !== "approved") return;
   played.add(id);
+  if (status === "auto_spoken" && reg && (handedOff.has(reg) || inHandoff(reg))) return;
+  if (status === "handoff_spoken" && reg) handedOff.add(reg);
   enqueueLanded(id, text);
 }
