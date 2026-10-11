@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gemini and code</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=block">
+<style>
+  :root { --bg:#0F141B; --lane:#141B24; --box:#18212C; --text:#EEF0EA; --soft:#B8C2CE; --muted:#7D8894;
+          --blue:#6CB0EE; --amber:#F29E4C; --red:#E66767; --gem:#A78BFA; }
+  * { box-sizing:border-box; margin:0; }
+  body { width:1920px; height:1080px; background:var(--bg); color:var(--text); font-family:'IBM Plex Sans', Arial, sans-serif; position:relative; overflow:hidden; }
+  .title { position:absolute; left:40px; top:24px; font:700 50px 'Space Grotesk', Arial, sans-serif; }
+  .sub { position:absolute; left:42px; top:90px; font-size:28px; color:var(--soft); }
+  .legend { position:absolute; left:40px; right:40px; top:140px; display:flex; gap:18px; align-items:center; font-size:22px; }
+  .legend > span { display:flex; align-items:center; gap:10px; padding:5px 14px; border-radius:8px; border:3px solid; white-space:nowrap; }
+  .lm { font:500 20px 'JetBrains Mono', monospace; color:var(--soft); }
+  .grid { position:absolute; left:40px; top:204px; width:1840px; display:grid; grid-template-columns:330px 1fr 1fr; column-gap:12px; row-gap:8px;
+          grid-template-rows:44px 88px 88px 112px 72px 72px 96px 72px 92px; }
+  .colh { font:700 26px 'Space Grotesk', sans-serif; padding:6px 4px 0; display:flex; align-items:baseline; gap:14px; }
+  .colh small { font:500 20px 'JetBrains Mono', monospace; letter-spacing:1px; }
+  .lab { background:var(--box); border:3px solid var(--blue); border-radius:14px; padding:4px 14px; display:flex; flex-direction:column; justify-content:center; position:relative; }
+  .lab.g { border-color:var(--gem); } .lab.in { border-color:var(--muted); } .lab.sh { border:3px dashed var(--muted); background:transparent; }
+  .lab b { font:700 26px 'Space Grotesk', sans-serif; letter-spacing:1px; display:flex; align-items:center; gap:10px; }
+  .lab .m { font:500 20px 'JetBrains Mono', monospace; color:var(--gem); white-space:nowrap; margin-top:2px; }
+  .lab .c { font-size:22px; color:var(--soft); margin-top:2px; }
+  .lab .logo { position:absolute; right:12px; top:50%; transform:translateY(-50%); }
+  .cell { background:var(--lane); border-radius:12px; border-left:8px solid var(--blue); padding:6px 18px; display:flex; flex-direction:column; justify-content:center; font-size:22px; line-height:1.3; position:relative; }
+  .cell.g { border-left-color:var(--gem); } .cell.in { border-left-color:var(--muted); }
+  .cell.sh { background:transparent; border:3px dashed var(--muted); padding-left:18px; color:var(--soft); }
+  .q { color:var(--text); }
+  .q::before { content:"\201C"; color:var(--muted); } .q::after { content:"\201D"; color:var(--muted); }
+  .say { font-weight:600; font-size:24px; }
+  .note { color:var(--soft); font-size:22px; }
+  .mono { font:500 20px 'JetBrains Mono', monospace; line-height:1.4; color:var(--text); white-space:pre; }
+  .k { color:var(--blue); } .s { color:#C9DDB0; } .n { color:var(--amber); }
+  .who { position:absolute; right:12px; top:8px; font:700 20px 'JetBrains Mono', monospace; letter-spacing:1px; }
+  .foot { position:absolute; left:40px; right:40px; top:1042px; font-size:22px; color:var(--muted); }
+  .foot strong { color:var(--soft); font-weight:600; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="gg" gradientUnits="userSpaceOnUse" x1="0" y1="24" x2="24" y2="0"><stop offset="0" stop-color="#6CB0EE"/><stop offset="1" stop-color="#A78BFA"/></linearGradient>
+  <symbol id="gem" viewBox="0 0 24 24"><path fill="url(#gg)" d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+  <symbol id="oai" viewBox="0 0 24 24"><path fill="#EEF0EA" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol>
+</defs></svg>
+
+<div class="title">Gemini handles the routine. Code takes over when it's risky.</div>
+<div class="sub">Two real calls from the demo scenarios.</div>
+<div class="legend">
+  <span style="border-color:var(--gem)"><svg width="32" height="32" role="img" aria-label="Google Gemini"><use href="#gem"/></svg><span>Gemini <span class="lm">(gemini-3.8-flash, gemini-3.5-flash-lite, gemini-3.8-flash-lite-tts)</span></span></span>
+  <span style="border-color:var(--muted);border-style:dashed"><svg width="32" height="32" role="img" aria-label="OpenAI"><use href="#oai"/></svg><span>OpenAI Decisions API <span class="lm">(gpt-6-luna)</span>, shadow mode</span></span>
+  <span style="border-color:var(--blue)">plain code</span>
+</div>
+
+<div class="grid">
+  <div></div>
+  <div class="colh" style="color:var(--gem)">Routine check-in <small>S1</small></div>
+  <div class="colh" style="color:var(--red)">Risky request <small>S2</small></div>
+
+  <div class="lab in"><b>PILOT</b><span class="c">simulated radio call</span></div>
+  <div class="cell in"><span class="q">Landed desk, MEDEVAC Two Six Four Six X-Ray, checking in, Downtown Skyport, lifting, East River northbound, five hundred.</span></div>
+  <div class="cell in"><span class="q">Landed desk, MEDEVAC Three One Two Lima, East 34th, request direct College Point area, six hundred.</span></div>
+
+  <div class="lab g"><b>HEAR</b><span class="m">gemini-3.8-flash</span><svg class="logo" width="36" height="36"><use href="#gem"/></svg></div>
+  <div class="cell g"><span class="q">Landed desk, Medevac 2646 X-ray checking in. Downtown Skyport, lifting, East River northbound 500.</span><span class="note">ASR confidence 0.95</span></div>
+  <div class="cell g"><span class="q">Landed desk, MEDEVAC 312 Lima, East 34th. Request direct to College Point area, 600.</span><span class="note">ASR confidence 0.88</span></div>
+
+  <div class="lab"><b>UNDERSTAND</b><span class="c">rules first; if unsure</span><span class="m">gemini-3.5-flash-lite</span></div>
+  <div class="cell"><span class="mono">{<span class="k">"callsign"</span>: <span class="s">"N2646X"</span>, <span class="k">"intent"</span>: <span class="s">"checkin"</span>,
+ <span class="k">"corridor"</span>: <span class="s">"East River"</span>, <span class="k">"altitude_ft"</span>: <span class="n">500</span>}</span><span class="note">grammar rules, confidence 1.00; Gemini not needed</span></div>
+  <div class="cell"><span class="mono">{<span class="k">"callsign"</span>: <span class="s">"N312LM"</span>, <span class="k">"intent"</span>: <span class="s">"request_route"</span>,
+ <span class="k">"destination"</span>: <span class="s">"College Point"</span>, <span class="k">"altitude_ft"</span>: <span class="n">600</span>}</span><span class="note">grammar rules, confidence 0.90; Gemini not needed</span></div>
+
+  <div class="lab sh"><b>2ND OPINION</b><span class="c">shadow mode</span><svg class="logo" width="36" height="36"><use href="#oai"/></svg></div>
+  <div class="cell sh"><span><span class="mono">needs_review 0.50</span>: would ask for approval; changes nothing</span></div>
+  <div class="cell sh"><span>Logged; cannot relax a policy decision</span></div>
+
+  <div class="lab"><b>GEOMETRY</b><span class="c">conflict engine</span></div>
+  <div class="cell"><span>No conflict: no engine alerts in the run</span></div>
+  <div class="cell" style="border-left-color:var(--red)"><span>Path crosses <strong style="color:var(--red)">LGA Rwy 22 final</strong> at 600 ft in 83 s: handoff</span></div>
+
+  <div class="lab g"><b>DECIDE</b><span class="m">gemini-3.5-flash-lite</span><span class="c" style="margin-top:0">or policy, if risky</span><svg class="logo" width="36" height="36"><use href="#gem"/></svg></div>
+  <div class="cell g"><span class="mono">template_id: <span class="s">ACK_CHECKIN</span>  source: <span style="color:var(--gem)">gemini</span></span><span class="note">Gemini function calling picks the template, confidence 0.95</span></div>
+  <div class="cell"><span class="mono">template_id: <span class="s">STANDBY_HANDOFF</span>  source: <span class="k">policy</span></span><span class="note">Mandatory handoff (out_of_whitelist); Gemini never chooses</span></div>
+
+  <div class="lab"><b>CHECK</b><span class="c">whitelist, triggers, approval</span></div>
+  <div class="cell"><span>Approved template; no triggers; tier: <strong>auto</strong></span></div>
+  <div class="cell"><span>Trigger out_of_whitelist; tier: <strong style="color:var(--red)">handoff</strong> to the controller</span></div>
+
+  <div class="lab g"><b>SPEAK</b><span class="m">gemini-3.8-flash-lite-tts</span></div>
+  <div class="cell g"><span class="q say">MEDEVAC Two Six Four Six X-Ray, Landed advisory, radar contact Downtown Skyport, altimeter two niner niner two</span></div>
+  <div class="cell g"><span class="q say">MEDEVAC Three One Two Lima Mike, standby, controller will be with you</span></div>
+</div>
+
+<div class="foot"><strong>Real values</strong> from scenarios S1 (line L1) and S2 (line L1), run 20261011T170214Z, 3 of 3 runs pass. <strong>Simulation only; never transmits.</strong></div>
+</body>
+</html>
